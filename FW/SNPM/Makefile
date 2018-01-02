@@ -21,7 +21,7 @@
 
 BINARY = main
 
-LDSCRIPT = stm32f0-discovery.ld
+LDSCRIPT = ../stm32f0.ld
 
 LIBNAME		= opencm3_stm32f0
 DEFS		+= -DSTM32F0
@@ -46,5 +46,5 @@ BMP_PORT	?=
 #STLINK_PORT	?= :4242
 
 
-include rules.mk
+include ../rules.mk
 

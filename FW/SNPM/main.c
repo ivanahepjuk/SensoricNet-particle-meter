@@ -1,4 +1,5 @@
-#include "functions.h"
+#include "inc/functions.h"
+#include "inc/bme280.h"
 
 //globals
 int32_t     t_fine;
@@ -82,9 +83,9 @@ usartSend("\r\ndbg\r\n", 2);
     float pm10 = 60.60;
 
     //prenasobi vsechno
-    hum  *= 100;
-    temp *= 100;
-    pres *= 100;
+///    hum  *= 100;
+///    temp *= 100;
+///    pres *= 100;
     pm1  *= 100;
     pm25 *= 100;
     pm10 *= 100;
