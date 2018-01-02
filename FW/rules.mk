@@ -53,6 +53,7 @@ OBJS		+= $(BINARY).o
 #here add .o files of custom libraries
 OBJS		+= src/functions.o
 OBJS		+= src/bme280.o
+OBJS		+= src/opcn2.o
 
 
 ifeq ($(strip $(OPENCM3_DIR)),)

@@ -1,12 +1,35 @@
+/*
+ * This file is part of the SenoricNet project, https://sensoricnet.cz
+ *
+ * Copyright (C) 2017 Pavel Polach <ivanahepjuk@gmail.com>
+ *
+ * This library is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "inc/functions.h"
-#include "inc/bme280.h"
+#include "inc/bme280.h
+#include "inc/opcn2.h"
 
-//globals
+/////////////////////////////////////////////////////////////
+//Global variables for burst register reading, for bme280: //
+/////////////////////////////////////////////////////////////
 int32_t     t_fine;
 uint8_t comp_data[34];//compensation data readed into this
 uint8_t burst_read_data[8] = {0};//in loop measured data readed into this
 
-//promenne pro kompenzacni funkce BME280
+/////////////////////////////////////////////////////////////
+//Global variables for compensation functions for bme280:  //
+/////////////////////////////////////////////////////////////
 //temperature
 uint16_t dig_T1;
 int16_t dig_T2, dig_T3;
@@ -18,8 +41,6 @@ unsigned char dig_H1, dig_H3;
 int16_t dig_H2, dig_H4, dig_H5;
 signed char dig_H6;
 
-
-//////////////////////////////////////
 
 int main(void)
 {
