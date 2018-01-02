@@ -1,0 +1,9 @@
+(module smd_point_bottom (layer F.Cu) (tedit 59157551)
+  (fp_text reference REF** (at 0 2) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value smd_point (at 0 -2) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad 1 smd rect (at 0 0) (size 1 1.2) (layers B.Cu B.Paste B.Mask))
+)
