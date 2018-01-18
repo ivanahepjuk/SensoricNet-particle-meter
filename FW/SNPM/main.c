@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "inc/functions.h"
-#include "inc/bme280.h
+#include "inc/bme280.h"
 #include "inc/opcn2.h"
 
 /////////////////////////////////////////////////////////////
@@ -55,8 +55,10 @@ int main(void)
   //char pm10_str [10];
   
   //Quectel wireless modul HW reset
-  gpio_clear(GPIOA, GPIO9); wait(0.2); gpio_set(GPIOA, GPIO9);
+  //gpio_clear(GPIOA, GPIO9); wait(0.2); 
+  //gpio_clear(GPIOA, GPIO9);
   //wait(14);//until quectel wakes up
+  wait(5);//until quectel wakes up
 
   clock_setup();
   gpio_setup();
@@ -64,11 +66,12 @@ int main(void)
   i2c_setup();
 
   //set BME280 and read compensation data
-  init_BME280();
-  wait(1);
+//init_BME280();
+//wait(1);
   //Connect to nbiot network
   //connect_nbiot();
-  //connect_lorawan();
+  connect_lorawan();
+
 
   while (1){
 
@@ -90,9 +93,13 @@ i2c_send_stop(I2C2);
 
 usart_send_blocking(USART2, 0x65);
 
-
 */
-usartSend("\r\ndbg\r\n", 2);
+
+usartSend("mac get devaddr\r\n", 4);
+//wait(0.01);
+//usart_send_blocking(USART4, 10);
+//wait(0.01);
+//usart_send_blocking(USART4, 13);
 
     //usartSend("mac tx uncnf 1 AABABBB\r\n", 4);	
     //precte vsechno
@@ -138,9 +145,9 @@ usartSend("\r\ndbg\r\n", 2);
     i=0;
 
     //nucleo ledka
-    gpio_clear(GPIOA, GPIO5); wait(0.2); gpio_set(GPIOA, GPIO5);
+    gpio_clear(GPIOA, GPIO10); wait(0.2); gpio_set(GPIOA, GPIO10);
 
-    wait(4);
+    wait(1);
   }
   return 0;
 }

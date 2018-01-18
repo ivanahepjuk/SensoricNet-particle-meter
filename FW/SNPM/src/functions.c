@@ -19,6 +19,30 @@
  
 #include "functions.h"
 #include <libopencm3/stm32/i2c.h>
+#include <libopencm3/stm32/spi.h>
+
+void spi_setup(void)
+{
+	//clock setup is in setup_clock();
+	
+	//define pin states etc
+	//define blablabla
+	//enable spi
+;	
+}
+
+void particlemeter_setup(int fan, int laser)
+{
+	//send fan and laser
+	
+;	
+}
+
+void particlemeter_read(void)
+{
+	//read registers
+;	
+}
 
 char hexDigit(unsigned n)
 {
@@ -74,17 +98,25 @@ void usartSend(char *phrase, int usart)
 
 void clock_setup(void)
 {
-        //clk for gsm,leds,
-        rcc_periph_clock_enable(RCC_GPIOA);
-	// Enable GPIOC clock for LED
-	rcc_periph_clock_enable(RCC_GPIOC);//quectel 
+    //clk for gsm,leds,
+    rcc_periph_clock_enable(RCC_GPIOA);
 
+	//clk for spi and FIXME i2c
+    rcc_periph_clock_enable(RCC_GPIOB);
+	
+	// Enable GPIOC clock for LED
+	rcc_periph_clock_enable(RCC_GPIOC);
+	
+	//clk for SPI1
+	rcc_periph_clock_enable(RCC_SPI1);
+	
 	// clk for USART4 (quectel)  PC10 tx PC11 rx
 	rcc_periph_clock_enable(RCC_USART4);
-        // clk for USART2 (gsm) PA2 tx PA3 rx
+
+    // clk for USART2 (gsm) PA2 tx PA3 rx
 	rcc_periph_clock_enable(RCC_USART2);
 	//lora na serial1
-	rcc_periph_clock_enable(RCC_USART1);
+	//rcc_periph_clock_enable(RCC_USART1);
 }
 
 
@@ -155,14 +187,18 @@ void usart_setup(void)
 
 void gpio_setup(void)
 {
+	/*
 //seral1 lora
 	// GPIO pins to alternative mode for USART4 transmit receive. 
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO9);//tx
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//rx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO9);//tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//rx
 
 	// Setup USART4 pins as alternate function AF0
-	gpio_set_af(GPIOA, GPIO_AF1, GPIO9);
-	gpio_set_af(GPIOA, GPIO_AF1, GPIO10);
+	gpio_set_af(GPIOC, GPIO_AF1, GPIO9);
+	gpio_set_af(GPIOC, GPIO_AF1, GPIO10);
+	
+	//wireless reset pin
+	*/
 
 #ifdef debug
 	//nucleo led 
@@ -170,10 +206,10 @@ void gpio_setup(void)
 #endif
 	//gpio LEDs setup
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
-        gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11);
+    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11);
 	
 	//wireless reset
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9);
+	//gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
 
 	// USART2 GPIO pins 
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
@@ -182,12 +218,12 @@ void gpio_setup(void)
 	// USART2 setup pins as alternate function AF0
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
+    
+    // USART4 GPIO pins 
+    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
 
-	// GPIO pins to alternative mode for USART4 transmit receive. 
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
-
-	// Setup USART4 pins as alternate function AF0
+	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
 }
@@ -197,6 +233,8 @@ void connect_lorawan(void)
 //mac set deveui 0004A30B00222137		
 //mac set appeui 70B3D57ED00082D2
 //mac set appkey D94AC6F27881D3505F3E595B69472898
+	//usartSend("sys get ver\r\n", 4);
+    //wait(1);
 	usartSend("radio set pwr 14\r\n", 4);
 	wait(3);
 	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
