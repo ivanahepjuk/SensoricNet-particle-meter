@@ -47,4 +47,10 @@ int sendCommand(char *phrase, char *check, int pocetentru);
 void i2c_transfer77(uint32_t i2c, uint8_t addr, uint8_t *w, size_t wn, uint8_t *r, size_t rn);
 void compensation_data_readout_BME280(uint8_t arrayy[]);
 
+
+
+float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3);
+
+
+
 #endif

@@ -21,28 +21,55 @@
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
 
+#define SPI_CR1_DFF_8BIT  	(0 << 11)
+
+
+//delay
+//volatile uint32_t system_millis;
+
+float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
+{
+  // Return an IEEE754 float from an array of 4 bytes
+  union u_tag {
+    uint8_t b[4];
+    float val;
+  } u;
+
+  u.b[0] = val0;
+  u.b[1] = val1;
+  u.b[2] = val2;
+  u.b[3] = val3;
+
+  return u.val;
+}
+
+
 void spi_setup(void)
 {
-	//clock setup is in setup_clock();
+
+	// gpio setting for SS
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO8);
 	
-	//define pin states etc
-	//define blablabla
-	//enable spi
+	// gpio setting for SDI SDO SCK
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3 | GPIO4 | GPIO5);
+
+	// gpio alternative function SPI 1
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3  | GPIO4 | GPIO5);
+	//gpio_set_af(GPIOA, GPIO_AF5, GPIO5 | GPIO7);
+
+//	spi_disable_crc(SPI1);
+	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, (0 << 11)       , SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
+	
+	//spi_init_master(SPI1, 500000                       , SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
+	
+	spi_enable_ss_output(SPI1);
+//	spi_enable_software_slave_management(SPI1);
+//	spi_set_nss_high(SPI1);
+//	spi_clear_mode_fault(SPI1);
+	spi_enable(SPI1);
 ;	
 }
 
-void particlemeter_setup(int fan, int laser)
-{
-	//send fan and laser
-	
-;	
-}
-
-void particlemeter_read(void)
-{
-	//read registers
-;	
-}
 
 char hexDigit(unsigned n)
 {

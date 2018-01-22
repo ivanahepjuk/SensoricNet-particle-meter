@@ -16,9 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <libopencm3/stm32/spi.h>
 #include "inc/functions.h"
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
+
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for bme280: //
@@ -41,16 +43,26 @@ unsigned char dig_H1, dig_H3;
 int16_t dig_H2, dig_H4, dig_H5;
 signed char dig_H6;
 
+/////////////////////////////////////////////////////////////
+//Global variables for burst register reading, for OPC-N2: //
+/////////////////////////////////////////////////////////////
+
+uint8_t histogram_buffer[62];//whole dataset of opc readed into this
+uint8_t pm_values_buffer[12];//only pm data
+
+
+
 
 int main(void)
 {
+	
   //pomocna promenna pro prepocitavani ascii znaku na hexadecimalni substringy
   //char hex_string[3];
   //do techto stringu se zkonvertuji nactene hodnoty
   //char hum_str [10];
   //char temp_str[10];
   //char pres_str[10];
-  //char pm1_str [10];
+  char pm1_str [10];
   //char pm25_str [10];
   //char pm10_str [10];
   
@@ -58,22 +70,35 @@ int main(void)
   //gpio_clear(GPIOA, GPIO9); wait(0.2); 
   //gpio_clear(GPIOA, GPIO9);
   //wait(14);//until quectel wakes up
-  wait(5);//until quectel wakes up
+  wait(1);//until quectel wakes up
 
   clock_setup();
   gpio_setup();
   usart_setup();
   i2c_setup();
+  
+  spi_setup();
 
   //set BME280 and read compensation data
 //init_BME280();
 //wait(1);
   //Connect to nbiot network
   //connect_nbiot();
-  connect_lorawan();
+  //connect_lorawan();
+
+	  
+	  
+	  wait(1);
+particlemeter_ON();
+particlemeter_set_fan(70); //unstable?
 
 
   while (1){
+//read_histogram_all();
+read_pm_values();
+
+
+	 
 
     //debug bme
     //data_readout_BME280(&burst_read_data);
@@ -95,7 +120,7 @@ usart_send_blocking(USART2, 0x65);
 
 */
 
-usartSend("mac get devaddr\r\n", 4);
+//usartSend("mac get devaddr\r\n", 4);
 //wait(0.01);
 //usart_send_blocking(USART4, 10);
 //wait(0.01);
@@ -106,7 +131,7 @@ usartSend("mac get devaddr\r\n", 4);
     float hum  = hum_BME280();
     float temp = temp_BME280();
     float pres = press_BME280();
-    float pm1  = 40.40;
+    float pm1  = particemeter_pm1();
     float pm25 = 50.50;
     float pm10 = 60.60;
 
@@ -114,7 +139,7 @@ usartSend("mac get devaddr\r\n", 4);
 ///    hum  *= 100;
 ///    temp *= 100;
 ///    pres *= 100;
-    pm1  *= 100;
+///    pm1  *= 100;
     pm25 *= 100;
     pm10 *= 100;
 
@@ -133,6 +158,11 @@ usartSend("mac get devaddr\r\n", 4);
     char str6[]=",pm25=";
     char str7[]=",pm10=";
 
+
+
+
+	sprintf(pm1_str, "%.2f", pm1);
+	usartSend(pm1_str, 4);
     //vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
     /*
     while(str2 != '\0'){
@@ -145,7 +175,7 @@ usartSend("mac get devaddr\r\n", 4);
     i=0;
 
     //nucleo ledka
-    gpio_clear(GPIOA, GPIO10); wait(0.2); gpio_set(GPIOA, GPIO10);
+    gpio_set(GPIOA, GPIO10); wait(0.2); gpio_clear(GPIOA, GPIO10); 
 
     wait(1);
   }

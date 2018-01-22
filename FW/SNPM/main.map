@@ -4,6 +4,10 @@ Archive member included to satisfy reference by file (symbol)
                               main.o (gpio_set)
 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
                               src/functions.o (gpio_mode_setup)
+../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                              src/functions.o (spi_enable)
+../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+                              src/functions.o (spi_init_master)
 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
                               src/functions.o (rcc_periph_clock_enable)
 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
@@ -26,22 +30,74 @@ Archive member included to satisfy reference by file (symbol)
                               src/bme280.o (memcpy)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
                               src/functions.o (memset)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+                              main.o (sprintf)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
                               src/functions.o (strstr)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o) (_svfprintf_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (_dtoa_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o) (_impure_ptr)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (_localeconv_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (_malloc_r)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
                               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o) (memchr)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
                               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o) (memcmp)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o) (__malloc_lock)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (_Balloc)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o) (_sbrk_r)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
                               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o) (strchr)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (strlen)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (__ssprint_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o) (_calloc_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o) (_free_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o) (__global_locale)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o) (__retarget_lock_acquire_recursive)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o) (__ascii_mbtowc)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o) (memmove)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o) (_realloc_r)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o) (errno)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o) (strcmp)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o) (__ascii_wctomb)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o) (_ctype_)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_thumb1_case_uqi.o)
                               ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o) (__gnu_thumb1_case_uqi)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
                               src/bme280.o (__aeabi_uidiv)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (__aeabi_idiv)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
                               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (__aeabi_dcmpeq)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
                               src/functions.o (__aeabi_fcmplt)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (__aeabi_uldivmod)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o) (__udivmoddi4)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
                               src/bme280.o (__aeabi_fdiv)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
@@ -53,11 +109,61 @@ Archive member included to satisfy reference by file (symbol)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
                               src/functions.o (__aeabi_fmul)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
-                              src/functions.o (__aeabi_i2f)
+                              main.o (__aeabi_i2f)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
                               src/bme280.o (__aeabi_ui2f)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_dadd)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_ddiv)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o) (__eqdf2)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o) (__gedf2)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o) (__ledf2)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_dmul)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_dsub)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o) (__aeabi_dcmpun)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_d2iz)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_i2d)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o) (__aeabi_ui2d)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
+                              main.o (__aeabi_f2d)
 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
                               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o) (__clzsi2)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzdi2.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o) (__clzdi2)
+/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
+                              /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o) (_sbrk)
+
+Allocating common symbols
+Common symbol       size              file
+
+__lock___atexit_recursive_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___arc4random_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+errno               0x4               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+__lock___env_recursive_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___sinit_recursive_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___malloc_recursive_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___at_quick_exit_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___dd_hash_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___tz_mutex   0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+__lock___sfp_recursive_mutex
+                    0x1               /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
 
 Discarded input sections
 
@@ -66,6 +172,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 main.o
  .bss.comp_data
                 0x0000000000000000       0x22 main.o
+ .bss.histogram_buffer
+                0x0000000000000000       0x3e main.o
  .text          0x0000000000000000        0x0 src/functions.o
  .data          0x0000000000000000        0x0 src/functions.o
  .bss           0x0000000000000000        0x0 src/functions.o
@@ -73,12 +181,16 @@ Discarded input sections
                 0x0000000000000000       0x10 src/functions.o
  .text.charToHex
                 0x0000000000000000       0x1e src/functions.o
+ .text.connect_lorawan
+                0x0000000000000000       0x7c src/functions.o
  .text.sendCommand
                 0x0000000000000000       0x5c src/functions.o
  .text.connect_nbiot
                 0x0000000000000000       0x64 src/functions.o
  .text.i2c_transfer77
                 0x0000000000000000       0xba src/functions.o
+ .rodata.connect_lorawan.str1.1
+                0x0000000000000000       0xa4 src/functions.o
  .rodata.connect_nbiot.str1.1
                 0x0000000000000000       0x39 src/functions.o
  .text          0x0000000000000000        0x0 src/bme280.o
@@ -94,11 +206,12 @@ Discarded input sections
  .text          0x0000000000000000        0x0 src/opcn2.o
  .data          0x0000000000000000        0x0 src/opcn2.o
  .bss           0x0000000000000000        0x0 src/opcn2.o
- .debug_line    0x0000000000000000        0x0 src/opcn2.o
- .debug_str     0x0000000000000000      0x113 src/opcn2.o
- .comment       0x0000000000000000       0x80 src/opcn2.o
- .ARM.attributes
-                0x0000000000000000       0x31 src/opcn2.o
+ .text.read_histogram_all
+                0x0000000000000000       0x58 src/opcn2.o
+ .text.particlemeter_set_laser
+                0x0000000000000000       0x64 src/opcn2.o
+ .text.particlemeter_read
+                0x0000000000000000        0x2 src/opcn2.o
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
@@ -162,6 +275,161 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x2e6 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
  .debug_macro   0x0000000000000000      0x14e ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
  .debug_macro   0x0000000000000000       0x3a ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text          0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .data          0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .bss           0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_reset
+                0x0000000000000000       0x28 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_clean_disable
+                0x0000000000000000       0x2e ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_write
+                0x0000000000000000        0x4 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_xfer
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_bidirectional_mode
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_unidirectional_mode
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_bidirectional_receive_only_mode
+                0x0000000000000000       0x18 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_bidirectional_transmit_only_mode
+                0x0000000000000000       0x16 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_crc
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_crc
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_next_tx_from_buffer
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_next_tx_from_crc
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_full_duplex_mode
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_receive_only_mode
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_software_slave_management
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_software_slave_management
+                0x0000000000000000       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_nss_high
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_nss_low
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_send_lsb_first
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_send_msb_first
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_baudrate_prescaler
+                0x0000000000000000       0x18 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_master_mode
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_slave_mode
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_clock_polarity_1
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_clock_polarity_0
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_clock_phase_1
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_clock_phase_0
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_tx_buffer_empty_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_tx_buffer_empty_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_rx_buffer_not_empty_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_rx_buffer_not_empty_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_error_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_error_interrupt
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_ss_output
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_tx_dma
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_tx_dma
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_enable_rx_dma
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_disable_rx_dma
+                0x0000000000000000        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .text.spi_set_standard_mode
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000      0x898 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x4f ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x51 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0xef ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x6a ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000      0x1df ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0xfa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000       0x34 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000000000      0x15a ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text          0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .data          0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .bss           0x0000000000000000        0x0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_send8
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_read8
+                0x0000000000000000        0xe ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_set_crcl_8bit
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_set_crcl_16bit
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_set_data_size
+                0x0000000000000000       0x18 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_fifo_reception_threshold_8bit
+                0x0000000000000000        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_fifo_reception_threshold_16bit
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .text.spi_i2s_mode_spi_mode
+                0x0000000000000000       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000      0x898 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x4f ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x51 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0xef ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x6a ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000      0x1df ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0xfa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0x34 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000      0x15a ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000      0x2eb ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000       0xca ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x0000000000000000      0x746 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
@@ -208,6 +476,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xfa ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .debug_macro   0x0000000000000000       0x34 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .debug_macro   0x0000000000000000      0x15a ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_macro   0x0000000000000000      0x746 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
  .group         0x0000000000000000        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
@@ -695,17 +964,14 @@ Discarded input sections
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
- .text.memcpy   0x0000000000000000       0x84 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
- .debug_frame   0x0000000000000000       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
- .ARM.attributes
-                0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
- .text.memset   0x0000000000000000       0x94 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
- .debug_frame   0x0000000000000000       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
- .ARM.attributes
-                0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+ .text._sprintf_r
+                0x0000000000000000       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
@@ -717,13 +983,30 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x8c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
  .ARM.attributes
                 0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strstr.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .text.__localeconv_l
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .text.localeconv
+                0x0000000000000000       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
- .text.memchr   0x0000000000000000       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
- .debug_frame   0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
- .ARM.attributes
-                0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
@@ -731,6 +1014,27 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
  .ARM.attributes
                 0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcmp.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__s2b    0x0000000000000000       0x94 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__ulp    0x0000000000000000       0x4c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__b2d    0x0000000000000000       0xd8 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__ratio  0x0000000000000000       0x74 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text._mprec_log10
+                0x0000000000000000       0x34 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__copybits
+                0x0000000000000000       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text.__any_on
+                0x0000000000000000       0x60 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .rodata.__mprec_tinytens
+                0x0000000000000000       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
  .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
@@ -738,6 +1042,94 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
  .ARM.attributes
                 0x0000000000000000       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strchr.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .text._svfiprintf_r
+                0x0000000000000000      0xa80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .rodata._svfiprintf_r
+                0x0000000000000000      0x164 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .rodata._svfiprintf_r.str1.4
+                0x0000000000000000       0x2f /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .rodata.blanks.7203
+                0x0000000000000000       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .rodata.zeroes.7204
+                0x0000000000000000       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text._setlocale_r
+                0x0000000000000000       0x44 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text.__locale_mb_cur_max
+                0x0000000000000000       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text.__locale_ctype_ptr_l
+                0x0000000000000000        0x8 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text.__locale_ctype_ptr
+                0x0000000000000000       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text.setlocale
+                0x0000000000000000       0x18 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .bss._PathLocale
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x0000000000000000        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .text._mbtowc_r
+                0x0000000000000000       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .text.cleanup_glue
+                0x0000000000000000       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .text._reclaim_reent
+                0x0000000000000000       0x94 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .text          0x0000000000000000       0x88 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+ .debug_frame   0x0000000000000000       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x0000000000000000       0x1b /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strcmp.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .text._wctomb_r
+                0x0000000000000000       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
  .text          0x0000000000000000       0x14 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_thumb1_case_uqi.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_thumb1_case_uqi.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_thumb1_case_uqi.o)
@@ -745,10 +1137,19 @@ Discarded input sections
                 0x0000000000000000       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_thumb1_case_uqi.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+ .ARM.extab     0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
@@ -763,8 +1164,37 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
  .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
  .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzdi2.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzdi2.o)
+ .text          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
+ .data          0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
+ .bss           0x0000000000000000        0x0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
 
 Memory Configuration
 
@@ -790,437 +1220,723 @@ LOAD /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/ar
 LOAD /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a
 END GROUP
 
-.text           0x0000000008000000     0x13ac
+.text           0x0000000008000000     0x76f0
  *(.vectors)
  .vectors       0x0000000008000000       0xc0 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
                 0x0000000008000000                vector_table
  *(.text*)
  .text.startup.main
-                0x00000000080000c0       0x64 main.o
+                0x00000000080000c0       0x94 main.o
                 0x00000000080000c0                main
- .text.wait     0x0000000008000124       0x28 src/functions.o
-                0x0000000008000124                wait
+ .text.calculate_float
+                0x0000000008000154        0xe src/functions.o
+                0x0000000008000154                calculate_float
+ *fill*         0x0000000008000162        0x2 
+ .text.spi_setup
+                0x0000000008000164       0x54 src/functions.o
+                0x0000000008000164                spi_setup
+ .text.wait     0x00000000080001b8       0x28 src/functions.o
+                0x00000000080001b8                wait
  .text.usartSend
-                0x000000000800014c       0x4c src/functions.o
-                0x000000000800014c                usartSend
+                0x00000000080001e0       0x4c src/functions.o
+                0x00000000080001e0                usartSend
  .text.clock_setup
-                0x0000000008000198       0x2c src/functions.o
-                0x0000000008000198                clock_setup
+                0x000000000800022c       0x40 src/functions.o
+                0x000000000800022c                clock_setup
  .text.i2c_setup
-                0x00000000080001c4       0x7c src/functions.o
-                0x00000000080001c4                i2c_setup
+                0x000000000800026c       0x7c src/functions.o
+                0x000000000800026c                i2c_setup
  .text.usart_setup
-                0x0000000008000240       0x80 src/functions.o
-                0x0000000008000240                usart_setup
+                0x00000000080002e8       0x80 src/functions.o
+                0x00000000080002e8                usart_setup
  .text.gpio_setup
-                0x00000000080002c0       0x88 src/functions.o
-                0x00000000080002c0                gpio_setup
- .text.connect_lorawan
-                0x0000000008000348       0x7c src/functions.o
-                0x0000000008000348                connect_lorawan
+                0x0000000008000368       0x88 src/functions.o
+                0x0000000008000368                gpio_setup
  .text.temp_BME280
-                0x00000000080003c4       0x6c src/bme280.o
-                0x00000000080003c4                temp_BME280
+                0x00000000080003f0       0x6c src/bme280.o
+                0x00000000080003f0                temp_BME280
  .text.press_BME280
-                0x0000000008000430      0x100 src/bme280.o
-                0x0000000008000430                press_BME280
+                0x000000000800045c      0x100 src/bme280.o
+                0x000000000800045c                press_BME280
  .text.hum_BME280
-                0x0000000008000530       0xbc src/bme280.o
-                0x0000000008000530                hum_BME280
+                0x000000000800055c       0xbc src/bme280.o
+                0x000000000800055c                hum_BME280
+ .text.particlemeter_set_fan
+                0x0000000008000618       0x64 src/opcn2.o
+                0x0000000008000618                particlemeter_set_fan
+ .text.read_pm_values
+                0x000000000800067c       0x58 src/opcn2.o
+                0x000000000800067c                read_pm_values
+ .text.particemeter_pm1
+                0x00000000080006d4       0x1c src/opcn2.o
+                0x00000000080006d4                particemeter_pm1
+ .text.particlemeter_ON
+                0x00000000080006f0       0x44 src/opcn2.o
+                0x00000000080006f0                particlemeter_ON
  .text.gpio_set
-                0x00000000080005ec        0x4 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
-                0x00000000080005ec                gpio_set
+                0x0000000008000734        0x4 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+                0x0000000008000734                gpio_set
  .text.gpio_clear
-                0x00000000080005f0        0x6 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
-                0x00000000080005f0                gpio_clear
+                0x0000000008000738        0x6 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+                0x0000000008000738                gpio_clear
  .text.gpio_mode_setup
-                0x00000000080005f6       0x3a ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
-                0x00000000080005f6                gpio_mode_setup
+                0x000000000800073e       0x3a ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+                0x000000000800073e                gpio_mode_setup
  .text.gpio_set_af
-                0x0000000008000630       0x58 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
-                0x0000000008000630                gpio_set_af
+                0x0000000008000778       0x58 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+                0x0000000008000778                gpio_set_af
+ .text.spi_enable
+                0x00000000080007d0        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                0x00000000080007d0                spi_enable
+ .text.spi_send
+                0x00000000080007da        0xc ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                0x00000000080007da                spi_send
+ .text.spi_read
+                0x00000000080007e6        0xe ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                0x00000000080007e6                spi_read
+ .text.spi_enable_ss_output
+                0x00000000080007f4        0xa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                0x00000000080007f4                spi_enable_ss_output
+ .text.spi_init_master
+                0x00000000080007fe       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+                0x00000000080007fe                spi_init_master
  .text.rcc_periph_clock_enable
-                0x0000000008000688       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
-                0x0000000008000688                rcc_periph_clock_enable
+                0x0000000008000820       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+                0x0000000008000820                rcc_periph_clock_enable
  .text.rcc_periph_reset_pulse
-                0x00000000080006a4       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
-                0x00000000080006a4                rcc_periph_reset_pulse
+                0x000000000800083c       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+                0x000000000800083c                rcc_periph_reset_pulse
  .text.usart_set_baudrate
-                0x00000000080006c4       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x00000000080006c4                usart_set_baudrate
+                0x000000000800085c       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x000000000800085c                usart_set_baudrate
  .text.usart_set_databits
-                0x00000000080006e0       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x00000000080006e0                usart_set_databits
+                0x0000000008000878       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x0000000008000878                usart_set_databits
  .text.usart_set_stopbits
-                0x00000000080006fc       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x00000000080006fc                usart_set_stopbits
+                0x0000000008000894       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x0000000008000894                usart_set_stopbits
  .text.usart_set_parity
-                0x000000000800070c       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x000000000800070c                usart_set_parity
+                0x00000000080008a4       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000080008a4                usart_set_parity
  .text.usart_set_mode
-                0x000000000800071c        0xc ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x000000000800071c                usart_set_mode
+                0x00000000080008b4        0xc ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000080008b4                usart_set_mode
  .text.usart_set_flow_control
-                0x0000000008000728       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x0000000008000728                usart_set_flow_control
+                0x00000000080008c0       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000080008c0                usart_set_flow_control
  .text.usart_enable
-                0x0000000008000738        0xa ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x0000000008000738                usart_enable
+                0x00000000080008d0        0xa ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000080008d0                usart_enable
  .text.usart_send_blocking
-                0x0000000008000742       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
-                0x0000000008000742                usart_send_blocking
+                0x00000000080008da       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000080008da                usart_send_blocking
  .text.usart_send
-                0x0000000008000756        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
-                0x0000000008000756                usart_send
+                0x00000000080008ee        0x8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+                0x00000000080008ee                usart_send
  .text.usart_wait_send_ready
-                0x000000000800075e        0xa ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
-                0x000000000800075e                usart_wait_send_ready
+                0x00000000080008f6        0xa ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+                0x00000000080008f6                usart_wait_send_ready
  .text.i2c_reset
-                0x0000000008000768       0x2c ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000768                i2c_reset
+                0x0000000008000900       0x2c ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000900                i2c_reset
  .text.i2c_peripheral_enable
-                0x0000000008000794        0xa ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000794                i2c_peripheral_enable
+                0x000000000800092c        0xa ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x000000000800092c                i2c_peripheral_enable
  .text.i2c_peripheral_disable
-                0x000000000800079e        0xa ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x000000000800079e                i2c_peripheral_disable
+                0x0000000008000936        0xa ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000936                i2c_peripheral_disable
  .text.i2c_enable_analog_filter
-                0x00000000080007a8       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x00000000080007a8                i2c_enable_analog_filter
+                0x0000000008000940       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000940                i2c_enable_analog_filter
  .text.i2c_set_prescaler
-                0x00000000080007b8        0xe ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x00000000080007b8                i2c_set_prescaler
- *fill*         0x00000000080007c6        0x2 
+                0x0000000008000950        0xe ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000950                i2c_set_prescaler
+ *fill*         0x000000000800095e        0x2 
  .text.i2c_set_data_setup_time
-                0x00000000080007c8       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x00000000080007c8                i2c_set_data_setup_time
+                0x0000000008000960       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000960                i2c_set_data_setup_time
  .text.i2c_set_data_hold_time
-                0x00000000080007dc       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x00000000080007dc                i2c_set_data_hold_time
+                0x0000000008000974       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000974                i2c_set_data_hold_time
  .text.i2c_set_scl_high_period
-                0x00000000080007f0       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x00000000080007f0                i2c_set_scl_high_period
+                0x0000000008000988       0x14 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000008000988                i2c_set_scl_high_period
  .text.i2c_set_scl_low_period
-                0x0000000008000804        0xc ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000804                i2c_set_scl_low_period
+                0x000000000800099c        0xc ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x000000000800099c                i2c_set_scl_low_period
  .text.i2c_enable_stretching
-                0x0000000008000810       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000810                i2c_enable_stretching
+                0x00000000080009a8       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x00000000080009a8                i2c_enable_stretching
  .text.i2c_set_7bit_addr_mode
-                0x0000000008000820       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000820                i2c_set_7bit_addr_mode
+                0x00000000080009b8       0x10 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x00000000080009b8                i2c_set_7bit_addr_mode
  .text.i2c_set_speed
-                0x0000000008000830       0x5e ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
-                0x0000000008000830                i2c_set_speed
+                0x00000000080009c8       0x5e ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x00000000080009c8                i2c_set_speed
  .text.blocking_handler
-                0x000000000800088e        0x2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
-                0x000000000800088e                rtc_isr
-                0x000000000800088e                tim7_isr
-                0x000000000800088e                blocking_handler
-                0x000000000800088e                tsc_isr
-                0x000000000800088e                spi1_isr
-                0x000000000800088e                i2c1_isr
-                0x000000000800088e                tim17_isr
-                0x000000000800088e                i2c2_isr
-                0x000000000800088e                usart1_isr
-                0x000000000800088e                usart3_4_isr
-                0x000000000800088e                tim1_cc_isr
-                0x000000000800088e                exti2_3_isr
-                0x000000000800088e                tim16_isr
-                0x000000000800088e                pvd_isr
-                0x000000000800088e                rcc_isr
-                0x000000000800088e                flash_isr
-                0x000000000800088e                hard_fault_handler
-                0x000000000800088e                tim14_isr
-                0x000000000800088e                spi2_isr
-                0x000000000800088e                usb_isr
-                0x000000000800088e                tim15_isr
-                0x000000000800088e                tim3_isr
-                0x000000000800088e                usart2_isr
-                0x000000000800088e                adc_comp_isr
-                0x000000000800088e                dma1_channel1_isr
-                0x000000000800088e                tim6_dac_isr
-                0x000000000800088e                tim1_brk_up_trg_com_isr
-                0x000000000800088e                dma1_channel2_3_isr
-                0x000000000800088e                exti4_15_isr
-                0x000000000800088e                cec_can_isr
-                0x000000000800088e                wwdg_isr
-                0x000000000800088e                tim2_isr
-                0x000000000800088e                dma1_channel4_5_isr
-                0x000000000800088e                exti0_1_isr
+                0x0000000008000a26        0x2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+                0x0000000008000a26                rtc_isr
+                0x0000000008000a26                tim7_isr
+                0x0000000008000a26                blocking_handler
+                0x0000000008000a26                tsc_isr
+                0x0000000008000a26                spi1_isr
+                0x0000000008000a26                i2c1_isr
+                0x0000000008000a26                tim17_isr
+                0x0000000008000a26                i2c2_isr
+                0x0000000008000a26                usart1_isr
+                0x0000000008000a26                usart3_4_isr
+                0x0000000008000a26                tim1_cc_isr
+                0x0000000008000a26                exti2_3_isr
+                0x0000000008000a26                tim16_isr
+                0x0000000008000a26                pvd_isr
+                0x0000000008000a26                rcc_isr
+                0x0000000008000a26                flash_isr
+                0x0000000008000a26                hard_fault_handler
+                0x0000000008000a26                tim14_isr
+                0x0000000008000a26                spi2_isr
+                0x0000000008000a26                usb_isr
+                0x0000000008000a26                tim15_isr
+                0x0000000008000a26                tim3_isr
+                0x0000000008000a26                usart2_isr
+                0x0000000008000a26                adc_comp_isr
+                0x0000000008000a26                dma1_channel1_isr
+                0x0000000008000a26                tim6_dac_isr
+                0x0000000008000a26                tim1_brk_up_trg_com_isr
+                0x0000000008000a26                dma1_channel2_3_isr
+                0x0000000008000a26                exti4_15_isr
+                0x0000000008000a26                cec_can_isr
+                0x0000000008000a26                wwdg_isr
+                0x0000000008000a26                tim2_isr
+                0x0000000008000a26                dma1_channel4_5_isr
+                0x0000000008000a26                exti0_1_isr
  .text.null_handler
-                0x0000000008000890        0x2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
-                0x0000000008000890                null_handler
-                0x0000000008000890                sv_call_handler
-                0x0000000008000890                pend_sv_handler
-                0x0000000008000890                sys_tick_handler
-                0x0000000008000890                nmi_handler
- *fill*         0x0000000008000892        0x2 
+                0x0000000008000a28        0x2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+                0x0000000008000a28                null_handler
+                0x0000000008000a28                sv_call_handler
+                0x0000000008000a28                pend_sv_handler
+                0x0000000008000a28                sys_tick_handler
+                0x0000000008000a28                nmi_handler
+ *fill*         0x0000000008000a2a        0x2 
  .text.reset_handler
-                0x0000000008000894       0x8c ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
-                0x0000000008000894                reset_handler
- .text          0x0000000008000920      0x114 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
-                0x0000000008000920                __udivsi3
-                0x0000000008000920                __aeabi_uidiv
-                0x0000000008000a2c                __aeabi_uidivmod
- .text          0x0000000008000a34        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
-                0x0000000008000a34                __aeabi_ldiv0
-                0x0000000008000a34                __aeabi_idiv0
- .text          0x0000000008000a38       0x74 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
-                0x0000000008000a38                __aeabi_cfrcmple
-                0x0000000008000a40                __aeabi_cfcmple
-                0x0000000008000a40                __aeabi_cfcmpeq
-                0x0000000008000a50                __aeabi_fcmpeq
-                0x0000000008000a5c                __aeabi_fcmplt
-                0x0000000008000a70                __aeabi_fcmple
-                0x0000000008000a84                __aeabi_fcmpgt
-                0x0000000008000a98                __aeabi_fcmpge
- .text          0x0000000008000aac      0x290 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
-                0x0000000008000aac                __aeabi_fdiv
- .text          0x0000000008000d3c       0x4c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
-                0x0000000008000d3c                __nesf2
-                0x0000000008000d3c                __eqsf2
- .text          0x0000000008000d88       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
-                0x0000000008000d88                __gtsf2
-                0x0000000008000d88                __gesf2
- .text          0x0000000008000e08       0x84 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
-                0x0000000008000e08                __lesf2
-                0x0000000008000e08                __ltsf2
- .text          0x0000000008000e8c      0x240 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
-                0x0000000008000e8c                __aeabi_fmul
- .text          0x00000000080010cc       0xa0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
-                0x00000000080010cc                __aeabi_i2f
- .text          0x000000000800116c       0x8c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
-                0x000000000800116c                __aeabi_ui2f
- .text          0x00000000080011f8       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
-                0x00000000080011f8                __clzsi2
-                0x0000000008001234                . = ALIGN (0x4)
+                0x0000000008000a2c       0x8c ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+                0x0000000008000a2c                reset_handler
+ .text.memcpy   0x0000000008000ab8       0x84 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
+                0x0000000008000ab8                memcpy
+ .text.memset   0x0000000008000b3c       0x94 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
+                0x0000000008000b3c                memset
+ .text.sprintf  0x0000000008000bd0       0x44 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+                0x0000000008000bd0                sprintf
+ .text._svfprintf_r
+                0x0000000008000c14     0x1608 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+                0x0000000008000c14                _svfprintf_r
+ .text.quorem   0x000000000800221c      0x154 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+ .text._dtoa_r  0x0000000008002370      0xf88 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+                0x0000000008002370                _dtoa_r
+ .text._localeconv_r
+                0x00000000080032f8       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+                0x00000000080032f8                _localeconv_r
+ .text._malloc_r
+                0x0000000008003314      0x568 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000008003314                _malloc_r
+ .text.memchr   0x000000000800387c       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
+                0x000000000800387c                memchr
+ .text.__malloc_lock
+                0x00000000080038fc       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+                0x00000000080038fc                __malloc_lock
+ .text.__malloc_unlock
+                0x000000000800390c       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+                0x000000000800390c                __malloc_unlock
+ .text._Balloc  0x000000000800391c       0x50 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x000000000800391c                _Balloc
+ .text._Bfree   0x000000000800396c       0x14 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x000000000800396c                _Bfree
+ .text.__multadd
+                0x0000000008003980       0x8c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003980                __multadd
+ .text.__hi0bits
+                0x0000000008003a0c       0x34 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003a0c                __hi0bits
+ .text.__lo0bits
+                0x0000000008003a40       0x5c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003a40                __lo0bits
+ .text.__i2b    0x0000000008003a9c       0x14 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003a9c                __i2b
+ .text.__multiply
+                0x0000000008003ab0      0x154 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003ab0                __multiply
+ .text.__pow5mult
+                0x0000000008003c04       0xc0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003c04                __pow5mult
+ .text.__lshift
+                0x0000000008003cc4       0xc0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003cc4                __lshift
+ .text.__mcmp   0x0000000008003d84       0x34 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003d84                __mcmp
+ .text.__mdiff  0x0000000008003db8      0x138 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003db8                __mdiff
+ .text.__d2b    0x0000000008003ef0       0xbc /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x0000000008003ef0                __d2b
+ .text._sbrk_r  0x0000000008003fac       0x24 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+                0x0000000008003fac                _sbrk_r
+ .text.strlen   0x0000000008003fd0       0x64 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+                0x0000000008003fd0                strlen
+ .text.__ssprint_r
+                0x0000000008004034      0x120 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+                0x0000000008004034                __ssprint_r
+ .text._calloc_r
+                0x0000000008004154       0x58 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+                0x0000000008004154                _calloc_r
+ .text._malloc_trim_r
+                0x00000000080041ac       0xa0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+                0x00000000080041ac                _malloc_trim_r
+ .text._free_r  0x000000000800424c      0x1bc /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+                0x000000000800424c                _free_r
+ .text.__retarget_lock_acquire_recursive
+                0x0000000008004408        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+                0x0000000008004408                __retarget_lock_acquire_recursive
+ .text.__retarget_lock_release_recursive
+                0x000000000800440c        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+                0x000000000800440c                __retarget_lock_release_recursive
+ .text.__ascii_mbtowc
+                0x0000000008004410       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+                0x0000000008004410                __ascii_mbtowc
+ .text.memmove  0x000000000800443c       0xa0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+                0x000000000800443c                memmove
+ .text._realloc_r
+                0x00000000080044dc      0x37c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+                0x00000000080044dc                _realloc_r
+ .text.__ascii_wctomb
+                0x0000000008004858       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+                0x0000000008004858                __ascii_wctomb
+ .text          0x0000000008004874      0x114 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                0x0000000008004874                __udivsi3
+                0x0000000008004874                __aeabi_uidiv
+                0x0000000008004980                __aeabi_uidivmod
+ .text          0x0000000008004988      0x1d4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+                0x0000000008004988                __aeabi_idiv
+                0x0000000008004988                __divsi3
+                0x0000000008004b54                __aeabi_idivmod
+ .text          0x0000000008004b5c        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x0000000008004b5c                __aeabi_ldiv0
+                0x0000000008004b5c                __aeabi_idiv0
+ .text          0x0000000008004b60       0x7c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o)
+                0x0000000008004b60                __aeabi_cdrcmple
+                0x0000000008004b70                __aeabi_cdcmple
+                0x0000000008004b70                __aeabi_cdcmpeq
+                0x0000000008004b80                __aeabi_dcmpeq
+                0x0000000008004b8c                __aeabi_dcmplt
+                0x0000000008004ba0                __aeabi_dcmple
+                0x0000000008004bb4                __aeabi_dcmpgt
+                0x0000000008004bc8                __aeabi_dcmpge
+ .text          0x0000000008004bdc       0x74 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
+                0x0000000008004bdc                __aeabi_cfrcmple
+                0x0000000008004be4                __aeabi_cfcmple
+                0x0000000008004be4                __aeabi_cfcmpeq
+                0x0000000008004bf4                __aeabi_fcmpeq
+                0x0000000008004c00                __aeabi_fcmplt
+                0x0000000008004c14                __aeabi_fcmple
+                0x0000000008004c28                __aeabi_fcmpgt
+                0x0000000008004c3c                __aeabi_fcmpge
+ .text          0x0000000008004c50       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o)
+                0x0000000008004c50                __aeabi_uldivmod
+ .text          0x0000000008004c90      0x180 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+                0x0000000008004c90                __udivmoddi4
+ .text          0x0000000008004e10      0x290 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
+                0x0000000008004e10                __aeabi_fdiv
+ .text          0x00000000080050a0       0x4c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
+                0x00000000080050a0                __nesf2
+                0x00000000080050a0                __eqsf2
+ .text          0x00000000080050ec       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
+                0x00000000080050ec                __gtsf2
+                0x00000000080050ec                __gesf2
+ .text          0x000000000800516c       0x84 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
+                0x000000000800516c                __lesf2
+                0x000000000800516c                __ltsf2
+ .text          0x00000000080051f0      0x240 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
+                0x00000000080051f0                __aeabi_fmul
+ .text          0x0000000008005430       0xa0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
+                0x0000000008005430                __aeabi_i2f
+ .text          0x00000000080054d0       0x8c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+                0x00000000080054d0                __aeabi_ui2f
+ .text          0x000000000800555c      0x620 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+                0x000000000800555c                __aeabi_dadd
+ .text          0x0000000008005b7c      0x668 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+                0x0000000008005b7c                __aeabi_ddiv
+ .text          0x00000000080061e4       0x74 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+                0x00000000080061e4                __eqdf2
+                0x00000000080061e4                __nedf2
+ .text          0x0000000008006258       0xc8 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+                0x0000000008006258                __gtdf2
+                0x0000000008006258                __gedf2
+ .text          0x0000000008006320       0xc4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+                0x0000000008006320                __ltdf2
+                0x0000000008006320                __ledf2
+ .text          0x00000000080063e4      0x500 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+                0x00000000080063e4                __aeabi_dmul
+ .text          0x00000000080068e4      0x62c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+                0x00000000080068e4                __aeabi_dsub
+ .text          0x0000000008006f10       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+                0x0000000008006f10                __aeabi_dcmpun
+ .text          0x0000000008006f50       0x68 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+                0x0000000008006f50                __aeabi_d2iz
+ .text          0x0000000008006fb8       0x84 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+                0x0000000008006fb8                __aeabi_i2d
+ .text          0x000000000800703c       0x70 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+                0x000000000800703c                __aeabi_ui2d
+ .text          0x00000000080070ac       0xa4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
+                0x00000000080070ac                __aeabi_f2d
+ .text          0x0000000008007150       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
+                0x0000000008007150                __clzsi2
+ .text          0x000000000800718c       0x18 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzdi2.o)
+                0x000000000800718c                __clzdi2
+ .text._sbrk    0x00000000080071a4       0x1c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
+                0x00000000080071a4                _sbrk
+                0x00000000080071c0                . = ALIGN (0x4)
  *(.rodata*)
  .rodata.main.str1.1
-                0x0000000008001234       0x12 main.o
- .rodata.connect_lorawan.str1.1
-                0x0000000008001246       0xa4 src/functions.o
- *fill*         0x00000000080012ea        0x2 
- .rodata        0x00000000080012ec       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
- .rodata        0x000000000800136c       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
-                0x00000000080013ac                . = ALIGN (0x4)
+                0x00000000080071c0        0x5 main.o
+ *fill*         0x00000000080071c5        0x3 
+ .rodata._svfprintf_r
+                0x00000000080071c8      0x164 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .rodata._svfprintf_r.str1.4
+                0x000000000800732c       0x42 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ *fill*         0x000000000800736e        0x2 
+ .rodata.blanks.7223
+                0x0000000008007370       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .rodata.zeroes.7224
+                0x0000000008007380       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .rodata._dtoa_r.str1.4
+                0x0000000008007390       0x10 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+                                         0x12 (size before relaxing)
+ .rodata.__mprec_bigtens
+                0x00000000080073a0       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x00000000080073a0                __mprec_bigtens
+ .rodata.__mprec_tens
+                0x00000000080073c8       0xc8 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+                0x00000000080073c8                __mprec_tens
+ .rodata.p05.6055
+                0x0000000008007490        0xc /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .rodata._setlocale_r.str1.4
+                0x000000000800749c        0xa /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+                                          0xd (size before relaxing)
+ *fill*         0x00000000080074a6        0x2 
+ .rodata.str1.4
+                0x00000000080074a8        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+                                          0x2 (size before relaxing)
+ .rodata._ctype_
+                0x00000000080074ac      0x101 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
+                0x00000000080074ac                _ctype_
+ *fill*         0x00000000080075ad        0x3 
+ .rodata        0x00000000080075b0       0x80 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
+ .rodata        0x0000000008007630       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
+ .rodata        0x0000000008007670       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+ .rodata        0x00000000080076b0       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+                0x00000000080076f0                . = ALIGN (0x4)
 
-.glue_7         0x00000000080013ac        0x0
- .glue_7        0x00000000080013ac        0x0 linker stubs
+.glue_7         0x00000000080076f0        0x0
+ .glue_7        0x00000000080076f0        0x0 linker stubs
 
-.glue_7t        0x00000000080013ac        0x0
- .glue_7t       0x00000000080013ac        0x0 linker stubs
+.glue_7t        0x00000000080076f0        0x0
+ .glue_7t       0x00000000080076f0        0x0 linker stubs
 
-.vfp11_veneer   0x00000000080013ac        0x0
- .vfp11_veneer  0x00000000080013ac        0x0 linker stubs
+.vfp11_veneer   0x00000000080076f0        0x0
+ .vfp11_veneer  0x00000000080076f0        0x0 linker stubs
 
-.v4_bx          0x00000000080013ac        0x0
- .v4_bx         0x00000000080013ac        0x0 linker stubs
+.v4_bx          0x00000000080076f0        0x0
+ .v4_bx         0x00000000080076f0        0x0 linker stubs
 
-.iplt           0x00000000080013ac        0x0
- .iplt          0x00000000080013ac        0x0 main.o
+.iplt           0x00000000080076f0        0x0
+ .iplt          0x00000000080076f0        0x0 main.o
 
-.rel.dyn        0x00000000080013ac        0x0
- .rel.iplt      0x00000000080013ac        0x0 main.o
-
-.preinit_array  0x00000000080013ac        0x0
-                0x00000000080013ac                . = ALIGN (0x4)
-                0x00000000080013ac                __preinit_array_start = .
+.preinit_array  0x00000000080076f0        0x0
+                0x00000000080076f0                . = ALIGN (0x4)
+                0x00000000080076f0                __preinit_array_start = .
  *(.preinit_array)
-                0x00000000080013ac                __preinit_array_end = .
+                0x00000000080076f0                __preinit_array_end = .
 
-.init_array     0x00000000080013ac        0x0
-                0x00000000080013ac                . = ALIGN (0x4)
-                0x00000000080013ac                __init_array_start = .
+.init_array     0x00000000080076f0        0x0
+                0x00000000080076f0                . = ALIGN (0x4)
+                0x00000000080076f0                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
-                0x00000000080013ac                __init_array_end = .
+                0x00000000080076f0                __init_array_end = .
 
-.fini_array     0x00000000080013ac        0x0
-                0x00000000080013ac                . = ALIGN (0x4)
-                0x00000000080013ac                __fini_array_start = .
+.fini_array     0x00000000080076f0        0x0
+                0x00000000080076f0                . = ALIGN (0x4)
+                0x00000000080076f0                __fini_array_start = .
  *(.fini_array)
  *(SORT(.fini_array.*))
-                0x00000000080013ac                __fini_array_end = .
+                0x00000000080076f0                __fini_array_end = .
 
 .ARM.extab
  *(.ARM.extab*)
 
-.ARM.exidx      0x00000000080013ac        0x0
-                0x00000000080013ac                __exidx_start = .
+.ARM.exidx      0x00000000080076f0        0x8
+                0x00000000080076f0                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080013ac                __exidx_end = .
-                0x00000000080013ac                . = ALIGN (0x4)
-                0x00000000080013ac                _etext = .
+ .ARM.exidx     0x00000000080076f0        0x8 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+                0x00000000080076f8                __exidx_end = .
 
-.data           0x0000000020000000        0x4 load address 0x00000000080013ac
+.rel.dyn        0x00000000080076f8        0x0
+ .rel.iplt      0x00000000080076f8        0x0 main.o
+                0x00000000080076f8                . = ALIGN (0x4)
+                0x00000000080076f8                _etext = .
+
+.data           0x0000000020000000      0x9ac load address 0x00000000080076f8
                 0x0000000020000000                _data = .
  *(.data*)
  .data.rcc_apb1_frequency
                 0x0000000020000000        0x4 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
                 0x0000000020000000                rcc_apb1_frequency
-                0x0000000020000004                . = ALIGN (0x4)
-                0x0000000020000004                _edata = .
-                0x00000000080013ac                _data_loadaddr = LOADADDR (.data)
+ .data._impure_ptr
+                0x0000000020000004        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+                0x0000000020000004                _impure_ptr
+ .data.impure_data
+                0x0000000020000008      0x428 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
+ .data.__malloc_av_
+                0x0000000020000430      0x408 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000020000430                __malloc_av_
+ .data.__malloc_sbrk_base
+                0x0000000020000838        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000020000838                __malloc_sbrk_base
+ .data.__malloc_trim_threshold
+                0x000000002000083c        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x000000002000083c                __malloc_trim_threshold
+ .data.__global_locale
+                0x0000000020000840      0x16c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+                0x0000000020000840                __global_locale
+                0x00000000200009ac                . = ALIGN (0x4)
+                0x00000000200009ac                _edata = .
+                0x00000000080076f8                _data_loadaddr = LOADADDR (.data)
 
-.igot.plt       0x0000000020000004        0x0 load address 0x00000000080013b0
- .igot.plt      0x0000000020000004        0x0 main.o
+.igot.plt       0x00000000200009ac        0x0 load address 0x00000000080080a4
+ .igot.plt      0x00000000200009ac        0x0 main.o
 
-.bss            0x0000000020000004       0x30 load address 0x00000000080013b0
+.bss            0x00000000200009ac       0x9c load address 0x00000000080080a4
  *(.bss*)
  .bss.burst_read_data
-                0x0000000020000004        0x8 main.o
-                0x0000000020000004                burst_read_data
- .bss.dig_H1    0x000000002000000c        0x1 main.o
-                0x000000002000000c                dig_H1
- *fill*         0x000000002000000d        0x1 
- .bss.dig_H2    0x000000002000000e        0x2 main.o
-                0x000000002000000e                dig_H2
- .bss.dig_H3    0x0000000020000010        0x1 main.o
-                0x0000000020000010                dig_H3
- *fill*         0x0000000020000011        0x1 
- .bss.dig_H4    0x0000000020000012        0x2 main.o
-                0x0000000020000012                dig_H4
- .bss.dig_H5    0x0000000020000014        0x2 main.o
-                0x0000000020000014                dig_H5
- .bss.dig_H6    0x0000000020000016        0x1 main.o
-                0x0000000020000016                dig_H6
- *fill*         0x0000000020000017        0x1 
- .bss.dig_P1    0x0000000020000018        0x2 main.o
-                0x0000000020000018                dig_P1
- .bss.dig_P2    0x000000002000001a        0x2 main.o
-                0x000000002000001a                dig_P2
- .bss.dig_P3    0x000000002000001c        0x2 main.o
-                0x000000002000001c                dig_P3
- .bss.dig_P4    0x000000002000001e        0x2 main.o
-                0x000000002000001e                dig_P4
- .bss.dig_P5    0x0000000020000020        0x2 main.o
-                0x0000000020000020                dig_P5
- .bss.dig_P6    0x0000000020000022        0x2 main.o
-                0x0000000020000022                dig_P6
- .bss.dig_P7    0x0000000020000024        0x2 main.o
-                0x0000000020000024                dig_P7
- .bss.dig_P8    0x0000000020000026        0x2 main.o
-                0x0000000020000026                dig_P8
- .bss.dig_P9    0x0000000020000028        0x2 main.o
-                0x0000000020000028                dig_P9
- .bss.dig_T1    0x000000002000002a        0x2 main.o
-                0x000000002000002a                dig_T1
- .bss.dig_T2    0x000000002000002c        0x2 main.o
-                0x000000002000002c                dig_T2
- .bss.dig_T3    0x000000002000002e        0x2 main.o
-                0x000000002000002e                dig_T3
- .bss.t_fine    0x0000000020000030        0x4 main.o
-                0x0000000020000030                t_fine
+                0x00000000200009ac        0x8 main.o
+                0x00000000200009ac                burst_read_data
+ .bss.dig_H1    0x00000000200009b4        0x1 main.o
+                0x00000000200009b4                dig_H1
+ *fill*         0x00000000200009b5        0x1 
+ .bss.dig_H2    0x00000000200009b6        0x2 main.o
+                0x00000000200009b6                dig_H2
+ .bss.dig_H3    0x00000000200009b8        0x1 main.o
+                0x00000000200009b8                dig_H3
+ *fill*         0x00000000200009b9        0x1 
+ .bss.dig_H4    0x00000000200009ba        0x2 main.o
+                0x00000000200009ba                dig_H4
+ .bss.dig_H5    0x00000000200009bc        0x2 main.o
+                0x00000000200009bc                dig_H5
+ .bss.dig_H6    0x00000000200009be        0x1 main.o
+                0x00000000200009be                dig_H6
+ *fill*         0x00000000200009bf        0x1 
+ .bss.dig_P1    0x00000000200009c0        0x2 main.o
+                0x00000000200009c0                dig_P1
+ .bss.dig_P2    0x00000000200009c2        0x2 main.o
+                0x00000000200009c2                dig_P2
+ .bss.dig_P3    0x00000000200009c4        0x2 main.o
+                0x00000000200009c4                dig_P3
+ .bss.dig_P4    0x00000000200009c6        0x2 main.o
+                0x00000000200009c6                dig_P4
+ .bss.dig_P5    0x00000000200009c8        0x2 main.o
+                0x00000000200009c8                dig_P5
+ .bss.dig_P6    0x00000000200009ca        0x2 main.o
+                0x00000000200009ca                dig_P6
+ .bss.dig_P7    0x00000000200009cc        0x2 main.o
+                0x00000000200009cc                dig_P7
+ .bss.dig_P8    0x00000000200009ce        0x2 main.o
+                0x00000000200009ce                dig_P8
+ .bss.dig_P9    0x00000000200009d0        0x2 main.o
+                0x00000000200009d0                dig_P9
+ .bss.dig_T1    0x00000000200009d2        0x2 main.o
+                0x00000000200009d2                dig_T1
+ .bss.dig_T2    0x00000000200009d4        0x2 main.o
+                0x00000000200009d4                dig_T2
+ .bss.dig_T3    0x00000000200009d6        0x2 main.o
+                0x00000000200009d6                dig_T3
+ .bss.pm_values_buffer
+                0x00000000200009d8        0xc main.o
+                0x00000000200009d8                pm_values_buffer
+ .bss.t_fine    0x00000000200009e4        0x4 main.o
+                0x00000000200009e4                t_fine
+ .bss.__malloc_current_mallinfo
+                0x00000000200009e8       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x00000000200009e8                __malloc_current_mallinfo
+ .bss.__malloc_max_sbrked_mem
+                0x0000000020000a10        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000020000a10                __malloc_max_sbrked_mem
+ .bss.__malloc_max_total_mem
+                0x0000000020000a14        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000020000a14                __malloc_max_total_mem
+ .bss.__malloc_top_pad
+                0x0000000020000a18        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+                0x0000000020000a18                __malloc_top_pad
+ .bss.heap_end.4116
+                0x0000000020000a1c        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
  *(COMMON)
-                0x0000000020000034                . = ALIGN (0x4)
-                0x0000000020000034                _ebss = .
+ COMMON         0x0000000020000a20       0x21 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+                0x0000000020000a20                __lock___atexit_recursive_mutex
+                0x0000000020000a24                __lock___arc4random_mutex
+                0x0000000020000a28                __lock___env_recursive_mutex
+                0x0000000020000a2c                __lock___sinit_recursive_mutex
+                0x0000000020000a30                __lock___malloc_recursive_mutex
+                0x0000000020000a34                __lock___at_quick_exit_mutex
+                0x0000000020000a38                __lock___dd_hash_mutex
+                0x0000000020000a3c                __lock___tz_mutex
+                0x0000000020000a40                __lock___sfp_recursive_mutex
+ *fill*         0x0000000020000a41        0x3 
+ COMMON         0x0000000020000a44        0x4 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+                0x0000000020000a44                errno
+                0x0000000020000a48                . = ALIGN (0x4)
+                0x0000000020000a48                _ebss = .
 
 /DISCARD/
  *(.eh_frame)
-                0x0000000020000034                . = ALIGN (0x4)
-                0x0000000020000034                end = .
+                0x0000000020000a48                . = ALIGN (0x4)
+                0x0000000020000a48                end = .
                 0x0000000020004000                PROVIDE (_stack, (ORIGIN (ram) + LENGTH (ram)))
 OUTPUT(main.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x5202
- .debug_info    0x0000000000000000      0xd88 main.o
- .debug_info    0x0000000000000d88     0x15da src/functions.o
- .debug_info    0x0000000000002362      0x6b5 src/bme280.o
- .debug_info    0x0000000000002a17      0x22c ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_info    0x0000000000002c43      0x1f7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_info    0x0000000000002e3a      0x527 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_info    0x0000000000003361      0x4b8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_info    0x0000000000003819      0x364 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_info    0x0000000000003b7d      0xc70 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_info    0x00000000000047ed      0x2ae ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_info    0x0000000000004a9b      0x767 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+.debug_info     0x0000000000000000     0x6e20
+ .debug_info    0x0000000000000000      0xec8 main.o
+ .debug_info    0x0000000000000ec8     0x1798 src/functions.o
+ .debug_info    0x0000000000002660      0x6b5 src/bme280.o
+ .debug_info    0x0000000000002d15      0xd90 src/opcn2.o
+ .debug_info    0x0000000000003aa5      0x22c ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_info    0x0000000000003cd1      0x1f7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_info    0x0000000000003ec8      0x910 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_info    0x00000000000047d8      0x280 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_info    0x0000000000004a58      0x527 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_info    0x0000000000004f7f      0x4b8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_info    0x0000000000005437      0x364 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_info    0x000000000000579b      0xc70 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_info    0x000000000000640b      0x2ae ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_info    0x00000000000066b9      0x767 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
-.debug_abbrev   0x0000000000000000     0x116f
- .debug_abbrev  0x0000000000000000      0x23d main.o
- .debug_abbrev  0x000000000000023d      0x311 src/functions.o
- .debug_abbrev  0x000000000000054e      0x172 src/bme280.o
- .debug_abbrev  0x00000000000006c0       0xf4 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_abbrev  0x00000000000007b4       0xb7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_abbrev  0x000000000000086b      0x137 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_abbrev  0x00000000000009a2      0x126 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_abbrev  0x0000000000000ac8      0x109 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_abbrev  0x0000000000000bd1      0x210 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_abbrev  0x0000000000000de1      0x127 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_abbrev  0x0000000000000f08      0x267 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+.debug_abbrev   0x0000000000000000     0x16d2
+ .debug_abbrev  0x0000000000000000      0x284 main.o
+ .debug_abbrev  0x0000000000000284      0x347 src/functions.o
+ .debug_abbrev  0x00000000000005cb      0x172 src/bme280.o
+ .debug_abbrev  0x000000000000073d      0x257 src/opcn2.o
+ .debug_abbrev  0x0000000000000994       0xf4 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_abbrev  0x0000000000000a88       0xb7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_abbrev  0x0000000000000b3f      0x1a9 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_abbrev  0x0000000000000ce8       0xe6 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_abbrev  0x0000000000000dce      0x137 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_abbrev  0x0000000000000f05      0x126 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_abbrev  0x000000000000102b      0x109 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_abbrev  0x0000000000001134      0x210 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_abbrev  0x0000000000001344      0x127 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_abbrev  0x000000000000146b      0x267 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
-.debug_aranges  0x0000000000000000      0x5c0
+.debug_loc      0x0000000000000000     0x1a12
+ .debug_loc     0x0000000000000000       0x19 main.o
+ .debug_loc     0x0000000000000019      0x51a src/functions.o
+ .debug_loc     0x0000000000000533      0x285 src/bme280.o
+ .debug_loc     0x00000000000007b8       0x98 src/opcn2.o
+ .debug_loc     0x0000000000000850       0x97 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_loc     0x00000000000008e7      0x186 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_loc     0x0000000000000a6d      0x133 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_loc     0x0000000000000ba0      0x15a ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_loc     0x0000000000000cfa       0xe7 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_loc     0x0000000000000de1      0x1d6 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_loc     0x0000000000000fb7       0xc3 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_loc     0x000000000000107a      0x620 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_loc     0x000000000000169a       0xf2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_loc     0x000000000000178c      0x286 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+
+.debug_aranges  0x0000000000000000      0x7f8
  .debug_aranges
                 0x0000000000000000       0x20 main.o
  .debug_aranges
-                0x0000000000000020       0x78 src/functions.o
+                0x0000000000000020       0x88 src/functions.o
  .debug_aranges
-                0x0000000000000098       0x48 src/bme280.o
+                0x00000000000000a8       0x48 src/bme280.o
  .debug_aranges
-                0x00000000000000e0       0x50 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+                0x00000000000000f0       0x50 src/opcn2.o
  .debug_aranges
-                0x0000000000000130       0x30 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+                0x0000000000000140       0x50 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .debug_aranges
-                0x0000000000000160       0x68 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+                0x0000000000000190       0x30 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
  .debug_aranges
-                0x00000000000001c8       0xb8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x00000000000001c0      0x178 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
  .debug_aranges
-                0x0000000000000280       0xa8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+                0x0000000000000338       0x60 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
  .debug_aranges
-                0x0000000000000328      0x170 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000000000398       0x68 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .debug_aranges
-                0x0000000000000498       0x30 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+                0x0000000000000400       0xb8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
  .debug_aranges
-                0x00000000000004c8       0xf8 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+                0x00000000000004b8       0xa8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_aranges
+                0x0000000000000560      0x170 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_aranges
+                0x00000000000006d0       0x30 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_aranges
+                0x0000000000000700       0xf8 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
-.debug_ranges   0x0000000000000000      0x568
- .debug_ranges  0x0000000000000000       0x28 main.o
- .debug_ranges  0x0000000000000028       0x80 src/functions.o
- .debug_ranges  0x00000000000000a8       0x38 src/bme280.o
- .debug_ranges  0x00000000000000e0       0x40 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_ranges  0x0000000000000120       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_ranges  0x0000000000000140       0x58 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_ranges  0x0000000000000198       0xa8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_ranges  0x0000000000000240       0x98 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_ranges  0x00000000000002d8      0x160 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_ranges  0x0000000000000438       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_ranges  0x0000000000000458      0x110 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+.debug_ranges   0x0000000000000000      0x778
+ .debug_ranges  0x0000000000000000       0x30 main.o
+ .debug_ranges  0x0000000000000030       0x90 src/functions.o
+ .debug_ranges  0x00000000000000c0       0x38 src/bme280.o
+ .debug_ranges  0x00000000000000f8       0x40 src/opcn2.o
+ .debug_ranges  0x0000000000000138       0x40 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_ranges  0x0000000000000178       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_ranges  0x0000000000000198      0x168 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_ranges  0x0000000000000300       0x50 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_ranges  0x0000000000000350       0x58 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_ranges  0x00000000000003a8       0xa8 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_ranges  0x0000000000000450       0x98 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_ranges  0x00000000000004e8      0x160 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_ranges  0x0000000000000648       0x20 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_ranges  0x0000000000000668      0x110 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
-.debug_line     0x0000000000000000     0x2e52
- .debug_line    0x0000000000000000      0x25b main.o
- .debug_line    0x000000000000025b      0x42a src/functions.o
- .debug_line    0x0000000000000685      0x2c2 src/bme280.o
- .debug_line    0x0000000000000947      0x3b9 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_line    0x0000000000000d00      0x3b1 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_line    0x00000000000010b1      0x3d3 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_line    0x0000000000001484      0x4da ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_line    0x000000000000195e      0x47c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_line    0x0000000000001dda      0x6cd ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_line    0x00000000000024a7      0x391 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_line    0x0000000000002838      0x61a ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+.debug_line     0x0000000000000000     0x3ca5
+ .debug_line    0x0000000000000000      0x29f main.o
+ .debug_line    0x000000000000029f      0x470 src/functions.o
+ .debug_line    0x000000000000070f      0x2c2 src/bme280.o
+ .debug_line    0x00000000000009d1      0x2fe src/opcn2.o
+ .debug_line    0x0000000000000ccf      0x3b9 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_line    0x0000000000001088      0x3b1 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_line    0x0000000000001439      0x6d1 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_line    0x0000000000001b0a      0x3fa ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_line    0x0000000000001f04      0x3d3 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_line    0x00000000000022d7      0x4da ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_line    0x00000000000027b1      0x47c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_line    0x0000000000002c2d      0x6cd ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_line    0x00000000000032fa      0x391 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_line    0x000000000000368b      0x61a ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
-.debug_str      0x0000000000000000     0xdbe0
- .debug_str     0x0000000000000000      0x670 main.o
-                                        0x76d (size before relaxing)
- .debug_str     0x0000000000000670      0x4d8 src/functions.o
-                                        0xafc (size before relaxing)
- .debug_str     0x0000000000000b48       0xb4 src/bme280.o
+.debug_str      0x0000000000000000     0xf331
+ .debug_str     0x0000000000000000      0x6d7 main.o
+                                        0x7e0 (size before relaxing)
+ .debug_str     0x00000000000006d7      0x542 src/functions.o
+                                        0xb60 (size before relaxing)
+ .debug_str     0x0000000000000c19       0xb4 src/bme280.o
                                         0x458 (size before relaxing)
- .debug_str     0x0000000000000bfc     0x543f ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_str     0x0000000000000ccd       0x63 src/opcn2.o
+                                        0x6c7 (size before relaxing)
+ .debug_str     0x0000000000000d30     0x543f ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
                                        0x55e0 (size before relaxing)
- .debug_str     0x000000000000603b       0x73 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_str     0x000000000000616f       0x73 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
                                        0x5602 (size before relaxing)
- .debug_str     0x00000000000060ae     0x27d6 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_str     0x00000000000061e2     0x3b67 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+                                       0x7cb6 (size before relaxing)
+ .debug_str     0x0000000000009d49       0xe0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+                                       0x77e3 (size before relaxing)
+ .debug_str     0x0000000000009e29      0x1ac ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
                                        0x6a80 (size before relaxing)
- .debug_str     0x0000000000008884     0x1cdc ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_str     0x0000000000009fd5     0x1cdc ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
                                        0x833c (size before relaxing)
- .debug_str     0x000000000000a560      0x190 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_str     0x000000000000bcb1      0x190 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
                                        0x5e22 (size before relaxing)
- .debug_str     0x000000000000a6f0     0x158a ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_str     0x000000000000be41     0x158a ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
                                        0x7f4d (size before relaxing)
- .debug_str     0x000000000000bc7a     0x12e2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_str     0x000000000000d3cb     0x12e2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
                                        0x4ad4 (size before relaxing)
- .debug_str     0x000000000000cf5c      0xc84 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_str     0x000000000000e6ad      0xc84 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
                                        0x725e (size before relaxing)
 
 .comment        0x0000000000000000       0x7f
@@ -1228,8 +1944,11 @@ OUTPUT(main.elf elf32-littlearm)
                                          0x80 (size before relaxing)
  .comment       0x000000000000007f       0x80 src/functions.o
  .comment       0x000000000000007f       0x80 src/bme280.o
+ .comment       0x000000000000007f       0x80 src/opcn2.o
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
@@ -1238,7 +1957,7 @@ OUTPUT(main.elf elf32-littlearm)
  .comment       0x000000000000007f       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
 
 .ARM.attributes
-                0x0000000000000000       0x31
+                0x0000000000000000       0x2f
  .ARM.attributes
                 0x0000000000000000       0x31 main.o
  .ARM.attributes
@@ -1246,78 +1965,196 @@ OUTPUT(main.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000062       0x31 src/bme280.o
  .ARM.attributes
-                0x0000000000000093       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+                0x0000000000000093       0x31 src/opcn2.o
  .ARM.attributes
-                0x00000000000000c4       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+                0x00000000000000c4       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .ARM.attributes
-                0x00000000000000f5       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+                0x00000000000000f5       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
  .ARM.attributes
-                0x0000000000000126       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+                0x0000000000000126       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
  .ARM.attributes
-                0x0000000000000157       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+                0x0000000000000157       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
  .ARM.attributes
-                0x0000000000000188       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+                0x0000000000000188       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
  .ARM.attributes
-                0x00000000000001b9       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+                0x00000000000001b9       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
  .ARM.attributes
-                0x00000000000001ea       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+                0x00000000000001ea       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
  .ARM.attributes
-                0x000000000000021b       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                0x000000000000021b       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
  .ARM.attributes
-                0x0000000000000239       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x000000000000024c       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
  .ARM.attributes
-                0x0000000000000257       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
+                0x000000000000027d       0x31 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
  .ARM.attributes
-                0x0000000000000275       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
+                0x00000000000002ae       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
  .ARM.attributes
-                0x00000000000002a1       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
+                0x00000000000002da       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x00000000000002cd       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
+                0x0000000000000306       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
  .ARM.attributes
-                0x00000000000002f9       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
+                0x0000000000000332       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
  .ARM.attributes
-                0x0000000000000325       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
+                0x000000000000035e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
  .ARM.attributes
-                0x0000000000000351       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
+                0x000000000000038a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x000000000000037d       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+                0x00000000000003b6       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
  .ARM.attributes
-                0x00000000000003a9       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
+                0x00000000000003e2       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x000000000000040e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
+ .ARM.attributes
+                0x000000000000043a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x0000000000000466       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .ARM.attributes
+                0x0000000000000492       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x00000000000004be       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+ .ARM.attributes
+                0x00000000000004ea       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .ARM.attributes
+                0x0000000000000516       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+ .ARM.attributes
+                0x0000000000000542       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x000000000000056e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .ARM.attributes
+                0x000000000000059a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .ARM.attributes
+                0x00000000000005c6       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .ARM.attributes
+                0x00000000000005f2       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x000000000000061e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+ .ARM.attributes
+                0x000000000000064a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .ARM.attributes
+                0x0000000000000676       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .ARM.attributes
+                0x00000000000006a2       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-ctype_.o)
+ .ARM.attributes
+                0x00000000000006ce       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000000000006ec       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000000000000070a       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x0000000000000728       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpdf2.o)
+ .ARM.attributes
+                0x0000000000000746       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x0000000000000764       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x0000000000000782       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x00000000000007ae       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
+ .ARM.attributes
+                0x00000000000007da       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
+ .ARM.attributes
+                0x0000000000000806       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
+ .ARM.attributes
+                0x0000000000000832       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
+ .ARM.attributes
+                0x000000000000085e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
+ .ARM.attributes
+                0x000000000000088a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
+ .ARM.attributes
+                0x00000000000008b6       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+ .ARM.attributes
+                0x00000000000008e2       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+ .ARM.attributes
+                0x000000000000090e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+ .ARM.attributes
+                0x000000000000093a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+ .ARM.attributes
+                0x0000000000000966       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+ .ARM.attributes
+                0x0000000000000992       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+ .ARM.attributes
+                0x00000000000009be       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+ .ARM.attributes
+                0x00000000000009ea       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+ .ARM.attributes
+                0x0000000000000a16       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+ .ARM.attributes
+                0x0000000000000a42       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+ .ARM.attributes
+                0x0000000000000a6e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+ .ARM.attributes
+                0x0000000000000a9a       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+ .ARM.attributes
+                0x0000000000000ac6       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
+ .ARM.attributes
+                0x0000000000000af2       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzsi2.o)
+ .ARM.attributes
+                0x0000000000000b10       0x1e /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_clzdi2.o)
+ .ARM.attributes
+                0x0000000000000b2e       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
 
-.debug_frame    0x0000000000000000      0xd6c
+.debug_frame    0x0000000000000000     0x1cfc
  .debug_frame   0x0000000000000000       0x2c main.o
- .debug_frame   0x000000000000002c      0x150 src/functions.o
- .debug_frame   0x000000000000017c       0xb4 src/bme280.o
- .debug_frame   0x0000000000000230       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_frame   0x00000000000002b0       0x78 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_frame   0x0000000000000328       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_frame   0x00000000000003f8      0x16c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_frame   0x0000000000000564      0x130 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_frame   0x0000000000000694      0x2e4 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_frame   0x0000000000000978       0x40 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_frame   0x00000000000009b8      0x23c ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
- .debug_frame   0x0000000000000bf4       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
- .debug_frame   0x0000000000000c14       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
- .debug_frame   0x0000000000000c50       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
- .debug_frame   0x0000000000000c7c       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
- .debug_frame   0x0000000000000cac       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
- .debug_frame   0x0000000000000cdc       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
- .debug_frame   0x0000000000000d18       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
- .debug_frame   0x0000000000000d44       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+ .debug_frame   0x000000000000002c      0x17c src/functions.o
+ .debug_frame   0x00000000000001a8       0xb4 src/bme280.o
+ .debug_frame   0x000000000000025c       0xcc src/opcn2.o
+ .debug_frame   0x0000000000000328       0x80 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
+ .debug_frame   0x00000000000003a8       0x78 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
+ .debug_frame   0x0000000000000420      0x2e0 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_frame   0x0000000000000700       0xac ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_frame   0x00000000000007ac       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_frame   0x000000000000087c      0x16c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_frame   0x00000000000009e8      0x130 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_frame   0x0000000000000b18      0x2e4 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_frame   0x0000000000000dfc       0x40 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_frame   0x0000000000000e3c      0x23c ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_frame   0x0000000000001078       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000000000010a8       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memset.o)
+ .debug_frame   0x00000000000010d8       0x50 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sprintf.o)
+ .debug_frame   0x0000000000001128       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfprintf.o)
+ .debug_frame   0x0000000000001164       0x68 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-dtoa.o)
+ .debug_frame   0x00000000000011cc       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-localeconv.o)
+ .debug_frame   0x000000000000120c       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mallocr.o)
+ .debug_frame   0x0000000000001248       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memchr-stub.o)
+ .debug_frame   0x0000000000001274       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mlock.o)
+ .debug_frame   0x00000000000012b4      0x260 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mprec.o)
+ .debug_frame   0x0000000000001514       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000001540       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-strlen-stub.o)
+ .debug_frame   0x0000000000001568       0x68 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-svfiprintf.o)
+ .debug_frame   0x00000000000015d0       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-callocr.o)
+ .debug_frame   0x00000000000015f8       0x50 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-freer.o)
+ .debug_frame   0x0000000000001648       0x74 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-locale.o)
+ .debug_frame   0x00000000000016bc       0xb0 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-lock.o)
+ .debug_frame   0x000000000000176c       0x40 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x00000000000017ac       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-memmove.o)
+ .debug_frame   0x00000000000017dc       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reallocr.o)
+ .debug_frame   0x0000000000001818       0x48 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-reent.o)
+ .debug_frame   0x0000000000001860       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x000000000000189c       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000000018bc       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_frame   0x00000000000018dc       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x0000000000001918       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divsf3.o)
+ .debug_frame   0x0000000000001954       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqsf2.o)
+ .debug_frame   0x0000000000001980       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gesf2.o)
+ .debug_frame   0x00000000000019b0       0x30 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(lesf2.o)
+ .debug_frame   0x00000000000019e0       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(mulsf3.o)
+ .debug_frame   0x0000000000001a1c       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsisf.o)
+ .debug_frame   0x0000000000001a48       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsisf.o)
+ .debug_frame   0x0000000000001a70       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(adddf3.o)
+ .debug_frame   0x0000000000001aac       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(divdf3.o)
+ .debug_frame   0x0000000000001ae8       0x38 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(eqdf2.o)
+ .debug_frame   0x0000000000001b20       0x38 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(gedf2.o)
+ .debug_frame   0x0000000000001b58       0x38 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(ledf2.o)
+ .debug_frame   0x0000000000001b90       0x3c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(muldf3.o)
+ .debug_frame   0x0000000000001bcc       0x38 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(subdf3.o)
+ .debug_frame   0x0000000000001c04       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(unorddf2.o)
+ .debug_frame   0x0000000000001c30       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(fixdfsi.o)
+ .debug_frame   0x0000000000001c5c       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatsidf.o)
+ .debug_frame   0x0000000000001c88       0x28 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(floatunsidf.o)
+ .debug_frame   0x0000000000001cb0       0x2c /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(extendsfdf2.o)
+ .debug_frame   0x0000000000001cdc       0x20 /home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(sbrk.o)
 
-.debug_loc      0x0000000000000000     0x1650
- .debug_loc     0x0000000000000000      0x496 src/functions.o
- .debug_loc     0x0000000000000496      0x285 src/bme280.o
- .debug_loc     0x000000000000071b       0x97 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
- .debug_loc     0x00000000000007b2      0x186 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_loc     0x0000000000000938       0xe7 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_loc     0x0000000000000a1f      0x1d6 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_loc     0x0000000000000bf5       0xc3 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_loc     0x0000000000000cb8      0x620 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_loc     0x00000000000012d8       0xf2 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_loc     0x00000000000013ca      0x286 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
-
-.debug_macro    0x0000000000000000     0x3181
+.debug_macro    0x0000000000000000     0x36ec
  .debug_macro   0x0000000000000000       0xd7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .debug_macro   0x00000000000000d7      0x898 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .debug_macro   0x000000000000096f       0x22 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
@@ -1335,21 +2172,25 @@ OUTPUT(main.elf elf32-littlearm)
  .debug_macro   0x000000000000136f      0x14e ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .debug_macro   0x00000000000014bd       0x3a ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_all.o)
  .debug_macro   0x00000000000014f7       0xd7 ../libopencm3//lib/libopencm3_stm32f0.a(gpio_common_f0234.o)
- .debug_macro   0x00000000000015ce       0xcf ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_macro   0x000000000000169d      0x746 ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
- .debug_macro   0x0000000000001de3       0xda ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_macro   0x0000000000001ebd       0x94 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_macro   0x0000000000001f51      0x514 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_macro   0x0000000000002465       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
- .debug_macro   0x0000000000002481       0xc2 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
- .debug_macro   0x0000000000002543       0xdb ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_macro   0x000000000000261e      0x16d ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_macro   0x000000000000278b      0x3c3 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
- .debug_macro   0x0000000000002b4e       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_macro   0x0000000000002c1e      0x1b1 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_macro   0x0000000000002dcf       0x46 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_macro   0x0000000000002e15       0xca ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
- .debug_macro   0x0000000000002edf       0xe0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
- .debug_macro   0x0000000000002fbf       0x16 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
- .debug_macro   0x0000000000002fd5       0xdc ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
- .debug_macro   0x00000000000030b1       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_macro   0x00000000000015ce       0xdb ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x00000000000016a9      0x2eb ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000001994       0xca ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x0000000000001a5e      0x746 ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_all.o)
+ .debug_macro   0x00000000000021a4       0xdb ../libopencm3//lib/libopencm3_stm32f0.a(spi_common_f03.o)
+ .debug_macro   0x000000000000227f       0xcf ../libopencm3//lib/libopencm3_stm32f0.a(rcc_common_all.o)
+ .debug_macro   0x000000000000234e       0xda ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_macro   0x0000000000002428       0x94 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_macro   0x00000000000024bc      0x514 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_macro   0x00000000000029d0       0x1c ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_all.o)
+ .debug_macro   0x00000000000029ec       0xc2 ../libopencm3//lib/libopencm3_stm32f0.a(usart_common_v2.o)
+ .debug_macro   0x0000000000002aae       0xdb ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_macro   0x0000000000002b89      0x16d ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_macro   0x0000000000002cf6      0x3c3 ../libopencm3//lib/libopencm3_stm32f0.a(i2c_common_v2.o)
+ .debug_macro   0x00000000000030b9       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_macro   0x0000000000003189      0x1b1 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_macro   0x000000000000333a       0x46 ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_macro   0x0000000000003380       0xca ../libopencm3//lib/libopencm3_stm32f0.a(vector.o)
+ .debug_macro   0x000000000000344a       0xe0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_macro   0x000000000000352a       0x16 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_macro   0x0000000000003540       0xdc ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
+ .debug_macro   0x000000000000361c       0xd0 ../libopencm3//lib/libopencm3_stm32f0.a(rcc.o)
