@@ -18,36 +18,44 @@
  */
 
 #include <libopencm3/stm32/i2c.h>
-#include "bme280.h"																															
+#include "bme280.h"
+#include "functions.h"			 //smazat																												
 
 void init_BME280(void)
 {
+	
+	 
 	uint8_t cmd_w[2] = {0xF2, 0x07}; //CTRL_HUM, 00000111
 	uint8_t data[8] = {0};
 	
 	//tohle zapise na eeprom adresu cmd_w[0] hodnoty co jsou dale v tom poli
-	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
+	i2c_transfer77(I2C2, BME, cmd_w, 2, data, 0);
+	 gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
+    gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
+    gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
 	/* //check	
 	cmd_w [0]= 0xF2;
 	i2c_transfer7(I2C2, BME, &cmd_w, 1, &data, 1);
 	*/
 	//nastaveni ctrl_meas
 	cmd_w[0] = 0xF4;
-        cmd_w[1] = 0x6F;  //011 011 11
+    cmd_w[1] = 0x6F;  //011 011 11
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0); 
 
 	//nastaveni ctrl_meas
 	cmd_w[0] = 0xF5;
-        cmd_w[1] = 0x80;  //011 011 11
+    cmd_w[1] = 0x80;  //011 011 11
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
 
-
+ 
 	//vycte kompenzacni data
 	compensation_data_readout_BME280(comp_data);	
 }
 
 void compensation_data_readout_BME280(uint8_t arrayy[])
 {
+	
+	 
 	wait(0.001);
 	i2c_set_7bit_address(I2C2, BME);
 	i2c_set_write_transfer_dir(I2C2);
@@ -67,15 +75,17 @@ void compensation_data_readout_BME280(uint8_t arrayy[])
 	/* important to do it afterwards to do a proper repeated start! */
 	i2c_enable_autoend(I2C2);
 
-	for (size_t i = 0; i < 34; i++) {
-		while (i2c_received_data(I2C2) == 0);
+	for (uint8_t i = 0; i < 34; i++) {
+		//while (i2c_received_data(I2C2) == 0);
 		arrayy[i] = i2c_get_data(I2C2);
+		
 	}
-
+	
+//i2c_send_stop(I2C2);
 ///////globals:)
 dig_T1 = (arrayy[1] << 8) | arrayy[0];
 dig_T2 = (arrayy[3] << 8) | arrayy[2];
-dig_T2 = (arrayy[5] << 8) | arrayy[4];
+dig_T3 = (arrayy[5] << 8) | arrayy[4];
 dig_P1 = (arrayy[7] << 8) | arrayy[6];
 dig_P2 = (arrayy[9] << 8) | arrayy[8];
 dig_P3 = (arrayy[11] << 8) | arrayy[10];
@@ -97,11 +107,40 @@ dig_H6 = arrayy[32];
 
 void data_readout_BME280(uint8_t array[])
 {
+	/*
 	size_t number_of_bytes = 8;
 	uint8_t addr = BME;
 	uint8_t cmd_w = 0xF7;
 	//uint8_t burst_data[8] = {0};
+	
 	i2c_transfer7(I2C2, addr, &cmd_w, 1, array, number_of_bytes);
+	*/
+		wait(0.001);
+	i2c_set_7bit_address(I2C2, BME);
+	i2c_set_write_transfer_dir(I2C2);
+	i2c_set_bytes_to_transfer(I2C2, 1); //pocet bajtu	
+	//i2c_enable_autoend(I2C2);
+	
+	i2c_send_start(I2C2);
+	i2c_send_data(I2C2,0xF7); //start of measured data
+	
+	wait(0.001);
+
+	//cteni		
+	i2c_set_read_transfer_dir(I2C2);
+	i2c_set_bytes_to_transfer(I2C2, 8);
+	/* start transfer */
+	i2c_send_start(I2C2);
+	/* important to do it afterwards to do a proper repeated start! */
+	i2c_enable_autoend(I2C2);
+
+	for (uint8_t i = 0; i < 8; i++) {
+		//while (i2c_received_data(I2C2) == 0);
+		array[i] = i2c_get_data(I2C2);
+		
+	}
+	
+	
 }
 
 

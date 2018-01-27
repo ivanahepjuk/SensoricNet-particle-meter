@@ -152,7 +152,7 @@ void i2c_setup(void)
 	rcc_periph_clock_enable(RCC_I2C2);
 	rcc_periph_clock_enable(RCC_GPIOB);
 	//rcc_set_i2c_clock_hsi(I2C2);
-	RCC_CFGR3 &= ~(1 << 5);
+	//RCC_CFGR3 &= ~(1 << 5);
 
 	i2c_reset(I2C2);
 	
@@ -343,9 +343,9 @@ void i2c_transfer77(uint32_t i2c, uint8_t addr, uint8_t *w, size_t wn, uint8_t *
 		/* not entirely sure this is really necessary.
 		 * RM implies it will stall until it can write out the later bits
 		 */
-		if (rn) {
-			while (!i2c_transfer_complete(i2c));
-		}
+//		if (rn) {
+//			while (!i2c_transfer_complete(i2c));
+//		}
 	}
 
 	if (rn) {

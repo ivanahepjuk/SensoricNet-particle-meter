@@ -48,6 +48,7 @@ float press_BME280(void);
 float hum_BME280(void);
 float temp_BME280(void);
 void data_readout_BME280(uint8_t array[]);
+void compensation_data_readout_BME280(uint8_t arrayy[]);
 
 
 #endif

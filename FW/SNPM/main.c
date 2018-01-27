@@ -60,7 +60,7 @@ int main(void)
   //char hex_string[3];
   //do techto stringu se zkonvertuji nactene hodnoty
   //char hum_str [10];
-  //char temp_str[10];
+  char temp_str[10];
   //char pres_str[10];
   char pm1_str [10];
   //char pm25_str [10];
@@ -70,7 +70,7 @@ int main(void)
   //gpio_clear(GPIOA, GPIO9); wait(0.2); 
   //gpio_clear(GPIOA, GPIO9);
   //wait(14);//until quectel wakes up
-  wait(1);//until quectel wakes up
+//  wait(1);//until quectel wakes up
 
   clock_setup();
   gpio_setup();
@@ -79,30 +79,44 @@ int main(void)
   
   spi_setup();
 
-  //set BME280 and read compensation data
-//init_BME280();
-//wait(1);
+ 
+  init_BME280();
+ 
+   
+
+
+compensation_data_readout_BME280(&comp_data);
+    
+    
+  //wait(1);
   //Connect to nbiot network
   //connect_nbiot();
   //connect_lorawan();
 
 	  
 	  
-	  wait(1);
-particlemeter_ON();
-particlemeter_set_fan(70); //unstable?
+//	  wait(1);
+//particlemeter_ON();
+//particlemeter_set_fan(70); //unstable?
 
 
   while (1){
 //read_histogram_all();
-read_pm_values();
+//read_pm_values();
 
+//data_readout_BME280(&burst_read_data);
+/*
+for(int i = 0; i<8; i++)
+{
+	usart_send_blocking(USART4, burst_read_data[i]);
+}
+* */
+//usart_send_blocking(USART4, 21.21);
 
-	 
+	// usartSend("\r\ncuus\r\n", 4);  
 
     //debug bme
-    //data_readout_BME280(&burst_read_data);
-    //compensation_data_readout_BME280(&comp_data);
+   
     //debug gme konec
 /*
 i2c_send_start(I2C2);
@@ -128,10 +142,10 @@ usart_send_blocking(USART2, 0x65);
 
     //usartSend("mac tx uncnf 1 AABABBB\r\n", 4);	
     //precte vsechno
-    float hum  = hum_BME280();
-    float temp = temp_BME280();
-    float pres = press_BME280();
-    float pm1  = particemeter_pm1();
+ //   float hum  = hum_BME280();
+    float temp = 21.21;// temp_BME280();
+ //   float pres = press_BME280();
+    float pm1  = 21.21;//particemeter_pm1();
     float pm25 = 50.50;
     float pm10 = 60.60;
 
@@ -159,10 +173,13 @@ usart_send_blocking(USART2, 0x65);
     char str7[]=",pm10=";
 
 
+//temp
+	sprintf(temp_str, "%.2f", temp);
+	usartSend(temp_str, 4);
 
-
-	sprintf(pm1_str, "%.2f", pm1);
-	usartSend(pm1_str, 4);
+//pm1
+//	sprintf(pm1_str, "%.2f", pm1);
+//	usartSend(pm1_str, 4);
     //vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
     /*
     while(str2 != '\0'){
@@ -175,7 +192,7 @@ usart_send_blocking(USART2, 0x65);
     i=0;
 
     //nucleo ledka
-    gpio_set(GPIOA, GPIO10); wait(0.2); gpio_clear(GPIOA, GPIO10); 
+    gpio_set(GPIOA, GPIO11); wait(0.2); gpio_clear(GPIOA, GPIO11); 
 
     wait(1);
   }
