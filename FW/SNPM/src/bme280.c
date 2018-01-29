@@ -29,7 +29,7 @@ void init_BME280(void)
 	uint8_t data[8] = {0};
 	
 	//tohle zapise na eeprom adresu cmd_w[0] hodnoty co jsou dale v tom poli
-	i2c_transfer77(I2C2, BME, cmd_w, 2, data, 0);
+	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
 	 gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
     gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
     gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
@@ -54,33 +54,11 @@ void init_BME280(void)
 
 void compensation_data_readout_BME280(uint8_t arrayy[])
 {
+	int8_t cmd_w[1] = {0x88}; //CTRL_HUM, 00000111
+	//uint8_t data[8] = {0};
 	
-	 
-	wait(0.001);
-	i2c_set_7bit_address(I2C2, BME);
-	i2c_set_write_transfer_dir(I2C2);
-	i2c_set_bytes_to_transfer(I2C2, 1); //pocet bajtu	
-	i2c_enable_autoend(I2C2);
-	
-	i2c_send_start(I2C2);
-	i2c_send_data(I2C2,0x88);
-	
-	wait(0.001);
+i2c_transfer7(I2C2, BME, cmd_w, 1, arrayy, 34);
 
-	//cteni		
-	i2c_set_read_transfer_dir(I2C2);
-	i2c_set_bytes_to_transfer(I2C2, 34);
-	/* start transfer */
-	i2c_send_start(I2C2);
-	/* important to do it afterwards to do a proper repeated start! */
-	i2c_enable_autoend(I2C2);
-
-	for (uint8_t i = 0; i < 34; i++) {
-		//while (i2c_received_data(I2C2) == 0);
-		arrayy[i] = i2c_get_data(I2C2);
-		
-	}
-	
 //i2c_send_stop(I2C2);
 ///////globals:)
 dig_T1 = (arrayy[1] << 8) | arrayy[0];
@@ -107,38 +85,11 @@ dig_H6 = arrayy[32];
 
 void data_readout_BME280(uint8_t array[])
 {
-	/*
-	size_t number_of_bytes = 8;
-	uint8_t addr = BME;
-	uint8_t cmd_w = 0xF7;
-	//uint8_t burst_data[8] = {0};
+		int8_t cmd_w[1] = {0xf7}; //CTRL_HUM, 00000111
+	//uint8_t data[8] = {0};
 	
-	i2c_transfer7(I2C2, addr, &cmd_w, 1, array, number_of_bytes);
-	*/
-		wait(0.001);
-	i2c_set_7bit_address(I2C2, BME);
-	i2c_set_write_transfer_dir(I2C2);
-	i2c_set_bytes_to_transfer(I2C2, 1); //pocet bajtu	
-	//i2c_enable_autoend(I2C2);
-	
-	i2c_send_start(I2C2);
-	i2c_send_data(I2C2,0xF7); //start of measured data
-	
-	wait(0.001);
+i2c_transfer7(I2C2, BME, cmd_w, 1, array, 8);
 
-	//cteni		
-	i2c_set_read_transfer_dir(I2C2);
-	i2c_set_bytes_to_transfer(I2C2, 8);
-	/* start transfer */
-	i2c_send_start(I2C2);
-	/* important to do it afterwards to do a proper repeated start! */
-	i2c_enable_autoend(I2C2);
-
-	for (uint8_t i = 0; i < 8; i++) {
-		//while (i2c_received_data(I2C2) == 0);
-		array[i] = i2c_get_data(I2C2);
-		
-	}
 	
 	
 }

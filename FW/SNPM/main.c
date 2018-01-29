@@ -85,7 +85,7 @@ int main(void)
    
 
 
-compensation_data_readout_BME280(&comp_data);
+
     
     
   //wait(1);
@@ -104,7 +104,7 @@ compensation_data_readout_BME280(&comp_data);
 //read_histogram_all();
 //read_pm_values();
 
-//data_readout_BME280(&burst_read_data);
+data_readout_BME280(burst_read_data);
 /*
 for(int i = 0; i<8; i++)
 {
@@ -143,7 +143,7 @@ usart_send_blocking(USART2, 0x65);
     //usartSend("mac tx uncnf 1 AABABBB\r\n", 4);	
     //precte vsechno
  //   float hum  = hum_BME280();
-    float temp = 21.21;// temp_BME280();
+    float temp = temp_BME280();
  //   float pres = press_BME280();
     float pm1  = 21.21;//particemeter_pm1();
     float pm25 = 50.50;
@@ -176,6 +176,9 @@ usart_send_blocking(USART2, 0x65);
 //temp
 	sprintf(temp_str, "%.2f", temp);
 	usartSend(temp_str, 4);
+	usartSend("\r\n", 4);
+
+
 
 //pm1
 //	sprintf(pm1_str, "%.2f", pm1);
