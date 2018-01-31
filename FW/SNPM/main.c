@@ -48,10 +48,7 @@ signed char dig_H6;
 /////////////////////////////////////////////////////////////
 
 uint8_t histogram_buffer[62];//whole dataset of opc readed into this
-uint8_t pm_values_buffer[12];//only pm data
-
-
-
+uint8_t pm_values_buffer[13];//only pm data
 
 int main(void)
 {
@@ -76,76 +73,38 @@ int main(void)
   gpio_setup();
   usart_setup();
   i2c_setup();
-  
   spi_setup();
-
- 
   init_BME280();
- 
-   
 
+	gpio_clear(GPIOA, GPIO8); //SS Log 0
+	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
+	gpio_set(GPIOA, GPIO8); //SS Log 0
+	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 
-
-    
-    
-  //wait(1);
+  wait(5);
   //Connect to nbiot network
   //connect_nbiot();
   //connect_lorawan();
 
-	  
-	  
-//	  wait(1);
-//particlemeter_ON();
-//particlemeter_set_fan(70); //unstable?
 
+particlemeter_ON();
+wait(DELAY_1);
+//particlemeter_set_fan(70); //unstable?
+//wait(1);
 
   while (1){
 //read_histogram_all();
-//read_pm_values();
+wait(5);
+read_pm_values();
+wait(5);
+read_pm_serial_number();
 
 data_readout_BME280(burst_read_data);
-/*
-for(int i = 0; i<8; i++)
-{
-	usart_send_blocking(USART4, burst_read_data[i]);
-}
-* */
-//usart_send_blocking(USART4, 21.21);
 
-	// usartSend("\r\ncuus\r\n", 4);  
-
-    //debug bme
-   
-    //debug gme konec
-/*
-i2c_send_start(I2C2);
-i2c_send_data(I2C2,0xEC); //slave address
-i2c_send_data(I2C2,0xD0); //id register address
-
-
-//i2c_set_read_transfer_dir(I2C2);
-i2c_send_start(I2C2);
-i2c_send_data(I2C2,0xED); //slave address
-uint8_t incomming = i2c_get_data(I2C2); //id register address
-i2c_send_stop(I2C2);
-
-usart_send_blocking(USART2, 0x65);
-
-*/
-
-//usartSend("mac get devaddr\r\n", 4);
-//wait(0.01);
-//usart_send_blocking(USART4, 10);
-//wait(0.01);
-//usart_send_blocking(USART4, 13);
-
-    //usartSend("mac tx uncnf 1 AABABBB\r\n", 4);	
-    //precte vsechno
  //   float hum  = hum_BME280();
     float temp = temp_BME280();
  //   float pres = press_BME280();
-    float pm1  = 21.21;//particemeter_pm1();
+    float pm1  = particlemeter_pm1();
     float pm25 = 50.50;
     float pm10 = 60.60;
 
@@ -172,17 +131,16 @@ usart_send_blocking(USART2, 0x65);
     char str6[]=",pm25=";
     char str7[]=",pm10=";
 
-
 //temp
-	sprintf(temp_str, "%.2f", temp);
-	usartSend(temp_str, 4);
-	usartSend("\r\n", 4);
-
-
+//	sprintf(temp_str, "%.2f", temp);
+//	usartSend(temp_str, 4);
+//	usartSend("\r\n", 4);
 
 //pm1
-//	sprintf(pm1_str, "%.2f", pm1);
-//	usartSend(pm1_str, 4);
+	sprintf(pm1_str, "%.2f", pm1);
+	usartSend(pm1_str, 4);
+	usartSend("\r\n", 4);
+	
     //vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
     /*
     while(str2 != '\0'){

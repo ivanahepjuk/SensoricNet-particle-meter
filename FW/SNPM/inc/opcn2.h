@@ -23,14 +23,14 @@
 #include <libopencm3/stm32/usart.h>
 #include "functions.h"
 
-#define DELAY				0.03
-#define DELAY_1				1
+#define DELAY				0.01
+#define DELAY_1				2
 
 
 
 
 extern uint8_t histogram_buffer[62];
-extern uint8_t pm_values_buffer[12];
+extern uint8_t pm_values_buffer[13];
 
 
 

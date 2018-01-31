@@ -58,7 +58,7 @@ void spi_setup(void)
 	//gpio_set_af(GPIOA, GPIO_AF5, GPIO5 | GPIO7);
 
 //	spi_disable_crc(SPI1);
-	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_8, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, (0 << 11)       , SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
+	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_32, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_2, (0 << 11)       , SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
 	
 	//spi_init_master(SPI1, 500000                       , SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
 	
@@ -89,7 +89,7 @@ void charToHex(char c, char hex[3])
 
 void wait(float sec)
 {
-	for (int i = 0; i < (sec*50000); i++) {	// wait a bit. 
+	for (int i = 0; i < (sec*25000); i++) {	// wait a bit. 
 		__asm__("NOP");	}
 }
 
