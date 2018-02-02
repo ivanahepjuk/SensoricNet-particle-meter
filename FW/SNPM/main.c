@@ -59,7 +59,7 @@ int main(void)
   //char hum_str [10];
   char temp_str[10];
   //char pres_str[10];
-  char pm1_str [10];
+  char pm1_str [20];
   //char pm25_str [10];
   //char pm10_str [10];
   
@@ -74,7 +74,7 @@ int main(void)
   usart_setup();
   i2c_setup();
   spi_setup();
-  init_BME280();
+ // init_BME280();
 
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
@@ -82,24 +82,22 @@ int main(void)
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 
   wait(5);
+  
   //Connect to nbiot network
   //connect_nbiot();
   //connect_lorawan();
-
-
 particlemeter_ON();
-wait(DELAY_1);
-//particlemeter_set_fan(70); //unstable?
-//wait(1);
+wait(7);
+//particlemeter_set_fan(FAN_SPEED);
+
+
+
+flash(7);
 
   while (1){
-//read_histogram_all();
-wait(5);
-read_pm_values();
-wait(5);
-read_pm_serial_number();
 
-data_readout_BME280(burst_read_data);
+read_pm_values();
+//data_readout_BME280(burst_read_data);
 
  //   float hum  = hum_BME280();
     float temp = temp_BME280();
@@ -136,11 +134,14 @@ data_readout_BME280(burst_read_data);
 //	usartSend(temp_str, 4);
 //	usartSend("\r\n", 4);
 
+
 //pm1
 	sprintf(pm1_str, "%.2f", pm1);
 	usartSend(pm1_str, 4);
 	usartSend("\r\n", 4);
 	
+
+
     //vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
     /*
     while(str2 != '\0'){
@@ -152,10 +153,8 @@ data_readout_BME280(burst_read_data);
     //vynuluje iteracni promennou
     i=0;
 
-    //nucleo ledka
-    gpio_set(GPIOA, GPIO11); wait(0.2); gpio_clear(GPIOA, GPIO11); 
-
-    wait(1);
+	flash(3);
+    wait(10);
   }
   return 0;
 }

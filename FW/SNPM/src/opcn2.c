@@ -1,7 +1,43 @@
 
 #include "opcn2.h"
-//
+#include "functions.h"
 
+
+
+uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
+{
+	uint16_t incomming;
+		
+	spi_send8(SPI1, command_byte);
+	
+	//steals incomming data directly from shift register
+	incomming = SPI_DR(SPI1);
+	//usart_send_blocking(USART4, incomming);
+	cekej(delay);
+	
+	return incomming;
+}
+
+void pm_SS_on(void)
+{
+	gpio_clear(GPIOA, GPIO8); //SS Log 0
+	cekej(1000000); //1s
+}
+
+void pm_SS_off(void)
+{	cekej(100000); //100ms
+	gpio_set(GPIOA, GPIO8); //SS Log 1
+	cekej(100000); //100ms
+}
+
+void pm_SS_toggle(uint32_t delay)
+{
+	cekej(delay); //0.1s
+	gpio_set(GPIOA, GPIO8); //SS Log 0
+	cekej(delay); //0.1s
+	gpio_clear(GPIOA, GPIO8); //SS Log 1
+	cekej(1000000); //1s
+}
 
 
 void read_pm_serial_number(void)
@@ -42,42 +78,23 @@ uint8_t scrap;
 
 void particlemeter_ON(void)
 {
-	uint8_t scrap;
-		  
-	  gpio_clear(GPIOA, GPIO8); //SS Log 0
-	  wait(DELAY_1); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
-	  
-	  //fan and laser power ON
-	  spi_send8(SPI1, 0x03);
-	  //scrap = spi_read8(SPI1);//spi_send8(SPI1, 0x00);  //to empty buffer
-	  wait(DELAY);
-	  spi_send8(SPI1, 0x00);
-	  scrap = spi_read8(SPI1);//spi_send8(SPI1, 0x00);  //to empty buffer
-	  wait(DELAY);
-	  //spi_send8(SPI1, 0x00);
-	  //wait(DELAY);
-	  
-
-	  gpio_set(GPIOA, GPIO8); //SS Log 1	
-	  wait(1);
+	pm_SS_on();
+	while(pm_set_command(0x03, 14000) == 243)       {;}
+	cekej(14000);
+	while( pm_set_command(0x00, 14000) == 0x03){;}
+	pm_SS_off();
+	
 }
 
 void particlemeter_set_fan(uint8_t speed)
 {
-	//wait(DELAY);
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
-	
-	wait(DELAY_1);
-	  
-	spi_send8(SPI1, 0x42);
-	wait(DELAY);
-	spi_send8(SPI1, 0x00);//fan command
-	wait(DELAY);
-	spi_send8(SPI1, speed);
-	wait(DELAY);
-	//spi_send8(SPI1, 0x00);  //to empty buffer
-		  
-	gpio_set(GPIOA, GPIO8); //SS Log 1
+	pm_SS_on();
+	while(pm_set_command(0x42, 14000) == 0xf3)       {;}
+	cekej(14000);
+	while( pm_set_command(0x00, 14000) == 0x42){;}
+	cekej(14000);
+	while( pm_set_command(speed, 14000) == 0x00){;}
+	pm_SS_off();
 }
 
 //read_serial_number
@@ -96,55 +113,30 @@ void cekej(int usec)
 
 void read_pm_values(void)
 {
-
-	uint8_t scrap;
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
 	
-	wait(DELAY_1);
+	pm_SS_on();
+	while(pm_set_command(0x32, 14000) == 0xf3)       {;}
+	cekej(14000);
+	//pm_SS_toggle(100000);
 	
-	spi_send8(SPI1, 0x32);
-	scrap = spi_read8(SPI1);
-	//wait(0.02);
-	//gpio_set(GPIOA, GPIO8); //SS Log 1
-	//wait(1.2);
-	//gpio_clear(GPIOA, GPIO8); //SS Log 0
-	
-	cekej(5000);
-	
-	 for(int i=0; i<12;i++)
+	for(uint8_t i = 0; i<12; i++)
 	{
-		cekej(5);
 		spi_send8(SPI1, 0x32);
-		//cekej(5);
-		pm_values_buffer[i] = spi_read8(SPI1);
-	} 
-	//scrap = spi_read8(SPI1);//spi_send8(SPI1, 0x00);  //to empty buffer
-
-	wait(DELAY);
-	gpio_set(GPIOA, GPIO8); //SS Log 1
+		//steals incomming data directly from shift register
+		pm_values_buffer[i] = SPI_DR(SPI1);
+		//usart_send_blocking(USART4, incomming);
+		cekej(50);	
+	}
+	
+	pm_SS_off();
 }
 
-void read_histogram_all(void)
-{
-
-	wait(DELAY_1);
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
-	
-	wait(DELAY_1);
-	 for(int i=0; i<62;i++)
-	{
-		wait(DELAY);
-		spi_send(SPI1, 0x30);
-		histogram_buffer[i] = spi_read(SPI1);
-	} 
-	
-	gpio_set(GPIOA, GPIO8); //SS Log 1
-}
 //read_pm_data
 float particlemeter_pm1(void)
 {
-	float pm1 = calculate_float(pm_values_buffer[4], pm_values_buffer[5] , pm_values_buffer[6], pm_values_buffer[7]);
-	//float pm1 = calculate_float(pm_values_buffer[0], pm_values_buffer[1] , pm_values_buffer[2], pm_values_buffer[3]);
+	float pm1;
+	//calculate_float(pm_values_buffer[3], pm_values_buffer[2] , pm_values_buffer[1], pm_values_buffer[0]);
+	pm1 = calculate_float(pm_values_buffer[0], pm_values_buffer[1] , pm_values_buffer[2], pm_values_buffer[3]);
 //	float pm1 = calculate_float(pm_values_buffer[3], pm_values_buffer[2] , pm_values_buffer[1], pm_values_buffer[0]);
 //	float pm1 = calculate_float(pm_values_buffer[1], pm_values_buffer[2] , pm_values_buffer[3], pm_values_buffer[4]);//	
 	return pm1;

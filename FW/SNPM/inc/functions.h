@@ -24,6 +24,7 @@
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/rcc.h>
 #include <string.h>
+//#include <stdint.h>
 	
 #define EEPROM 0x51
 #define RCC_CFGR3_I2C2SW   (1 << 5)

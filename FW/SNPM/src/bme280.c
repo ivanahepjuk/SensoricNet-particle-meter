@@ -30,9 +30,7 @@ void init_BME280(void)
 	
 	//tohle zapise na eeprom adresu cmd_w[0] hodnoty co jsou dale v tom poli
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
-	 gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
-    gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
-    gpio_set(GPIOA, GPIO11); wait(0.1); gpio_clear(GPIOA, GPIO11); wait(0.1);
+	
 	/* //check	
 	cmd_w [0]= 0xF2;
 	i2c_transfer7(I2C2, BME, &cmd_w, 1, &data, 1);

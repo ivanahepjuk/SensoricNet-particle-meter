@@ -43,9 +43,23 @@ float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
   return u.val;
 }
 
+void flash(uint8_t loop)
+{
+	for (uint8_t i = 0; i < loop; i++)
+	{
+		gpio_set(GPIOA, GPIO11); 
+		cekej(100000); 
+		gpio_clear(GPIOA, GPIO11); 
+		cekej(100000);
+	}
+}
 
 void spi_setup(void)
 {
+	/*
+	 * opcn2 je "mode 1" device, takze cpol 0, cpha 1
+	 * 
+	 * */
 
 	// gpio setting for SS
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO8);
@@ -61,7 +75,9 @@ void spi_setup(void)
 	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_32, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_2, (0 << 11)       , SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
 	
 	//spi_init_master(SPI1, 500000                       , SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
-	
+	//spi_set_dff_8bit (SPI1);
+	#define SPI_CR1_DFF   (1 << 11)
+	 SPI_CR1(SPI1) &= ~SPI_CR1_DFF;
 	spi_enable_ss_output(SPI1);
 //	spi_enable_software_slave_management(SPI1);
 //	spi_set_nss_high(SPI1);
