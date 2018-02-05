@@ -150,7 +150,7 @@ flash(7);
     i=0;
 
 	flash(3);
-    wait(10);
+    wait(4);
   }
   return 0;
 }

@@ -20,16 +20,15 @@ uint8_t spi_xferr(uint32_t spi, uint8_t data)
 uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 {
 	uint8_t incomming;
-	/*
-	incomming = spi_xferr(SPI1, command_byte);
-	cekej(delay);
-	usart_send_blocking(USART4, incomming);
-	*/	
 	spi_send8(SPI1, command_byte);
-	//cekej(1000);
-	//steals incomming data directly from shift register
-	incomming = spi_read8(SPI1);//(uint8_t)SPI_DR(SPI1);
-	usart_send_blocking(USART4, incomming);
+
+	incomming = spi_read8(SPI1);//(uint8_t)
+
+	//usart_send_blocking(USART4, command_byte);
+	//usartSend("\r\n", 4);
+	//	usartSend("prijal sem: ", 4);
+	//usart_send_blocking(USART4, incomming);
+	//usartSend("\r\n", 4);
 	cekej(delay);
 	
 	return incomming;
@@ -70,7 +69,7 @@ uint8_t scrap;
 
 	cekej(200000);
 	gpio_set(GPIOA, GPIO8); //SS Log 1
-	cekej(200000);
+	cekej(20000);
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
 	
 	cekej(1500);
@@ -96,7 +95,7 @@ uint8_t scrap;
 void particlemeter_ON(void)
 {
 	pm_SS_on();
-	while(pm_set_command(0x03, 14000) != 243)       {;}
+	while(pm_set_command(0x03, 14000) != 0xF3){;}
 	cekej(14000);
 	while( pm_set_command(0x00, 14000) != 0x03){;}
 	pm_SS_off();
@@ -118,14 +117,7 @@ void particlemeter_set_fan(uint8_t speed)
 //read_config_values
 //read_config_values_2
 
-void cekej(int usec)
-{
-	int x= 0;
-		for (int i=0; i<usec; i++)
-		{
-			__asm__("NOP");
-			}
-}
+
 
 #define SPI_DR8(spi_base) 	   MMIO8((spi_base) + 0x0c)
 
@@ -141,10 +133,12 @@ void read_pm_values(void)
 	pm_SS_toggle(20000);
 	cekej(10000);
 	
+	//pm_values_buffer[0] = spi_read8(SPI1);
+	//
 	for(uint8_t i = 0; i<12; i++)
 	{
 		spi_send8(SPI1, 0x32);
-		cekej(20000);
+		cekej(2000);
 		//steals incomming data directly from shift register
 		pm_values_buffer[i] = spi_read8(SPI1);
 

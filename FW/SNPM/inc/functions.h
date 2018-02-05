@@ -52,6 +52,7 @@ void compensation_data_readout_BME280(uint8_t arrayy[]);
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3);
 
 uint8_t spi_reaad8(uint32_t spi);
+void cekej(int usec);
 
 
 #endif

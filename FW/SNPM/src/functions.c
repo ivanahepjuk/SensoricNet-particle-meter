@@ -47,6 +47,14 @@ float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
   return u.val;
 }
 
+void cekej(int usec)
+{
+	int x= 0;
+		for (int i=0; i<usec; i++)
+		{
+			__asm__("NOP");
+			}
+}
 
 void flash(uint8_t loop)
 {
@@ -61,11 +69,7 @@ void flash(uint8_t loop)
 
 void spi_setup(void)
 {
-	/*
-	 * opcn2 je "mode 1" device, takze cpol 0, cpha 1
-	 * 
-	 * */
-
+	
 	// gpio setting for SS
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO8);
 	
@@ -75,23 +79,36 @@ void spi_setup(void)
 	// gpio alternative function SPI 1
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3  | GPIO4 | GPIO5);
 	//gpio_set_af(GPIOA, GPIO_AF5, GPIO5 | GPIO7);
+	
+	/* Reset SPI, SPI_CR1 register cleared, SPI is disabled */
+	spi_reset(SPI1);
 
-//	spi_disable_crc(SPI1);
-	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_32, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_2, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
-	
-	//spi_init_master(SPI1, 500000                       , SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
-	//spi_set_dff_8bit (SPI1);
-	//#define SPI_CR1_DFF   (1 << 11)
-	// SPI_CR1(SPI1) &= ~SPI_CR1_DFF;
-	
-	 SPI_CR2(SPI1) |= 0b0000011100000000;
-	spi_enable_ss_output(SPI1);
-//	spi_enable_software_slave_management(SPI1);
-//	spi_set_nss_high(SPI1);
-//	spi_clear_mode_fault(SPI1);
-	spi_enable(SPI1);
-;	
+  /* Set up SPI in Master mode with:
+   * Clock baud rate: 1/64 of peripheral clock frequency
+   * Clock polarity: Idle High
+   * Clock phase: Data valid on 2nd clock pulse
+   * Data frame format: 8-bit
+   * Frame format: MSB First
+   */
+   SPI_CR1(SPI1) |= 0b0000001100100101;  //bitstream for register settinggs according to datasheet
+   
+   SPI_CR2(SPI1) |= 0b0000011100000000;  //bitstream for register settinggs according to datasheet
+/*
+   * Set NSS management to software.
+   *
+   * Note:
+   * Setting nss high is very important, even if we are controlling the GPIO
+   * ourselves this bit needs to be at least set to 1, otherwise the spi
+   * peripheral will not send any data out.
+   */
+  
+  spi_fifo_reception_threshold_8bit(SPI1);
+
+  /* Enable SPI1 periph. */
+  spi_enable(SPI1);
 }
+  
+
 
 
 char hexDigit(unsigned n)
