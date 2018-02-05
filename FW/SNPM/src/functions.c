@@ -27,6 +27,10 @@
 //delay
 //volatile uint32_t system_millis;
 
+
+
+
+
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
   // Return an IEEE754 float from an array of 4 bytes
@@ -42,6 +46,7 @@ float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 
   return u.val;
 }
+
 
 void flash(uint8_t loop)
 {
@@ -72,12 +77,14 @@ void spi_setup(void)
 	//gpio_set_af(GPIOA, GPIO_AF5, GPIO5 | GPIO7);
 
 //	spi_disable_crc(SPI1);
-	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_32, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_2, (0 << 11)       , SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
+	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_32, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_2, SPI_CR1_DFF_8BIT, SPI_CR1_MSBFIRST);  //#define SPI_CR1_DFF_8BIT  (0 << 11)
 	
 	//spi_init_master(SPI1, 500000                       , SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE, SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
 	//spi_set_dff_8bit (SPI1);
-	#define SPI_CR1_DFF   (1 << 11)
-	 SPI_CR1(SPI1) &= ~SPI_CR1_DFF;
+	//#define SPI_CR1_DFF   (1 << 11)
+	// SPI_CR1(SPI1) &= ~SPI_CR1_DFF;
+	
+	 SPI_CR2(SPI1) |= 0b0000011100000000;
 	spi_enable_ss_output(SPI1);
 //	spi_enable_software_slave_management(SPI1);
 //	spi_set_nss_high(SPI1);
@@ -217,7 +224,7 @@ void usart_setup(void)
 	usart_enable(USART2);
 
         // setup quectel USART4 parameters
-	usart_set_baudrate(USART4, 57600);
+	usart_set_baudrate(USART4, 9600);
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);

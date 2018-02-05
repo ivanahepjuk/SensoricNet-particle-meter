@@ -49,9 +49,9 @@ void i2c_transfer77(uint32_t i2c, uint8_t addr, uint8_t *w, size_t wn, uint8_t *
 void compensation_data_readout_BME280(uint8_t arrayy[]);
 
 
-
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3);
 
+uint8_t spi_reaad8(uint32_t spi);
 
 
 #endif

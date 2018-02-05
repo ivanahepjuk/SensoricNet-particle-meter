@@ -31,9 +31,10 @@
 
 
 extern uint8_t histogram_buffer[62];
-extern uint8_t pm_values_buffer[13];
+extern uint8_t pm_values_buffer[12];
 
 
+uint8_t pm_set_command(uint8_t command_byte, uint32_t delay);
 
 void particlemeter_set_fan(uint8_t speed);
 //read_serial_number
@@ -41,6 +42,7 @@ void particlemeter_set_fan(uint8_t speed);
 //read_config_values_2
 void read_histogram_all(void);
 void particlemeter_set_laser(uint8_t laser);
+float particlemeter_pm1(void);
 
 void particlemeter_ON(void);
 void particlemeter_read(void);

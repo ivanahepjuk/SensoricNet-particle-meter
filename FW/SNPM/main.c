@@ -21,7 +21,6 @@
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
 
-
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for bme280: //
 /////////////////////////////////////////////////////////////
@@ -48,7 +47,10 @@ signed char dig_H6;
 /////////////////////////////////////////////////////////////
 
 uint8_t histogram_buffer[62];//whole dataset of opc readed into this
-uint8_t pm_values_buffer[13];//only pm data
+uint8_t pm_values_buffer[12] = {0};//only pm data
+
+
+
 
 int main(void)
 {
@@ -59,7 +61,7 @@ int main(void)
   //char hum_str [10];
   char temp_str[10];
   //char pres_str[10];
-  char pm1_str [20];
+  char pm1_str [35];
   //char pm25_str [10];
   //char pm10_str [10];
   
@@ -91,16 +93,15 @@ wait(7);
 //particlemeter_set_fan(FAN_SPEED);
 
 
-
 flash(7);
 
   while (1){
 
-read_pm_values();
+	read_pm_values();
 //data_readout_BME280(burst_read_data);
 
  //   float hum  = hum_BME280();
-    float temp = temp_BME280();
+ //   float temp = temp_BME280();
  //   float pres = press_BME280();
     float pm1  = particlemeter_pm1();
     float pm25 = 50.50;
@@ -129,14 +130,9 @@ read_pm_values();
     char str6[]=",pm25=";
     char str7[]=",pm10=";
 
-//temp
-//	sprintf(temp_str, "%.2f", temp);
-//	usartSend(temp_str, 4);
-//	usartSend("\r\n", 4);
-
 
 //pm1
-	sprintf(pm1_str, "%.2f", pm1);
+	sprintf(pm1_str, "%f", pm1);
 	usartSend(pm1_str, 4);
 	usartSend("\r\n", 4);
 	

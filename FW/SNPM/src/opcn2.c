@@ -2,17 +2,34 @@
 #include "opcn2.h"
 #include "functions.h"
 
+typedef uint8_t byte;
+
+uint8_t spi_xferr(uint32_t spi, uint8_t data)
+ {
+         spi_send8(spi, data);
+ 
+         /* Wait for transfer finished. */
+         while (!(SPI_SR(spi) & SPI_SR_RXNE));
+ 
+         /* Read the data (8 or 16 bits, depending on DFF bit) from DR. */
+         return SPI_DR(spi);
+ }
+ 
 
 
 uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 {
-	uint16_t incomming;
-		
+	uint8_t incomming;
+	/*
+	incomming = spi_xferr(SPI1, command_byte);
+	cekej(delay);
+	usart_send_blocking(USART4, incomming);
+	*/	
 	spi_send8(SPI1, command_byte);
-	
+	//cekej(1000);
 	//steals incomming data directly from shift register
-	incomming = SPI_DR(SPI1);
-	//usart_send_blocking(USART4, incomming);
+	incomming = spi_read8(SPI1);//(uint8_t)SPI_DR(SPI1);
+	usart_send_blocking(USART4, incomming);
 	cekej(delay);
 	
 	return incomming;
@@ -21,13 +38,13 @@ uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 void pm_SS_on(void)
 {
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
-	cekej(1000000); //1s
+	cekej(100000); //1s
 }
 
 void pm_SS_off(void)
-{	cekej(100000); //100ms
+{	cekej(10000); //100ms
 	gpio_set(GPIOA, GPIO8); //SS Log 1
-	cekej(100000); //100ms
+	cekej(50000); //100ms
 }
 
 void pm_SS_toggle(uint32_t delay)
@@ -36,7 +53,7 @@ void pm_SS_toggle(uint32_t delay)
 	gpio_set(GPIOA, GPIO8); //SS Log 0
 	cekej(delay); //0.1s
 	gpio_clear(GPIOA, GPIO8); //SS Log 1
-	cekej(1000000); //1s
+	cekej(10000); //1s
 }
 
 
@@ -79,9 +96,9 @@ uint8_t scrap;
 void particlemeter_ON(void)
 {
 	pm_SS_on();
-	while(pm_set_command(0x03, 14000) == 243)       {;}
+	while(pm_set_command(0x03, 14000) != 243)       {;}
 	cekej(14000);
-	while( pm_set_command(0x00, 14000) == 0x03){;}
+	while( pm_set_command(0x00, 14000) != 0x03){;}
 	pm_SS_off();
 	
 }
@@ -110,23 +127,36 @@ void cekej(int usec)
 			}
 }
 
+#define SPI_DR8(spi_base) 	   MMIO8((spi_base) + 0x0c)
+
+
 
 void read_pm_values(void)
 {
 	
 	pm_SS_on();
-	while(pm_set_command(0x32, 14000) == 0xf3)       {;}
-	cekej(14000);
-	//pm_SS_toggle(100000);
+	//while(pm_set_command(0x32, 14000) == 0xf3)       {;}
+	pm_set_command(0x32, 14000);
+	//cekej(14000);
+	pm_SS_toggle(20000);
+	cekej(10000);
 	
 	for(uint8_t i = 0; i<12; i++)
 	{
 		spi_send8(SPI1, 0x32);
+		cekej(20000);
 		//steals incomming data directly from shift register
-		pm_values_buffer[i] = SPI_DR(SPI1);
-		//usart_send_blocking(USART4, incomming);
-		cekej(50);	
+		pm_values_buffer[i] = spi_read8(SPI1);
+
+		
+			
 	}
+	for (int i=0; i<12; i++)
+	{
+		usart_send_blocking(USART4, pm_values_buffer[i]);			
+
+	}
+		usartSend("\r\n", 4);	
 	
 	pm_SS_off();
 }
@@ -134,11 +164,9 @@ void read_pm_values(void)
 //read_pm_data
 float particlemeter_pm1(void)
 {
-	float pm1;
-	//calculate_float(pm_values_buffer[3], pm_values_buffer[2] , pm_values_buffer[1], pm_values_buffer[0]);
-	pm1 = calculate_float(pm_values_buffer[0], pm_values_buffer[1] , pm_values_buffer[2], pm_values_buffer[3]);
-//	float pm1 = calculate_float(pm_values_buffer[3], pm_values_buffer[2] , pm_values_buffer[1], pm_values_buffer[0]);
-//	float pm1 = calculate_float(pm_values_buffer[1], pm_values_buffer[2] , pm_values_buffer[3], pm_values_buffer[4]);//	
+//	pm1 = calculate_float(122,70, 86, 66);//53.568825
+	float pm1 = calculate_float(pm_values_buffer[0], pm_values_buffer[1] , pm_values_buffer[2], pm_values_buffer[3]);
+	//pm1 = calculate_float(0xBC, 0x43, 0xE5, 0x6C);//2217311033871905637061885952.000000
 	return pm1;
 }
 
