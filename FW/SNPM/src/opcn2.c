@@ -66,11 +66,11 @@ void particlemeter_ON(void)
 void particlemeter_set_fan(uint8_t speed)
 {
 	pm_SS_on();
-	while(pm_set_command(0x42, 14000) == 0xf3)       {;}
+	while(pm_set_command(0x42, 14000) != 0xf3)       {;}
 	wait(14000);
-	while( pm_set_command(0x00, 14000) == 0x42){;}
+	while( pm_set_command(0x00, 14000) != 0x42){;}
 	wait(14000);
-	while( pm_set_command(speed, 14000) == 0x00){;}
+	while( pm_set_command(speed, 14000) != 0x00){;}
 	pm_SS_off();
 }
 

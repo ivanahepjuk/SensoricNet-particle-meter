@@ -223,7 +223,7 @@ void usart_setup(void)
 	usart_enable(USART2);
 
         // setup quectel USART4 parameters
-	usart_set_baudrate(USART4, 9600);
+	usart_set_baudrate(USART4, 57600);
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
@@ -242,7 +242,7 @@ void gpio_setup(void)
     gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11);
 	
 	//wireless reset
-	//gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
 
 	// USART2 GPIO pins 
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
@@ -268,18 +268,26 @@ void connect_lorawan(void)
 //mac set appkey D94AC6F27881D3505F3E595B69472898
 	//usartSend("sys get ver\r\n", 4);
     //wait(1);
-	usartSend("radio set pwr 14\r\n", 4);
-	wait(3);
+	usartSend("radio set pwr 14   \r   \n", 4);
+	wait(SEC*3);
 	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
-	wait(2);
+	wait(SEC*2);
 	usartSend("mac set appeui 70B3D57ED00082D2\r\n", 4);
-	wait(2);
+	wait(SEC*2);
 	usartSend("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n", 4);
-	wait(2);
+	wait(SEC*2);
 	usartSend("mac save\r\n", 4);
-	wait(2);
+	wait(SEC*2);
 	usartSend("mac join otaa\r\n", 4);
-	wait(15);
+	wait(SEC*15);
+	///debug
+	usartSend("mac get status\r\n", 4);
+	wait(SEC*5);
+	usartSend("mac get devaddr\r\n", 4);
+	wait(SEC*5);
+	
+	
+	
 }
 
 

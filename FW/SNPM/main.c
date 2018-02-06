@@ -68,19 +68,23 @@ int main(void)
 	char pm1_str [10];
 	char pm2_5_str [10];
 	char pm10_str [10];
-
-	//Quectel wireless modul HW reset
-	//gpio_clear(GPIOA, GPIO9); wait(0.2); 
-	//gpio_clear(GPIOA, GPIO9);
-	//wait(14);//until quectel wakes up
-	//wait(1);//until quectel wakes up
-
+	
+	
 	clock_setup();
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
 	spi_setup();
 	init_BME280();
+	
+	
+	//Quectel wireless modul HW reset
+	gpio_clear(GPIOA, GPIO9); 
+	wait(SEC*0.2); 
+	gpio_set(GPIOA, GPIO9);
+	
+	wait(SEC*5);//until quectel wakes up
+	//wait(1);//until quectel wakes up
 
 	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
@@ -98,7 +102,7 @@ int main(void)
 
 	particlemeter_ON();
 
-	//particlemeter_set_fan(FAN_SPEED);
+	particlemeter_set_fan(FAN_SPEED);
 
 
 	flash(3);
@@ -195,6 +199,15 @@ int main(void)
 		flash(1);
 		
 		wait(SEC *5);
+		
+		
+		///broadcast
+		usartSend("mac tx uncnf 1 AABABBB\r\n", 4);
+		wait(SEC *5);
+		
+		
+		
+		
 	}
 	return 0;
 }
