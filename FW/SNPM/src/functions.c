@@ -21,39 +21,23 @@
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
 
-#define SPI_CR1_DFF_8BIT  	(0 << 11)
-
-
-//delay
-//volatile uint32_t system_millis;
-
-
-
+//#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
 
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
-  // Return an IEEE754 float from an array of 4 bytes
-  union u_tag {
-    uint8_t b[4];
-    float val;
-  } u;
+	// Return an IEEE754 float from an array of 4 bytes
+	union u_tag {
+		uint8_t b[4];
+		float val;
+	} u;
 
-  u.b[0] = val0;
-  u.b[1] = val1;
-  u.b[2] = val2;
-  u.b[3] = val3;
+	u.b[0] = val0;
+	u.b[1] = val1;
+	u.b[2] = val2;
+	u.b[3] = val3;
 
-  return u.val;
-}
-
-void cekej(int usec)
-{
-	int x= 0;
-		for (int i=0; i<usec; i++)
-		{
-			__asm__("NOP");
-			}
+	return u.val;
 }
 
 void flash(uint8_t loop)
@@ -61,15 +45,24 @@ void flash(uint8_t loop)
 	for (uint8_t i = 0; i < loop; i++)
 	{
 		gpio_set(GPIOA, GPIO11); 
-		cekej(100000); 
+		wait(100000); 
 		gpio_clear(GPIOA, GPIO11); 
-		cekej(100000);
+		wait(100000);
 	}
 }
 
+
+
+/* 		void spi_setup(void)
+ * 
+ * This functions does setting-up of SPI peripheral. 
+ * (1) Configuring GPIO's
+ * (2) Configuring SPI block
+ * (3) Enabling spi
+ * 
+ */
 void spi_setup(void)
 {
-	
 	// gpio setting for SS
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO8);
 	
@@ -78,34 +71,30 @@ void spi_setup(void)
 
 	// gpio alternative function SPI 1
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3  | GPIO4 | GPIO5);
-	//gpio_set_af(GPIOA, GPIO_AF5, GPIO5 | GPIO7);
-	
-	/* Reset SPI, SPI_CR1 register cleared, SPI is disabled */
+
+	//Reset SPI
 	spi_reset(SPI1);
 
-  /* Set up SPI in Master mode with:
-   * Clock baud rate: 1/64 of peripheral clock frequency
-   * Clock polarity: Idle High
-   * Clock phase: Data valid on 2nd clock pulse
-   * Data frame format: 8-bit
-   * Frame format: MSB First
-   */
-   SPI_CR1(SPI1) |= 0b0000001100100101;  //bitstream for register settinggs according to datasheet
-   
-   SPI_CR2(SPI1) |= 0b0000011100000000;  //bitstream for register settinggs according to datasheet
-/*
-   * Set NSS management to software.
-   *
-   * Note:
-   * Setting nss high is very important, even if we are controlling the GPIO
-   * ourselves this bit needs to be at least set to 1, otherwise the spi
-   * peripheral will not send any data out.
-   */
-  
-  spi_fifo_reception_threshold_8bit(SPI1);
+	/* Set up SPI in Master mode with:
+	* Clock baud rate: 1/32? of peripheral clock frequency
+	* Clock polarity: Idle High
+	* Clock phase: Data valid on 2nd clock pulse
+	* Data frame format: 8-bit
+	* Frame format: MSB First
+	* Setting NSS high (Even though I am using gpio as SS)
+	*/
+	
+	//bitstream for register settinggs according to datasheet
+	SPI_CR1(SPI1) |= 0b0000001100100101;  
+	//bitstream for register settinggs according to datasheet
+	SPI_CR2(SPI1) |= 0b0000011100000000; 
+	 
+	//this is super important for reliable reading 8-bit packets from bus   
+	spi_fifo_reception_threshold_8bit(SPI1);
 
-  /* Enable SPI1 periph. */
-  spi_enable(SPI1);
+	//Enable SPI1 peripherals
+	spi_enable(SPI1);
+	
 }
   
 
@@ -113,7 +102,7 @@ void spi_setup(void)
 
 char hexDigit(unsigned n)
 {
-    if (n < 10) {
+	if (n < 10) {
         return n + '0';
     } else {
         return (n - 10) + 'A';
@@ -127,20 +116,25 @@ void charToHex(char c, char hex[3])
     hex[2] = '\0';
 }
 
-void wait(float sec)
+void wait(uint32_t usec)
 {
-	for (int i = 0; i < (sec*25000); i++) {	// wait a bit. 
-		__asm__("NOP");	}
+	for (uint32_t i=0; i<usec; i++)
+	{
+		__asm__("NOP");
+	}		
 }
 
-
-void usartSend(char *phrase, int usart)
+/* 		void usartSend(char *phrase, uint8_t usart)
+ * 
+ * This functions sends string to one of four usarts.
+ * Note: chosen usart must be allready configured in usart_setup! 
+ */
+void usartSend(char *phrase, uint8_t usart)
 {
-//	char incomming[100] = {0};   //readed string
-	int i=0;                    //iteracni promenn
 
-	//posila na linku
-	while(phrase[i] != '\0')//posle string
+	uint32_t i=0;                    
+
+	while(phrase[i] != '\0')
 	{
 		if(usart==1)
 		{
@@ -182,52 +176,40 @@ void clock_setup(void)
 
     // clk for USART2 (gsm) PA2 tx PA3 rx
 	rcc_periph_clock_enable(RCC_USART2);
-	//lora na serial1
-	//rcc_periph_clock_enable(RCC_USART1);
 }
 
 
 void i2c_setup(void)
 {
+	//clocks
 	rcc_periph_clock_enable(RCC_I2C2);
 	rcc_periph_clock_enable(RCC_GPIOB);
-	//rcc_set_i2c_clock_hsi(I2C2);
-	//RCC_CFGR3 &= ~(1 << 5);
-
+	
 	i2c_reset(I2C2);
 	
+	// gpio setting for data and clock
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO13 | GPIO14);
+	// gpio setting to alternative function I2C2
 	gpio_set_af(GPIOB, GPIO_AF5, GPIO13 | GPIO14);
+	//disable i2c2 before configuration
 	i2c_peripheral_disable(I2C2);
 	//configure ANFOFF DNF[3:0] in CR1
 	i2c_enable_analog_filter(I2C2);
+	//digital filter
 	//i2c_set_digital_filter(I2C1, I2C_CR1_DNF_DISABLED);
-	/* HSI is at 8Mhz */
+	//speed
 	i2c_set_speed(I2C2, i2c_speed_sm_100k, 8);
 	//configure No-Stretch CR1 (only relevant in slave mode)
 	i2c_enable_stretching(I2C2);
 	//addressing mode
 	i2c_set_7bit_addr_mode(I2C2);
+	//After setting it up, it must be enabled.
 	i2c_peripheral_enable(I2C2);
 }
 
 
 void usart_setup(void)
 {
-
-
-	//usart1
-	/*
-	//lora debug
-	usart_set_baudrate(USART1, 57600);
-	usart_set_databits(USART1, 8);
-	usart_set_parity(USART1, USART_PARITY_NONE);
-	usart_set_stopbits(USART1, USART_CR2_STOP_1_0BIT);
-	usart_set_mode(USART1, USART_MODE_TX_RX);
-	usart_set_flow_control(USART1, USART_FLOWCONTROL_NONE);
-	// enable the USART2
-	usart_enable(USART1);
-	*/
 	// setup gsm USART2 parameters
 	usart_set_baudrate(USART2, 9600);
 	//lora
@@ -254,23 +236,7 @@ void usart_setup(void)
 
 void gpio_setup(void)
 {
-	/*
-//seral1 lora
-	// GPIO pins to alternative mode for USART4 transmit receive. 
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO9);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//rx
 
-	// Setup USART4 pins as alternate function AF0
-	gpio_set_af(GPIOC, GPIO_AF1, GPIO9);
-	gpio_set_af(GPIOC, GPIO_AF1, GPIO10);
-	
-	//wireless reset pin
-	*/
-
-#ifdef debug
-	//nucleo led 
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO5);
-#endif
 	//gpio LEDs setup
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
     gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11);
@@ -354,82 +320,5 @@ int sendCommand(char *phrase, char *check, int pocetentru)
 		return 0;
 	}
 }
-
-
-void i2c_transfer77(uint32_t i2c, uint8_t addr, uint8_t *w, size_t wn, uint8_t *r, size_t rn)
-{
-	/*  waiting for busy is unnecessary. read the RM */
-	if (wn) {
-		i2c_set_7bit_address(i2c, addr);
-		i2c_set_write_transfer_dir(i2c);
-		i2c_set_bytes_to_transfer(i2c, wn);
-		if (rn) {
-			i2c_disable_autoend(i2c);
-		} else {
-			i2c_enable_autoend(i2c);
-		}
-		i2c_send_start(i2c);
-
-		while (wn--) {
-			bool wait = true;
-			while (wait) {
-				if (i2c_transmit_int_status(i2c)) {
-					wait = false;
-				}
-				while (i2c_nack(i2c)); /* FIXME Some error */
-			}
-			i2c_send_data(i2c, *w++);
-		}
-		/* not entirely sure this is really necessary.
-		 * RM implies it will stall until it can write out the later bits
-		 */
-//		if (rn) {
-//			while (!i2c_transfer_complete(i2c));
-//		}
-	}
-
-	if (rn) {
-		/* Setting transfer properties */
-		i2c_set_7bit_address(i2c, addr);
-		i2c_set_read_transfer_dir(i2c);
-		i2c_set_bytes_to_transfer(i2c, rn);
-		/* start transfer */
-		i2c_send_start(i2c);
-		/* important to do it afterwards to do a proper repeated start! */
-		i2c_enable_autoend(i2c);
-
-		for (size_t i = 0; i < rn; i++) {
-			while (i2c_received_data(i2c) == 0);
-			r[i] = i2c_get_data(i2c);
-		}
-	}
-}
-
-
-
-
-/*
-//problem je v i2c_transfer7 --> if (rn) { ...
-void compensation_data_readout_BME280(uint8_t *arrayy)	
-{
-	uint8_t cmd_readout[2] = {0x88, 0x00};
-	i2c_transfer7(I2C2, BME, &cmd_readout, 1, &arrayy, 28);
-	//return 1;	
-}
-*/
-
-/*
-#define RCC_CFGR3_I2C2SW   (1 << 5)
-
-void rcc_set_i2c_clock_hsi(uint32_t i2c)  
- {
-         if (i2c == I2C1) {
-                 RCC_CFGR3 &= ~RCC_CFGR3_I2C1SW;
-         }
-         if (i2c == I2C2) {
-                 RCC_CFGR3 &= ~RCC_CFGR3_I2C2SW;
-         }
- }
-*/
 
 

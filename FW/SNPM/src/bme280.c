@@ -23,18 +23,12 @@
 
 void init_BME280(void)
 {
-	
-	 
-	uint8_t cmd_w[2] = {0xF2, 0x07}; //CTRL_HUM, 00000111
+	uint8_t cmd_w[2] = {0xF2, 0x07}; //CTRL_HUM, 00000111;
 	uint8_t data[8] = {0};
 	
 	//tohle zapise na eeprom adresu cmd_w[0] hodnoty co jsou dale v tom poli
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
 	
-	/* //check	
-	cmd_w [0]= 0xF2;
-	i2c_transfer7(I2C2, BME, &cmd_w, 1, &data, 1);
-	*/
 	//nastaveni ctrl_meas
 	cmd_w[0] = 0xF4;
     cmd_w[1] = 0x6F;  //011 011 11
@@ -52,7 +46,7 @@ void init_BME280(void)
 
 void compensation_data_readout_BME280(uint8_t arrayy[])
 {
-	int8_t cmd_w[1] = {0x88}; //CTRL_HUM, 00000111
+	uint8_t cmd_w[1] = {0x88}; //CTRL_HUM, 00000111
 	//uint8_t data[8] = {0};
 	
 i2c_transfer7(I2C2, BME, cmd_w, 1, arrayy, 34);
@@ -83,7 +77,7 @@ dig_H6 = arrayy[32];
 
 void data_readout_BME280(uint8_t array[])
 {
-		int8_t cmd_w[1] = {0xf7}; //CTRL_HUM, 00000111
+		uint8_t cmd_w[1] = {0xf7}; //CTRL_HUM, 00000111
 	//uint8_t data[8] = {0};
 	
 i2c_transfer7(I2C2, BME, cmd_w, 1, array, 8);
