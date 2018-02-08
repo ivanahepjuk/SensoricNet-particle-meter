@@ -18,6 +18,7 @@
  */
  
 #include <libopencm3/stm32/spi.h>
+#include <libopencm3/stm32/nvic.h>
 #include "inc/functions.h"
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
@@ -54,12 +55,42 @@ uint8_t pm_values_buffer[12] = {0};//only pm data
 
 void usart4_isr(void)
 {
+	/*
+	     uint32_t serviced_irqs = 0;
+     // Process individual IRQs
+     if (uart_is_interrupt_source(UART0, UART_INT_RX)) {
+        process_rx_event();
+        serviced_irq |= UART_INT_RX;
+     }
+     if (uart_is_interrupt_source(UART0, UART_INT_CTS)) {
+        process_cts_event();
+        serviced_irq |= UART_INT_CTS;
+     }
+     // Clear the interrupt flag for the processed IRQs
+     uart_clear_interrupt_flag(UART0, serviced_irqs);
+     */
+     
 //tady dopsat kod preruseni	
 flash(7);	
 }
 
 int main(void)
 {
+//interrupts:
+	//uart_enable_interrupts(USART4, UART_INT_RX);
+	// Unmask receive interrupt
+	uart_enable_rx_interrupt(UART4);
+	// Make sure the interrupt is routed through the NVIC
+	nvic_enable_irq(NVIC_UART4_RX);
+
+
+
+
+
+
+
+
+
 	
 	//pomocna promenna pro prepocitavani ascii znaku na hexadecimalni substringy
 	//char hex_string[3];
@@ -204,7 +235,36 @@ int main(void)
 		
 		
 		///broadcast
-		usartSend("mac tx uncnf 1 AABABBB\r\n", 4);
+		//navrh na organizaci paketu:
+		/*
+		nazev			kanal		typ		size[B]		poznamka					encoded:
+		cislo_senosoru	0x01		00		1			cislo mericiho boxu			010001
+		verze_fw		0x02		00		1			verze fw					020010
+		teplota			0x03		67		2			teplota						03670110
+		tlak			0x04		73		2			tlak						04730220
+		vlhkost			0x05		68		1			vlhkost						056830
+		pm1				0x06		02		2			analog input? prozatim		06022332
+		pm2_5			0x07		02		2			analog input? prozatim		07022345
+		pm10			0x08		02		2			analog input? prozatim		08024939
+		gps				0x09		88		9			gps							098806765ff2960A0003E8
+		konec zpravy																FF
+		*/
+		uint8_t buffer[100];
+		static char cislo_sensoru[] = "010001";
+		static char verze_fw[] = "010001";
+		
+		strcat(buffer, cislo_sensoru
+		
+		
+		/*
+		 * 	Data 	Channel 	Type 				Value
+			03 ⇒ 	3 			67 ⇒ Temperature 	0110 = 272 ⇒ 27.2°C
+			05 ⇒ 	5 			67 ⇒ Temperature 	00FF = 255 ⇒ 25.5°C
+		 */
+		 
+		//hardcoded teoreticke hodnoty:  0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8
+		
+		usartSend("mac tx uncnf 1 0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8\r\n", 4);
 		wait(SEC *5);
 		
 		
