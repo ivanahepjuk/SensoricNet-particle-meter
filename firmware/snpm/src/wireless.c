@@ -46,10 +46,10 @@ void connect_lorawan(void)
 	usartSend("mac join otaa\r\n", 4);
 	wait(SEC*15);
 	///debug
-	usartSend("mac get status\r\n", 4);
-	wait(SEC*5);
-	usartSend("mac get devaddr\r\n", 4);
-	wait(SEC*5);
+	//usartSend("mac get status\r\n", 4);
+	//wait(SEC*5);
+	//usartSend("mac get devaddr\r\n", 4);
+	//wait(SEC*5);
 	
 	
 	
