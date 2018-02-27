@@ -23,6 +23,8 @@
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
 #include "inc/wireless.h"
+#include "inc/cayenne_lpp.h"
+
 
 #define LORAWAN
 
@@ -77,7 +79,14 @@ flash(7);
 */
 int main(void)
 {
-    /*
+	struct CayenneLPP *lpp;
+	unsigned char *buf;
+	int w, size;
+
+	// init cayenne lpp
+	lpp = CayenneLPP__create(51);
+
+	/*
     //interrupts:
 	//uart_enable_interrupts(USART4, UART_INT_RX);
 	// Unmask receive interrupt
@@ -144,7 +153,7 @@ int main(void)
 
 		float hum  = hum_BME280();
 		float temp = temp_BME280();
-		float pres = press_BME280();
+		float press = press_BME280();
 		float pm1  = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
@@ -193,6 +202,7 @@ int main(void)
 		
 		///LORAWAN
 		//navrh na organizaci paketu:
+		// -> nene, hezky encodovat do lpp
 		/*
 		nazev			kanal		typ		size[B]		poznamka					encoded:
 		cislo_senosoru	0x01		00		1			cislo mericiho boxu			010001
@@ -221,11 +231,32 @@ int main(void)
 		 */
 		 
 		//hardcoded teoreticke hodnoty:  0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8
+
+
+		// mame tyto senzory
+		// teplota,  tlak,  vlhkost,  pm1,  pm2_5, pm10, gps
+
+		CayenneLPP__addTemperature(lpp, 1, temp);
+		CayenneLPP__addBarometricPressure(lpp, 2, press);
+		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
+		CayenneLPP__addAnalogInput(lpp, 4, pm1);
+		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
+		CayenneLPP__addAnalogInput(lpp, 6, pm10);
+		CayenneLPP__addGPS(lpp, 7, 52.37365, 4.88650, 2);
+
+		buf=CayenneLPP__getBuffer(lpp);
+		size=CayenneLPP__getSize(lpp);
+
+		// Send it off
+		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
+
+		usartSend("mac tx uncnf 1 ", 4);
+		for (w = 0; w < size; ++w) {
+			usartSend(buf[w], 4);
+		}
+		usartSend("\r\n", 4);
 		
-		usartSend("mac tx uncnf 1 0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8\r\n", 4);
 		wait(SEC *10);
-		
-		
 		
 		
 	}
