@@ -123,8 +123,7 @@ int main(void)
 
 	flash(10);
 
-	puts ("Application start.\n");
-	printf ("printf test.\n");
+	printf ("Entering main loop.\n");
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
@@ -133,7 +132,11 @@ int main(void)
 	// init cayenne lpp
 	lpp = CayenneLPP__create(51);
 
-	
+
+
+#ifdef NBIOT
+	printf ("Quectel reset.\n");
+
 	//Quectel wireless modul HW reset
 	gpio_clear(GPIOA, GPIO9); 
 	wait(SEC*0.2); 
@@ -141,6 +144,9 @@ int main(void)
 	
 	wait(SEC*5);//until quectel wakes up
 	//wait(1);//until quectel wakes up
+#endif
+
+	printf ("Debug spike.\n");
 
 	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
@@ -148,29 +154,39 @@ int main(void)
 	gpio_set(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 
+	printf ("Wait.\n");
 	wait(SEC*5);
-  
-	//Connect to network
-	#ifdef LORAWAN
-	connect_lorawan();
-    #endif
-    
-    #ifdef NBIOT
-    connect_nbiot();
-    #endif
-	
 
+	printf ("Network connect.\n");
+
+	//Connect to network
+#ifdef LORAWAN
+	connect_lorawan();
+#endif
+
+#ifdef NBIOT
+	connect_nbiot();
+#endif
+
+	printf ("Network connect done.\n");
+
+	printf ("Enabling particlemeter.\n");
 	particlemeter_ON();
 
+	printf ("Setting particlemeter fan.\n");
 	particlemeter_set_fan(FAN_SPEED);
 
+	flash(3);
+
+	printf ("Settings done.\n");
 	
-    flash(3);
 	while (1){
 
-		printf ("loop");
+		printf ("New loop\n");
 
+		printf ("Reading pm values\n");
 		read_pm_values();
+		printf ("Reading BME280 values\n");
 		data_readout_BME280(burst_read_data);
 
 		float hum  = hum_BME280();
@@ -206,10 +222,12 @@ int main(void)
 		
 		flash(1);
 		
-		wait(SEC *5);
-		
 		// mame tyto senzory
 		// teplota, tlak, vlhkost, pm1, pm2_5, pm10, gps
+
+		printf ("Data: %f, %f, %f, %f, %f, %s\n", temp, press, hum, pm1, pm2_5, pm10);
+
+		printf ("Encode values\n");
 
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
@@ -225,67 +243,24 @@ int main(void)
 		// Send it off
 		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
 
+		printf ("Encoded data size: %i\n", size);
+
+		printf ("Send encoded data\n");
+
 		// takovy osklivy pokus... pak do knihovny...
 		usartSend("mac tx uncnf 1 ", 4);
 		for (w = 0; w < size; ++w) {
 			usartSend(buf[w], 4);
 		}
 		usartSend("\r\n", 4);
-		
+
+		printf ("Sending done\n");
+
+		printf ("Wait...\n");
+
 		wait(SEC *10);
-		
 		
 	}
 	return 0;
 }
-
-
-/*		DEBUG SERIAL SEQUENCE
- 
-		usartSend("MEASURED VALUES:\r\n", 4);
-		//temp
-		sprintf(temp_str, "%.2f", temp);
-		usartSend("temp \t[°C]: \t\t", 4);
-		usartSend(temp_str, 4);
-		usartSend("\r\n", 4);
-
-		//press
-		sprintf(pres_str, "%.2f", pres);
-		usartSend("pres \t[XX]: \t\t", 4);
-		usartSend(pres_str, 4);
-		usartSend("\r\n", 4);
-
-
-		//hum
-		sprintf(hum_str, "%.2f", hum);
-		usartSend("hum \t[XX]: \t\t", 4);
-		usartSend(hum_str, 4);
-		usartSend("\r\n", 4);
-
-		//pm1
-		sprintf(pm1_str, "%.2f", pm1);
-		usartSend("pm 1 \t[ug/m3]: \t", 4);
-		usartSend(pm1_str, 4);
-		usartSend("\r\n", 4);
-
-
-		//pm1
-		sprintf(pm2_5_str, "%.2f", pm2_5);
-		usartSend("pm 2.5 \t[ug/m3]: \t", 4);
-		usartSend(pm2_5_str, 4);
-		usartSend("\r\n", 4);
-		
-		
-		//pm1
-		sprintf(pm10_str, "%.2f", pm10);
-		usartSend("pm 10 \t[ug/m3]: \t", 4);
-		usartSend(pm10_str, 4);
-		usartSend("\r\n", 4);	
-			usartSend("\r\n", 4);
- 
-  
- */
-
-
-
 

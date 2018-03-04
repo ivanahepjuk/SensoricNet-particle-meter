@@ -37,6 +37,27 @@ USB Virtual COM Port, and can also read input from the PC's keyboard via scanf f
   * http://www.wolinlabs.com/blog/stm32f4.semihosting.html
   * http://www.openstm32.org/forumthread164#threadId798
 
+vypadá to, že to funguje. Po přeložení a flashnutí je pořeba znovu spustit openocd
+
+openocd -f /usr/share/openocd/scripts/interface/stlink-v2-1.cfg -f /usr/share/openocd/scripts/target/stm32f0x.cfg
+
+a připojit se na port 4444
+
+telnet localhost 4444
+
+a tam zadat
+
+arm semihosting enable
+reset
+
+určitě to půjde zautomatizovat v Makefile
+
+POZOR! pokud se překládá s podporou semihosting (je to default), tak musí být připojený ST-LINK,
+       jinak ta binárka nepoběží!!! Překlad bez semihostingu je potřeba explicitně provést pomocí
+
+make ENABLE_SEMIHOSTING=0 flash
+
+
 Alternativa je retargeting (imho presmerovani USART2 do debug konzole)
 
   * https://github.com/ChuckM/nucleo-retarget-example
