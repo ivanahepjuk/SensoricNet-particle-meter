@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <float.h>
+#include <string.h>
 #include "cayenne_lpp.h"
 
 struct CayenneLPP

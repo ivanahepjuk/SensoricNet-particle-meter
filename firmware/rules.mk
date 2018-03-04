@@ -56,7 +56,7 @@ OBJS		+= src/functions.o
 OBJS		+= src/bme280.o
 OBJS		+= src/opcn2.o
 OBJS		+= src/wireless.o
-OBJS            += src/cayenne_lpp.o
+OBJS		+= src/cayenne_lpp.o
 
 
 ifeq ($(strip $(OPENCM3_DIR)),)
