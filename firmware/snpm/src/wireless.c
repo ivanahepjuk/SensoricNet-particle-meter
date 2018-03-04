@@ -33,7 +33,12 @@ void connect_lorawan(void)
 //mac set appkey D94AC6F27881D3505F3E595B69472898
 	//usartSend("sys get ver\r\n", 4);
     //wait(1);
-	usartSend("radio set pwr 14   \r   \n", 4);
+	usartSend("sys reset\r\n", 4);
+	wait(SEC*1);
+	usartSend("mac set dr 1\r\n", 4);
+	wait(SEC*1);
+
+	usartSend("radio set pwr 14\r\n", 4);
 	wait(SEC*3);
 	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
 	wait(SEC*2);

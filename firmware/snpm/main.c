@@ -167,12 +167,6 @@ int main(void)
 	unsigned char *buf;
 	int w, size;
 
-	char send_string[256] = "";
-
-	// init cayenne lpp
-	lpp = CayenneLPP__create(51);
-
-
 
 #ifdef NBIOT
 	printf ("Quectel reset.\n");
@@ -270,6 +264,9 @@ int main(void)
 
 		printf ("Encode values\n");
 
+		// init cayenne lpp
+		lpp = CayenneLPP__create(100);
+
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
 		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
@@ -296,6 +293,7 @@ int main(void)
 		free(send_string);
 
 		printf ("Sending done\n");
+		free(lpp);
 
 		printf ("Wait...\n");
 
