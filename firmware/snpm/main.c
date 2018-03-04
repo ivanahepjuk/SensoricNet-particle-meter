@@ -19,7 +19,8 @@
  
 #include <libopencm3/stm32/spi.h>
 #include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
+#include <string.h>
 //#include <libopencm3/stm32/nvic.h>
 #include "inc/functions.h"
 #include "inc/bme280.h"
@@ -94,7 +95,44 @@ flash(7);
 */
 
 
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
 
+
+char* string_to_hex(char *string, int len)
+{
+	char *result = malloc(len*2+1);
+	unsigned int pointer = result;
+//	char hex[3];
+	int x;
+
+	for (x = 0; x < len; ++x) {
+		sprintf(pointer, "%02x", *string);
+
+//		sprintf(hex, "%02x", *string);
+//		printf("hex: %s ", hex);
+
+		string++;
+		pointer++;
+		pointer++;
+	}
+
+//	printf("done\n");
+
+	return result;
+}
+
+
+/********************************************************************************************
+ *
+ * MAIN
+ *
+ ********************************************************************************************/
 
 int main(void)
 {
@@ -128,6 +166,8 @@ int main(void)
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
 	int w, size;
+
+	char send_string[256] = "";
 
 	// init cayenne lpp
 	lpp = CayenneLPP__create(51);
@@ -187,14 +227,15 @@ int main(void)
 		printf ("Reading pm values\n");
 		read_pm_values();
 		printf ("Reading BME280 values\n");
-		data_readout_BME280(burst_read_data);
+//		data_readout_BME280(burst_read_data);
 
-		float hum  = hum_BME280();
+		float hum = hum_BME280();
 		float temp = temp_BME280();
 		float press = press_BME280();
-		float pm1  = particlemeter_pm1();
+		float pm1 = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
+
 
 		//send nbiot
 		//char str_data[210];
@@ -245,14 +286,14 @@ int main(void)
 
 		printf ("Encoded data size: %i\n", size);
 
-		printf ("Send encoded data\n");
+		char* hex_string = string_to_hex(buf, size);
+		char* send_string = concat("mac tx uncnf 1 ", hex_string);
+		free(hex_string);
+		send_string = concat(send_string, "\r\n");
 
-		// takovy osklivy pokus... pak do knihovny...
-		usartSend("mac tx uncnf 1 ", 4);
-		for (w = 0; w < size; ++w) {
-			usartSend(buf[w], 4);
-		}
-		usartSend("\r\n", 4);
+		printf ("Send string: %s\n", send_string);
+		usartSend(send_string, 4);
+		free(send_string);
 
 		printf ("Sending done\n");
 
@@ -263,4 +304,3 @@ int main(void)
 	}
 	return 0;
 }
-
