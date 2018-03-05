@@ -45,7 +45,7 @@ void flash(uint8_t loop)
 	for (uint8_t i = 0; i < loop; i++)
 	{
 		gpio_set(GPIOA, GPIO11); 
-		wait(100000); 
+		wait(100000);
 		gpio_clear(GPIOA, GPIO11); 
 		wait(100000);
 	}

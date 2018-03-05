@@ -23,6 +23,16 @@ BINARY = main
 
 LDSCRIPT = ../stm32f0.ld
 
+# To disable semihosting debug, run "make ENABLE_SEMIHOSTING=0" or comment next line out
+ENABLE_SEMIHOSTING ?= 1
+
+ifeq ($(ENABLE_SEMIHOSTING),1)
+LDFLAGS         += --specs=nosys.specs
+LDFLAGS         += --specs=rdimon.specs
+LDLIBS          += -lrdimon
+DEFS            += -DENABLE_SEMIHOSTING=1
+endif
+
 LIBNAME		= opencm3_stm32f0
 DEFS		+= -DSTM32F0
 

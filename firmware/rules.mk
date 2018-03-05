@@ -56,13 +56,14 @@ OBJS		+= src/functions.o
 OBJS		+= src/bme280.o
 OBJS		+= src/opcn2.o
 OBJS		+= src/wireless.o
+OBJS		+= src/cayenne_lpp.o
 
 
 ifeq ($(strip $(OPENCM3_DIR)),)
 # user has not specified the library path, so we try to detect it
 
 # where we search for the library
-LIBPATHS := ../libopencm3 ./libopencm3 ../../../../libopencm3 ../../../../../libopencm3 ./ 
+LIBPATHS := ../libopencm3 ./libopencm3 ../../../libopencm3 ../../../../../libopencm3 ./ 
 
 OPENCM3_DIR := $(wildcard $(LIBPATHS:=/locm3.sublime-project))
 OPENCM3_DIR := $(firstword $(dir $(OPENCM3_DIR)))

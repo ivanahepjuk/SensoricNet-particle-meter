@@ -18,13 +18,31 @@
  */
  
 #include <libopencm3/stm32/spi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 //#include <libopencm3/stm32/nvic.h>
 #include "inc/functions.h"
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
 #include "inc/wireless.h"
+#include "inc/cayenne_lpp.h"
+
+
+// Sample pragmas to cope with warnings. Please note the related line at
+// the end of this function, used to pop the compiler diagnostics status.
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored "-Wunused-parameter"
+//#pragma GCC diagnostic ignored "-Wmissing-declarations"
+//#pragma GCC diagnostic ignored "-Wreturn-type"
+
+
 
 #define LORAWAN
+
+
+/* For semihosting on newlib */
+extern void initialise_monitor_handles(void);
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for bme280: //
@@ -75,9 +93,51 @@ void usart4_isr(void)
 flash(7);	
 }
 */
+
+
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+
+char* string_to_hex(char *string, int len)
+{
+	char *result = malloc(len*2+1);
+	unsigned int pointer = result;
+//	char hex[3];
+	int x;
+
+	for (x = 0; x < len; ++x) {
+		sprintf(pointer, "%02x", *string);
+
+//		sprintf(hex, "%02x", *string);
+//		printf("hex: %s ", hex);
+
+		string++;
+		pointer++;
+		pointer++;
+	}
+
+//	printf("done\n");
+
+	return result;
+}
+
+
+/********************************************************************************************
+ *
+ * MAIN
+ *
+ ********************************************************************************************/
+
 int main(void)
 {
-    /*
+
+	/*
     //interrupts:
 	//uart_enable_interrupts(USART4, UART_INT_RX);
 	// Unmask receive interrupt
@@ -86,25 +146,31 @@ int main(void)
 	nvic_enable_irq(NVIC_UART4_RX);
 	*/
 	
-	//pomocna promenna pro prepocitavani ascii znaku na hexadecimalni substringy
-	//char hex_string[3];
-	//do techto stringu se zkonvertuji nactene hodnoty
-	char hum_str [10];
-	char temp_str[10];
-	char pres_str[10];
-	char pm1_str [10];
-	char pm2_5_str [10];
-	char pm10_str [10];
-	
-	
 	clock_setup();
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
 	spi_setup();
 	init_BME280();
-	
-	
+
+// semihosting - stdio po debug konzoli, inicializace
+#if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
+	initialise_monitor_handles();
+	setbuf(stdout, NULL);
+#endif
+
+	flash(10);
+
+	printf ("Entering main loop.\n");
+
+	struct CayenneLPP *lpp;
+	unsigned char *buf;
+	int w, size;
+
+
+#ifdef NBIOT
+	printf ("Quectel reset.\n");
+
 	//Quectel wireless modul HW reset
 	gpio_clear(GPIOA, GPIO9); 
 	wait(SEC*0.2); 
@@ -112,6 +178,9 @@ int main(void)
 	
 	wait(SEC*5);//until quectel wakes up
 	//wait(1);//until quectel wakes up
+#endif
+
+	printf ("Debug spike.\n");
 
 	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
@@ -119,46 +188,48 @@ int main(void)
 	gpio_set(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 
+	printf ("Wait.\n");
 	wait(SEC*5);
-  
-	//Connect to network
-	#ifdef LORAWAN
-	connect_lorawan();
-    #endif
-    
-    #ifdef NBIOT
-    connect_nbiot();
-    #endif
-	
 
+	printf ("Network connect.\n");
+
+	//Connect to network
+#ifdef LORAWAN
+	connect_lorawan();
+#endif
+
+#ifdef NBIOT
+	connect_nbiot();
+#endif
+
+	printf ("Network connect done.\n");
+
+	printf ("Enabling particlemeter.\n");
 	particlemeter_ON();
 
+	printf ("Setting particlemeter fan.\n");
 	particlemeter_set_fan(FAN_SPEED);
 
+	flash(3);
+
+	printf ("Settings done.\n");
 	
-    flash(3);
 	while (1){
 
-		read_pm_values();
-		data_readout_BME280(burst_read_data);
+		printf ("New loop\n");
 
-		float hum  = hum_BME280();
+		printf ("Reading pm values\n");
+		read_pm_values();
+		printf ("Reading BME280 values\n");
+//		data_readout_BME280(burst_read_data);
+
+		float hum = hum_BME280();
 		float temp = temp_BME280();
-		float pres = press_BME280();
-		float pm1  = particlemeter_pm1();
+		float press = press_BME280();
+		float pm1 = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
 
-		//prenasobi vsechno, ..?
-		///hum  *= 100;
-		///temp *= 100;
-		///pres *= 100;
-		///pm1  *= 100;
-		///pm25 *= 100;
-		///pm10 *= 100;
-
-		//prelozi na stringy
-		
 
 		//send nbiot
 		//char str_data[210];
@@ -171,8 +242,6 @@ int main(void)
 		//char str5[]=",pm1=";
 		//char str6[]=",pm25=";
 		//char str7[]=",pm10=";
-
-
 
 		//vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
 		/*
@@ -188,97 +257,48 @@ int main(void)
 		
 		flash(1);
 		
-		wait(SEC *5);
-		
-		
-		///LORAWAN
-		//navrh na organizaci paketu:
-		/*
-		nazev			kanal		typ		size[B]		poznamka					encoded:
-		cislo_senosoru	0x01		00		1			cislo mericiho boxu			010001
-		verze_fw		0x02		00		1			verze fw					020010
-		teplota			0x03		67		2			teplota						03670110
-		tlak			0x04		73		2			tlak						04730220
-		vlhkost			0x05		68		1			vlhkost						056830
-		pm1				0x06		02		2			analog input? prozatim		06022332
-		pm2_5			0x07		02		2			analog input? prozatim		07022345
-		pm10			0x08		02		2			analog input? prozatim		08024939
-		gps				0x09		88		9			gps							098806765ff2960A0003E8
-	
-		*/
-		/*
-		uint8_t buffer[100];
-		static char cislo_sensoru[] = "010001";
-		static char verze_fw[] = "010001";
-		
-		strcat(buffer, cislo_sensoru
-		*/
-		
-		/*
-		 * 	Data 	Channel 	Type 				Value
-			03 ⇒ 	3 			67 ⇒ Temperature 	0110 = 272 ⇒ 27.2°C
-			05 ⇒ 	5 			67 ⇒ Temperature 	00FF = 255 ⇒ 25.5°C
-		 */
-		 
-		//hardcoded teoreticke hodnoty:  0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8
-		
-		usartSend("mac tx uncnf 1 0100010200100367011004730220056830060223320702234508024939098806765ff2960A0003E8\r\n", 4);
+		// mame tyto senzory
+		// teplota, tlak, vlhkost, pm1, pm2_5, pm10, gps
+
+		printf ("Data: %f, %f, %f, %f, %f, %s\n", temp, press, hum, pm1, pm2_5, pm10);
+
+		printf ("Encode values\n");
+
+		// init cayenne lpp
+		lpp = CayenneLPP__create(100);
+
+		CayenneLPP__addTemperature(lpp, 1, temp);
+		CayenneLPP__addBarometricPressure(lpp, 2, press);
+		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
+		CayenneLPP__addAnalogInput(lpp, 4, pm1);
+		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
+		CayenneLPP__addAnalogInput(lpp, 6, pm10);
+		CayenneLPP__addGPS(lpp, 7, 52.37365, 4.88650, 2);
+
+		buf=CayenneLPP__getBuffer(lpp);
+		size=CayenneLPP__getSize(lpp);
+
+		// Send it off
+		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
+
+		printf ("Encoded data size: %i\n", size);
+
+		char* hex_string = string_to_hex(buf, size);
+		char* send_string = concat("mac tx uncnf 1 ", hex_string);
+		free(hex_string);
+		send_string = concat(send_string, "\r\n");
+
+		printf ("Send string: %s\n", send_string);
+		usartSend(send_string, 4);
+		free(send_string);
+
+		printf ("Sending done\n");
+		free(lpp);
+
+		printf ("Wait...\n");
+
 		wait(SEC *10);
-		
-		
-		
 		
 	}
 	return 0;
 }
-
-
-/*		DEBUG SERIAL SEQUENCE
- 
-		usartSend("MEASURED VALUES:\r\n", 4);
-		//temp
-		sprintf(temp_str, "%.2f", temp);
-		usartSend("temp \t[°C]: \t\t", 4);
-		usartSend(temp_str, 4);
-		usartSend("\r\n", 4);
-
-		//press
-		sprintf(pres_str, "%.2f", pres);
-		usartSend("pres \t[XX]: \t\t", 4);
-		usartSend(pres_str, 4);
-		usartSend("\r\n", 4);
-
-
-		//hum
-		sprintf(hum_str, "%.2f", hum);
-		usartSend("hum \t[XX]: \t\t", 4);
-		usartSend(hum_str, 4);
-		usartSend("\r\n", 4);
-
-		//pm1
-		sprintf(pm1_str, "%.2f", pm1);
-		usartSend("pm 1 \t[ug/m3]: \t", 4);
-		usartSend(pm1_str, 4);
-		usartSend("\r\n", 4);
-
-
-		//pm1
-		sprintf(pm2_5_str, "%.2f", pm2_5);
-		usartSend("pm 2.5 \t[ug/m3]: \t", 4);
-		usartSend(pm2_5_str, 4);
-		usartSend("\r\n", 4);
-		
-		
-		//pm1
-		sprintf(pm10_str, "%.2f", pm10);
-		usartSend("pm 10 \t[ug/m3]: \t", 4);
-		usartSend(pm10_str, 4);
-		usartSend("\r\n", 4);	
-			usartSend("\r\n", 4);
- 
-  
- */
-
-
-
-

@@ -1,0 +1,71 @@
+
+Project layout
+--------------
+
+..
+└── git
+    ├── libopencm3
+    └── SensoricNet-particle-meter
+
+CPU used
+--------
+
+ARM STM32F072
+
+
+GNU Arm Embedded Toolchain:
+---------------------------
+
+The GNU Arm Embedded toolchains are integrated and validated packages featuring the Arm Embedded GCC compiler,
+libraries and other GNU tools necessary for bare-metal software development on devices based on the 
+Arm Cortex-M and Cortex-R processors. 
+
+  * https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+
+
+Semihosting
+-----------
+
+Semihosting is a neat way to redirect STDOUT and STDIN from an embedded system to a debug window on a PC.
+This allows you to output messages using printf functions without having to use/configure an RS232 or 
+USB Virtual COM Port, and can also read input from the PC's keyboard via scanf functions.
+
+  * http://www.keil.com/support/man/docs/armcc/armcc_pge1358787046598.htm
+  * http://bgamari.github.io/posts/2014-10-31-semihosting.html
+  * https://github.com/libopencm3/libopencm3-examples/tree/master/examples/stm32/l1/stm32l-discovery/usart-semihosting
+  * https://github.com/rowol/stm32_discovery_arm_gcc/tree/master/semihosting
+  * http://www.wolinlabs.com/blog/stm32f4.semihosting.html
+  * http://www.openstm32.org/forumthread164#threadId798
+
+vypadá to, že to funguje. Po přeložení a flashnutí je pořeba znovu spustit openocd
+
+openocd -f /usr/share/openocd/scripts/interface/stlink-v2-1.cfg -f /usr/share/openocd/scripts/target/stm32f0x.cfg
+
+a připojit se na port 4444
+
+telnet localhost 4444
+
+a tam zadat
+
+arm semihosting enable
+reset
+
+určitě to půjde zautomatizovat v Makefile
+
+POZOR! pokud se překládá s podporou semihosting (je to default), tak musí být připojený ST-LINK,
+       jinak ta binárka nepoběží!!! Překlad bez semihostingu je potřeba explicitně provést pomocí
+
+make ENABLE_SEMIHOSTING=0 flash
+
+
+Alternativa je retargeting (imho presmerovani USART2 do debug konzole)
+
+  * https://github.com/ChuckM/nucleo-retarget-example
+
+GDB (GNU debuger)
+-----------------
+
+  * https://mcuoneclipse.com/2015/03/25/command-line-programming-and-debugging-with-gdb/
+  * http://pandafruits.com/stm32_primer/stm32_primer_minimal.php
+
+  
