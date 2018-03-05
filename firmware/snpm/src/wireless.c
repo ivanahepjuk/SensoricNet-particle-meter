@@ -18,47 +18,82 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "rn2483.h"
 #include "functions.h"
+#include "wireless.h"
 
-
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
- * 			LORWAN WIRELESS MODULE FUNCTIONS			*
- * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-
+/**********************************************************
+ * LORWAN
+ **********************************************************/
 void connect_lorawan(void)
 {
 //mac set deveui 0004A30B00222137		
 //mac set appeui 70B3D57ED00082D2
 //mac set appkey D94AC6F27881D3505F3E595B69472898
-	//usartSend("sys get ver\r\n", 4);
-    //wait(1);
-	usartSend("sys reset\r\n", 4);
-	wait(SEC*1);
-	usartSend("mac set dr 1\r\n", 4);
-	wait(SEC*1);
 
-	usartSend("radio set pwr 14\r\n", 4);
-	wait(SEC*3);
-	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
-	wait(SEC*2);
-	usartSend("mac set appeui 70B3D57ED00082D2\r\n", 4);
-	wait(SEC*2);
-	usartSend("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n", 4);
-	wait(SEC*2);
-	usartSend("mac save\r\n", 4);
-	wait(SEC*2);
-	usartSend("mac join otaa\r\n", 4);
-	wait(SEC*15);
-	///debug
-	//usartSend("mac get status\r\n", 4);
-	//wait(SEC*5);
-	//usartSend("mac get devaddr\r\n", 4);
-	//wait(SEC*5);
-	
-	
-	
+	lora_sendCommand("sys reset\r\n");
+
+	lora_sendCommand("sys get hweui\r\n");
+	lora_sendCommand("mac get deveui\r\n");
+
+	lora_sendCommand("radio get mod");
+	lora_sendCommand("radio get freq");
+	lora_sendCommand("radio get sf");
+	lora_sendCommand("radio get bw");
+	lora_sendCommand("radio get cr");
+	lora_sendCommand("radio get prlen");
+	lora_sendCommand("radio get pwr");
+
+	//	wait(SEC*1);
+//	usartSend("mac set dr 1\r\n", 4);
+//	wait(SEC*1);
+//
+//	usartSend("radio set pwr 14\r\n", 4);
+//	wait(SEC*3);
+//	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
+//	wait(SEC*2);
+//	usartSend("mac set appeui 70B3D57ED00082D2\r\n", 4);
+//	wait(SEC*2);
+//	usartSend("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n", 4);
+//	wait(SEC*2);
+//	usartSend("mac save\r\n", 4);
+//	wait(SEC*2);
+//	usartSend("mac join otaa\r\n", 4);
+//	wait(SEC*15);
+//	///debug
+//	//usartSend("mac get status\r\n", 4);
+//	//wait(SEC*5);
+//	//usartSend("mac get devaddr\r\n", 4);
+//	//wait(SEC*5);
+//
+//
+//
 }
+
+
+void lora_sendCommand(char *phrase)
+{
+	uint32_t i=0;
+	uint16_t recieved_char;
+
+	printf("lora cmd: ");
+	while(phrase[i] != '\0')
+	{
+		usart_send_blocking(USART4, phrase[i]);
+		printf("%c", phrase[i]);
+		i++;
+	}
+	usart_send_blocking(USART4, '\r');
+	usart_send_blocking(USART4, '\n');
+	printf("\n");
+
+	do {
+		printf(".");
+		recieved_char = usart_recv_blocking (USART4);
+		printf("%04x", recieved_char);
+	} while (recieved_char == '\n');
+
+}
+
 
 
 int sendCommand(char *phrase, char *check, int pocetentru)

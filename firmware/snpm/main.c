@@ -16,7 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
+
 #include <libopencm3/stm32/spi.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +38,19 @@
 //#pragma GCC diagnostic ignored "-Wreturn-type"
 
 
-
 #define LORAWAN
+//#define NBIOT
+
+// set some constants, fixme
+#ifdef LORAWAN
+#define USART_BAUDRATE 57600
+#define LORA_USART (USART4)
+#endif
+
+#ifdef NBIOT
+#define USART_BAUDRATE 9600
+#endif
+
 
 
 /* For semihosting on newlib */
@@ -47,7 +59,7 @@ extern void initialise_monitor_handles(void);
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for bme280: //
 /////////////////////////////////////////////////////////////
-int32_t     t_fine;
+int32_t t_fine;
 uint8_t comp_data[34];//compensation data readed into this
 uint8_t burst_read_data[8] = {0};//in loop measured data readed into this
 
@@ -104,10 +116,10 @@ char* concat(const char *s1, const char *s2)
 }
 
 
-char* string_to_hex(char *string, int len)
+unsigned char* string_to_hex(unsigned char *string, int len)
 {
-	char *result = malloc(len*2+1);
-	unsigned int pointer = result;
+	unsigned char *result = malloc(len*2+1);
+	void* pointer = result;
 //	char hex[3];
 	int x;
 
@@ -148,7 +160,7 @@ int main(void)
 	
 	clock_setup();
 	gpio_setup();
-	usart_setup();
+	usart_setup();	// setup lora/nbiot usart
 	i2c_setup();
 	spi_setup();
 	init_BME280();
@@ -260,7 +272,7 @@ int main(void)
 		// mame tyto senzory
 		// teplota, tlak, vlhkost, pm1, pm2_5, pm10, gps
 
-		printf ("Data: %f, %f, %f, %f, %f, %s\n", temp, press, hum, pm1, pm2_5, pm10);
+		printf ("Data: %f, %f, %f, %f, %f, %f\n", temp, press, hum, pm1, pm2_5, pm10);
 
 		printf ("Encode values\n");
 
@@ -283,13 +295,13 @@ int main(void)
 
 		printf ("Encoded data size: %i\n", size);
 
-		char* hex_string = string_to_hex(buf, size);
-		char* send_string = concat("mac tx uncnf 1 ", hex_string);
+		unsigned char* hex_string = string_to_hex(buf, size);
+		unsigned char* send_string = concat("mac tx uncnf 1 ", hex_string);
 		free(hex_string);
-		send_string = concat(send_string, "\r\n");
+//		send_string = concat(send_string, "\r\n");
 
 		printf ("Send string: %s\n", send_string);
-		usartSend(send_string, 4);
+		lora_sendCommand(send_string);
 		free(send_string);
 
 		printf ("Sending done\n");
