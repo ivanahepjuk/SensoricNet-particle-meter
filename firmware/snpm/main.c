@@ -221,7 +221,7 @@ int main(void)
 		printf ("Reading pm values\n");
 		read_pm_values();
 		printf ("Reading BME280 values\n");
-//		data_readout_BME280(burst_read_data);
+		data_readout_BME280(burst_read_data);
 
 		float hum = hum_BME280();
 		float temp = temp_BME280();
@@ -260,7 +260,7 @@ int main(void)
 		// mame tyto senzory
 		// teplota, tlak, vlhkost, pm1, pm2_5, pm10, gps
 
-		printf ("Data: %f, %f, %f, %f, %f, %s\n", temp, press, hum, pm1, pm2_5, pm10);
+		printf ("Data: %f, %f, %f, %f, %f, %f\n", temp, press, hum, pm1, pm2_5, pm10);
 
 		printf ("Encode values\n");
 
@@ -297,7 +297,7 @@ int main(void)
 
 		printf ("Wait...\n");
 
-		wait(SEC *10);
+		wait(SEC *1);
 		
 	}
 	return 0;

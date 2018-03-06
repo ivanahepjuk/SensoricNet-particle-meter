@@ -52,4 +52,16 @@ void flash(uint8_t loop);
 
 void usart4_isr(void);
 
+
+////////////////dronovo
+char* concat(const char *s1, const char *s2);
+char* string_to_hex(char *string, int len);
+
+
+
+
+
+
+
+
 #endif
