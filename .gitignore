@@ -3,8 +3,4 @@
 *.bin
 *.o
 *.d
-*.map
 /.project
-/.cproject
-/.settings
-/Debug
