@@ -27,7 +27,6 @@ LDSCRIPT = ../stm32f0.ld
 ENABLE_SEMIHOSTING ?= 1
 
 ifeq ($(ENABLE_SEMIHOSTING),1)
-LDFLAGS         += --specs=nosys.specs
 LDFLAGS         += --specs=rdimon.specs
 LDLIBS          += -lrdimon
 DEFS            += -DENABLE_SEMIHOSTING=1

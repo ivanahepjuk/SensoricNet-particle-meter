@@ -21,6 +21,7 @@
 #include "functions.h"
 #include "wireless.h"
 
+
 /**********************************************************
  * LORWAN
  **********************************************************/
@@ -28,6 +29,11 @@ void connect_lorawan(void)
 {
 
 	lora_sendCommand("sys reset");
+
+	// po resetu musim pockat na sestupnou hranu RX a pak
+	// zase na vzestupnou, pak rn vybleje
+
+
 
 	lora_sendCommand("sys get hweui");
 	lora_sendCommand("mac get deveui");
@@ -41,12 +47,12 @@ void connect_lorawan(void)
 	lora_sendCommand("radio get pwr");
 
 	lora_sendCommand("mac set dr 1");
-	lora_sendCommand("radio set pwr 14\r\n");
-	lora_sendCommand("mac set deveui 0004A30B00222137\r\n");
-	lora_sendCommand("mac set appeui 70B3D57ED00082D2\r\n");
-	lora_sendCommand("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n");
-	lora_sendCommand("mac save\r\n");
-	lora_sendCommand("mac join otaa\r\n");
+	lora_sendCommand("radio set pwr 14");
+	lora_sendCommand("mac set deveui 0004A30B00222137");
+	lora_sendCommand("mac set appeui 70B3D57ED00082D2");
+	lora_sendCommand("mac set appkey D94AC6F27881D3505F3E595B69472898");
+	lora_sendCommand("mac save");
+	lora_sendCommand("mac join otaa");
 //	lora_sendCommand("mac get status\r\n");
 //	lora_sendCommand("mac get devaddr\r\n");
 
@@ -58,29 +64,26 @@ void lora_sendCommand(char *phrase)
 	uint32_t i=0;
 	uint16_t recieved_char;
 
-//	printf("lora cmd: ");
+	printf("lora cmd: ");
 	while(phrase[i] != '\0')
 	{
 		usart_send_blocking(USART4, phrase[i]);
-//		printf("%c", phrase[i]);
+		printf("%c", phrase[i]);
 		i++;
 	}
 
-	wait(1000);
-
-	usart_send_blocking(USART4, ' ');
+//	wait (1000);
 	usart_send_blocking(USART4, '\r');
-	usart_send_blocking(USART4, ' ');
 	usart_send_blocking(USART4, '\n');
-//	printf("\n");
+	printf("\n");
 
-	wait(SEC *1);
+//	wait (1000);
 
 	do {
-//		printf(".");
-		recieved_char = usart_recv_blocking (USART4);
-//		printf("%04x", recieved_char);
-	} while (recieved_char == '\n');
+		printf(".");
+		recieved_char = usart_recv (USART4);
+		printf("%04x", recieved_char);
+	} while (recieved_char != '\n');
 
 }
 
