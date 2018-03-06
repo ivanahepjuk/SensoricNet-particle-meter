@@ -179,15 +179,14 @@ int main(void)
 	unsigned char *buf;
 	int w, size;
 
+	//gps/lora module HW reset
+	gpio_clear(GPIOA, GPIO9);
+	wait(SEC*0.2);
+	gpio_set(GPIOA, GPIO9);
 
 #ifdef NBIOT
 	printf ("Quectel reset.\n");
 
-	//Quectel wireless modul HW reset
-	gpio_clear(GPIOA, GPIO9); 
-	wait(SEC*0.2); 
-	gpio_set(GPIOA, GPIO9);
-	
 	wait(SEC*5);//until quectel wakes up
 	//wait(1);//until quectel wakes up
 #endif

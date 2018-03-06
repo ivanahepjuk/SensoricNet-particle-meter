@@ -26,14 +26,11 @@
  **********************************************************/
 void connect_lorawan(void)
 {
-//mac set deveui 0004A30B00222137		
-//mac set appeui 70B3D57ED00082D2
-//mac set appkey D94AC6F27881D3505F3E595B69472898
 
-	lora_sendCommand("sys reset\r\n");
+	lora_sendCommand("sys reset");
 
-	lora_sendCommand("sys get hweui\r\n");
-	lora_sendCommand("mac get deveui\r\n");
+	lora_sendCommand("sys get hweui");
+	lora_sendCommand("mac get deveui");
 
 	lora_sendCommand("radio get mod");
 	lora_sendCommand("radio get freq");
@@ -43,30 +40,16 @@ void connect_lorawan(void)
 	lora_sendCommand("radio get prlen");
 	lora_sendCommand("radio get pwr");
 
-	//	wait(SEC*1);
-//	usartSend("mac set dr 1\r\n", 4);
-//	wait(SEC*1);
-//
-//	usartSend("radio set pwr 14\r\n", 4);
-//	wait(SEC*3);
-//	usartSend("mac set deveui 0004A30B00222137\r\n", 4);
-//	wait(SEC*2);
-//	usartSend("mac set appeui 70B3D57ED00082D2\r\n", 4);
-//	wait(SEC*2);
-//	usartSend("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n", 4);
-//	wait(SEC*2);
-//	usartSend("mac save\r\n", 4);
-//	wait(SEC*2);
-//	usartSend("mac join otaa\r\n", 4);
-//	wait(SEC*15);
-//	///debug
-//	//usartSend("mac get status\r\n", 4);
-//	//wait(SEC*5);
-//	//usartSend("mac get devaddr\r\n", 4);
-//	//wait(SEC*5);
-//
-//
-//
+	lora_sendCommand("mac set dr 1");
+	lora_sendCommand("radio set pwr 14\r\n");
+	lora_sendCommand("mac set deveui 0004A30B00222137\r\n");
+	lora_sendCommand("mac set appeui 70B3D57ED00082D2\r\n");
+	lora_sendCommand("mac set appkey D94AC6F27881D3505F3E595B69472898\r\n");
+	lora_sendCommand("mac save\r\n");
+	lora_sendCommand("mac join otaa\r\n");
+//	lora_sendCommand("mac get status\r\n");
+//	lora_sendCommand("mac get devaddr\r\n");
+
 }
 
 
@@ -75,21 +58,28 @@ void lora_sendCommand(char *phrase)
 	uint32_t i=0;
 	uint16_t recieved_char;
 
-	printf("lora cmd: ");
+//	printf("lora cmd: ");
 	while(phrase[i] != '\0')
 	{
 		usart_send_blocking(USART4, phrase[i]);
-		printf("%c", phrase[i]);
+//		printf("%c", phrase[i]);
 		i++;
 	}
+
+	wait(1000);
+
+	usart_send_blocking(USART4, ' ');
 	usart_send_blocking(USART4, '\r');
+	usart_send_blocking(USART4, ' ');
 	usart_send_blocking(USART4, '\n');
-	printf("\n");
+//	printf("\n");
+
+	wait(SEC *1);
 
 	do {
-		printf(".");
+//		printf(".");
 		recieved_char = usart_recv_blocking (USART4);
-		printf("%04x", recieved_char);
+//		printf("%04x", recieved_char);
 	} while (recieved_char == '\n');
 
 }
