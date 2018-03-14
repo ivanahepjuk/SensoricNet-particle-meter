@@ -27,6 +27,7 @@
  
 
 void connect_lorawan(void);
+void lora_sendCommand(char *phrase);
 int sendCommand(char *phrase, char *check, int pocetentru);
 
 

@@ -132,7 +132,7 @@ void wait(uint32_t usec)
 void usartSend(char *phrase, uint8_t usart)
 {
 
-	uint32_t i=0;                    
+	uint32_t i=0;
 
 	while(phrase[i] != '\0')
 	{
@@ -174,7 +174,7 @@ void clock_setup(void)
 	// clk for USART4 (quectel)  PC10 tx PC11 rx
 	rcc_periph_clock_enable(RCC_USART4);
 
-    // clk for USART2 (gsm) PA2 tx PA3 rx
+	// clk for USART2 (gsm) PA2 tx PA3 rx
 	rcc_periph_clock_enable(RCC_USART2);
 }
 
@@ -210,10 +210,9 @@ void i2c_setup(void)
 
 void usart_setup(void)
 {
-	// setup gsm USART2 parameters
+	// setup GPS module USART2 parameters
+	// fixme - vymyslet predavani parametru baudrate
 	usart_set_baudrate(USART2, 9600);
-	//lora
-	//usart_set_baudrate(USART2, 57600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
@@ -222,7 +221,8 @@ void usart_setup(void)
 	// enable the USART2
 	usart_enable(USART2);
 
-        // setup quectel USART4 parameters
+	// setup quectel(gsm)/lora USART4 parameters
+	// fixme - vymyslet predavani parametru baudrate
 	usart_set_baudrate(USART4, 57600);
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
@@ -231,7 +231,14 @@ void usart_setup(void)
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
 	// enable the USART4
 	usart_enable(USART4);
-}	
+
+//	/* Enable interrupts from the USART */
+//	nvic_enable_irq(NVIC_USART4_IRQ);
+
+	/* Specifically enable recieve interrupts */
+//usart_enable_rx_interrupt(USART4);
+
+}
 
 
 void gpio_setup(void)
@@ -260,11 +267,4 @@ void gpio_setup(void)
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
 }
-
-
-
-
-
-
-
 

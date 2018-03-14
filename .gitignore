@@ -3,6 +3,4 @@
 *.bin
 *.o
 *.d
-*.map
 /.project
-/.cproject
