@@ -223,7 +223,7 @@ void usart_setup(void)
 
 	// setup quectel(gsm)/lora USART4 parameters
 	// fixme - vymyslet predavani parametru baudrate
-	usart_set_baudrate(USART4, 57600);
+	usart_set_baudrate(USART4, 57600);  //lora 57600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
@@ -237,6 +237,7 @@ void usart_setup(void)
 
 	/* Specifically enable recieve interrupts */
 //usart_enable_rx_interrupt(USART4);
+//https://www.youtube.com/watch?v=kFiVs-0Ww28
 
 }
 
@@ -261,7 +262,7 @@ void gpio_setup(void)
     
     // USART4 GPIO pins 
     gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO11);//rx
 
 	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);

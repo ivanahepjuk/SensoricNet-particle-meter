@@ -178,12 +178,12 @@ int main(void)
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
 	int w, size;
-
+/*
 	//gps/lora module HW reset
 	gpio_clear(GPIOA, GPIO9);
 	wait(SEC*0.2);
 	gpio_set(GPIOA, GPIO9);
-
+*/
 #ifdef NBIOT
 	printf ("Quectel reset.\n");
 
@@ -210,6 +210,7 @@ int main(void)
 #endif
 
 #ifdef NBIOT
+printf ("test\n");
 	connect_nbiot();
 #endif
 
@@ -237,9 +238,9 @@ int main(void)
 		float hum = hum_BME280();
 		float temp = temp_BME280();
 		float press = press_BME280();
-		float pm1 = particlemeter_pm1();
-		float pm2_5 = particlemeter_pm2_5();
-		float pm10 = particlemeter_pm10();
+		float pm1 = 1.1;//particlemeter_pm1();
+		float pm2_5 = 2.5;//particlemeter_pm2_5();
+		float pm10 = 10.10;//particlemeter_pm10();
 
 
 		//send nbiot
@@ -300,7 +301,52 @@ int main(void)
 //		send_string = concat(send_string, "\r\n");
 
 		printf ("Send string: %s\n", send_string);
+		#ifdef LORAWAN
+		//Send string: mac tx uncnf 1 0167010e0273260c0368000402006e050200fa
+		//								060203f2078807fdd800bee10000c8
+		
+
 		lora_sendCommand(send_string);
+		#endif
+		
+		#ifdef NBIOT
+		//vezmu zacatek
+		//prilepim cayenne retezec
+		
+		
+		
+		//socket opening
+		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
+                wait(1);
+        //make string 
+        char nbiot_cmd[100] = "AT+NSOST=0,193.84.207.60,9999,";
+        char nbiot_data_length[10];
+        
+        //convert dta length number into string
+        sprintf (nbiot_data_length, "%d", size);
+        //concatenate this packet length at the end of string
+        strcat(nbiot_cmd, nbiot_data_length);
+        //separate by comma
+        strcat(nbiot_cmd, ',');
+        //add LPP encoded packet
+        strcat(nbiot_cmd, hex_string);
+        //add \r\n
+        strcat(nbiot_cmd, '\r');
+        strcat(nbiot_cmd, '\n');
+        
+        printf ("Send string: %s\n", nbiot_cmd);//send_string);
+        
+        //Sending datagram
+        while (nbiot_sendCommand(nbiot_cmd, "OK\r\n", 4))   //sending "!!!LABKA->up-and-running!!!" string to specified port
+                wait(1);
+		//Closing socket     fixme: chtelo by to vychytat konkretni socket, pripadne to nejak jinak obechcat
+        while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK\r\n", 2))
+                wait(1);
+        
+
+		//nbiot_sendCommand(				char *phrase, char *check, int pocetentru);
+		#endif
+		
 		free(send_string);
 
 		printf ("Sending done\n");

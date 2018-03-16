@@ -78,18 +78,39 @@ void lora_sendCommand(char *phrase)
 	printf("\n");
 
 //	wait (1000);
-
+/*
 	do {
 		printf(".");
 		recieved_char = usart_recv (USART4);
 		printf("%04x", recieved_char);
 	} while (recieved_char != '\n');
-
+*/
 }
 
 
 
-int sendCommand(char *phrase, char *check, int pocetentru)
+
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 		NBIOT QUECTEL WIRELESS MODULE FUNCTIONS			*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
+
+
+void connect_nbiot(void)
+{
+	printf ("test_uvnitr\n");
+	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 1))
+	printf ("at+cfun\n");
+		wait(3.0);
+	while(nbiot_sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
+	printf ("at+cops\n");
+		wait(0.5);
+	while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) //timeout = number of tries	
+	printf ("at+cgatt?\n");
+		wait(0.5);
+}
+
+
+int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 {
 	char incomming[50] = {0};   //readed string
 	int i=0;                                              //iteracni promenna
@@ -116,22 +137,5 @@ int sendCommand(char *phrase, char *check, int pocetentru)
 		return 0;
 	}
 }
-
-
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
- * 		NBIOT QUECTEL WIRELESS MODULE FUNCTIONS			*
- * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-
-
-void connect_nbiot(void)
-{
-	while(sendCommand("AT+CFUN=1\r\n", "OK", 2))
-		wait(3.0);
-	while(sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
-		wait(0.5);
-	while( sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) //timeout = number of tries	
-		wait(0.5);
-}
-
 
 
