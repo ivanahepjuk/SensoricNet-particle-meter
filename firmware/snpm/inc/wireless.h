@@ -28,7 +28,9 @@
 
 void connect_lorawan(void);
 void lora_sendCommand(char *phrase);
-int sendCommand(char *phrase, char *check, int pocetentru);
+//int sendCommand(char *phrase, char *check, int pocetentru);
+
+int nbiot_sendCommand(char *phrase, char *check, int pocetentru);
 
 
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 

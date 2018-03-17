@@ -48,14 +48,14 @@ float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3);
 uint8_t spi_reaad8(uint32_t spi);
 void wait(uint32_t usec);
 
-void flash(uint8_t loop);
+void flash(uint8_t loop, uint32_t delay);
 
 void usart4_isr(void);
 
 
 ////////////////dronovo
 char* concat(const char *s1, const char *s2);
-unsigned char* string_to_hex(unsigned char *string, int len);
+char* string_to_hex(unsigned char *string, int len);
 
 
 

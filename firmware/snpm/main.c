@@ -38,23 +38,11 @@
 //#pragma GCC diagnostic ignored "-Wreturn-type"
 
 
-#define LORAWAN
-//#define NBIOT
-
-// set some constants, fixme
-#ifdef LORAWAN
-#define USART_BAUDRATE 57600
-#define LORA_USART (USART4)
-#endif
-
-#ifdef NBIOT
-#define USART_BAUDRATE 9600
-#endif
-
-
+//#define LORAWAN
+#define NBIOT
 
 /* For semihosting on newlib */
-extern void initialise_monitor_handles(void);
+//extern void initialise_monitor_handles(void);
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for bme280: //
@@ -106,40 +94,6 @@ flash(7);
 }
 */
 
-
-char* concat(const char *s1, const char *s2)
-{
-    char *result = malloc(strlen(s1)+strlen(s2)+1);
-    strcpy(result, s1);
-    strcat(result, s2);
-    return result;
-}
-
-
-unsigned char* string_to_hex(unsigned char *string, int len)
-{
-	unsigned char *result = malloc(len*2+1);
-	void* pointer = result;
-//	char hex[3];
-	int x;
-
-	for (x = 0; x < len; ++x) {
-		sprintf(pointer, "%02x", *string);
-
-//		sprintf(hex, "%02x", *string);
-//		printf("hex: %s ", hex);
-
-		string++;
-		pointer++;
-		pointer++;
-	}
-
-//	printf("done\n");
-
-	return result;
-}
-
-
 /********************************************************************************************
  *
  * MAIN
@@ -148,61 +102,48 @@ unsigned char* string_to_hex(unsigned char *string, int len)
 
 int main(void)
 {
-
-	/*
-    //interrupts:
-	//uart_enable_interrupts(USART4, UART_INT_RX);
-	// Unmask receive interrupt
-	uart_enable_rx_interrupt(UART4);
-	// Make sure the interrupt is routed through the NVIC
-	nvic_enable_irq(NVIC_UART4_RX);
-	*/
 	
 	clock_setup();
 	gpio_setup();
-	usart_setup();	// setup lora/nbiot usart
+	usart_setup();
 	i2c_setup();
 	spi_setup();
 	init_BME280();
 
 // semihosting - stdio po debug konzoli, inicializace
+/*
 #if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
 	initialise_monitor_handles();
 	setbuf(stdout, NULL);
 #endif
+*/
+	flash(3, 50000);
 
-	flash(10);
-
-	printf ("Entering main loop.\n");
+	usartSend("Entering main loop.\r\n\r\n", 2);
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
-	int w, size;
-/*
+	int size;
+
 	//gps/lora module HW reset
 	gpio_clear(GPIOA, GPIO9);
-	wait(SEC*0.2);
+	wait(SEC*0.5);
 	gpio_set(GPIOA, GPIO9);
-*/
+
 #ifdef NBIOT
-	printf ("Quectel reset.\n");
-
+	usartSend("Quectel reset.\r\n", 2);
 	wait(SEC*5);//until quectel wakes up
-	//wait(1);//until quectel wakes up
 #endif
-
-	printf ("Debug spike.\n");
-
+/*
 	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
+	usartSend("Debug spike.\r\n", 2);
 	gpio_clear(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 	gpio_set(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
-
-	printf ("Wait.\n");
-	wait(SEC*5);
-
-	printf ("Network connect.\n");
+*/
+	//printf ("Wait...\r\n", 2);
+	//wait(SEC*5);
 
 	//Connect to network
 #ifdef LORAWAN
@@ -210,29 +151,19 @@ int main(void)
 #endif
 
 #ifdef NBIOT
-printf ("test\n");
 	connect_nbiot();
+	usartSend("Nb-IOT network connected.\r\n", 2);
 #endif
 
-	printf ("Network connect done.\n");
-
-	printf ("Enabling particlemeter.\n");
 	particlemeter_ON();
-
-	printf ("Setting particlemeter fan.\n");
 	particlemeter_set_fan(FAN_SPEED);
+	usartSend("Particlemeter set.\r\n", 2);
 
-	flash(3);
+	flash(10, 50000);
 
-	printf ("Settings done.\n");
-	
 	while (1){
-
-		printf ("New loop\n");
-
-		printf ("Reading pm values\n");
+		usartSend("New loop\r\n", 2);
 		read_pm_values();
-		printf ("Reading BME280 values\n");
 		data_readout_BME280(burst_read_data);
 
 		float hum = hum_BME280();
@@ -242,39 +173,7 @@ printf ("test\n");
 		float pm2_5 = 2.5;//particlemeter_pm2_5();
 		float pm10 = 10.10;//particlemeter_pm10();
 
-
-		//send nbiot
-		//char str_data[210];
-		//int i = 0;
-
-		//char str1[]="AT+NSOST=0,89.103.47.53,8089,";
-		//char str2[]="hodnoty,box=Adrspach hum=";
-		//char str3[]=",temp=";
-		//char str4[]=",pres=";
-		//char str5[]=",pm1=";
-		//char str6[]=",pm25=";
-		//char str7[]=",pm10=";
-
-		//vezme retezec ze str2, konvertuje na hexadecimal a pricte k retezci str_data
-		/*
-		while(str2 != '\0'){
-		  charToHex(str2[i], hex_string);
-		  strcat(str_data, hex_string);
-		  i++;
-		}
-		
-		//vynuluje iteracni promennou
-		i=0;
-		*/
-		
-		flash(1);
-		
-		// mame tyto senzory
-		// teplota, tlak, vlhkost, pm1, pm2_5, pm10, gps
-
-		printf ("Data: %f, %f, %f, %f, %f, %f\n", temp, press, hum, pm1, pm2_5, pm10);
-
-		printf ("Encode values\n");
+		usartSend("Encode values\r\n", 2);
 
 		// init cayenne lpp
 		lpp = CayenneLPP__create(100);
@@ -293,27 +192,24 @@ printf ("test\n");
 		// Send it off
 		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
 
-		printf ("Encoded data size: %i\n", size);
+		//printf("Encoded data size: %i\n", size);
 
-		unsigned char* hex_string = string_to_hex(buf, size);
-		unsigned char* send_string = concat("mac tx uncnf 1 ", hex_string);
+		char* hex_string = string_to_hex(buf, size);
+		char* send_string = concat("mac tx uncnf 1 ", hex_string);
 		free(hex_string);
 //		send_string = concat(send_string, "\r\n");
 
-		printf ("Send string: %s\n", send_string);
+		//printf("Send string: %s\n", send_string);
 		#ifdef LORAWAN
 		//Send string: mac tx uncnf 1 0167010e0273260c0368000402006e050200fa
 		//								060203f2078807fdd800bee10000c8
 		
 
 		lora_sendCommand(send_string);
+		//usartSend(send_string, 2);
 		#endif
 		
 		#ifdef NBIOT
-		//vezmu zacatek
-		//prilepim cayenne retezec
-		
-		
 		
 		//socket opening
 		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
@@ -321,6 +217,7 @@ printf ("test\n");
         //make string 
         char nbiot_cmd[100] = "AT+NSOST=0,193.84.207.60,9999,";
         char nbiot_data_length[10];
+        char ending[] = "\r\n";
         
         //convert dta length number into string
         sprintf (nbiot_data_length, "%d", size);
@@ -331,28 +228,25 @@ printf ("test\n");
         //add LPP encoded packet
         strcat(nbiot_cmd, hex_string);
         //add \r\n
-        strcat(nbiot_cmd, '\r');
-        strcat(nbiot_cmd, '\n');
+        strcat(nbiot_cmd, ending);
         
-        printf ("Send string: %s\n", nbiot_cmd);//send_string);
-        
+        usartSend(nbiot_cmd, 2);//send_string);
+        usartSend("\r\n", 2);
         //Sending datagram
-        while (nbiot_sendCommand(nbiot_cmd, "OK\r\n", 4))   //sending "!!!LABKA->up-and-running!!!" string to specified port
-                wait(1);
+ //       while (nbiot_sendCommand(nbiot_cmd, "OK\r\n", 4))   //sending "!!!LABKA->up-and-running!!!" string to specified port
+ //               wait(1);
 		//Closing socket     fixme: chtelo by to vychytat konkretni socket, pripadne to nejak jinak obechcat
-        while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK\r\n", 2))
+        while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK\r\n", 2)){;}
                 wait(1);
-        
-
-		//nbiot_sendCommand(				char *phrase, char *check, int pocetentru);
+       
 		#endif
 		
 		free(send_string);
 
-		printf ("Sending done\n");
+		usartSend("Sending done\r\n", 2);
 		free(lpp);
 
-		printf ("Wait...\n");
+		usartSend("Wait at the end...\r\n", 2);
 
 		wait(SEC *1);
 		

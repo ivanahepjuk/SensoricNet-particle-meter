@@ -1,5 +1,7 @@
 struct CayenneLPP; // forward declared for encapsulation
 
+
+void CayenneLPP__init(struct CayenneLPP* self, unsigned char size);
 struct CayenneLPP* CayenneLPP__create(unsigned char size);
 void CayenneLPP__destroy(struct CayenneLPP* self);
 void CayenneLPP__reset(struct CayenneLPP* self);

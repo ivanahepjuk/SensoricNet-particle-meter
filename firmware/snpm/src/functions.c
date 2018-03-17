@@ -20,9 +20,21 @@
 #include "functions.h"
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
+#include <stdlib.h>
 
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
+// set some constants, fixme
+/*
+#ifdef LORAWAN
+#define USART_BAUDRATE 57600
+#define LORA_USART (USART4)
+#endif
+
+#ifdef NBIOT
+#define USART_BAUDRATE 9600
+#endif
+*/
 
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
@@ -40,14 +52,14 @@ float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 	return u.val;
 }
 
-void flash(uint8_t loop)
+void flash(uint8_t loop, uint32_t delay)
 {
 	for (uint8_t i = 0; i < loop; i++)
 	{
 		gpio_set(GPIOA, GPIO11); 
-		wait(100000);
+		wait(delay);
 		gpio_clear(GPIOA, GPIO11); 
-		wait(100000);
+		wait(delay);
 	}
 }
 
@@ -223,11 +235,12 @@ void usart_setup(void)
 
 	// setup quectel(gsm)/lora USART4 parameters
 	// fixme - vymyslet predavani parametru baudrate
-	usart_set_baudrate(USART4, 57600);  //lora 57600
+	usart_set_baudrate(USART4, 9600);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
-	usart_set_mode(USART4, USART_MODE_TX_RX);
+	usart_set_mode(USART4, USART_MODE_TX);
+	usart_set_mode(USART4, USART_MODE_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
 	// enable the USART4
 	usart_enable(USART4);
@@ -260,12 +273,46 @@ void gpio_setup(void)
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
     
-    // USART4 GPIO pins 
-    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO11);//rx
-
-	// USART4 setup pins as alternate function AF0
+    	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
+    
+    // USART4 GPIO pins 
+    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
+
+
 }
 
+
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+
+char* string_to_hex(unsigned char *string, int len)
+{
+	unsigned char *result = malloc(len*2+1);
+	void* pointer = result;
+//	char hex[3];
+	int x;
+
+	for (x = 0; x < len; ++x) {
+		sprintf(pointer, "%02x", *string);
+
+//		sprintf(hex, "%02x", *string);
+//		printf("hex: %s ", hex);
+
+		string++;
+		pointer++;
+		pointer++;
+	}
+
+//	printf("done\n");
+
+	return result;
+}
