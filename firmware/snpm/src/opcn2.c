@@ -74,15 +74,16 @@ void particlemeter_set_fan(uint8_t speed)
 	pm_SS_off();
 }
 
+
 void read_pm_values(void)
 {
 	
 	pm_SS_on();
-	while(pm_set_command(0x32, 14000) == 0xf3)       {;}
+	//while(pm_set_command(0x32, 14000) == 0xf3)       {;}
 	pm_set_command(0x32, 14000);
-	wait(14000);
-	//pm_SS_toggle(20000);
-	//wait(10000);
+	//wait(14000);
+	pm_SS_toggle(20000);
+	wait(10000);
 	
 	for(uint8_t i = 0; i<12; i++)
 	{
