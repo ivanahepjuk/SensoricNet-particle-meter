@@ -235,13 +235,23 @@ void usart_setup(void)
 
 	// setup quectel(gsm)/lora USART4 parameters
 	// fixme - vymyslet predavani parametru baudrate
+	
 	usart_set_baudrate(USART4, 9600);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
-	usart_set_mode(USART4, USART_MODE_TX);
-	usart_set_mode(USART4, USART_MODE_RX);
+	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
+/*	*/
+	USART_CR1(USART4) |= 0b0000000000000000000000101100;
+	//USART_BRR(USART4) |= 500;  //oversampling
+	USART_CR1(USART4) |= 0b1;    //enable that fucker
+	/* (1) oversampling by 16, 9600 baud */
+/* (2) 8 data bit, 1 start bit, 1 stop bit, no parity, reception mode */
+//USART1->BRR = 480000 / 96; /* (1) */
+//USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE; /* (2) */
+	
+	
 	// enable the USART4
 	usart_enable(USART4);
 
@@ -279,7 +289,7 @@ void gpio_setup(void)
     
     // USART4 GPIO pins 
     gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
 
 
 }
@@ -296,7 +306,7 @@ char* concat(const char *s1, const char *s2)
 
 char* string_to_hex(unsigned char *string, int len)
 {
-	unsigned char *result = malloc(len*2+1);
+	char *result = malloc(len*2+1);
 	void* pointer = result;
 //	char hex[3];
 	int x;

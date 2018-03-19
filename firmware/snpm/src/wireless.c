@@ -20,17 +20,11 @@
 
 #include "functions.h"
 #include "wireless.h"
-
+#include <libopencm3/stm32/usart.h>
 
 uint8_t usart_read(void);
 
-uint8_t usart_read(void)
-{
-	 while ((USART4_ISR & USART_ISR_RXNE) == 0){;}
-		
-		return (unsigned char)(USART_RDR(USART4) & USART_RDR_MASK);
-		
-}
+
 /**********************************************************
  * LORWAN
  **********************************************************/
@@ -106,17 +100,17 @@ void lora_sendCommand(char *phrase)
 
 void connect_nbiot(void)
 {
-	printf ("test_uvnitr\n");
-	usartSend("test uvnitr\r\n", 2);
-	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 1))
+	flash(5, 50000);
+	//usartSend("test uvnitr\r\n", 2);
+	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 2))
 	//usartSend("at+cfun\r\n", 2);
-		wait(3.0);
+		wait(SEC*3);
 	while(nbiot_sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
-	usartSend("at+cops\r\n", 2);
-		wait(0.5);
+	//usartSend("at+cops\r\n", 2);
+		wait(SEC*3);
 	while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) //timeout = number of tries	
-	usartSend("at+cgatt?\r\n", 2);
-		wait(0.5);
+	//usartSend("at+cgatt?\r\n", 2);
+		wait(SEC*3);
 }
 
 
@@ -129,28 +123,24 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	//posila na linku
 	while(phrase[i] != '\0'){  //posle string
 		usart_send_blocking(USART4, phrase[i]);
+		//sending stuff to usart2 debug port
 		usart_send_blocking(USART2, phrase[i]);
 		i++;
 	}
 	i=0;
-	
-	
-
+	//interrupt status register poreseny
+	USART_ICR(USART4) |= 0b00000000000010100011101110101111;
 	//cte z linky dokud neprijme tolik entru kolik ceka
 	while(enter < pocetentru){      
-		//usartSend("tady", 2);                   
-		incomming[i] = usart_recv_blocking(USART4);
+
+		incomming[i] = usart_recv_blocking(USART4); 
+		//sending stuff to usart2 debug port
 		usart_send_blocking(USART2, incomming[i]);
         	if (incomming[i] == '\n')
 			enter++;
 		i++;
 	}
-	usartSend("odeslano: ", 2);
-	usartSend(phrase, 2);
 
-	usartSend("prijato: ", 2);
-	usartSend(incomming, 2);
-	usartSend("\r\n", 2); 
 	
 	if ( (strstr(incomming, check)) == NULL) {
 		return 1;
