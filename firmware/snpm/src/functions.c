@@ -307,6 +307,8 @@ char* concat(const char *s1, const char *s2)
 char* string_to_hex(unsigned char *string, int len)
 {
 	char *result = malloc(len*2+1);
+	if (result == NULL)
+	usartSend("memoryleak\r\n", 2);
 	void* pointer = result;
 //	char hex[3];
 	int x;

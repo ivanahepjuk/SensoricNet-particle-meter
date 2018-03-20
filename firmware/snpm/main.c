@@ -40,6 +40,9 @@
 
 //#define LORAWAN
 #define NBIOT
+//debug
+int cykly = 0;
+char cykly_str[10];
 
 /* For semihosting on newlib */
 //extern void initialise_monitor_handles(void);
@@ -258,13 +261,15 @@ int main(void)
 		#endif
 		free(hex_string);
 		free(send_string);
-
-		usartSend("Sending done\r\n", 2);
 		free(lpp);
 
-		usartSend("Wait at the end...\r\n", 2);
+usartSend("Loop done: ", 2);
+sprintf(cykly_str, "%d", cykly);
+usartSend(cykly_str, 2);
+usartSend("\r\n", 2);
+cykly++;
 
-		wait(SEC *7);
+		//wait(SEC *7);
 		
 	}
 	return 0;
