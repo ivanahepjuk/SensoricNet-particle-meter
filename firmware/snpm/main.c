@@ -163,6 +163,9 @@ int main(void)
 	usartSend("Particlemeter set.\r\n", 2);
 
 	flash(10, 50000);
+	
+	// init cayenne lpp
+	lpp = CayenneLPP__create(200);
 
 	while (1){
 		usartSend("New loop\r\n", 2);
@@ -178,11 +181,11 @@ int main(void)
 
 		usartSend("Encode values\r\n", 2);
 		char debug_data_string[150] = {0};
-		sprintf(debug_data_string, "hum: %f.2 temp: %f.2 press: %f.2 pm1: %f.2 pm2_5: %f.2 pm10: %f.2\r\n", hum, temp, press, pm1, pm2_5, pm10);
+		sprintf(debug_data_string, "hum: %.2f temp: %.2f press: %.2f pm1: %.2f pm2_5: %.2f pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
 		usartSend(debug_data_string, 2);
-		// init cayenne lpp
-		lpp = CayenneLPP__create(100);
-
+		
+		
+		
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
 		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
@@ -199,8 +202,8 @@ int main(void)
 
 		//printf("Encoded data size: %i\n", size);
 
-		char* hex_string  = string_to_hex(buf, size);
-		char* send_string;
+		char* hex_string = string_to_hex(buf, size);
+		//char* send_string;
 		
 		
 		#ifdef LORAWAN
@@ -208,60 +211,56 @@ int main(void)
 			send_string = concat("mac tx uncnf 1 ", hex_string);
 			//send_string = concat(send_string, "\r\n");
 			//printf("Send string: %s\n", send_string);
-				//ten string vypada asi takhle:
-				//Send string: mac tx uncnf 1 0167010e0273260c0368000402006e050200fa
-				//								060203f2078807fdd800bee10000c8
-			
 
 			lora_sendCommand(send_string);
 			//usartSend(send_string, 2);
 		#endif
 		
 		#ifdef NBIOT
-		
-		/*
-		
-		Jak nejlepe handlit socket? Otevrit ho ve funkci ktera ho pripojuje a pak ho nechat otevreny, nebo
-		pred odeslanim otevrit, po odeslani zavrit?
-		
-		*/
-							//socket opening
-			while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
-					wait(SEC*1);	
+			
+			char my_hex_string[200] = {0};
+			int j = 0;
+			char znak[3];
+			
+			while(j<size){
+				charToHex(buf[j], znak);
+				strcat(my_hex_string, znak);
+				j++;
+			}
 		
 			//nutne stringy
 			char nbiot_data_length[10];
-			char ending[] = "\r\n";
-			char comma[] = ",";
+			//char ending[] = "\r\n";
+			//char comma[] = ",";
+			char posilam[200] = {0};
 			
-			//convert dta length number into string
+			//convert data length number into string
 			sprintf (nbiot_data_length, "%d", size+(11));
-///			//socket opening
-///			while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
-///					wait(SEC*1);		
-			//prepare string 
-			send_string = concat("AT+NSOST=0,193.84.207.60,9999,", nbiot_data_length); 
-			send_string = concat(send_string, comma);
-			send_string = concat(send_string, "6e62696f742d3030303100");//nbiot-0001'NULL'
-			send_string = concat(send_string, hex_string);
-			send_string = concat(send_string, ending);
 			
-			/*
-			usartSend("debug", 2);//send_string);
-			usartSend(send_string, 2);//send_string);
-			usartSend("debug", 2);//send_string);
-			*/
+			//construct AT string
+			strcat(posilam, "AT+NSOST=0,193.84.207.60,9999,");
+			strcat(posilam, nbiot_data_length);
+			strcat(posilam, ",");
+			strcat(posilam, "6e62696f742d3030303100");  //nbiot-0001
+			strcat(posilam, my_hex_string);
+			strcat(posilam, "\r\n");
+
+			//socket opening
+			while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
+					wait(SEC*1);
 			//Sending datagram
-			while (nbiot_sendCommand(send_string, "OK", 4))   //sending
+			while (nbiot_sendCommand(posilam, "OK", 4))   
 					wait(SEC*3);
 			//Closing socket
-			while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK\r\n", 2)){;}
+			while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2)){;}
 					wait(SEC*1);
 
 		#endif
 		free(hex_string);
-		free(send_string);
-		free(lpp);
+		//free(send_string);
+		
+		CayenneLPP__reset(lpp);
+		//lpp->cursor = NULL;
 
 usartSend("Loop done: ", 2);
 sprintf(cykly_str, "%d", cykly);
@@ -269,7 +268,7 @@ usartSend(cykly_str, 2);
 usartSend("\r\n", 2);
 cykly++;
 
-		//wait(SEC *7);
+		//wait(SEC *10);
 		
 	}
 	return 0;

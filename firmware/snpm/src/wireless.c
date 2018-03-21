@@ -23,7 +23,7 @@
 #include <libopencm3/stm32/usart.h>
 
 uint8_t usart_read(void);
-
+#define DEBUG
 
 /**********************************************************
  * LORWAN
@@ -123,8 +123,10 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	//posila na linku
 	while(phrase[i] != '\0'){  //posle string
 		usart_send_blocking(USART4, phrase[i]);
+	#ifdef DEBUG
 		//sending stuff to usart2 debug port
 		usart_send_blocking(USART2, phrase[i]);
+	#endif
 		i++;
 	}
 	i=0;
@@ -133,9 +135,11 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	//cte z linky dokud neprijme tolik entru kolik ceka
 	while(enter < pocetentru){      
 
-		incomming[i] = usart_recv_blocking(USART4); 
+		incomming[i] = usart_recv_blocking(USART4);
+		#ifdef DEBUG 
 		//sending stuff to usart2 debug port
 		usart_send_blocking(USART2, incomming[i]);
+		#endif
         	if (incomming[i] == '\n')
 			enter++;
 		i++;

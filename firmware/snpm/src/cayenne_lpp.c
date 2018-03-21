@@ -13,12 +13,7 @@
 #include <string.h>
 #include "cayenne_lpp.h"
 
-struct CayenneLPP
-{
-	unsigned char *buffer;
-	unsigned char maxsize;
-	unsigned char cursor;
-};
+
 
 void CayenneLPP__init(struct CayenneLPP* self, unsigned char size)
 {
