@@ -28,6 +28,7 @@
 #include "inc/opcn2.h"
 #include "inc/wireless.h"
 #include "inc/cayenne_lpp.h"
+#include "main.h"
 
 
 // Sample pragmas to cope with warnings. Please note the related line at
@@ -38,8 +39,7 @@
 //#pragma GCC diagnostic ignored "-Wreturn-type"
 
 
-//#define LORAWAN
-#define NBIOT
+
 //debug
 int cykly = 0;
 char cykly_str[10];
@@ -145,11 +145,11 @@ int main(void)
 	gpio_set(GPIOA, GPIO8); //SS Log 0
 	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
 */
-	//printf ("Wait...\r\n", 2);
-	//wait(SEC*5);
 
 	//Connect to network
 #ifdef LORAWAN
+	usartSend("rn2483 reset.\r\n", 2);
+	wait(SEC*3);//until rn2483 wakes up
 	connect_lorawan();
 #endif
 
@@ -162,7 +162,7 @@ int main(void)
 	particlemeter_set_fan(FAN_SPEED);
 	usartSend("Particlemeter set.\r\n", 2);
 
-	flash(10, 50000);
+	flash(3, 50000);
 	
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
@@ -202,73 +202,69 @@ int main(void)
 
 		//printf("Encoded data size: %i\n", size);
 
-		char* hex_string = string_to_hex(buf, size);
-		//char* send_string;
+		char hex_string[200] = {0};		//encoded string here
+		char send_string[200] = {0};			//string to send here
 		
+		//ascii-hex encoding is happening here:
+		int j = 0;
+		char znak[3];
 		
-		#ifdef LORAWAN
-			
-			send_string = concat("mac tx uncnf 1 ", hex_string);
-			//send_string = concat(send_string, "\r\n");
-			//printf("Send string: %s\n", send_string);
+		while(j<size){
+			charToHex(buf[j], znak);
+			strcat(hex_string, znak);
+			j++;
+		}
+		
 
-			lora_sendCommand(send_string);
-			//usartSend(send_string, 2);
+		#ifdef LORAWAN
+			//sestaveni stringu pro LORAWAN
+			strcat(send_string, "mac tx uncnf 1 ");
+			strcat(send_string, hex_string);
+			strcat(send_string, "\r\n");
+			
+			//odeslani stringu, checkuje "ok", pokud nedostane ok tak to zkusi za chvili znova
+			while(lora_sendCommand(send_string, "ok", 1)){
+				wait(SEC*3);
+			}
+			
 		#endif
 		
 		#ifdef NBIOT
-			
-			char my_hex_string[200] = {0};
-			int j = 0;
-			char znak[3];
-			
-			while(j<size){
-				charToHex(buf[j], znak);
-				strcat(my_hex_string, znak);
-				j++;
-			}
-		
-			//nutne stringy
+			//tady se konvertuje na string a ulozi delka payloadu (int)
 			char nbiot_data_length[10];
-			//char ending[] = "\r\n";
-			//char comma[] = ",";
-			char posilam[200] = {0};
-			
-			//convert data length number into string
 			sprintf (nbiot_data_length, "%d", size+(11));
 			
-			//construct AT string
-			strcat(posilam, "AT+NSOST=0,193.84.207.60,9999,");
-			strcat(posilam, nbiot_data_length);
-			strcat(posilam, ",");
-			strcat(posilam, "6e62696f742d3030303100");  //nbiot-0001
-			strcat(posilam, my_hex_string);
-			strcat(posilam, "\r\n");
+			//sestaveni stringu pro Nb-IOT
+			strcat(send_string, "AT+NSOST=0,193.84.207.60,9999,");
+			strcat(send_string, nbiot_data_length);
+			strcat(send_string, ",");
+			strcat(send_string, "6e62696f742d3030303100");  //nbiot-0001
+			strcat(send_string, hex_string);
+			strcat(send_string, "\r\n");
 
 			//socket opening
 			while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
 					wait(SEC*1);
 			//Sending datagram
-			while (nbiot_sendCommand(posilam, "OK", 4))   
+			while (nbiot_sendCommand(send_string, "OK", 4))   
 					wait(SEC*3);
 			//Closing socket
 			while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2)){;}
 					wait(SEC*1);
 
 		#endif
-		free(hex_string);
-		//free(send_string);
 		
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
-
-usartSend("Loop done: ", 2);
-sprintf(cykly_str, "%d", cykly);
-usartSend(cykly_str, 2);
-usartSend("\r\n", 2);
-cykly++;
-
-		//wait(SEC *10);
+		
+		//DEBUG CODE posila cislo loop smycky
+		usartSend("Loop done: ", 2);
+		sprintf(cykly_str, "%d", cykly);
+		usartSend(cykly_str, 2);
+		usartSend("\r\n", 2);
+		cykly++;
+		
+		wait(SEC *WAIT);
 		
 	}
 	return 0;

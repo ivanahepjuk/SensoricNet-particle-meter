@@ -21,20 +21,12 @@
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
 #include <stdlib.h>
+#include "../main.h"
 
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
 // set some constants, fixme
-/*
-#ifdef LORAWAN
-#define USART_BAUDRATE 57600
-#define LORA_USART (USART4)
-#endif
 
-#ifdef NBIOT
-#define USART_BAUDRATE 9600
-#endif
-*/
 
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
@@ -224,7 +216,7 @@ void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
 	// fixme - vymyslet predavani parametru baudrate
-	usart_set_baudrate(USART2, 9600);
+	usart_set_baudrate(USART2, 57600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
@@ -236,7 +228,7 @@ void usart_setup(void)
 	// setup quectel(gsm)/lora USART4 parameters
 	// fixme - vymyslet predavani parametru baudrate
 	
-	usart_set_baudrate(USART4, 9600);  //lora 57600 quectel 9600
+	usart_set_baudrate(USART4, USART_BAUDRATE);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
@@ -289,7 +281,7 @@ void gpio_setup(void)
     
     // USART4 GPIO pins 
     gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
 
 
 }
