@@ -30,6 +30,8 @@
 #define EEPROM 	0x51
 #define SEC		(1000000)
 
+//eeprom
+int eeprom_write(char *dev_id);
 
 //pomocne
 void charToHex(char c, char hex[3]);

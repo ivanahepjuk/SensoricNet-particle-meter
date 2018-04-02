@@ -112,6 +112,11 @@ int main(void)
 	i2c_setup();
 	spi_setup();
 	init_BME280();
+	
+	while(eprom_write("nbiot-0001")){
+		flash(15, 100000);
+		wait(SEC*5)
+	}
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
