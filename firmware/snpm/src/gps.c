@@ -1,3 +1,5 @@
+
+
 /*
  * This file is part of the SenoricNet project, https://sensoricnet.cz
  *
@@ -17,46 +19,14 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
-
-#include <libopencm3/stm32/gpio.h>
+#include "functions.h"
+#include "wireless.h"
 #include <libopencm3/stm32/usart.h>
-#include <libopencm3/stm32/rcc.h>
-#include <string.h>
-#include <stdio.h>
-//#include <stdint.h>
-	
+#include "../main.h"
 
-#define SEC		(1000000)
-
-//eeprom
-int eeprom_write(char *dev_id);
-
-//pomocne
-void charToHex(char c, char hex[3]);
-char hexDigit(unsigned n);
-
-//posle string na usart c. 1,2,3,4
-void usartSend(char *phrase, uint8_t usart);
-void clock_setup(void);
-void i2c_setup(void);
-void usart_setup(void);
-void gpio_setup(void);
-void spi_setup(void);
-
-float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3);
-
-uint8_t spi_reaad8(uint32_t spi);
-void wait(uint32_t usec);
-
-void flash(uint8_t loop, uint32_t delay);
-
-void usart4_isr(void);
+//preruseni na usart2, pokazde kdyz neco prijde, skoci tady a ulozi global promennou.
 
 
-////////////////dronovo
-char* concat(const char *s1, const char *s2);
-char* string_to_hex(unsigned char *string, int len);
 
-#endif
+
+

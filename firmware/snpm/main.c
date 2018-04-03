@@ -17,20 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#include <libopencm3/stm32/spi.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-//#include <libopencm3/stm32/nvic.h>
-#include "inc/functions.h"
-#include "inc/bme280.h"
-#include "inc/opcn2.h"
-#include "inc/wireless.h"
-#include "inc/cayenne_lpp.h"
 #include "main.h"
-#include "m24c04.h"
-
 
 // Sample pragmas to cope with warnings. Please note the related line at
 // the end of this function, used to pop the compiler diagnostics status.
@@ -38,8 +25,6 @@
 //#pragma GCC diagnostic ignored "-Wunused-parameter"
 //#pragma GCC diagnostic ignored "-Wmissing-declarations"
 //#pragma GCC diagnostic ignored "-Wreturn-type"
-
-
 
 //debug
 int cykly = 0;

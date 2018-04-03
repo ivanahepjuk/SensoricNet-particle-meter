@@ -1,6 +1,18 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <libopencm3/stm32/spi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//#include <libopencm3/stm32/nvic.h>
+#include "inc/functions.h"
+#include "inc/bme280.h"
+#include "inc/opcn2.h"
+#include "inc/wireless.h"
+#include "inc/cayenne_lpp.h"
+#include "m24c04.h"
+
 //how long it waits at the end of each loop?
 #define WAIT 10
 
