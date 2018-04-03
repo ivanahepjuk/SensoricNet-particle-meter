@@ -320,31 +320,5 @@ char* string_to_hex(unsigned char *string, int len)
 }
 
 
-int eeprom_write(char *dev_id)
-{
-
-	uint8_t data[20] = {0};
-	
-
-	
-	//i2c setting
-	
-	//i2c write
-		for(int i=0; i<10; i++){
-		
-		i2c_transfer7(I2C2, EEPROM, (uint8_t)dev_id, 10, data, 0);
-	}
-	
-	//i2c read
-	
-	
-	
-	//success
-	return 0
-	else 
-	//again
-	return 1
-}
-
 
 

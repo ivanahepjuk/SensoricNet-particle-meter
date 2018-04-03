@@ -27,7 +27,7 @@
 #include <stdio.h>
 //#include <stdint.h>
 	
-#define EEPROM 	0x51
+
 #define SEC		(1000000)
 
 //eeprom

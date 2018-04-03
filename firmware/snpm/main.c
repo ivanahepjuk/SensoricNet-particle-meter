@@ -29,6 +29,7 @@
 #include "inc/wireless.h"
 #include "inc/cayenne_lpp.h"
 #include "main.h"
+#include "m24c04.h"
 
 
 // Sample pragmas to cope with warnings. Please note the related line at
@@ -113,10 +114,9 @@ int main(void)
 	spi_setup();
 	init_BME280();
 	
-	while(eprom_write("nbiot-0001")){
-		flash(15, 100000);
-		wait(SEC*5)
-	}
+
+eeprom_write_id("nbiot=0001");
+eeprom_read_id();
 
 // semihosting - stdio po debug konzoli, inicializace
 /*

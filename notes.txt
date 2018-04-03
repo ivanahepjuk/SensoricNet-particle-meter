@@ -68,4 +68,13 @@ GDB (GNU debuger)
   * https://mcuoneclipse.com/2015/03/25/command-line-programming-and-debugging-with-gdb/
   * http://pandafruits.com/stm32_primer/stm32_primer_minimal.php
 
-  
+////////////////////////////////
+ukoly
+
+Vyresit ID jednotlivych senzoru, tzn mozna HWID? Mozna funkci na zapis ID?
+
+Benchmark gps?
+
+Posilat vic zajimavych dat z quectelu. Posilat jako string, nevymyslet picoviny, easy to poslat.
+
+Preruseni na usart, vyzkouset ale si neni jak? Jo je, ale jen pri up-linku.
