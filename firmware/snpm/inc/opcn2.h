@@ -29,7 +29,7 @@
 
 #define DELAY				0.01
 #define DELAY_1				2
-#define FAN_SPEED			255
+#define FAN_SPEED			140
 
 
 

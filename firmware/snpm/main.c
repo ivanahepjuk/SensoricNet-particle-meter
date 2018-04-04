@@ -54,6 +54,10 @@ unsigned char dig_H1, dig_H3;
 int16_t dig_H2, dig_H4, dig_H5;
 signed char dig_H6;
 
+/////////
+char ID[11];
+char id_decoded[23]={0};
+
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for OPC-N2: //
 /////////////////////////////////////////////////////////////
@@ -97,11 +101,16 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
+
+	//   !!!   Uncomment this only if you know what you are mdoing,   
+	//   !!!!  This is used when deploying new devices   !!!!
+	//eeprom_write_id("nbiot-0001");
+
+	//reads ID from eeprom
+	eeprom_read_id();
+
 	init_BME280();
 	
-
-eeprom_write_id("nbiot=0001");
-eeprom_read_id();
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
@@ -112,7 +121,7 @@ eeprom_read_id();
 */
 	flash(1, 100000);
 
-	usartSend("Entering main loop.\r\n\r\n", 2);
+	
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
@@ -228,7 +237,23 @@ eeprom_read_id();
 			strcat(send_string, "AT+NSOST=0,193.84.207.60,9999,");
 			strcat(send_string, nbiot_data_length);
 			strcat(send_string, ",");
-			strcat(send_string, "6e62696f742d3030303100");  //nbiot-0001
+			
+			////experimental, eeprom string decoding
+			j=0;
+			while(j<10){
+			charToHex(ID[j], znak);
+			strcat(id_decoded, znak);
+			j++;
+			}
+			id_decoded[20] = 48;
+			id_decoded[21] = 48;
+			id_decoded[22] = NULL;
+			
+			
+			usartSend(id_decoded, 2);
+			
+			strcat(send_string, id_decoded);  //nbiot-0001
+			//strcat(send_string, "00");  //nbiot-0001
 			strcat(send_string, hex_string);
 			strcat(send_string, "\r\n");
 
@@ -254,8 +279,9 @@ eeprom_read_id();
 		usartSend("\r\n", 2);
 		cykly++;
 		
-		wait(SEC *WAIT);
-		
+		flash(3, 100000);
+
+		wait(SEC *WAIT);		
 	}
 	return 0;
 }

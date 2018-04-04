@@ -56,12 +56,16 @@ void pm_SS_toggle(uint32_t delay)
 void particlemeter_ON(void)
 {
 	pm_SS_on();
-	while(pm_set_command(0x03, 14000) != 0xF3){;}
+	while(pm_set_command(0x03, 14000) != 0xF3){
 	wait(14000);
-	while( pm_set_command(0x00, 14000) != 0x03){;}
+	}
+	while( pm_set_command(0x00, 14000) != 0x03){
+		wait(14000);
+	}
 	pm_SS_off();
 	
 }
+
 
 void particlemeter_set_fan(uint8_t speed)
 {

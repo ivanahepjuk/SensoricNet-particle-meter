@@ -22,9 +22,9 @@
 
 #include <stdint.h>
 
-#define EEPROM 	0b10100000
+#define EEPROM 0b1010000
 
-int eeprom_write_id(uint8_t *dev_id);
+void eeprom_write_id(char *dev_id);
 void eeprom_read_id(void);
 
 

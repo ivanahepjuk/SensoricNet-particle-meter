@@ -113,7 +113,7 @@ void connect_lorawan(void)
 		wait(SEC*3);
 	}
 	//set device EUI
-	while(lora_sendCommand("mac set deveui 0004A30B00222137\r\n", "ok", 1)){
+	while(lora_sendCommand("mac set deveui 0004A30B0021E7B7\r\n", "ok", 1)){  //prvnipolkusnymodul 0004A30B00222137
 		wait(SEC*3);
 	}
 	//set application EUI

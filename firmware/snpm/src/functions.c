@@ -101,7 +101,23 @@ void spi_setup(void)
 	
 }
   
-
+	/*
+	while(j<10){
+		if (dev_id[j] < 10) {
+			c = dev_id[j] + '0';
+		} else {
+			c = (dev_id[j] - 10) + 'A';
+		}
+		   
+		cmd_w[2*j+1] = c / 0x10;
+		cmd_w[2*j+2] = c % 0x10;
+		
+		j++;
+	}
+	for(int k=0; k<21; k++){
+		usart_send_blocking(USART2, cmd_w[k]);	
+	}
+*/
 
 
 char hexDigit(unsigned n)
