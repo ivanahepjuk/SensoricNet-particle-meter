@@ -104,13 +104,16 @@ int main(void)
 
 	//   !!!   Uncomment this only if you know what you are mdoing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-	//eeprom_write_id("nbiot-0001");
+	//eeprom_write_id("nbiot-0007");
 
 	//reads ID from eeprom
 	eeprom_read_id();
-
+	usartSend(ID, 2);
 	init_BME280();
 	
+	char pokus[100];
+	sprintf(pokus, "id0: %d id1: %d id2: %d", DESIG_UNIQUE_ID0, DESIG_UNIQUE_ID1, DESIG_UNIQUE_ID2);
+	usartSend(pokus, 2);
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
@@ -134,7 +137,7 @@ int main(void)
 
 #ifdef NBIOT
 	usartSend("Quectel reset.\r\n", 2);
-	wait(SEC*5);//until quectel wakes up
+	wait(SEC*15);//until quectel wakes up
 #endif
 /*
 	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
@@ -148,7 +151,7 @@ int main(void)
 	//Connect to network
 #ifdef LORAWAN
 	usartSend("rn2483 reset.\r\n", 2);
-	wait(SEC*3);//until rn2483 wakes up
+	wait(SEC*5);//until rn2483 wakes up
 	connect_lorawan();
 #endif
 
@@ -158,6 +161,7 @@ int main(void)
 #endif
 
 	particlemeter_ON();
+	wait(200000);
 	particlemeter_set_fan(FAN_SPEED);
 	usartSend("Particlemeter set.\r\n", 2);
 
@@ -261,6 +265,7 @@ int main(void)
 			while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
 					wait(SEC*1);
 			//Sending datagram
+			usartSend(send_string, 2);
 			while (nbiot_sendCommand(send_string, "OK", 4))   
 					wait(SEC*3);
 			//Closing socket
@@ -278,7 +283,7 @@ int main(void)
 		usartSend(cykly_str, 2);
 		usartSend("\r\n", 2);
 		cykly++;
-		
+
 		flash(3, 100000);
 
 		wait(SEC *WAIT);		

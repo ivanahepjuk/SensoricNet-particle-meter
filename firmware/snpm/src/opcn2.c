@@ -25,6 +25,7 @@ uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 	uint8_t incomming;
 	
 	spi_send8(SPI1, command_byte);
+	//wait(50);
 	incomming = spi_read8(SPI1);//(uint8_t)
 	wait(delay);
 	
@@ -57,10 +58,10 @@ void particlemeter_ON(void)
 {
 	pm_SS_on();
 	while(pm_set_command(0x03, 14000) != 0xF3){
-	wait(14000);
+	//wait(14000);
 	}
 	while( pm_set_command(0x00, 14000) != 0x03){
-		wait(14000);
+	//wait(14000);
 	}
 	pm_SS_off();
 	
@@ -70,26 +71,29 @@ void particlemeter_ON(void)
 void particlemeter_set_fan(uint8_t speed)
 {
 	pm_SS_on();
-	while(pm_set_command(0x42, 14000) != 0xf3)       {;}
-	wait(14000);
-	while( pm_set_command(0x00, 14000) != 0x42){;}
-	wait(14000);
+	
+	wait(70000);
+	
+	while( pm_set_command( 0x42, 14000) != 0xF3){;}
+	
+	while( pm_set_command( 0x00, 14000) != 0x42){;}
+	
 	while( pm_set_command(speed, 14000) != 0x00){;}
+	
+	wait(70000);
+	
 	pm_SS_off();
+	
 }
 
 
 void read_pm_values(void)
 {
-	
 	pm_SS_on();
-	//while(pm_set_command(0x32, 14000) == 0xf3)       {;}
-	pm_set_command(0x32, 14000);
-	//wait(14000);
-	pm_SS_toggle(20000);
-	wait(10000);
 	
-	for(uint8_t i = 0; i<12; i++)
+	while( pm_set_command(0x32, 140000) != 0xF3){;}// ok tady ten loop!!
+	
+		for(uint8_t i = 0; i<12; i++)
 	{
 		spi_send8(SPI1, 0x32);
 		wait(2000);
@@ -97,16 +101,8 @@ void read_pm_values(void)
 		pm_values_buffer[i] = spi_read8(SPI1);		
 	}
 	
-	/*
-	//Debug
-	for (int i=0; i<12; i++)
-	{
-		usart_send_blocking(USART4, pm_values_buffer[i]);			
-	}
-	usartSend("\r\n", 4);	
-	*/
-	
 	pm_SS_off();
+	
 }
 
 //read_pm_data

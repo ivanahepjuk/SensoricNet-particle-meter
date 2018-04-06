@@ -36,6 +36,7 @@ void eeprom_write_id(char *dev_id)
 
 	//i2c write
 	i2c_transfer7(I2C2, EEPROM, cmd_w, 11, data, 0);
+	wait(210000);
 }
 
 //It reads data from eeporom and stores it into global array

@@ -14,7 +14,7 @@
 #include "m24c04.h"
 
 //how long it waits at the end of each loop?
-#define WAIT 10
+#define WAIT 30
 
 //USART2 debug output, if defined, all USART4 communication is routed also to USART2
 #define DEBUG
