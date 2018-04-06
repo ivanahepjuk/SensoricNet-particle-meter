@@ -78,3 +78,12 @@ Benchmark gps?
 Posilat vic zajimavych dat z quectelu. Posilat jako string, nevymyslet picoviny, easy to poslat.
 
 Preruseni na usart, vyzkouset ale si neni jak? Jo je, ale jen pri up-linku.
+
+
+//SPI connections:
+GND
+SCK
+MOSI/SDI
+MISO/SDO
+SS
+5V
