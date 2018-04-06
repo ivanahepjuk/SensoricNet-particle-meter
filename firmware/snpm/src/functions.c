@@ -89,7 +89,7 @@ void spi_setup(void)
 	*/
 	
 	//bitstream for register settinggs according to datasheet
-	SPI_CR1(SPI1) |= 0b0000001100110101; //100101  
+	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011  
 	//bitstream for register settinggs according to datasheet
 	SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 

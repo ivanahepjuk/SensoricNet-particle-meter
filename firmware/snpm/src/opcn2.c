@@ -89,6 +89,34 @@ void particlemeter_set_fan(uint8_t speed)
 
 void read_pm_values(void)
 {
+	
+	pm_SS_on();
+	//while(pm_set_command(0x32, 14000) == 0xf3)       {;}
+	pm_set_command(0x32, 14000);
+	//wait(14000);
+	pm_SS_toggle(20000);
+	wait(10000);
+	
+	for(uint8_t i = 0; i<12; i++)
+	{
+		spi_send8(SPI1, 0x32);
+		wait(20000);
+		//steals incomming data directly from shift register
+		pm_values_buffer[i] = spi_read8(SPI1);		
+	}
+	
+	/*
+	//Debug
+	for (int i=0; i<12; i++)
+	{
+		usart_send_blocking(USART4, pm_values_buffer[i]);			
+	}
+	usartSend("\r\n", 4);	
+	*/
+	
+	pm_SS_off();
+	
+	/*
 	pm_SS_on();
 	
 	while( pm_set_command(0x32, 140000) != 0xF3){;}// ok tady ten loop!!
@@ -102,7 +130,7 @@ void read_pm_values(void)
 	}
 	
 	pm_SS_off();
-	
+	*/
 }
 
 //read_pm_data

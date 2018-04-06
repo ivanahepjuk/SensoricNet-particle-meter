@@ -104,7 +104,7 @@ int main(void)
 
 	//   !!!   Uncomment this only if you know what you are mdoing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-	//eeprom_write_id("nbiot-0007");
+	//eeprom_write_id("nbiot-0005");
 
 	//reads ID from eeprom
 	eeprom_read_id();
