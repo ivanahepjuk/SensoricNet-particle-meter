@@ -21,9 +21,14 @@
 
 //Choose your platform here
 //#define LORAWAN
-#define NBIOT
+#define LORAWAN
 
+//#define LORAWAN_DEVEUI "xxxxxxxxxxxxxxxx"
+//#define LORAWAN_APPEUI "yyyyyyyyyyyyyyyy"
+//#define LORAWAN_APPKEY "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 
+// dulezite pouze pro nbiot
+//#define DEV_ID "nbiot-0001"
 
 #ifdef LORAWAN
 #define USART_BAUDRATE 57600

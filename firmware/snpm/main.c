@@ -104,16 +104,12 @@ int main(void)
 
 	//   !!!   Uncomment this only if you know what you are mdoing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-	//eeprom_write_id("nbiot-0005");
+//	eeprom_write_id("sensoricnet-lora-0002");
 
 	//reads ID from eeprom
-	eeprom_read_id();
-	usartSend(ID, 2);
+//	eeprom_read_id();
+//	usartSend(ID, 2);
 	init_BME280();
-	
-	char pokus[100];
-	sprintf(pokus, "id0: %d id1: %d id2: %d", DESIG_UNIQUE_ID0, DESIG_UNIQUE_ID1, DESIG_UNIQUE_ID2);
-	usartSend(pokus, 2);
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
@@ -123,8 +119,6 @@ int main(void)
 #endif
 */
 	flash(1, 100000);
-
-	
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
@@ -136,34 +130,30 @@ int main(void)
 	gpio_set(GPIOA, GPIO9);
 
 #ifdef NBIOT
-	usartSend("Quectel reset.\r\n", 2);
+	usartSend("DEBUG: Quectel reset.\r\n", 2);
 	wait(SEC*15);//until quectel wakes up
 #endif
-/*
-	//tohle udela debugovaci spike, je to tady kvuli logicke sondy, v produkci dat pryc
-	usartSend("Debug spike.\r\n", 2);
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
-	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
-	gpio_set(GPIOA, GPIO8); //SS Log 0
-	wait(0.2); //FIXME 1 sec je na hrane, pro produkci pak dat klidne vice! u vsech funkci?
-*/
 
 	//Connect to network
-#ifdef LORAWAN
-	usartSend("rn2483 reset.\r\n", 2);
-	wait(SEC*5);//until rn2483 wakes up
-	connect_lorawan();
-#endif
+	#ifdef LORAWAN
+	usartSend("DEBUG: rn2483 reset.\r\n", 2);
+	lorawan_reset();
+	usartSend("DEBUG: lora connect.\r\n", 2);
+	lorawan_connect();
+	usartSend("DEBUG: lora connected.\r\n", 2);
+	#endif
+
+	flash(2, 50000);
 
 #ifdef NBIOT
-	connect_nbiot();
+	nbiot_connect();
 	usartSend("Nb-IOT network connected.\r\n", 2);
 #endif
 
 	particlemeter_ON();
 	wait(200000);
 	particlemeter_set_fan(FAN_SPEED);
-	usartSend("Particlemeter set.\r\n", 2);
+	usartSend("DEBUG: Particlemeter set.\r\n", 2);
 
 	flash(3, 50000);
 	
@@ -171,7 +161,7 @@ int main(void)
 	lpp = CayenneLPP__create(200);
 
 	while (1){
-		usartSend("New loop\r\n", 2);
+		usartSend("DEBUG: New loop\r\n", 2);
 		read_pm_values();
 		data_readout_BME280(burst_read_data);
 
@@ -182,12 +172,10 @@ int main(void)
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
 
-		usartSend("Encode values\r\n", 2);
+		usartSend("DEBUG: Encode values\r\n", 2);
 		char debug_data_string[150] = {0};
-		sprintf(debug_data_string, "hum: %.2f temp: %.2f press: %.2f pm1: %.2f pm2_5: %.2f pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
+		sprintf(debug_data_string, "DEBUG: hum: %.2f temp: %.2f press: %.2f pm1: %.2f pm2_5: %.2f pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
 		usartSend(debug_data_string, 2);
-		
-		
 		
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
@@ -206,7 +194,7 @@ int main(void)
 		//printf("Encoded data size: %i\n", size);
 
 		char hex_string[200] = {0};		//encoded string here
-		char send_string[200] = {0};			//string to send here
+		char send_string[200] = {0};	//string to send here
 		
 		//ascii-hex encoding is happening here:
 		int j = 0;
@@ -223,13 +211,12 @@ int main(void)
 			//sestaveni stringu pro LORAWAN
 			strcat(send_string, "mac tx uncnf 1 ");
 			strcat(send_string, hex_string);
-			strcat(send_string, "\r\n");
 			
 			//odeslani stringu, checkuje "ok", pokud nedostane ok tak to zkusi za chvili znova
-			while(lora_sendCommand(send_string, "ok", 1)){
+			while(lorawan_sendCommand(send_string, "ok", 1)){
+				// TODO odstupnovat, nekolik pokusu, reset (nebo aspon connect)
 				wait(SEC*3);
 			}
-			
 		#endif
 		
 		#ifdef NBIOT
@@ -278,7 +265,7 @@ int main(void)
 		//lpp->cursor = NULL;
 		
 		//DEBUG CODE posila cislo loop smycky
-		usartSend("Loop done: ", 2);
+		usartSend("DEBUG: Loop done: ", 2);
 		sprintf(cykly_str, "%d", cykly);
 		usartSend(cykly_str, 2);
 		usartSend("\r\n", 2);

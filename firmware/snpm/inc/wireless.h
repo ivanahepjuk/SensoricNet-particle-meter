@@ -25,18 +25,16 @@
  * 			LORWAN WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
  
+void lorawan_reset(void);
+void lorawan_connect(void);
+int  lorawan_sendCommand(char *phrase, char *check, int pocetentru);
 
-void connect_lorawan(void);
-//void lora_sendCommand(char *phrase);
-//int sendCommand(char *phrase, char *check, int pocetentru);
-
-int nbiot_sendCommand(char *phrase, char *check, int pocetentru);
-int lora_sendCommand(char *phrase, char *check, int pocetentru);
 
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 		NBIOT QUECTEL WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
-void connect_nbiot(void);
+void nbiot_connect(void);
+int  nbiot_sendCommand(char *phrase, char *check, int pocetentru);
 
 #endif
