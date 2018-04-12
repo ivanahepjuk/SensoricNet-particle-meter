@@ -69,6 +69,16 @@ connect device, compile and flash the firmware
 
 ```
 cd ~/git/SensoricNet-particle-meter/firmware/snpm/
-make flash
+make clean ; make flash
+```
+
+or probably the smarter way is using simple provisioning utility
+
+- rename sensoricnet_lora_ids_example.csv file to sensoricnet_lora_ids.csv and modify it (add your data)
+- compile and flash the stuff by running 
+
+```
+cd ~/git/SensoricNet-particle-meter/firmware/snpm/
+./make_lora.sh <your_sensor_dev_id>
 ```
 
