@@ -26,6 +26,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
  
 void lorawan_reset(void);
+void lorawan_mac_save(void);
 void lorawan_connect(void);
 int  lorawan_sendCommand(char *phrase, char *check, int pocetentru);
 

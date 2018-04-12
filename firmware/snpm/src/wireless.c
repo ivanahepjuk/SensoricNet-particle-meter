@@ -41,6 +41,16 @@ void lorawan_reset(void)
 	//TODO loop
 }
 
+/**
+ * save rn2483 module state
+ */
+void lorawan_mac_save(void)
+{
+	lorawan_sendCommand("mac save", "ok", 1);
+
+	//TODO loop
+}
+
 
 /**
  * connects into lorawan network
@@ -53,12 +63,17 @@ void lorawan_connect(void)
 	}
 
 	// set data rate (0-7)
-	while(lorawan_sendCommand("mac set dr 1", "ok", 1)) {
+	while(lorawan_sendCommand("mac set dr 5", "ok", 1)) {
 		wait(SEC*3);
 	}
 
 	// set tx power
 	while(lorawan_sendCommand("radio set pwr 14", "ok", 1)) {
+		wait(SEC*3);
+	}
+
+	// set adr (adaptive data rate, default off), nemusi byt podporovane siti, tak bacha!
+	while(lorawan_sendCommand("mac set adr on", "ok", 1)) {
 		wait(SEC*3);
 	}
 
@@ -77,15 +92,13 @@ void lorawan_connect(void)
 		wait(SEC*3);
 	}
 
-	//save all
-	while(lorawan_sendCommand("mac save", "ok", 1)) {
-		wait(SEC*3);
-	}
+	//save module state
+	lorawan_mac_save();
 
 	//join network
-	int i = 0;
-	while (lorawan_sendCommand("mac join otaa", "ok", 1)) {
-		wait(SEC*5*i*i);
+	int i = 1;
+	while (lorawan_sendCommand("mac join otaa", "accepted", 2)) {
+		wait(SEC*5*(2*i));
 		if (i<8) {
 			i++;
 		}

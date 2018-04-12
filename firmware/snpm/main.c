@@ -30,6 +30,8 @@
 int cykly = 0;
 char cykly_str[10];
 
+int frame_counter = 0;
+
 /* For semihosting on newlib */
 //extern void initialise_monitor_handles(void);
 
@@ -160,7 +162,7 @@ int main(void)
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
 
-	while (1){
+	while (1) {
 		usartSend("DEBUG: New loop\r\n", 2);
 		read_pm_values();
 		data_readout_BME280(burst_read_data);
@@ -213,9 +215,16 @@ int main(void)
 			strcat(send_string, hex_string);
 			
 			//odeslani stringu, checkuje "ok", pokud nedostane ok tak to zkusi za chvili znova
-			while(lorawan_sendCommand(send_string, "ok", 1)){
+			while(lorawan_sendCommand(send_string, "ok", 1)) {
 				// TODO odstupnovat, nekolik pokusu, reset (nebo aspon connect)
 				wait(SEC*3);
+			}
+
+			frame_counter++;
+
+			// jednou za 8 frejmu uloz frame counter
+			if ((frame_counter & 0x07) == 0) {
+				lorawan_mac_save();
 			}
 		#endif
 		
