@@ -134,7 +134,6 @@ int lorawan_sendCommand(char *phrase, char *check, int pocetentru)
 	usart_send_blocking(USART4, '\r');
 	usart_send_blocking(USART4, '\n');
 
-
 	//interrupt status register poreseny
 	USART_ICR(USART4) |= 0b00000000000010100011101110101111;
 	//cte z linky dokud neprijme tolik entru kolik ceka
@@ -156,8 +155,10 @@ int lorawan_sendCommand(char *phrase, char *check, int pocetentru)
 
 	// check output
 	if ((strstr(incomming, check)) == NULL) {
+		flash(3, 10000);
 		return 1;
 	} else {
+		flash(1, 30000);
 		return 0;
 	}
 }

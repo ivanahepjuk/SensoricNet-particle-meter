@@ -19,12 +19,17 @@
 //USART2 debug output, if defined, all USART4 communication is routed also to USART2
 #define DEBUG
 
+// define macro for device type description
+#define NBIOT 1
+#define LORAWAN 2
+
+// u techto promennych se predpoklada jejich naplneni z cmdline
+
 //Choose your platform here
-//#define LORAWAN
-#define LORAWAN
+#ifndef DEVICE_TYPE
+#define DEVICE_TYPE NBIOT
+#endif
 
-
-// predpoklada se naplneni techto promennych z cmdline
 #ifndef LORAWAN_DEVEUI
 #define LORAWAN_DEVEUI "0011223344556677"
 #endif
@@ -38,14 +43,16 @@
 #endif
 
 // dulezite pouze pro nbiot
-//#define DEV_ID "nbiot-0001"
+#ifndef DEV_ID
+#define DEV_ID "nbiot-test"
+#endif
 
-#ifdef LORAWAN
+#if DEVICE_TYPE == LORAWAN
 #define USART_BAUDRATE 57600
 #define LORA_USART (USART4)
 #endif
 
-#ifdef NBIOT
+#if DEVICE_TYPE == NBIOT
 #define USART_BAUDRATE 9600
 #endif
 
