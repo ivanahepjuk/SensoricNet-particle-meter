@@ -68,6 +68,17 @@ GDB (GNU debuger)
   * https://mcuoneclipse.com/2015/03/25/command-line-programming-and-debugging-with-gdb/
   * http://pandafruits.com/stm32_primer/stm32_primer_minimal.php
 
+Hromadný deploying
+------------------
+
+Je potřeba si lokálně udržovat aktuální csv soubor s čidly (vzor je sensoricnet_lora_ids_example.csv).
+Pak se kompilace provádí pomocí
+
+cd ~/git/SensoricNet-particle-meter/firmware/snpm/
+./make_lora.sh <your_sensor_dev_id>
+
+
+
 ////////////////////////////////
 ukoly
 
