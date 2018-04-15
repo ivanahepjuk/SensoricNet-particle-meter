@@ -35,16 +35,17 @@ int frame_counter = 0;
 /* For semihosting on newlib */
 //extern void initialise_monitor_handles(void);
 
-/////////////////////////////////////////////////////////////
-//Global variables for burst register reading, for bme280: //
-/////////////////////////////////////////////////////////////
-int32_t t_fine;
-uint8_t comp_data[34];//compensation data readed into this
-uint8_t burst_read_data[8] = {0};//in loop measured data readed into this
 
-/////////////////////////////////////////////////////////////
-//Global variables for compensation functions for bme280:  //
-/////////////////////////////////////////////////////////////
+//Global variables for burst register reading, bme280
+int32_t t_fine;
+
+//compensation data readed into this
+uint8_t comp_data[34];
+
+//in loop measured data readed into this
+uint8_t burst_read_data[8] = {0};
+
+//Global variables for compensation functions, bme280:
 //temperature
 uint16_t dig_T1;
 int16_t dig_T2, dig_T3;
@@ -52,9 +53,11 @@ int16_t dig_T2, dig_T3;
 uint16_t dig_P1;
 int16_t dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8, dig_P9;
 //humidity
-unsigned char dig_H1, dig_H3;
+uint8_t dig_H1, dig_H3;
 int16_t dig_H2, dig_H4, dig_H5;
-signed char dig_H6;
+int8_t dig_H6;
+
+
 
 /////////
 char ID[11];
@@ -166,16 +169,16 @@ int main(void)
 		read_pm_values();
 		data_readout_BME280(burst_read_data);
 
-		float hum = hum_BME280();
 		float temp = temp_BME280();
 		float press = press_BME280();
+		float hum = hum_BME280();
 		float pm1 = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
 
 		usartSend("DEBUG: Encode values\r\n", 2);
 		char debug_data_string[150] = {0};
-		sprintf(debug_data_string, "DEBUG: hum: %.2f temp: %.2f press: %.2f pm1: %.2f pm2_5: %.2f pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
+		sprintf(debug_data_string, "DEBUG: hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
 		usartSend(debug_data_string, 2);
 		
 		CayenneLPP__addTemperature(lpp, 1, temp);
@@ -210,8 +213,6 @@ int main(void)
 
 		#if DEVICE_TYPE == LORAWAN
 
-		usartSend("DEBUG: Kod pro LORAWAN.\r\n", 2);
-
 		//sestaveni stringu pro LORAWAN
 		strcat(send_string, "mac tx uncnf 1 ");
 		strcat(send_string, hex_string);
@@ -232,8 +233,6 @@ int main(void)
 		
 		#if DEVICE_TYPE == NBIOT
 		//tady se konvertuje na string a ulozi delka payloadu (int)
-
-		usartSend("DEBUG: Kod pro NBIOT.\r\n", 2);
 
 		char nbiot_data_length[10];
 		sprintf (nbiot_data_length, "%d", size+(11));
