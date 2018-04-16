@@ -21,33 +21,34 @@
 #include "bme280.h"
 #include "functions.h"		//smazat
 
-void init_BME280(void)
+void BME280_init(void)
 {
-	uint8_t cmd_w[2] = {0xF2, 0x07}; //CTRL_HUM, 00000111;
+	//register ctrl_hum, set oversampling x16
+	uint8_t cmd_w[2] = {0xF2, 0x05};
 	uint8_t data[8] = {0};
 	
-	//tohle zapise na i2c adresu BME cmd_w[0] hodnoty co jsou dale v tom poli
+	//zapis cmd na i2c adresu BME cmd je v cmd_w
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
 	
-	//nastaveni ctrl_meas
+	//register ctrl_meas, temperature oversampling x4, pressure oversampling x4, normal mode
 	cmd_w[0] = 0xF4;
-	cmd_w[1] = 0x6F;  //011 011 11
+	cmd_w[1] = 0x6F;	//011 011 11
 	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0); 
 
-	//nastaveni ctrl_meas
-	cmd_w[0] = 0xF5;
-	cmd_w[1] = 0x80;  //011 011 11
-	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
+//	//register config, standby 250ms, filter coefficient 8, i2c
+//	cmd_w[0] = 0xF5;
+//	cmd_w[1] = 0x80;  //011 011 0 0
+//	i2c_transfer7(I2C2, BME, cmd_w, 2, data, 0);
 
 	//vycti kompenzacni data
-	compensation_data_readout_BME280(comp_data);	
+	BME280_compensation_data_readout(comp_data);
 }
 
-void compensation_data_readout_BME280(uint8_t array[])
+void BME280_compensation_data_readout(uint8_t array[])
 {
+	//	calib 00-25: od 0x88 26 bajtu
 	uint8_t cmd_w[1] = {0x88};
-	
-	i2c_transfer7(I2C2, BME, cmd_w, 1, array, 34);
+	i2c_transfer7(I2C2, BME, cmd_w, 1, array, 26);
 
 	dig_T1 = (array[1] << 8) | array[0];
 	dig_T2 = (array[3] << 8) | array[2];
@@ -61,15 +62,20 @@ void compensation_data_readout_BME280(uint8_t array[])
 	dig_P7 = (array[19] << 8) | array[18];
 	dig_P8 = (array[21] << 8) | array[20];
 	dig_P9 = (array[23] << 8) | array[22];
-	dig_H1 = array[24];
-	dig_H2 = (array[26] << 8) | array[25];
-	dig_H3 = array[27];
-	dig_H4 = (array[29] << 8) | array[28];
-	dig_H5 = (array[31] << 8) | array[30];
-	dig_H6 = array[32];
+	dig_H1 = array[25];
+
+	//	calib 26-41: od 0xE1 16 bajtu
+	cmd_w[0] = 0xE1;
+	i2c_transfer7(I2C2, BME, cmd_w, 1, array, 16);
+
+	dig_H2 = (array[1] << 8) | array[0];
+	dig_H3 = array[2];
+	dig_H4 = (array[4] & 0x0F) | (array[3] << 4);
+	dig_H5 = (array[4] >> 4) | (array[5] << 4);
+	dig_H6 = array[7];
 }
 
-void data_readout_BME280(uint8_t array[])
+void BME280_data_readout(uint8_t array[])
 {
 	// cteni dat - teplota, tlak a vlhkost = 0xF7 - 0xFE
 	uint8_t cmd_w[1] = {0xF7};
@@ -80,7 +86,7 @@ void data_readout_BME280(uint8_t array[])
 /**
  * before calling this, data_readout and _compensation_data_readout must by called
  */
-float temp_BME280(void)
+float BME280_temp(void)
 {
 	int32_t temp_raw;
 	int32_t temp;
@@ -99,7 +105,7 @@ float temp_BME280(void)
 	return (tempf/100.0f);
 }
 
-float press_BME280(void)
+float BME280_press(void)
 {
 	int32_t press_raw;
 	float pressf;
@@ -132,7 +138,7 @@ float press_BME280(void)
 	return (pressf/100.0f);
 }
 
-float hum_BME280(void)
+float BME280_hum(void)
 {
 	int32_t hum_raw;
 	int32_t v_x1;
@@ -146,8 +152,8 @@ float hum_BME280(void)
 			( ( ( ( ( ( (v_x1 * ((int32_t)dig_H6) ) >> 10 ) * ( ( (v_x1 * ((int32_t)dig_H3) ) >> 11 ) + ((int32_t)32768) ) ) >> 10 ) + ((int32_t)2097152) ) *
 			((int32_t)dig_H2) + 8192 ) >> 14 ) );
 	v_x1 = (v_x1 - ( ( ( ( (v_x1 >> 15) * (v_x1 >> 15) ) >> 7 ) * ((int32_t)dig_H1) ) >> 4 ) );
-//	v_x1 = (v_x1 < 0) ? 0 : v_x1;
-//	v_x1 = (v_x1 > 419430400) ? 419430400 : v_x1;
+	v_x1 = (v_x1 < 0) ? 0 : v_x1;
+	v_x1 = (v_x1 > 419430400) ? 419430400 : v_x1;
 
 	humf = (v_x1 >> 12);
 
