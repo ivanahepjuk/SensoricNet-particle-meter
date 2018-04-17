@@ -38,12 +38,8 @@ int frame_counter = 0;
 
 //Global variables for burst register reading, bme280
 int32_t t_fine;
-
-//compensation data readed into this
-uint8_t comp_data[34];
-
-//in loop measured data readed into this
-uint8_t burst_read_data[8] = {0};
+uint8_t comp_data[26];	//used for readings of compensation data
+uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 
 //Global variables for compensation functions, bme280:
 //temperature
@@ -114,7 +110,7 @@ int main(void)
 	//reads ID from eeprom
 //	eeprom_read_id();
 //	usartSend(ID, 2);
-	init_BME280();
+	BME280_init();
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
@@ -167,11 +163,11 @@ int main(void)
 	while (1) {
 		usartSend("DEBUG: New loop\r\n", 2);
 		read_pm_values();
-		data_readout_BME280(burst_read_data);
+		BME280_data_readout(burst_read_data);
 
-		float temp = temp_BME280();
-		float press = press_BME280();
-		float hum = hum_BME280();
+		float temp = BME280_temp();
+		float press = BME280_press();
+		float hum = BME280_hum();
 		float pm1 = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();

@@ -25,7 +25,7 @@
 #define BME 0x76
 
 extern int32_t t_fine;
-extern uint8_t comp_data[34]; //compensation data readed into this
+extern uint8_t comp_data[26]; //compensation data readed into this
 extern uint8_t burst_read_data[8]; //burst read data readed into this
 
 //compensation constants
@@ -41,12 +41,12 @@ extern int16_t dig_H2, dig_H4, dig_H5;
 extern int8_t dig_H6;
 
 //Functions
-void  init_BME280(void);
-float press_BME280(void);
-float hum_BME280(void);
-float temp_BME280(void);
-void data_readout_BME280(uint8_t array[]);
-void compensation_data_readout_BME280(uint8_t arrayy[]);
+void  BME280_init(void);
+float BME280_press(void);
+float BME280_hum(void);
+float BME280_temp(void);
+void  BME280_data_readout(uint8_t array[]);
+void  BME280_compensation_data_readout(uint8_t arrayy[]);
 
 
 #endif
