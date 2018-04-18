@@ -109,10 +109,10 @@ int main(void)
 
 	//   !!!   Uncomment this only if you know what you are mdoing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-//	eeprom_write_id("sensoricnet-lora-0002");
+	//eeprom_write_id("nbiot-0003");
 
 	//reads ID from eeprom
-//	eeprom_read_id();
+	eeprom_read_id();
 //	usartSend(ID, 2);
 	init_BME280();
 
@@ -155,7 +155,7 @@ int main(void)
 	flash(2, 50000);
 
 	particlemeter_ON();
-	wait(200000);
+	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
 	usartSend("DEBUG: Particle meter set.\r\n", 2);
 
