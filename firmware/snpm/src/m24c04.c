@@ -52,7 +52,6 @@ void eeprom_read_id(void)
 		ID[i] = data[i];
 	ID[10] = NULL;
 	
-	return data;
 }
 
 

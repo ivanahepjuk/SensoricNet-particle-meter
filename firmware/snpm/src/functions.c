@@ -230,51 +230,25 @@ void i2c_setup(void)
 
 void usart_setup(void)
 {
-	
-		nvic_enable_irq(NVIC_USART3_4_IRQ);
-
-	
 	// setup GPS module USART2 parameters
-	// fixme - vymyslet predavani parametru baudrate
+	nvic_enable_irq(NVIC_USART2_IRQ);
 	usart_set_baudrate(USART2, 57600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
-	// enable the USART2
+	usart_enable_rx_interrupt(USART2);
 	usart_enable(USART2);
 
 	// setup quectel(gsm)/lora USART4 parameters
-	// fixme - vymyslet predavani parametru baudrate
-	
-	usart_set_baudrate(USART4, 57600);//USART_BAUDRATE);  //lora 57600 quectel 9600
+	usart_set_baudrate(USART4, USART_BAUDRATE);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
 	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
-/*	*/
-	//USART_CR1(USART4) |= 0b0000000000000000000000001100;
-	//USART_BRR(USART4) |= 500;  //oversampling
-	//USART_CR1(USART4) |= 0b1;    //enable that fucker
-	/* (1) oversampling by 16, 9600 baud */
-/* (2) 8 data bit, 1 start bit, 1 stop bit, no parity, reception mode */
-//USART1->BRR = 480000 / 96; /* (1) */
-//USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE; /* (2) */
-	
-	
-	usart_enable_rx_interrupt(USART4);
-	// enable the USART4
 	usart_enable(USART4);
-
-//	/* Enable interrupts from the USART */
-//	nvic_enable_irq(NVIC_USART4_IRQ);
-
-	/* Specifically enable recieve interrupts */
-//usart_enable_rx_interrupt(USART4);
-//https://www.youtube.com/watch?v=kFiVs-0Ww28
-
 }
 
 
@@ -341,18 +315,17 @@ char* string_to_hex(unsigned char *string, int len)
 }
 
 
-void usart3_4_isr(void)
+void usart2_isr(void)
 {
-	uint8_t i = 0;
 	static uint8_t data = 'A';
 
 	/* Check if we were called because of RXNE. */
-	if (((USART_CR1(USART4) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART4) & USART_ISR_RXNE) != 0)) {
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
 
 	
-		while((USART_ISR(USART4) & USART_ISR_RXNE) != 0){
-			data = usart_recv(USART4);
-			usart_send_blocking(USART4, data);
+		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
+			data = usart_recv(USART2);
+			usart_send_blocking(USART2, data);
 		}
 
 		/*
@@ -364,7 +337,7 @@ void usart3_4_isr(void)
 		 * takove ORove peklo:)
 		 * 
 		 * */
-		USART_ICR(USART4) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
+		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
 								USART_ICR_NCF    | USART_ICR_ORECF | 
 								USART_ICR_IDLECF | USART_ICR_TCCF  | 
 								USART_ICR_LBDCF  | USART_ICR_CTSCF | 
@@ -372,8 +345,8 @@ void usart3_4_isr(void)
 								USART_ICR_CMCF   | USART_ICR_WUCF  
 							);
 	
-		//flush neprectene data
-	    //USART_RQR(USART4) |= USART_RQR_RXFRQ;
+		//flush neprectene data, 
+	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
 	}
 }
 
