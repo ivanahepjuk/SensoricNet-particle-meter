@@ -230,6 +230,10 @@ void i2c_setup(void)
 
 void usart_setup(void)
 {
+	
+		nvic_enable_irq(NVIC_USART3_4_IRQ);
+
+	
 	// setup GPS module USART2 parameters
 	// fixme - vymyslet predavani parametru baudrate
 	usart_set_baudrate(USART2, 57600);
@@ -251,15 +255,16 @@ void usart_setup(void)
 	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
 /*	*/
-	USART_CR1(USART4) |= 0b0000000000000000000000101100;
+	//USART_CR1(USART4) |= 0b0000000000000000000000001100;
 	//USART_BRR(USART4) |= 500;  //oversampling
-	USART_CR1(USART4) |= 0b1;    //enable that fucker
+	//USART_CR1(USART4) |= 0b1;    //enable that fucker
 	/* (1) oversampling by 16, 9600 baud */
 /* (2) 8 data bit, 1 start bit, 1 stop bit, no parity, reception mode */
 //USART1->BRR = 480000 / 96; /* (1) */
 //USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE; /* (2) */
 	
 	
+	usart_enable_rx_interrupt(USART4);
 	// enable the USART4
 	usart_enable(USART4);
 
@@ -296,8 +301,8 @@ void gpio_setup(void)
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
     
     // USART4 GPIO pins 
-    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
+    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
 
 
 }
