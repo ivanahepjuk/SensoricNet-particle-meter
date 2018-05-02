@@ -66,42 +66,6 @@ char id_decoded[23]={0};
 uint8_t histogram_buffer[62];//whole dataset of opc readed into this
 uint8_t pm_values_buffer[12] = {0};//only pm data
 
-void usart3_4_isr(void)
-{
-	static uint8_t data = 'A';
-
-	/* Check if we were called because of RXNE. */
-	if (((USART_CR1(USART4) & USART_CR1_RXNEIE) != 0) &&
-	    ((USART_ISR(USART4) & USART_ISR_RXNE) != 0)) {
-
-	
-	flash(3, 17000);
-
-		/* Retrieve the data from the peripheral. */
-		data = usart_recv(USART2);
-
-		/* Enable transmit interrupt so it sends back the data. */
-		//usart_enable_tx_interrupt(USART2);
-		wait(SEC*0.2);
-     // Clear the interrupt flag for the processed IRQs
-   // nvic_clear_pending_irq(NVIC_USART3_4_IRQ);	
-	
-	
-	//USART_ISR(USART4) |= USART_ISR_RXNE;
-	//USART_ICR(USART4) |= 0b00000000000000000000000000000000;
-	
-	//flush neprectene data
-	USART_RQR(USART4) |= USART_RQR_RXFRQ;
-}
-
-
-	
-	
-
-
-}
-
-
 /********************************************************************************************
  *
  * MAIN
@@ -113,27 +77,16 @@ int main(void)
 	
 	clock_setup();
 	gpio_setup();
-	
-
-	
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-	
-	//////////////////
-	
-
-	
-	//////////////////
 
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
 	//eeprom_write_id("nbiot-0003");
-
 	//reads ID from eeprom
-//	eeprom_read_id();
-//	usartSend(ID, 2);
-//	BME280_init();
+	eeprom_read_id();
+	BME280_init();
 
 // semihosting - stdio po debug konzoli, inicializace
 /*
@@ -156,37 +109,32 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-//	usartSend("DEBUG: Quectel reset.\r\n", 2);
-//	wait(SEC*15);//until quectel wakes up
-//	nbiot_connect();
-//	usartSend("DEBUG: Nb-IOT network connected.\r\n", 2);
+		wait(SEC*15);//until quectel wakes up
+		nbiot_connect();
 	#endif
 
 	//Connect to lora network
 	#if DEVICE_TYPE == LORAWAN
-	usartSend("DEBUG: rn2483 reset.\r\n", 2);
-	lorawan_reset();
-	usartSend("DEBUG: lora connect.\r\n", 2);
-	lorawan_connect();
-	usartSend("DEBUG: lora connected.\r\n", 2);
+		usartSend("DEBUG: rn2483 reset.\r\n", 2);
+		lorawan_reset();
+		usartSend("DEBUG: lora connect.\r\n", 2);
+		lorawan_connect();
+		usartSend("DEBUG: lora connected.\r\n", 2);
 	#endif
 
-	
-
-//	particlemeter_ON();
+	particlemeter_ON();
 	wait(SEC * 1);
-//	particlemeter_set_fan(FAN_SPEED);
-	usartSend("DEBUG: Particle meter set.\r\n", 2);
+	particlemeter_set_fan(FAN_SPEED);
 
-	//flash(3, 50000);
-	
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
 
+	flash(3, 100000);
+
 	while (1) {
 		usartSend("DEBUG: New loop\r\n", 2);
-//		read_pm_values();
-//		BME280_data_readout(burst_read_data);
+		read_pm_values();
+		BME280_data_readout(burst_read_data);
 
 		float temp = BME280_temp();
 		float press = BME280_press();
@@ -281,14 +229,14 @@ int main(void)
 		strcat(send_string, "\r\n");
 
 		//socket opening
-//		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
+		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
 		wait(SEC*1);
 		//Sending datagram
 		usartSend(send_string, 2);
-//		while (nbiot_sendCommand(send_string, "OK", 4))
+		while (nbiot_sendCommand(send_string, "OK", 4))
 		wait(SEC*3);
 		//Closing socket
-//		while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2))
+		while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2))
 		wait(SEC*1);
 		#endif
 		
@@ -302,7 +250,7 @@ int main(void)
 		usartSend("\r\n", 2);
 		cykly++;
 
-		//flash(3, 100000);
+		flash(3, 100000);
 
 		wait(SEC *WAIT);
 

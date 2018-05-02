@@ -248,7 +248,7 @@ void usart_setup(void)
 	// setup quectel(gsm)/lora USART4 parameters
 	// fixme - vymyslet predavani parametru baudrate
 	
-	usart_set_baudrate(USART4, USART_BAUDRATE);  //lora 57600 quectel 9600
+	usart_set_baudrate(USART4, 57600);//USART_BAUDRATE);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
@@ -340,6 +340,42 @@ char* string_to_hex(unsigned char *string, int len)
 	return result;
 }
 
+
+void usart3_4_isr(void)
+{
+	uint8_t i = 0;
+	static uint8_t data = 'A';
+
+	/* Check if we were called because of RXNE. */
+	if (((USART_CR1(USART4) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART4) & USART_ISR_RXNE) != 0)) {
+
+	
+		while((USART_ISR(USART4) & USART_ISR_RXNE) != 0){
+			data = usart_recv(USART4);
+			usart_send_blocking(USART4, data);
+		}
+
+		/*
+		 * USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
+		 * do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
+		 * tohohle interupt flag clear status register, protoze ten ISR je read only, anobrz ICRT je read write.
+		 * Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
+		 * nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
+		 * takove ORove peklo:)
+		 * 
+		 * */
+		USART_ICR(USART4) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
+								USART_ICR_NCF    | USART_ICR_ORECF | 
+								USART_ICR_IDLECF | USART_ICR_TCCF  | 
+								USART_ICR_LBDCF  | USART_ICR_CTSCF | 
+								USART_ICR_RTOCF  | USART_ICR_EOBCF | 
+								USART_ICR_CMCF   | USART_ICR_WUCF  
+							);
+	
+		//flush neprectene data
+	    //USART_RQR(USART4) |= USART_RQR_RXFRQ;
+	}
+}
 
 
 
