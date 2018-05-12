@@ -262,7 +262,7 @@ void gpio_setup(void)
 	//wireless reset
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
 
-	// USART2 GPIO pins 
+	// USART2 GPS
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3);//rx
 
@@ -319,24 +319,24 @@ void usart2_isr(void)
 {
 	static uint8_t data = 'A';
 
-	/* Check if we were called because of RXNE. */
+	//Check if we were called because of RXNE.
 	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
 
 	
 		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
 			data = usart_recv(USART2);
 			usart_send_blocking(USART2, data);
+			flash(3, 10000);
 		}
 
-		/*
-		 * USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
-		 * do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
-		 * tohohle interupt flag clear status register, protoze ten ISR je read only, anobrz ICRT je read write.
-		 * Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
-		 * nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
-		 * takove ORove peklo:)
-		 * 
-		 * */
+		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
+		// do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
+		// tohohle interupt flag clear status register, protoze ten ISR je read only, anobrz ICRT je read write.
+		// Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
+		// nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
+		// takove ORove peklo:)
+		 
+		 
 		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
 								USART_ICR_NCF    | USART_ICR_ORECF | 
 								USART_ICR_IDLECF | USART_ICR_TCCF  | 
