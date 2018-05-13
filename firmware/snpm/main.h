@@ -10,6 +10,7 @@
 #include "inc/bme280.h"
 #include "inc/opcn2.h"
 #include "inc/wireless.h"
+#include "inc/gps.h"
 #include "inc/cayenne_lpp.h"
 #include "m24c04.h"
 

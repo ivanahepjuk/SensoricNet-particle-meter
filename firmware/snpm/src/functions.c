@@ -26,7 +26,7 @@
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
 // set some constants, fixme
-
+extern char gps_string[400];
 
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
@@ -232,7 +232,7 @@ void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
 	nvic_enable_irq(NVIC_USART2_IRQ);
-	usart_set_baudrate(USART2, 57600);
+	usart_set_baudrate(USART2, 9600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
@@ -262,13 +262,7 @@ void gpio_setup(void)
 	//wireless reset
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
 
-	// USART2 GPS
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3);//rx
-
-	// USART2 setup pins as alternate function AF0
-	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
-	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
+	
     
     	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
@@ -278,7 +272,20 @@ void gpio_setup(void)
     gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//tx
 	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
 
+// USART2 GPS
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3);//rx
+	gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO5);// fix
+	gpio_mode_setup(GPIOC, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO4);// pulses
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO6);// standby
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO7);// reset
 
+
+	// USART2 setup pins as alternate function AF0
+	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
+	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
+	
+	
 }
 
 /*
@@ -317,16 +324,18 @@ char* string_to_hex(unsigned char *string, int len)
 
 void usart2_isr(void)
 {
-	static uint8_t data = 'A';
-
+	//static uint8_t data = 'A';
+uint8_t i = 0;
 	//Check if we were called because of RXNE.
-	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0)) {
 
 	
 		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
-			data = usart_recv(USART2);
-			usart_send_blocking(USART2, data);
-			flash(3, 10000);
+			gps_string[i] = usart_recv(USART2);
+			usart_send_blocking(USART2, gps_string[i]);
+			i++;
+			
+			
 		}
 
 		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak

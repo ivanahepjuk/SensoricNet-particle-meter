@@ -58,6 +58,7 @@ int8_t dig_H6;
 /////////
 char ID[11];
 char id_decoded[23]={0};
+char gps_string[400] = {0};
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for OPC-N2: //
@@ -80,7 +81,10 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-
+	
+	//gps set
+	gps_set();
+	
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
 	//eeprom_write_id("nbiot-0005");
@@ -113,21 +117,23 @@ int main(void)
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
 		wait(SEC*15);//until quectel wakes up
-		nbiot_connect();
+		//nbiot_connect();
 	#endif
 
 	//Connect to lora network
 	#if DEVICE_TYPE == LORAWAN
-		usartSend("DEBUG: rn2483 reset.\r\n", 2);
+		//usartSend("DEBUG: rn2483 reset.\r\n", 2);
 		lorawan_reset();
-		usartSend("DEBUG: lora connect.\r\n", 2);
+		//usartSend("DEBUG: lora connect.\r\n", 2);
 		lorawan_connect();
-		usartSend("DEBUG: lora connected.\r\n", 2);
+		//usartSend("DEBUG: lora connected.\r\n", 2);
 	#endif
 
+nvic_disable_irq(NVIC_USART2_IRQ);
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
+nvic_enable_irq(NVIC_USART2_IRQ);
 
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
@@ -135,10 +141,13 @@ int main(void)
 	flash(3, 100000);
 
 	while (1) {
-		usartSend("DEBUG: New loop\r\n", 2);
+		//usartSend("DEBUG: New loop\r\n", 2);
+	
+		nvic_disable_irq(NVIC_USART2_IRQ);
 		read_pm_values();
 		BME280_data_readout(burst_read_data);
-
+		nvic_enable_irq(NVIC_USART2_IRQ);
+		
 		float temp = BME280_temp();
 		float press = BME280_press();
 		float hum = BME280_hum();
@@ -146,10 +155,10 @@ int main(void)
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
 
-		usartSend("DEBUG: Encode values\r\n", 2);
-		char debug_data_string[150] = {0};
-		sprintf(debug_data_string, "DEBUG: hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
-		usartSend(debug_data_string, 2);
+		//usartSend("DEBUG: Encode values\r\n", 2);
+		//char debug_data_string[150] = {0};
+		//sprintf(debug_data_string, "DEBUG: hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
+		//usartSend(debug_data_string, 2);
 		
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
@@ -245,18 +254,23 @@ int main(void)
 		
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
-		
-		//DEBUG CODE posila cislo loop smycky
-		usartSend("DEBUG: Loop done: ", 2);
-		sprintf(cykly_str, "%d", cykly);
-		usartSend(cykly_str, 2);
-		usartSend("\r\n", 2);
+
 		cykly++;
 
 		flash(3, 100000);
 
-		wait(SEC *WAIT);
 
+		//vypise pozice co chci:
+				//vypise pozice co chci:
+//		for(uint8_t j = 0; j<400; j++)
+		//{
+	//		usart_send_blocking(USART2, gps_string[j]);
+		//}
+
+
+
+
+		wait(SEC *WAIT);
 	}
 	return 0;
 }
