@@ -63,7 +63,7 @@ char id_decoded[23]={0};
 //Global variables for burst register reading, for OPC-N2: //
 /////////////////////////////////////////////////////////////
 
-uint8_t histogram_buffer[62];//whole dataset of opc readed into this
+uint8_t pm_hist_buffer[62] = {0};//whole dataset of opc readed into this
 uint8_t pm_values_buffer[12] = {0};//only pm data
 
 /********************************************************************************************
@@ -137,14 +137,15 @@ int main(void)
 	while (1) {
 		usartSend("DEBUG: New loop\r\n", 2);
 		read_pm_values();
+		particlemeter_get_histogram();
 		BME280_data_readout(burst_read_data);
 
-		float temp = BME280_temp();
+		float temp  = BME280_temp();
 		float press = BME280_press();
-		float hum = BME280_hum();
-		float pm1 = particlemeter_pm1();
+		float hum   = BME280_hum();
+		float pm1   = particlemeter_pm1();
 		float pm2_5 = particlemeter_pm2_5();
-		float pm10 = particlemeter_pm10();
+		float pm10  = particlemeter_pm10();
 
 		usartSend("DEBUG: Encode values\r\n", 2);
 		char debug_data_string[150] = {0};
@@ -158,6 +159,25 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
 		CayenneLPP__addGPS(lpp, 7, 18.3087525, 49.8346883, 1234);
+		
+		//histogram
+		CayenneLPP__addAnalogInput(lpp, 8,  (float)pm_bin0());
+		CayenneLPP__addAnalogInput(lpp, 9,  (float)pm_bin1());
+		CayenneLPP__addAnalogInput(lpp, 10, (float)pm_bin2());
+		
+		/*CayenneLPP__addAnalogInput(lpp, 11, (float)pm_bin3());
+		CayenneLPP__addAnalogInput(lpp, 12, (float)pm_bin4());
+		CayenneLPP__addAnalogInput(lpp, 13, (float)pm_bin5());
+		CayenneLPP__addAnalogInput(lpp, 14, (float)pm_bin6());
+		CayenneLPP__addAnalogInput(lpp, 15, (float)pm_bin7());
+		CayenneLPP__addAnalogInput(lpp, 16, (float)pm_bin8());
+		CayenneLPP__addAnalogInput(lpp, 17, (float)pm_bin9());
+		CayenneLPP__addAnalogInput(lpp, 18, (float)pm_bin10());
+		CayenneLPP__addAnalogInput(lpp, 19, (float)pm_bin11());
+		CayenneLPP__addAnalogInput(lpp, 20, (float)pm_bin12());
+		CayenneLPP__addAnalogInput(lpp, 21, (float)pm_bin13());
+		CayenneLPP__addAnalogInput(lpp, 22, (float)pm_bin14());
+		CayenneLPP__addAnalogInput(lpp, 23, (float)pm_bin15());*/
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);

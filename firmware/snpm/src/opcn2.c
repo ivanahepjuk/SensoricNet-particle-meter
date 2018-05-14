@@ -137,6 +137,7 @@ void read_pm_values(void)
 float particlemeter_pm1(void)
 {
 	float pm1 = calculate_float(pm_values_buffer[0], pm_values_buffer[1] , pm_values_buffer[2], pm_values_buffer[3]);
+	//float pm1 = calculate_float(pm_hist_buffer[50], pm_hist_buffer[51] , pm_hist_buffer[52], pm_hist_buffer[53]);
 	
 	return pm1;
 }
@@ -144,6 +145,7 @@ float particlemeter_pm1(void)
 float particlemeter_pm2_5(void)
 {
 	float pm2_5 = calculate_float(pm_values_buffer[4], pm_values_buffer[5] , pm_values_buffer[6], pm_values_buffer[7]);
+	//float pm2_5 = calculate_float(pm_hist_buffer[54], pm_hist_buffer[55] , pm_hist_buffer[56], pm_hist_buffer[57]);
 	
 	return pm2_5;
 }
@@ -151,6 +153,7 @@ float particlemeter_pm2_5(void)
 float particlemeter_pm10(void)
 {
 	float pm10 = calculate_float(pm_values_buffer[8], pm_values_buffer[9] , pm_values_buffer[10], pm_values_buffer[11]);
+	//float pm10 = calculate_float(pm_hist_buffer[58], pm_hist_buffer[59] , pm_hist_buffer[60], pm_hist_buffer[61]);
 	
 	return pm10;
 }
@@ -171,10 +174,113 @@ void particlemeter_set_laser(uint8_t laser)
 	gpio_set(GPIOA, GPIO8); //SS Log 1
 }
 
-
-
-void particlemeter_read(void)
+void particlemeter_get_histogram(void)
 {
-	//read registers
-;	
+	pm_SS_on();
+	pm_set_command(0x30, 14000);
+	pm_SS_toggle(20000);
+	wait(10000);
+	
+	for(uint8_t i = 0; i<62; i++)
+	{
+		spi_send8(SPI1, 0x30);
+		wait(5000);
+		//steals incomming data directly from shift register
+		pm_hist_buffer[i] = spi_read8(SPI1);		
+		wait(5000);
+	}
+	
+	/*
+	//Debug
+	for (int i=0; i<12; i++)
+	{
+		usart_send_blocking(USART4, pm_values_buffer[i]);			
+	}
+	usartSend("\r\n", 4);	
+	*/
+	
+	pm_SS_off();
 }
+
+uint16_t pm_bin0(void)
+{
+	uint16_t bin = (pm_hist_buffer[0])|(pm_hist_buffer[1] << 8);
+	return bin;	
+}
+
+uint16_t pm_bin1(void)
+{
+	uint16_t bin = (pm_hist_buffer[2])|(pm_hist_buffer[3] << 8);
+	return bin;	
+}
+uint16_t pm_bin2(void)
+{
+	uint16_t bin = (pm_hist_buffer[4])|(pm_hist_buffer[5] << 8);
+	return bin;	
+}
+uint16_t pm_bin3(void)
+{
+	uint16_t bin = (pm_hist_buffer[6])|(pm_hist_buffer[7] << 8);
+	return bin;	
+}
+uint16_t pm_bin4(void)
+{
+	uint16_t bin = (pm_hist_buffer[8])|(pm_hist_buffer[9] << 8);
+	return bin;	
+}
+uint16_t pm_bin5(void)
+{
+	uint16_t bin = (pm_hist_buffer[10])|(pm_hist_buffer[11] << 8);
+	return bin;	
+}
+uint16_t pm_bin6(void)
+{
+	uint16_t bin = (pm_hist_buffer[12])|(pm_hist_buffer[13] << 8);
+	return bin;	
+}
+uint16_t pm_bin7(void)
+{
+	uint16_t bin = (pm_hist_buffer[14])|(pm_hist_buffer[15] << 8);
+	return bin;	
+}
+uint16_t pm_bin8(void)
+{
+	uint16_t bin = (pm_hist_buffer[16])|(pm_hist_buffer[17] << 8);
+	return bin;	
+}
+uint16_t pm_bin9(void)
+{
+	uint16_t bin = (pm_hist_buffer[18])|(pm_hist_buffer[19] << 8);
+	return bin;	
+}
+uint16_t pm_bin10(void)
+{
+	uint16_t bin = (pm_hist_buffer[20])|(pm_hist_buffer[21] << 8);
+	return bin;	
+}
+uint16_t pm_bin11(void)
+{
+	uint16_t bin = (pm_hist_buffer[22])|(pm_hist_buffer[23] << 8);
+	return bin;	
+}
+uint16_t pm_bin12(void)
+{
+	uint16_t bin = (pm_hist_buffer[24])|(pm_hist_buffer[25] << 8);
+	return bin;	
+}
+uint16_t pm_bin13(void)
+{
+	uint16_t bin = (pm_hist_buffer[26])|(pm_hist_buffer[27] << 8);
+	return bin;	
+}
+uint16_t pm_bin14(void)
+{
+	uint16_t bin = (pm_hist_buffer[28])|(pm_hist_buffer[29] << 8);
+	return bin;	
+}
+uint16_t pm_bin15(void)
+{
+	uint16_t bin = (pm_hist_buffer[30])|(pm_hist_buffer[31] << 8);
+	return bin;	
+}
+

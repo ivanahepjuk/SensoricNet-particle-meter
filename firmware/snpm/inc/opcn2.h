@@ -34,7 +34,7 @@
 
 
 
-extern uint8_t histogram_buffer[62];
+extern uint8_t pm_hist_buffer[62];
 extern uint8_t pm_values_buffer[12];
 
 
@@ -45,7 +45,7 @@ void particlemeter_set_fan(uint8_t speed);
 //read_config_values
 //read_config_values_2
 void read_pm_values(void);
-void read_histogram_all(void);
+void particlemeter_get_histogram(void);
 void particlemeter_set_laser(uint8_t laser);
 float particlemeter_pm1(void);
 float particlemeter_pm2_5(void);
@@ -57,5 +57,23 @@ void particlemeter_read(void);
 void pm_SS_on(void);
 void pm_SS_off(void);
 void pm_SS_toggle(uint32_t delay);
+
+///new
+uint16_t pm_bin0(void);
+uint16_t pm_bin1(void);
+uint16_t pm_bin2(void);
+uint16_t pm_bin3(void);
+uint16_t pm_bin4(void);
+uint16_t pm_bin5(void);
+uint16_t pm_bin6(void);
+uint16_t pm_bin7(void);
+uint16_t pm_bin8(void);
+uint16_t pm_bin9(void);
+uint16_t pm_bin10(void);
+uint16_t pm_bin11(void);
+uint16_t pm_bin12(void);
+uint16_t pm_bin13(void);
+uint16_t pm_bin14(void);
+uint16_t pm_bin15(void);
 
 #endif
