@@ -83,9 +83,12 @@ int main(void)
 
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-	//eeprom_write_id("nbiot-0003");
+	//eeprom_write_id("nbiot-0005");
 	//reads ID from eeprom
-	eeprom_read_id();
+	#if DEVICE_TYPE == NBIOT
+		eeprom_read_id();
+	#endif
+	
 	BME280_init();
 
 // semihosting - stdio po debug konzoli, inicializace
@@ -154,7 +157,7 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 4, pm1);
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
-		CayenneLPP__addGPS(lpp, 7, 52.37365, 4.88650, 2);
+		CayenneLPP__addGPS(lpp, 7, 18.3087525, 49.8346883, 1234);
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
