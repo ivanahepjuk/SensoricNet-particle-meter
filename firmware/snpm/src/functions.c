@@ -179,6 +179,9 @@ void usartSend(char *phrase, uint8_t usart)
 
 void clock_setup(void)
 {
+	rcc_clock_setup_in_hse_8mhz_out_48mhz();
+
+
     //clk for gsm,leds,
     rcc_periph_clock_enable(RCC_GPIOA);
 
@@ -232,6 +235,8 @@ void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
 	nvic_enable_irq(NVIC_USART2_IRQ);
+	//nvic_set_priority(NVIC_USART2_IRQ, 128);
+
 	usart_set_baudrate(USART2, 9600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
@@ -242,13 +247,16 @@ void usart_setup(void)
 	usart_enable(USART2);
 
 	// setup quectel(gsm)/lora USART4 parameters
-	usart_set_baudrate(USART4, USART_BAUDRATE);  //lora 57600 quectel 9600
+	usart_set_baudrate(USART4, 9600);  //lora 57600 quectel 9600 USART_BAUDRATE
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
 	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
 	usart_enable(USART4);
+
+//oversqamplng
+
 }
 
 
@@ -324,19 +332,38 @@ char* string_to_hex(unsigned char *string, int len)
 
 void usart2_isr(void)
 {
-	//static uint8_t data = 'A';
-uint8_t i = 0;
-	//Check if we were called because of RXNE.
-	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0)) {
+	static uint8_t data = 'A';
+uint16_t i = 0;
 
+int32_t flags = USART_ISR(USART2);
+
+	//Check if we were called because of RXNE.
+//RXNEIE znamena interupt enable. Pokud je v nem 1 tak se interrupt generuje pri ORE nebo RXNE v ISR registru, coz se resi hned v tom dalsim if
+	while (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
+
+	//ISR_ORE - overrun error. Nastavio ho HW kdyzdata ktera zrovna jsou prijimana do shift 
+	//registru jsou ready na transfer do RDR registru, ale RXNE je porad 1, tzn jeste sem z 
+	//RDR nevycetl to co tam bylo.
+	//
+	//ISR_RXNE register dsata not empty - nastavi ho hw pokud obsah RDR shift registru (receive data register) byl mptransformovan do 
+	//usart_RDR. Jinymy slovy - mam data ktera muzou byt vyctena.
 	
-		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
-			gps_string[i] = usart_recv(USART2);
-			usart_send_blocking(USART2, gps_string[i]);
-			i++;
+		//flash(1, 100000);
+		
+			//gps_string[i] = usart_recv(USART2);
+			//usart_send_blocking(USART2, gps_string[i]);
+			//i++;
+gps_string[i] = usart_recv(USART2);
+
+//usart_send_blocking(USART4, usart_recv(USART2));
+//uart_clear_interrupt_flag(
+//clean NE flag
+
+i++;
 			
 			
 		}
+	gps_string[i] = NULL;  //ukonceni retezce
 
 		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
 		// do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
@@ -344,19 +371,32 @@ uint8_t i = 0;
 		// Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
 		// nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
 		// takove ORove peklo:)
-		 
-		 
-		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
-								USART_ICR_NCF    | USART_ICR_ORECF | 
-								USART_ICR_IDLECF | USART_ICR_TCCF  | 
-								USART_ICR_LBDCF  | USART_ICR_CTSCF | 
-								USART_ICR_RTOCF  | USART_ICR_EOBCF | 
-								USART_ICR_CMCF   | USART_ICR_WUCF  
-							);
+		 /*
+		
+		USART_ICR(USART2) |= (	USART_ICR_PECF  |  //parity error 
+					USART_ICR_FECF  |  //framing error
+					USART_ICR_NCF   |  //noise detection clear flag 
+					USART_ICR_ORECF |  //overrun error
+					USART_ICR_IDLECF | //idle error clear flasg
+					USART_ICR_TCCF |  //transmission complete clear flasg	!!!!!!!!!!!!!!!!!!!!!!!!!!!!1!!!
+					USART_ICR_LBDCF | //LIN error detection clear flasg
+					USART_ICR_CTSCF | //CTS clear flasg
+					USART_ICR_RTOCF | //ireceiver timeout clear flag
+					USART_ICR_EOBCF | //end of block clear flasg
+					USART_ICR_IDLECF | //idle error clear flasg
+					USART_ICR_CMCF | //character match clear flasg
+					USART_ICR_WUCF  //wake up from stop mode
+				);
+*/
+//usart_enable_rx_interrupt(USART2);
+
+//po precteni hodi gp[s do standby
+//gpio_clear(GPIOA, GPIO6);
+	//gpio_clear(GPIOA, GPIO7);
 	
 		//flush neprectene data, 
 	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
-	}
+	
 }
 
 

@@ -26,9 +26,9 @@
 
 //preruseni na usart2, pokazde kdyz neco prijde, skoci tady a ulozi global promennou.
 
-void gps_set(void)
+void gps_read(void)
 {
-	gpio_set(GPIOA, GPIO6|GPIO7);
+	gpio_set(GPIOA, GPIO6);
 }
 
 

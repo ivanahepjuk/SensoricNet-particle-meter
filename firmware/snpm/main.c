@@ -82,9 +82,31 @@ int main(void)
 	i2c_setup();
 	spi_setup();
 	
-	//gps set
-	gps_set();
-	
+
+	gpio_set(GPIOA, GPIO6|GPIO7);
+
+
+//usartSend("\r\n$PMTK225,2,3000,18000,72000\r\n", 2);
+
+
+while (1){
+
+for(uint16_t x = 0; x<280; x++){
+	usart_send_blocking(USART4, gps_string[x]);
+}
+
+wait(SEC*10);
+
+}
+
+//
+
+//gpio_set(GPIOA, GPIO6);
+//wait(SEC*5);
+
+
+}
+/*	
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
 	//eeprom_write_id("nbiot-0005");
@@ -95,14 +117,7 @@ int main(void)
 	
 	BME280_init();
 
-// semihosting - stdio po debug konzoli, inicializace
-/*
-#if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
-	initialise_monitor_handles();
-	setbuf(stdout, NULL);
-#endif
-*/
-	
+
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
@@ -116,7 +131,7 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*15);//until quectel wakes up
+		//wait(SEC*15);//until quectel wakes up
 		//nbiot_connect();
 	#endif
 
@@ -138,9 +153,10 @@ nvic_enable_irq(NVIC_USART2_IRQ);
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
 
-	flash(3, 100000);
+	
 
 	while (1) {
+gps_read();
 		//usartSend("DEBUG: New loop\r\n", 2);
 	
 		nvic_disable_irq(NVIC_USART2_IRQ);
@@ -273,4 +289,8 @@ nvic_enable_irq(NVIC_USART2_IRQ);
 		wait(SEC *WAIT);
 	}
 	return 0;
+
 }
+
+*/
+
