@@ -80,7 +80,7 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-
+	//test
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
 	//eeprom_write_id("nbiot-0005");
