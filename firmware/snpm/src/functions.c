@@ -26,7 +26,7 @@
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
 // set some constants, fixme
-extern char gps_string[400];
+
 
 float calculate_float(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3)
 {
@@ -333,14 +333,15 @@ char* string_to_hex(unsigned char *string, int len)
 void usart2_isr(void)
 {
 	static uint8_t data = 'A';
-uint16_t i = 0;
 
-int32_t flags = USART_ISR(USART2);
+
+if(gps_index >= 400)
+	gps_index = 0;
 
 	//Check if we were called because of RXNE.
 //RXNEIE znamena interupt enable. Pokud je v nem 1 tak se interrupt generuje pri ORE nebo RXNE v ISR registru, coz se resi hned v tom dalsim if
-	while (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
-
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
+//USART_ISR(USART2) &= ~USART_ISR_RXNE;
 	//ISR_ORE - overrun error. Nastavio ho HW kdyzdata ktera zrovna jsou prijimana do shift 
 	//registru jsou ready na transfer do RDR registru, ale RXNE je porad 1, tzn jeste sem z 
 	//RDR nevycetl to co tam bylo.
@@ -348,22 +349,16 @@ int32_t flags = USART_ISR(USART2);
 	//ISR_RXNE register dsata not empty - nastavi ho hw pokud obsah RDR shift registru (receive data register) byl mptransformovan do 
 	//usart_RDR. Jinymy slovy - mam data ktera muzou byt vyctena.
 	
-		//flash(1, 100000);
-		
-			//gps_string[i] = usart_recv(USART2);
-			//usart_send_blocking(USART2, gps_string[i]);
-			//i++;
-gps_string[i] = usart_recv(USART2);
-
-//usart_send_blocking(USART4, usart_recv(USART2));
-//uart_clear_interrupt_flag(
-//clean NE flag
-
-i++;
+	
 			
-			
-		}
-	gps_string[i] = NULL;  //ukonceni retezce
+//		gps_string[gps_index] = usart_recv(USART2);
+//		gps_index++;
+
+
+
+		usart_send_blocking(USART4, usart_recv(USART2));
+	}
+	//gps_string[i] = NULL;  //ukonceni retezce
 
 		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
 		// do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
@@ -398,6 +393,7 @@ i++;
 	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
 	
 }
+
 
 
 

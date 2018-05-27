@@ -58,7 +58,8 @@ int8_t dig_H6;
 /////////
 char ID[11];
 char id_decoded[23]={0};
-char gps_string[400] = {0};
+uint8_t gps_string[400] = {1};
+uint16_t gps_index = 0;
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for OPC-N2: //
@@ -86,23 +87,13 @@ int main(void)
 	gpio_set(GPIOA, GPIO6|GPIO7);
 
 
-//usartSend("\r\n$PMTK225,2,3000,18000,72000\r\n", 2);
-
-
 while (1){
 
-for(uint16_t x = 0; x<280; x++){
-	usart_send_blocking(USART4, gps_string[x]);
-}
-
-wait(SEC*10);
+	flash(3, 1000);
+	usart_send_blocking(USART4, 'A');
 
 }
 
-//
-
-//gpio_set(GPIOA, GPIO6);
-//wait(SEC*5);
 
 
 }

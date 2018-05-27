@@ -30,6 +30,9 @@
 
 #define SEC		(1000000)
 
+extern uint8_t gps_string[400];
+extern uint16_t gps_index;
+
 //eeprom
 int eeprom_write(char *dev_id);
 
