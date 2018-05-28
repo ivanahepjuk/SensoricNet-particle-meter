@@ -34,6 +34,8 @@ int frame_counter = 0;
 
 /* For semihosting on newlib */
 //extern void initialise_monitor_handles(void);
+//systick
+uint32_t temp32;
 
 
 //Global variables for burst register reading, bme280
@@ -58,8 +60,9 @@ int8_t dig_H6;
 /////////
 char ID[11];
 char id_decoded[23]={0};
-uint8_t gps_string[400] = {1};
-uint16_t gps_index = 0;
+uint8_t gps_string[700] = {0};
+uint16_t gps_index = 0; 
+
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for OPC-N2: //
@@ -76,7 +79,9 @@ uint8_t pm_values_buffer[12] = {0};//only pm data
 
 int main(void)
 {
-	
+	// 125ms ticks =>  250ms period => 4Hz blinks 
+	systick_setup(8000);
+
 	clock_setup();
 	gpio_setup();
 	usart_setup();
@@ -87,12 +92,31 @@ int main(void)
 	gpio_set(GPIOA, GPIO6|GPIO7);
 
 
-while (1){
+	while (1){
+		if(temp32 > 4){
+			usart_disable(USART2);
+			usart_disable_rx_interrupt(USART2);
+			//code here triggers every WAIT seconds
+			for(uint16_t t = 0; t<700; t++)
+				usart_send_blocking(USART4, gps_string[t]);
 
-	flash(3, 1000);
-	usart_send_blocking(USART4, 'A');
+			usartSend("\r\n\r\n", 4);
+			gps_index = 0;
+			
+			temp32=0;
 
-}
+			usart_enable_rx_interrupt(USART2);
+			usart_enable(USART2);
+			//flush data
+			USART_RQR(USART2) |= USART_RQR_RXFRQ;
+		}
+	//code here is running for ever
+
+if((USART_ISR(USART2), USART_ISR_RTOF) != 0)
+usartSend("\r\n\r\n hmm", 4);//gps_index = 0;
+	//Kdyz neprobiha komunikace, vynuluju index gps stringu	
+//gps_index = 0;
+	}
 
 
 

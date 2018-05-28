@@ -21,7 +21,8 @@
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
 #include <stdlib.h>
-#include "../main.h"
+#include <libopencm3/stm32/usart.h>
+#include "gps.h"
 
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
@@ -179,7 +180,9 @@ void usartSend(char *phrase, uint8_t usart)
 
 void clock_setup(void)
 {
-	rcc_clock_setup_in_hse_8mhz_out_48mhz();
+//	rcc_clock_setup_in_hse_8mhz_out_48mhz();
+//fixme zkusit bez krystalu?
+rcc_clock_setup_in_hsi_out_48mhz();
 
 
     //clk for gsm,leds,
@@ -199,6 +202,23 @@ void clock_setup(void)
 
 	// clk for USART2 (gsm) PA2 tx PA3 rx
 	rcc_periph_clock_enable(RCC_USART2);
+}
+
+void systick_setup(int xms)
+{
+	/* div8 per ST, stays compatible with M3/M4 parts, well done ST */
+	systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
+	/* clear counter so it starts right away */
+	STK_CVR = 0;
+
+	systick_set_reload(rcc_ahb_frequency / 8 / 1000 * xms);
+	systick_counter_enable();
+	systick_interrupt_enable();
+}
+
+void sys_tick_handler(void)
+{
+	temp32++;
 }
 
 
@@ -235,7 +255,7 @@ void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
 	nvic_enable_irq(NVIC_USART2_IRQ);
-	//nvic_set_priority(NVIC_USART2_IRQ, 128);
+	nvic_set_priority(NVIC_USART2_IRQ, 128);
 
 	usart_set_baudrate(USART2, 9600);
 	usart_set_databits(USART2, 8);
@@ -244,7 +264,9 @@ void usart_setup(void)
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
 	usart_enable_rx_interrupt(USART2);
-	usart_enable(USART2);
+usart_enable(USART2);
+usart_set_rx_timeout_value(USART2, 1000);
+	
 
 	// setup quectel(gsm)/lora USART4 parameters
 	usart_set_baudrate(USART4, 9600);  //lora 57600 quectel 9600 USART_BAUDRATE
@@ -332,11 +354,18 @@ char* string_to_hex(unsigned char *string, int len)
 
 void usart2_isr(void)
 {
-	static uint8_t data = 'A';
-
-
-if(gps_index >= 400)
+	
+if (gps_index >= GPS_STRING_LENGTH - 1)
 	gps_index = 0;
+
+//static uint8_t data = 'A';
+
+//if ((USART_ISR(USART2) & USART_ISR_RTOF) == 1)
+//if((USART_ISR(USART2), USART_ISR_RTOF) != 0)
+
+//usartSend("x", 4);
+//gps_index = 0;
+
 
 	//Check if we were called because of RXNE.
 //RXNEIE znamena interupt enable. Pokud je v nem 1 tak se interrupt generuje pri ORE nebo RXNE v ISR registru, coz se resi hned v tom dalsim if
@@ -349,14 +378,14 @@ if(gps_index >= 400)
 	//ISR_RXNE register dsata not empty - nastavi ho hw pokud obsah RDR shift registru (receive data register) byl mptransformovan do 
 	//usart_RDR. Jinymy slovy - mam data ktera muzou byt vyctena.
 	
-	
+	//while ((USART_ISR(USART2) & USART_ISR_RTOF) != 0){
 			
-//		gps_string[gps_index] = usart_recv(USART2);
-//		gps_index++;
+		gps_string[gps_index] = usart_recv(USART2);
+		gps_index++;
+//}
 
 
-
-		usart_send_blocking(USART4, usart_recv(USART2));
+		//usart_send_blocking(USART4, usart_recv(USART2));
 	}
 	//gps_string[i] = NULL;  //ukonceni retezce
 
@@ -391,9 +420,8 @@ if(gps_index >= 400)
 	
 		//flush neprectene data, 
 	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
-	
+		
 }
-
 
 
 

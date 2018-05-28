@@ -25,13 +25,20 @@
 #include <libopencm3/stm32/rcc.h>
 #include <string.h>
 #include <stdio.h>
+#include <libopencm3/cm3/systick.h>
+#include "gps.h"
 //#include <stdint.h>
 	
 
 #define SEC		(1000000)
 
-extern uint8_t gps_string[400];
+extern uint8_t gps_string[700];
 extern uint16_t gps_index;
+
+
+//systick
+extern uint32_t temp32;
+
 
 //eeprom
 int eeprom_write(char *dev_id);
@@ -56,7 +63,7 @@ void wait(uint32_t usec);
 void flash(uint8_t loop, uint32_t delay);
 
 void usart4_isr(void);
-
+void systick_setup(int xms);
 
 ////////////////dronovo
 char* concat(const char *s1, const char *s2);
