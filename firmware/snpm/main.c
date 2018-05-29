@@ -60,9 +60,12 @@ int8_t dig_H6;
 /////////
 char ID[11];
 char id_decoded[23]={0};
-uint8_t gps_string[700] = {0};
+char gps_string[700];
+char *p_gps_string = &gps_string;
 uint16_t gps_index = 0; 
 
+//debug 
+char debug[700] = "fvdwvfdsvcsvcxzcxvgg$GPGLL,5014.8281,N,01729.0924,E,162245.406,A,A*5C ";
 
 /////////////////////////////////////////////////////////////
 //Global variables for burst register reading, for OPC-N2: //
@@ -76,6 +79,121 @@ uint8_t pm_values_buffer[12] = {0};//only pm data
  * MAIN
  *
  ********************************************************************************************/
+/////////////////gps
+
+typedef struct 
+{
+	float x;
+	float y;
+char X;
+char Y;
+}gps_struct;
+
+gps_struct gps;
+
+void gps_parse(char *field)
+{
+
+		
+char *pozice;
+char str_souradnice[20];
+
+if ( (strstr(field, "$GPGLL,")) == NULL) {
+	return 0;
+} 
+//vrati mi pozici kde se nachazi string GPGLL
+pozice = strstr(field, "$GPGLL,");
+
+//gps.x = 11.111;
+	
+
+
+//souradnice x
+//pokud tam neni carka, je tam asi cislo, tudiz ma smysl tam neco hledat:
+if(gps_string[pozice - p_gps_string+7] != ',' ){
+	uint8_t index = 0;
+
+	//parsing prvni souradnice:	
+	//je to cislo nebo desetinna tecka
+	while((isdigit(gps_string[pozice - p_gps_string+7+index])) ||  (gps_string[pozice - p_gps_string+7+index] == '.')){
+		//uloz do pole pomocneho
+		str_souradnice[index] = gps_string[pozice - p_gps_string+7+index];
+		index++;
+	}
+	str_souradnice[index] = NULL;
+	gps.x = atof(str_souradnice);
+
+	index++; //,
+	gps.X = gps_string[pozice - p_gps_string+7+index];
+	index++; //,
+	index++;
+	//parsing druhe souradnice:	
+	//je to cislo nebo desetinna tecka
+	uint8_t index_druhy = 0;
+	while((isdigit(gps_string[pozice - p_gps_string+7+index])) ||  (gps_string[pozice - p_gps_string+7+index] == '.')){
+		//uloz do pole pomocneho
+		str_souradnice[index_druhy] = gps_string[pozice - p_gps_string+7+index];
+		index++;
+		index_druhy++;
+	}
+	str_souradnice[index_druhy] = NULL;
+	gps.y = atof(str_souradnice);
+
+	index++; //,
+	gps.Y = gps_string[pozice - p_gps_string+7+index];
+	index++; //,
+	
+}
+
+//debug
+	char  vypis[100];
+
+	sprintf(vypis, "prvni:  %f%c druha %f%c\r\n", gps.x, gps.X, gps.y, gps.Y);
+	usartSend(vypis, 4);
+
+	
+
+//usartSend(str_souradnice, 4);
+
+
+
+	/*
+	char incomming[50] = {0};	//readed string
+	int i=0;	//iteracni promenna
+	int enter=0;	//detekce znaku CR
+
+	//posila na linku
+	while(phrase[i] != '\0'){	//posle string
+		usart_send_blocking(USART4, phrase[i]);
+		i++;
+	}
+	i=0;
+	//interrupt status register poreseny
+	USART_ICR(USART4) |= 0b00000000000010100011101110101111;
+	//cte z linky dokud neprijme tolik entru kolik ceka
+	while(enter < pocetentru){
+
+		incomming[i] = usart_recv_blocking(USART4);
+		#ifdef DEBUG 
+		//sending stuff to usart2 debug port
+		usart_send_blocking(USART2, incomming[i]);
+		#endif
+		if (incomming[i] == '\n')
+			enter++;
+		i++;
+	}
+
+	
+	if ( (strstr(incomming, check)) == NULL) {
+		return 1;
+	} else {
+		return 0;
+	}
+*/
+}
+
+
+
 
 int main(void)
 {
@@ -97,10 +215,14 @@ int main(void)
 			usart_disable(USART2);
 			usart_disable_rx_interrupt(USART2);
 			//code here triggers every WAIT seconds
+			usartSend("\r\n", 4);			
 			for(uint16_t t = 0; t<700; t++)
 				usart_send_blocking(USART4, gps_string[t]);
 
 			usartSend("\r\n\r\n", 4);
+			
+			gps_parse(gps_string);
+
 			gps_index = 0;
 			
 			temp32=0;
@@ -112,8 +234,8 @@ int main(void)
 		}
 	//code here is running for ever
 
-if((USART_ISR(USART2), USART_ISR_RTOF) != 0)
-usartSend("\r\n\r\n hmm", 4);//gps_index = 0;
+//if((USART_ISR(USART2), USART_ISR_RTOF) != 0)
+//gps_index = 0;
 	//Kdyz neprobiha komunikace, vynuluju index gps stringu	
 //gps_index = 0;
 	}

@@ -24,6 +24,7 @@
 #define GPS_STRING_LENGTH	700
 
 
+
 void gps_read(void);
 #endif
 

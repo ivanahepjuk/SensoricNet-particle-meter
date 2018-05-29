@@ -16,13 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#include "functions.h"
+
+#include <libopencm3/stm32/f0/nvic.h>
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/spi.h>
 #include <stdlib.h>
 #include <libopencm3/stm32/usart.h>
 #include "gps.h"
+#include "functions.h"
 
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
 
@@ -355,7 +356,7 @@ char* string_to_hex(unsigned char *string, int len)
 void usart2_isr(void)
 {
 	
-if (gps_index >= GPS_STRING_LENGTH - 1)
+if (gps_index >= GPS_STRING_LENGTH - 2) //because null and one
 	gps_index = 0;
 
 //static uint8_t data = 'A';

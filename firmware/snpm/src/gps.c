@@ -31,5 +31,9 @@ void gps_read(void)
 	gpio_set(GPIOA, GPIO6);
 }
 
+//$GPGLL,
+
+
+
 
 

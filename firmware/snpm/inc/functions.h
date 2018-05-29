@@ -32,7 +32,7 @@
 
 #define SEC		(1000000)
 
-extern uint8_t gps_string[700];
+extern char gps_string[700];
 extern uint16_t gps_index;
 
 
