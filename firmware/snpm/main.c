@@ -108,8 +108,8 @@ int main(void)
 //	eeprom_write_id("sensoricnet-lora-0002");
 
 	//reads ID from eeprom
-//	eeprom_read_id();
-//	usartSend(ID, 2);
+	eeprom_read_id();
+	usartSend(ID, 2);
 	BME280_init();
 
 // semihosting - stdio po debug konzoli, inicializace
