@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name SNPM)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/SNPM.pretty)(options "")(descr ""))
+  (lib (name Connectors)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/Connectors.pretty)(options "")(descr ""))
+  (lib (name Diodes_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Diodes_ThroughHole.pretty")(options "")(descr ""))
+  (lib (name Capacitors_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Capacitors_ThroughHole.pretty")(options "")(descr ""))
+)
