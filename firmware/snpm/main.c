@@ -65,28 +65,6 @@ char id_decoded[23]={0};
 
 uint8_t histogram_buffer[62];//whole dataset of opc readed into this
 uint8_t pm_values_buffer[12] = {0};//only pm data
-/*
-void usart4_isr(void)
-{
-	
-	     uint32_t serviced_irqs = 0;
-     // Process individual IRQs
-     if (uart_is_interrupt_source(UART0, UART_INT_RX)) {
-        process_rx_event();
-        serviced_irq |= UART_INT_RX;
-     }
-     if (uart_is_interrupt_source(UART0, UART_INT_CTS)) {
-        process_cts_event();
-        serviced_irq |= UART_INT_CTS;
-     }
-     // Clear the interrupt flag for the processed IRQs
-     uart_clear_interrupt_flag(UART0, serviced_irqs);
-     
-     
-//tady dopsat kod preruseni	
-flash(7);	
-}
-*/
 
 /********************************************************************************************
  *
@@ -102,14 +80,17 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-
-	//   !!!   Uncomment this only if you know what you are mdoing,   
+	//test
+	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
-//	eeprom_write_id("sensoricnet-lora-0002");
-
+	//eeprom_write_id("nbiot-0005");
 	//reads ID from eeprom
-	eeprom_read_id();
-	usartSend(ID, 2);
+
+	#if DEVICE_TYPE == NBIOT
+		eeprom_read_id();
+		usartSend(ID, 2);
+	#endif
+	
 	BME280_init();
 
 // semihosting - stdio po debug konzoli, inicializace
@@ -119,7 +100,7 @@ int main(void)
 	setbuf(stdout, NULL);
 #endif
 */
-	flash(1, 100000);
+	
 
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
@@ -133,32 +114,27 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-	usartSend("DEBUG: Quectel reset.\r\n", 2);
-	wait(SEC*15);//until quectel wakes up
-	nbiot_connect();
-	usartSend("DEBUG: Nb-IOT network connected.\r\n", 2);
+		wait(SEC*15);//until quectel wakes up
+		nbiot_connect();
 	#endif
 
 	//Connect to lora network
 	#if DEVICE_TYPE == LORAWAN
-	usartSend("DEBUG: rn2483 reset.\r\n", 2);
-	lorawan_reset();
-	usartSend("DEBUG: lora connect.\r\n", 2);
-	lorawan_connect();
-	usartSend("DEBUG: lora connected.\r\n", 2);
+		usartSend("DEBUG: rn2483 reset.\r\n", 2);
+		lorawan_reset();
+		usartSend("DEBUG: lora connect.\r\n", 2);
+		lorawan_connect();
+		usartSend("DEBUG: lora connected.\r\n", 2);
 	#endif
 
-	flash(2, 50000);
-
 	particlemeter_ON();
-	wait(200000);
+	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
-	usartSend("DEBUG: Particle meter set.\r\n", 2);
 
-	flash(3, 50000);
-	
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
+
+	flash(3, 100000);
 
 	while (1) {
 		usartSend("DEBUG: New loop\r\n", 2);
@@ -183,7 +159,7 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 4, pm1);
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
-		CayenneLPP__addGPS(lpp, 7, 52.37365, 4.88650, 2);
+		CayenneLPP__addGPS(lpp, 7, 18.3087525, 49.8346883, 1234);
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);

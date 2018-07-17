@@ -231,45 +231,24 @@ void i2c_setup(void)
 void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
-	// fixme - vymyslet predavani parametru baudrate
+	nvic_enable_irq(NVIC_USART2_IRQ);
 	usart_set_baudrate(USART2, 57600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
-	// enable the USART2
+	usart_enable_rx_interrupt(USART2);
 	usart_enable(USART2);
 
 	// setup quectel(gsm)/lora USART4 parameters
-	// fixme - vymyslet predavani parametru baudrate
-	
 	usart_set_baudrate(USART4, USART_BAUDRATE);  //lora 57600 quectel 9600
 	usart_set_databits(USART4, 8);
 	usart_set_parity(USART4, USART_PARITY_NONE);
 	usart_set_stopbits(USART4, USART_STOPBITS_1);
 	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
-/*	*/
-	USART_CR1(USART4) |= 0b0000000000000000000000101100;
-	//USART_BRR(USART4) |= 500;  //oversampling
-	USART_CR1(USART4) |= 0b1;    //enable that fucker
-	/* (1) oversampling by 16, 9600 baud */
-/* (2) 8 data bit, 1 start bit, 1 stop bit, no parity, reception mode */
-//USART1->BRR = 480000 / 96; /* (1) */
-//USART1->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE; /* (2) */
-	
-	
-	// enable the USART4
 	usart_enable(USART4);
-
-//	/* Enable interrupts from the USART */
-//	nvic_enable_irq(NVIC_USART4_IRQ);
-
-	/* Specifically enable recieve interrupts */
-//usart_enable_rx_interrupt(USART4);
-//https://www.youtube.com/watch?v=kFiVs-0Ww28
-
 }
 
 
@@ -283,7 +262,7 @@ void gpio_setup(void)
 	//wireless reset
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
 
-	// USART2 GPIO pins 
+	// USART2 GPS
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3);//rx
 
@@ -296,8 +275,8 @@ void gpio_setup(void)
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
     
     // USART4 GPIO pins 
-    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO11);//rx
+    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
 
 
 }
@@ -335,6 +314,41 @@ char* string_to_hex(unsigned char *string, int len)
 	return result;
 }
 
+
+void usart2_isr(void)
+{
+	static uint8_t data = 'A';
+
+	//Check if we were called because of RXNE.
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
+
+	
+		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
+			data = usart_recv(USART2);
+			usart_send_blocking(USART2, data);
+			flash(3, 10000);
+		}
+
+		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
+		// do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
+		// tohohle interupt flag clear status register, protoze ten ISR je read only, anobrz ICRT je read write.
+		// Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
+		// nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
+		// takove ORove peklo:)
+		 
+		 
+		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
+								USART_ICR_NCF    | USART_ICR_ORECF | 
+								USART_ICR_IDLECF | USART_ICR_TCCF  | 
+								USART_ICR_LBDCF  | USART_ICR_CTSCF | 
+								USART_ICR_RTOCF  | USART_ICR_EOBCF | 
+								USART_ICR_CMCF   | USART_ICR_WUCF  
+							);
+	
+		//flush neprectene data, 
+	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
+	}
+}
 
 
 

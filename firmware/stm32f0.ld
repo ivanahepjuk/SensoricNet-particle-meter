@@ -27,6 +27,7 @@ MEMORY
 	ram (rwx) : ORIGIN = 0x20000000, LENGTH = 16K
 }
 
-/* Include the common ld script. */
+/* Include the common ld script   */
 INCLUDE libopencm3_stm32f0.ld
+
 

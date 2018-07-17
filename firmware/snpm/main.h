@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <libopencm3/stm32/nvic.h>
+#include <libopencm3/stm32/f0/nvic.h>
 #include "inc/functions.h"
 #include "inc/bme280.h"
 #include "inc/opcn2.h"

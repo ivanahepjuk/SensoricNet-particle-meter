@@ -84,3 +84,54 @@ cd ~/git/SensoricNet-particle-meter/firmware/snpm/
 ./make_lora.sh <your_sensor_dev_id>
 ```
 
+
+#  Debian 9
+code:
+```
+git clone ivanahepjuk/SensoricNet...
+```
+libopencm3 library:
+```
+cd SensoricNet.../firmware
+git clone libopencm3
+```
+toolchain:
+```
+
+
+go to your home folder and make dedicated folder for arm toolchain:
+mkdir ~/ARM_toolchain
+
+download toolchain file into this ARM_toolchain folder:
+https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads/6-2017-q2-update
+
+extract it:
+tar -xf <toolchain_file>
+
+go to your home folder 
+cd ~/
+
+make a new file, name it .bash_profile
+nano .bash_profile
+
+and define path top your toolchain here (add this line with path to your toolchain files)
+PATH=$PATH:/home/ia/ARM_toolchain/gcc-arm-none-eabi-6-2017-q2-update/bin
+
+save it by pressing ctrl+x and then load it:
+source ~/.bash_profile
+
+test it by writing this into terminal:
+arm-none-eabi-gcc --version
+
+you should get this:
+arm-none-eabi-gcc (GNU Tools for ARM Embedded Processors 6-2017-q2-update) 6.3.1 20170620 (release) [ARM/embedded-6-branch revision 249437]
+Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+now installing openOCD:
+
+
