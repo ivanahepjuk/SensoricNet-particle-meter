@@ -159,7 +159,7 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 4, pm1);
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
-		CayenneLPP__addGPS(lpp, 7, 18.3087525, 49.8346883, 1234);
+		CayenneLPP__addGPS(lpp, 7, atof(GPS_LAT), atof(GPS_LONG), atof(GPS_ALT));
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
