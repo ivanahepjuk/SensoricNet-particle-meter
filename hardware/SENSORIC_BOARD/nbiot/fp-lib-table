@@ -2,4 +2,5 @@
   (lib (name SNPM)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/SNPM.pretty)(options "")(descr ""))
   (lib (name Diodes_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Diodes_ThroughHole.pretty")(options "")(descr ""))
   (lib (name Capacitors_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Capacitors_ThroughHole.pretty")(options "")(descr ""))
+  (lib (name koksovna)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/koksovna)(options "")(descr ""))
 )
