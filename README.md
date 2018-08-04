@@ -86,16 +86,21 @@ cd ~/git/SensoricNet-particle-meter/firmware/snpm/
 
 
 #  Debian 9
-code:
+
 ```
-git clone ivanahepjuk/SensoricNet...
+cd ~/git
+git clone https://github.com/ivanahepjuk/SensoricNet-particle-meter.git
 ```
+
 libopencm3 library:
+
 ```
 cd SensoricNet.../firmware
 git clone libopencm3
 ```
+
 toolchain:
+
 ```
 
 

@@ -48,9 +48,9 @@ void flash(uint8_t loop, uint32_t delay)
 {
 	for (uint8_t i = 0; i < loop; i++)
 	{
-		gpio_set(GPIOA, GPIO11); 
+		gpio_set(LED2_GPIO_GROUP, LED2_GPIO);
 		wait(delay);
-		gpio_clear(GPIOA, GPIO11); 
+		gpio_clear(LED2_GPIO_GROUP, LED2_GPIO);
 		wait(delay);
 	}
 }
@@ -256,8 +256,8 @@ void gpio_setup(void)
 {
 
 	//gpio LEDs setup
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
-    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11);
+	gpio_mode_setup(LED1_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED1_GPIO);
+	gpio_mode_setup(LED2_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED2_GPIO);
 	
 	//wireless reset
 	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);

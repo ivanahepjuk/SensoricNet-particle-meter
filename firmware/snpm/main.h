@@ -23,6 +23,17 @@
 #define NBIOT 1
 #define LORAWAN 2
 
+// define pins for peripherals
+
+// leds
+#define LED1_GPIO_GROUP GPIOC
+#define LED1_GPIO GPIO5
+#define LED2_GPIO_GROUP GPIOB
+#define LED2_GPIO GPIO1
+
+
+
+
 // u techto promennych se predpoklada jejich naplneni z cmdline
 
 //Choose your platform here
