@@ -16,8 +16,11 @@
 //how long it waits at the end of each loop?
 #define WAIT 30
 
-//USART2 debug output, if defined, all USART4 communication is routed also to USART2
+//USART1 is used as debug output, if defined, debug output is send
 #define DEBUG
+#define DEBUG_USART USART1
+#define DEBUG_BAUDRATE 57600
+
 
 // define macro for device type description
 #define NBIOT 1
@@ -31,7 +34,9 @@
 #define LED2_GPIO_GROUP GPIOB
 #define LED2_GPIO GPIO1
 
-
+// IoT module reset
+#define IOT_RESET_GPIO_GROUP GPIOA
+#define IOT_RESET_GPIO GPIO9
 
 
 // u techto promennych se predpoklada jejich naplneni z cmdline

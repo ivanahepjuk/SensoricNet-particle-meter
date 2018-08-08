@@ -48,9 +48,9 @@ void flash(uint8_t loop, uint32_t delay)
 {
 	for (uint8_t i = 0; i < loop; i++)
 	{
-		gpio_set(LED2_GPIO_GROUP, LED2_GPIO);
+		gpio_set(LED1_GPIO_GROUP, LED1_GPIO);
 		wait(delay);
-		gpio_clear(LED2_GPIO_GROUP, LED2_GPIO);
+		gpio_clear(LED1_GPIO_GROUP, LED1_GPIO);
 		wait(delay);
 	}
 }
@@ -176,14 +176,36 @@ void usartSend(char *phrase, uint8_t usart)
 	}
 }
 
+void debug_usart_send(char *phrase)
+{
+	char debug_txt[] = "DEBUG: ";
+	uint32_t i=0;
+
+	while(debug_txt[i] != '\0')
+	{
+		usart_send_blocking(DEBUG_USART, debug_txt[i]);
+		i++;
+	}
+
+	i=0;
+	while(phrase[i] != '\0')
+	{
+		usart_send_blocking(DEBUG_USART, phrase[i]);
+		i++;
+	}
+
+	usart_send_blocking(DEBUG_USART, '\r');
+	usart_send_blocking(DEBUG_USART, '\n');
+}
+
 
 void clock_setup(void)
 {
-    //clk for gsm,leds,
-    rcc_periph_clock_enable(RCC_GPIOA);
+	//clk for gsm, leds, FIXME
+	rcc_periph_clock_enable(RCC_GPIOA);
 
 	//clk for spi and FIXME i2c
-    rcc_periph_clock_enable(RCC_GPIOB);
+	rcc_periph_clock_enable(RCC_GPIOB);
 	
 	// Enable GPIOC clock for LED
 	rcc_periph_clock_enable(RCC_GPIOC);
@@ -191,11 +213,15 @@ void clock_setup(void)
 	//clk for SPI1
 	rcc_periph_clock_enable(RCC_SPI1);
 	
-	// clk for USART4 (quectel)  PC10 tx PC11 rx
+	//clk for USART4 (IoT module), PC10 tx, PC11 rx
 	rcc_periph_clock_enable(RCC_USART4);
 
-	// clk for USART2 (gsm) PA2 tx PA3 rx
+	//clk for USART2 (GPS module), PA2 tx, PA3 rx
 	rcc_periph_clock_enable(RCC_USART2);
+
+	//clk for USART1 (DEBUG), PB6 tx, PB7 rx
+	rcc_periph_clock_enable(RCC_USART1);
+
 }
 
 
@@ -238,7 +264,7 @@ void usart_setup(void)
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
-	usart_enable_rx_interrupt(USART2);
+//	usart_enable_rx_interrupt(USART2);
 	usart_enable(USART2);
 
 	// setup quectel(gsm)/lora USART4 parameters
@@ -249,6 +275,16 @@ void usart_setup(void)
 	usart_set_mode(USART4, USART_MODE_TX_RX);
 	usart_set_flow_control(USART4, USART_FLOWCONTROL_NONE);
 	usart_enable(USART4);
+
+	// setup debug USART1 parameters
+	usart_set_baudrate(DEBUG_USART, DEBUG_BAUDRATE); //default 57600
+	usart_set_databits(DEBUG_USART, 8);
+	usart_set_parity(DEBUG_USART, USART_PARITY_NONE);
+	usart_set_stopbits(DEBUG_USART, USART_STOPBITS_1);
+	usart_set_mode(DEBUG_USART, USART_MODE_TX_RX);
+	usart_set_flow_control(DEBUG_USART, USART_FLOWCONTROL_NONE);
+	usart_enable(DEBUG_USART);
+
 }
 
 
@@ -259,25 +295,32 @@ void gpio_setup(void)
 	gpio_mode_setup(LED1_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED1_GPIO);
 	gpio_mode_setup(LED2_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED2_GPIO);
 	
-	//wireless reset
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO9);
+	//iot module reset
+	gpio_mode_setup(IOT_RESET_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, IOT_RESET_GPIO);
 
-	// USART2 GPS
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2);//tx
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3);//rx
+	// USART1 setup pins as alternate function AF0
+	gpio_set_af(GPIOB, GPIO_AF0, GPIO6);
+	gpio_set_af(GPIOB, GPIO_AF0, GPIO7);
 
-	// USART2 setup pins as alternate function AF0
+	// USART2 setup pins as alternate function AF1
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
-    
-    	// USART4 setup pins as alternate function AF0
+
+	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
-    
-    // USART4 GPIO pins 
-    gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10);//tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11);//rx
 
+	// USART1 DEBUG
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO6); //tx
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO7); //rx
+
+	// USART2 GPS
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2); //tx
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3); //rx
+
+//	// USART4 GPIO pins
+//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
+//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
 
 }
 

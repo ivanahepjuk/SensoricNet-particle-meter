@@ -39,6 +39,7 @@ char hexDigit(unsigned n);
 
 //posle string na usart c. 1,2,3,4
 void usartSend(char *phrase, uint8_t usart);
+void debug_usart_send(char *phrase);
 void clock_setup(void);
 void i2c_setup(void);
 void usart_setup(void);

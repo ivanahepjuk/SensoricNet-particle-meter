@@ -80,15 +80,21 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
+
+	flash(1, 200000);
+
 	//test
 	//   !!!   Uncomment this only if you know what you are doing,   
 	//   !!!!  This is used when deploying new devices   !!!!
 	//eeprom_write_id("nbiot-0005");
 	//reads ID from eeprom
 
+	debug_usart_send("Welcome to SensoricNet particlemeter");
+
 	#if DEVICE_TYPE == NBIOT
-		eeprom_read_id();
-		usartSend(ID, 2);
+		debug_usart_send("device type is NBIoT");
+//		eeprom_read_id();
+//		usartSend(ID, 2);
 	#endif
 	
 	BME280_init();
@@ -106,25 +112,30 @@ int main(void)
 	unsigned char *buf;
 	int size;
 
-	//gps/lora module HW reset
-	gpio_clear(GPIOA, GPIO9);
+	//IoT module HW reset
+	debug_usart_send("IoT module hw reset");
+	gpio_clear(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
 	wait(SEC*0.5);
-	gpio_set(GPIOA, GPIO9);
+	gpio_set(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
 	wait(SEC*3);
+	debug_usart_send("IoT module hw reset done");
+
+	flash(1, 50000);
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*15);//until quectel wakes up
+		wait(SEC*15); //until quectel wakes up
+		flash(3, 50000);
 		nbiot_connect();
 	#endif
 
 	//Connect to lora network
 	#if DEVICE_TYPE == LORAWAN
-		usartSend("DEBUG: rn2483 reset.\r\n", 2);
+		debug_usart_send("rn2483 reset");
 		lorawan_reset();
-		usartSend("DEBUG: lora connect.\r\n", 2);
+		debug_usart_send("lora connect");
 		lorawan_connect();
-		usartSend("DEBUG: lora connected.\r\n", 2);
+		debug_usart_send("lora connected");
 	#endif
 
 	particlemeter_ON();
@@ -137,7 +148,7 @@ int main(void)
 	flash(3, 100000);
 
 	while (1) {
-		usartSend("DEBUG: New loop\r\n", 2);
+		debug_usart_send("New loop");
 		read_pm_values();
 		BME280_data_readout(burst_read_data);
 
@@ -148,10 +159,10 @@ int main(void)
 		float pm2_5 = particlemeter_pm2_5();
 		float pm10 = particlemeter_pm10();
 
-		usartSend("DEBUG: Encode values\r\n", 2);
+		debug_usart_send("Encode values");
 		char debug_data_string[150] = {0};
-		sprintf(debug_data_string, "DEBUG: hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f\r\n", hum, temp, press, pm1, pm2_5, pm10);
-		usartSend(debug_data_string, 2);
+		sprintf(debug_data_string, "hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f", hum, temp, press, pm1, pm2_5, pm10);
+		debug_usart_send(debug_data_string);
 		
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
@@ -248,17 +259,15 @@ int main(void)
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
 		
-		//DEBUG CODE posila cislo loop smycky
-		usartSend("DEBUG: Loop done: ", 2);
-		sprintf(cykly_str, "%d", cykly);
-		usartSend(cykly_str, 2);
-		usartSend("\r\n", 2);
+		char loop_debug_string[20] = {0};
+		sprintf(loop_debug_string, "Loop %d done", cykly);
+		debug_usart_send(loop_debug_string);
+
 		cykly++;
 
 		flash(3, 100000);
 
 		wait(SEC *WAIT);
-
 	}
 	return 0;
 }
