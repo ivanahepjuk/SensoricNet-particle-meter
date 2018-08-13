@@ -33,6 +33,8 @@
 #define LED1_GPIO GPIO5
 #define LED2_GPIO_GROUP GPIOB
 #define LED2_GPIO GPIO1
+#define LED3_GPIO_GROUP GPIOB
+#define LED3_GPIO GPIO2
 
 // IoT module reset
 #define IOT_RESET_GPIO_GROUP GPIOA

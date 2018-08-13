@@ -30,6 +30,10 @@
 
 #define SEC		(1000000)
 
+extern uint8_t gps_rx_buffer[255];
+extern uint8_t gps_rx_buffer_pointer;
+extern uint8_t latest_gps_rx_data;
+
 //eeprom
 int eeprom_write(char *dev_id);
 
@@ -52,6 +56,9 @@ uint8_t spi_reaad8(uint32_t spi);
 void wait(uint32_t usec);
 
 void flash(uint8_t loop, uint32_t delay);
+void led_flash(uint8_t led, uint8_t loop, uint32_t delay);
+void led_on(uint8_t led);
+void led_off(uint8_t led);
 
 void usart4_isr(void);
 

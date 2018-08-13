@@ -55,7 +55,44 @@ void flash(uint8_t loop, uint32_t delay)
 	}
 }
 
+/**
+ * zablika danou led x-krat s danou periodou
+ */
+void led_flash(uint8_t led, uint8_t loop, uint32_t delay)
+{
+	for (uint8_t i = 0; i < loop; i++)
+	{
+		led_on(led);
+		wait(delay);
+		led_off(led);
+		wait(delay);
+	}
+}
 
+/**
+ * zapne danou ledku
+ */
+
+void led_on(uint8_t led)
+{
+	if (led==1) {
+		gpio_set(LED1_GPIO_GROUP, LED1_GPIO);
+	} else {
+		gpio_set(LED2_GPIO_GROUP, LED2_GPIO);
+	}
+}
+
+/**
+ * vypne danou ledku
+ */
+void led_off(uint8_t led)
+{
+	if (led==1) {
+		gpio_clear(LED1_GPIO_GROUP, LED1_GPIO);
+	} else {
+		gpio_clear(LED2_GPIO_GROUP, LED2_GPIO);
+	}
+}
 
 /* 		void spi_setup(void)
  * 
@@ -258,13 +295,13 @@ void usart_setup(void)
 {
 	// setup GPS module USART2 parameters
 	nvic_enable_irq(NVIC_USART2_IRQ);
-	usart_set_baudrate(USART2, 57600);
+	usart_set_baudrate(USART2, 9600);
 	usart_set_databits(USART2, 8);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_stopbits(USART2, USART_STOPBITS_1);
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
-//	usart_enable_rx_interrupt(USART2);
+	usart_enable_rx_interrupt(USART2);
 	usart_enable(USART2);
 
 	// setup quectel(gsm)/lora USART4 parameters
@@ -294,13 +331,23 @@ void gpio_setup(void)
 	//gpio LEDs setup
 	gpio_mode_setup(LED1_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED1_GPIO);
 	gpio_mode_setup(LED2_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED2_GPIO);
+	// gpio_mode_setup(LED3_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED3_GPIO);
 	
 	//iot module reset
 	gpio_mode_setup(IOT_RESET_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, IOT_RESET_GPIO);
 
+
+	// USART1 DEBUG
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO6); //tx
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO7); //rx
+
 	// USART1 setup pins as alternate function AF0
 	gpio_set_af(GPIOB, GPIO_AF0, GPIO6);
 	gpio_set_af(GPIOB, GPIO_AF0, GPIO7);
+
+	// USART2 GPS
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2); //tx
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3); //rx
 
 	// USART2 setup pins as alternate function AF1
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
@@ -310,17 +357,9 @@ void gpio_setup(void)
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
 
-	// USART1 DEBUG
-	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO6); //tx
-	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO7); //rx
-
-	// USART2 GPS
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO2); //tx
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3); //rx
-
-//	// USART4 GPIO pins
-//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
-//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
+	//	// USART4 GPIO pins
+	//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
+	//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
 
 }
 
@@ -362,15 +401,22 @@ void usart2_isr(void)
 {
 	static uint8_t data = 'A';
 
+	led_on(2);
+
 	//Check if we were called because of RXNE.
+	// dron: jake jine preruseni by mohlo prijit? imho vydz to bude od RXNE, ale ok, je to safe
 	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
 
 	
-		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
+//		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
+		// dron: tento check ma delat co? imho je preruseni az po precteni celeho znaku, ne?
 			data = usart_recv(USART2);
-			usart_send_blocking(USART2, data);
-			flash(3, 10000);
-		}
+
+			gps_rx_buffer[gps_rx_buffer_pointer] = data;
+			latest_gps_rx_data = data;
+			gps_rx_buffer_pointer++;
+
+//		}
 
 		// USART Interrupt Flag Clear Register slouzi je read write a pokud mi behem prenosu nastavi ten procak
 		// do Interrupt STATS register nejaky status bit, tenhle status bit je mozne vynulovat pouze zapsanim do 
@@ -378,19 +424,22 @@ void usart2_isr(void)
 		// Trochu to haprovalo kdyz sem tam sazel znaky moc rychle, tak se to zaseklo - protoze nastavil 
 		// nekde nejaky bit. Rozhodl sem se v tomto mioste pro jistotu vynulvat cely ICR, proto je na dalsim radku
 		// takove ORove peklo:)
-		 
-		 
-		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF | 
-								USART_ICR_NCF    | USART_ICR_ORECF | 
-								USART_ICR_IDLECF | USART_ICR_TCCF  | 
-								USART_ICR_LBDCF  | USART_ICR_CTSCF | 
-								USART_ICR_RTOCF  | USART_ICR_EOBCF | 
-								USART_ICR_CMCF   | USART_ICR_WUCF  
-							);
+
+		// dron: teda v datasheetu sem se k tomu jeste nedocetl, ale cekal bych, ze rucne neni treba interupt flagy nulovat. nebo se pletu?
+
+//		USART_ICR(USART2) |= (	USART_ICR_FECF   |  USART_ICR_PECF |
+//								USART_ICR_NCF    | USART_ICR_ORECF |
+//								USART_ICR_IDLECF | USART_ICR_TCCF  |
+//								USART_ICR_LBDCF  | USART_ICR_CTSCF |
+//								USART_ICR_RTOCF  | USART_ICR_EOBCF |
+//								USART_ICR_CMCF   | USART_ICR_WUCF
+//							);
 	
 		//flush neprectene data, 
-	    //USART_RQR(USART2) |= USART_RQR_RXFRQ;
+		//USART_RQR(USART2) |= USART_RQR_RXFRQ;
+
 	}
+	led_off(2);
 }
 
 

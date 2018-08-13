@@ -41,6 +41,12 @@ int32_t t_fine;
 uint8_t comp_data[26];	//used for readings of compensation data
 uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 
+
+uint8_t gps_rx_buffer[255] = {0};
+uint8_t gps_rx_buffer_pointer = 0;
+uint8_t latest_gps_rx_data = 0;
+
+
 //Global variables for compensation functions, bme280:
 //temperature
 uint16_t dig_T1;
@@ -124,9 +130,10 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*15); //until quectel wakes up
+//		wait(SEC*15); //until quectel wakes up
 		flash(3, 50000);
-		nbiot_connect();
+		debug_usart_send("NBIoT site connect");
+//		nbiot_connect();
 	#endif
 
 	//Connect to lora network
@@ -137,6 +144,35 @@ int main(void)
 		lorawan_connect();
 		debug_usart_send("lora connected");
 	#endif
+
+
+		// test loop pro testovani parsovani gps
+		while (1) {
+			debug_usart_send("New loop");
+
+			char tmp_string[200] = {0};
+			int w;
+
+			for (w=0; w<30; w++) {
+				tmp_string[w] = gps_rx_buffer[w];
+			}
+			debug_usart_send(gps_rx_buffer);
+
+			char pointer_debug_string[20] = {0};
+			sprintf(pointer_debug_string, "pointer %d", gps_rx_buffer_pointer);
+			debug_usart_send(pointer_debug_string);
+
+			char latest_debug_string[20] = {0};
+			sprintf(latest_debug_string, "latest data %d", latest_gps_rx_data);
+			debug_usart_send(latest_debug_string);
+
+			led_flash(1, 3, 100000);
+			wait(SEC *5);
+
+
+		}
+
+
 
 	particlemeter_ON();
 	wait(SEC * 1);
