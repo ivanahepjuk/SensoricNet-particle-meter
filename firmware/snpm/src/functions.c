@@ -373,48 +373,96 @@ char* concat(const char *s1, const char *s2)
 }
 */
 
-char* string_to_hex(unsigned char *string, int len)
-{
-	char *result = malloc(len*2+1);
-	void* pointer = result;
-//	char hex[3];
-	int x;
-
-	for (x = 0; x < len; ++x) {
-		sprintf(pointer, "%02x", *string);
-
-//		sprintf(hex, "%02x", *string);
-//		printf("hex: %s ", hex);
-
-		string++;
-		pointer++;
-		pointer++;
-	}
+//char* string_to_hex(unsigned char *string, int len)
+//{
+//	char *result = malloc(len*2+1);
+//	void* pointer = result;
+////	char hex[3];
+//	int x;
+//
+//	for (x = 0; x < len; ++x) {
+//		sprintf(pointer, "%02x", *string);
+//
+////		sprintf(hex, "%02x", *string);
+////		printf("hex: %s ", hex);
+//
+//		string++;
+//		pointer++;
+//		pointer++;
+//	}
 
 //	printf("done\n");
+//
+//	return result;
+//}
 
-	return result;
+
+
+void get_nth_substring(unsigned int number, char separator, char* string, char* buffer, unsigned int buffer_size)
+{
+	if (!string || !buffer || buffer_size<1)
+		return; //bad input
+
+	unsigned int w, q, count = 0;
+	while (w < sizeof(string) && number > 0) {
+		if (string[w] == separator) {
+			count++;
+			if (count == number) {
+				w++;
+				break;
+			}
+		}
+		w++;
+	}
+	while (w < sizeof(string)) {
+		if (string[w] != separator && string[w] != '\0') {
+			buffer[q] = string[w];
+			w++;
+			q++;
+		} else {
+			break;
+		}
+	}
+
+	buffer[q+1] = '\0';
 }
+
 
 
 void usart2_isr(void)
 {
-	static uint8_t data = 'A';
+	static char data = 'A';
+	char gps_gpgga[] = {'G', 'P', 'V', 'T', 'G'};
 
 	led_on(2);
 
 	//Check if we were called because of RXNE.
-	// dron: jake jine preruseni by mohlo prijit? imho vydz to bude od RXNE, ale ok, je to safe
+	// dron: jake jine preruseni by mohlo prijit? imho vzdy to bude od RXNE, ale ok, je to safe
 	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) && ((USART_ISR(USART2) & USART_ISR_RXNE) != 0)) {
 
 	
 //		while((USART_ISR(USART2) & USART_ISR_RXNE) != 0){
 		// dron: tento check ma delat co? imho je preruseni az po precteni celeho znaku, ne?
-			data = usart_recv(USART2);
+			data = (char) usart_recv(USART2);
+
+			if (data == '$') {
+				// zacatek radku
+				gps_rx_buffer_pointer = 0;
+			}
 
 			gps_rx_buffer[gps_rx_buffer_pointer] = data;
-			latest_gps_rx_data = data;
 			gps_rx_buffer_pointer++;
+			latest_gps_rx_data = data;
+
+			if (data == '\n') {
+				// konec radku, rozparsuj ho
+				gps_rx_buffer[gps_rx_buffer_pointer] = '\0';
+
+				if (strstr(gps_rx_buffer, gps_gpgga) != NULL) {
+					// GPGGA radek
+					get_nth_substring(1, ',', gps_rx_buffer, gps_longitude, sizeof(gps_longitude));
+				}
+			}
 
 //		}
 

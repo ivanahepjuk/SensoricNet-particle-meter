@@ -30,9 +30,10 @@
 
 #define SEC		(1000000)
 
-extern uint8_t gps_rx_buffer[255];
+extern char gps_rx_buffer[255];
 extern uint8_t gps_rx_buffer_pointer;
-extern uint8_t latest_gps_rx_data;
+extern char latest_gps_rx_data;
+extern char gps_longitude[16];
 
 //eeprom
 int eeprom_write(char *dev_id);
@@ -60,11 +61,12 @@ void led_flash(uint8_t led, uint8_t loop, uint32_t delay);
 void led_on(uint8_t led);
 void led_off(uint8_t led);
 
-void usart4_isr(void);
+void get_nth_substring(unsigned int number, char separator, char* string, char* buffer, unsigned int buffer_size);
+//void usart4_isr(void);
 
 
 ////////////////dronovo
-char* concat(const char *s1, const char *s2);
-char* string_to_hex(unsigned char *string, int len);
+//char* concat(const char *s1, const char *s2);
+//char* string_to_hex(unsigned char *string, int len);
 
 #endif

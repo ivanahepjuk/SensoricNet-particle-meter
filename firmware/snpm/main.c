@@ -42,9 +42,10 @@ uint8_t comp_data[26];	//used for readings of compensation data
 uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 
 
-uint8_t gps_rx_buffer[255] = {0};
+char gps_rx_buffer[255] = {0};
 uint8_t gps_rx_buffer_pointer = 0;
-uint8_t latest_gps_rx_data = 0;
+char latest_gps_rx_data = 0;
+char gps_longitude[16] = {0};
 
 
 //Global variables for compensation functions, bme280:
@@ -96,6 +97,12 @@ int main(void)
 	//reads ID from eeprom
 
 	debug_usart_send("Welcome to SensoricNet particlemeter");
+
+	// se to sekne, kua. TODO
+	get_nth_substring(1, ',', "test,string,jak,cyp", gps_longitude, sizeof(gps_longitude));
+	debug_usart_send(gps_longitude);
+
+
 
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
@@ -153,10 +160,12 @@ int main(void)
 			char tmp_string[200] = {0};
 			int w;
 
-			for (w=0; w<30; w++) {
-				tmp_string[w] = gps_rx_buffer[w];
+			for (w=0; w<100; w++) {
+				if (gps_rx_buffer[w] != '\n') {
+					tmp_string[w] = gps_rx_buffer[w];
+				}
 			}
-			debug_usart_send(gps_rx_buffer);
+			debug_usart_send(tmp_string);
 
 			char pointer_debug_string[20] = {0};
 			sprintf(pointer_debug_string, "pointer %d", gps_rx_buffer_pointer);
@@ -165,6 +174,8 @@ int main(void)
 			char latest_debug_string[20] = {0};
 			sprintf(latest_debug_string, "latest data %d", latest_gps_rx_data);
 			debug_usart_send(latest_debug_string);
+
+			debug_usart_send(gps_longitude);
 
 			led_flash(1, 3, 100000);
 			wait(SEC *5);
