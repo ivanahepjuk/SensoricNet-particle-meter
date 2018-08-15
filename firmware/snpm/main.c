@@ -99,7 +99,7 @@ int main(void)
 	debug_usart_send("Welcome to SensoricNet particlemeter");
 
 	// se to sekne, kua. TODO
-	get_nth_substring(1, ',', "test,string,jak,cyp", gps_longitude, sizeof(gps_longitude));
+	get_nth_substring(1, ',', "test,string,jak,cyp", 20, gps_longitude, sizeof(gps_longitude));
 	debug_usart_send(gps_longitude);
 
 

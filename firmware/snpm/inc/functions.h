@@ -61,7 +61,7 @@ void led_flash(uint8_t led, uint8_t loop, uint32_t delay);
 void led_on(uint8_t led);
 void led_off(uint8_t led);
 
-void get_nth_substring(unsigned int number, char separator, char* string, char* buffer, unsigned int buffer_size);
+void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size);
 //void usart4_isr(void);
 
 

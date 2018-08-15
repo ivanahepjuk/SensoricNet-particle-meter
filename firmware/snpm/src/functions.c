@@ -398,13 +398,15 @@ char* concat(const char *s1, const char *s2)
 
 
 
-void get_nth_substring(unsigned int number, char separator, char* string, char* buffer, unsigned int buffer_size)
+void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size)
 {
 	if (!string || !buffer || buffer_size<1)
 		return; //bad input
 
-	unsigned int w, q, count = 0;
-	while (w < sizeof(string) && number > 0) {
+	unsigned int w = 0;
+	unsigned int q = 0;
+	unsigned int count = 0;
+	while (w < string_size && number > 0) {
 		if (string[w] == separator) {
 			count++;
 			if (count == number) {
@@ -414,7 +416,7 @@ void get_nth_substring(unsigned int number, char separator, char* string, char* 
 		}
 		w++;
 	}
-	while (w < sizeof(string)) {
+	while (w < string_size) {
 		if (string[w] != separator && string[w] != '\0') {
 			buffer[q] = string[w];
 			w++;
@@ -460,7 +462,7 @@ void usart2_isr(void)
 
 				if (strstr(gps_rx_buffer, gps_gpgga) != NULL) {
 					// GPGGA radek
-					get_nth_substring(1, ',', gps_rx_buffer, gps_longitude, sizeof(gps_longitude));
+					get_nth_substring(1, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_longitude, sizeof(gps_longitude));
 				}
 			}
 
