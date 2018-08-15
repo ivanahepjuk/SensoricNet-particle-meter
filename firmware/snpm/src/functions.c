@@ -434,7 +434,6 @@ void get_nth_substring(unsigned int number, char separator, char* string, unsign
 void usart2_isr(void)
 {
 	static char data = 'A';
-	char gps_gpgga[] = {'G', 'P', 'V', 'T', 'G'};
 
 	led_on(2);
 
@@ -460,7 +459,7 @@ void usart2_isr(void)
 				// konec radku, rozparsuj ho
 				gps_rx_buffer[gps_rx_buffer_pointer] = '\0';
 
-				if (strstr(gps_rx_buffer, gps_gpgga) != NULL) {
+				if (strstr(gps_rx_buffer, "GPGGA") != NULL) {
 					// GPGGA radek
 					get_nth_substring(1, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_longitude, sizeof(gps_longitude));
 				}
