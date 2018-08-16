@@ -397,6 +397,15 @@ char* concat(const char *s1, const char *s2)
 //}
 
 
+// TODO fce na prepocitani gps formatu na WGS84
+// gps dava souradnice 5133.82,N,00042.24,W
+//                     ssmm.vv   sssmm.vv
+// uhlova minuta je 1/60 stupne, jedna uhlova vterina je 1/3600 stupne
+// WGS84
+// 49.9346397,17.89627
+// 5133.82,N = 51.(33/60+82/3600) = 51.572777778N (N je +, S je -)
+// 00042.24,W = 0.(42/60+24/3600) = 0.706666667W (E je +, W je -???)
+
 
 void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size)
 {
@@ -453,15 +462,46 @@ void usart2_isr(void)
 
 			gps_rx_buffer[gps_rx_buffer_pointer] = data;
 			gps_rx_buffer_pointer++;
-			latest_gps_rx_data = data;
 
 			if (data == '\n') {
-				// konec radku, rozparsuj ho
+				// konec radku, rovnou ho rozparsuj
 				gps_rx_buffer[gps_rx_buffer_pointer] = '\0';
 
+				// radek GPGGA obsahuje vsechny uzitecne hodnoty
+
+				//	$GPGGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh
+				// 1    = UTC of Position
+				// 2    = Latitude
+				// 3    = N or S
+				// 4    = Longitude
+				// 5    = E or W
+				// 6    = GPS quality indicator (0=invalid; 1=GPS fix; 2=Diff. GPS fix)
+				// 7    = Number of satellites in use [not those in view]
+				// 8    = Horizontal dilution of position
+				// 9    = Antenna altitude above/below mean sea level (geoid)
+				// 10   = Meters  (Antenna height unit)
+				// 11   = Geoidal separation (Diff. between WGS-84 earth ellipsoid and
+				//        mean sea level.  -=geoid is below WGS-84 ellipsoid)
+				// 12   = Meters  (Units of geoidal separation)
+				// 13   = Age in seconds since last update from diff. reference station
+				// 14   = Diff. reference station ID#
+				// 15   = Checksum
+
 				if (strstr(gps_rx_buffer, "GPGGA") != NULL) {
-					// GPGGA radek
-					get_nth_substring(1, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_longitude, sizeof(gps_longitude));
+					// UTC time
+					get_nth_substring(1, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_utc_time, sizeof(gps_utc_time));
+					// Latitude
+					get_nth_substring(2, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_latitude, sizeof(gps_latitude));
+					// N or S
+					get_nth_substring(3, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_latitude_ns, sizeof(gps_latitude_ns));
+					// Longitude
+					get_nth_substring(4, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_longitude, sizeof(gps_longitude));
+					// E or W
+					get_nth_substring(5, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_longitude_ew, sizeof(gps_longitude_ew));
+					// GPS quality indicator
+					get_nth_substring(6, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_quality_indicator, sizeof(gps_quality_indicator));
+					// Altitude
+					get_nth_substring(9, ',', gps_rx_buffer, sizeof(gps_rx_buffer), gps_altitude, sizeof(gps_altitude));
 				}
 			}
 

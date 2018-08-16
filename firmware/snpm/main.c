@@ -44,8 +44,13 @@ uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 
 char gps_rx_buffer[255] = {0};
 uint8_t gps_rx_buffer_pointer = 0;
-char latest_gps_rx_data = 0;
-char gps_longitude[16] = {0};
+char gps_utc_time[10] = {0};
+char gps_latitude[8] = {0};
+char gps_latitude_ns[2] = {0};
+char gps_longitude[9] = {0};
+char gps_longitude_ew[2] = {0};
+char gps_quality_indicator[2] = {0};
+char gps_altitude[8] = {0};
 
 
 //Global variables for compensation functions, bme280:
@@ -161,19 +166,15 @@ int main(void)
 			}
 			debug_usart_send(tmp_string);
 
-			char pointer_debug_string[20] = {0};
+			char pointer_debug_string[80] = {0};
 			sprintf(pointer_debug_string, "pointer %d", gps_rx_buffer_pointer);
 			debug_usart_send(pointer_debug_string);
 
-			char latest_debug_string[20] = {0};
-			sprintf(latest_debug_string, "latest data %d", latest_gps_rx_data);
-			debug_usart_send(latest_debug_string);
-
-			debug_usart_send(gps_longitude);
+			sprintf(pointer_debug_string, "time: %s, latitude: %s, longitude: %s, altitude: %s", gps_utc_time, gps_latitude, gps_longitude, gps_altitude);
+			debug_usart_send(pointer_debug_string);
 
 			led_flash(1, 3, 100000);
 			wait(SEC *5);
-
 
 		}
 
