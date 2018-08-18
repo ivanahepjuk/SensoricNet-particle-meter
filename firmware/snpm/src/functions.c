@@ -397,6 +397,8 @@ char* concat(const char *s1, const char *s2)
 //}
 
 
+
+
 // TODO fce na prepocitani gps formatu na WGS84
 // gps dava souradnice 5133.82,N,00042.24,W
 //                     ssmm.vv   sssmm.vv
@@ -405,6 +407,37 @@ char* concat(const char *s1, const char *s2)
 // 49.9346397,17.89627
 // 5133.82,N = 51.(33/60+82/3600) = 51.572777778N (N je +, S je -)
 // 00042.24,W = 0.(42/60+24/3600) = 0.706666667W (E je +, W je -???)
+
+void convert_gps_to_wgs84_latitude (*char gps_latitude) {
+
+	char degree[2] = {'0'};
+	char minutes[2] = {'0'};
+	char seconds[2] = {'0'};
+	float wgs_latitude = 0;
+
+	//odloz stupne
+	degree[0] = gps_latitude[0];
+	degree[1] = gps_latitude[1];
+
+	//zjisti minuty
+	minutes[0] = gps_latitude[2];
+	minutes[1] = gps_latitude[3];
+
+	//zjisti vteriny
+	seconds[0] = gps_latitude[5];
+	seconds[1] = gps_latitude[6];
+
+	// asi to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
+
+	wgs_latitude = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
+
+	// jestli je latitude S, obrat znamenko
+
+	// zkonvertuj na string
+	char buf[13];
+	gcvt(wgs_latitude, 10, buf);
+	return (buf);
+}
 
 
 void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size)
