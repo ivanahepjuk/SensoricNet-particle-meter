@@ -51,8 +51,9 @@ char gps_longitude[9] = {0};
 char gps_longitude_ew[2] = {0};
 char gps_quality_indicator[2] = {0};
 char gps_altitude[8] = {0};
-char wgs_latitude[10] = {0};
-char wgs_longitude[10] = {0};
+float wgs_latitude = 0.0;
+float wgs_longitude = 0.0;
+float altitude = 0.0;
 
 
 //Global variables for compensation functions, bme280:
@@ -175,6 +176,15 @@ int main(void)
 			sprintf(pointer_debug_string, "time: %s, latitude: %s, longitude: %s, altitude: %s", gps_utc_time, gps_latitude, gps_longitude, gps_altitude);
 			debug_usart_send(pointer_debug_string);
 
+			// testovaci hodnoty natvrdo, jinak gps_latitude, gps_longitude
+			wgs_latitude = convert_gps_to_wgs84_latitude("5133.82");
+			wgs_longitude = convert_gps_to_wgs84_longitude("00042.24");
+			// atof neni bezpecne, TODO
+			altitude = atof(gps_altitude);
+
+			sprintf(pointer_debug_string, "wgs latitude: %f, wgs longitude: %f, altitude: %f", wgs_latitude, wgs_longitude, altitude);
+			debug_usart_send(pointer_debug_string);
+
 			led_flash(1, 3, 100000);
 			wait(SEC *5);
 
@@ -214,7 +224,8 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 4, pm1);
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
-		CayenneLPP__addGPS(lpp, 7, atof(GPS_LAT), atof(GPS_LONG), atof(GPS_ALT));
+		// jsou udaje gps validni, pripadne zmenily se od minula? TODO
+		CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);

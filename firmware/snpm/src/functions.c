@@ -399,7 +399,6 @@ char* concat(const char *s1, const char *s2)
 
 
 
-// TODO fce na prepocitani gps formatu na WGS84
 // gps dava souradnice 5133.82,N,00042.24,W
 //                     ssmm.vv   sssmm.vv
 // uhlova minuta je 1/60 stupne, jedna uhlova vterina je 1/3600 stupne
@@ -408,7 +407,7 @@ char* concat(const char *s1, const char *s2)
 // 5133.82,N = 51.(33/60+82/3600) = 51.572777778N (N je +, S je -)
 // 00042.24,W = 0.(42/60+24/3600) = 0.706666667W (E je +, W je -???)
 
-char *convert_gps_to_wgs84_latitude (char *gps_latitude_string, char *wgs_latitude_string) {
+float convert_gps_to_wgs84_latitude (char *gps_latitude_string) {
 
 	char degree[2] = {'0'};
 	char minutes[2] = {'0'};
@@ -431,20 +430,19 @@ char *convert_gps_to_wgs84_latitude (char *gps_latitude_string, char *wgs_latitu
 
 		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
 		// atoi neni zcela bezpecna fce, TODO
-		wgs_latitude_float = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
+		wgs_latitude_float = atoi(degree) + ((float)atoi(minutes) / 60) + ((float)atoi(seconds) / 3600);
 
-		// jestli je latitude S, obrat znamenko
+		// jestli je latitude S, obrat znamenko, TODO
 
-		// zkonvertuj na string
-		snprintf(wgs_latitude_string, 10, "%f", wgs_latitude_float);
-		return (wgs_latitude_string);
+		return (wgs_latitude_float);
 
 	} else {
-		return "undef";
+		// invalid hodnota - treba -500? TODO
+		return -500.0;
 	}
 }
 
-char *convert_gps_to_wgs84_longitude (char *gps_longitude_string, char *wgs_longitude_string) {
+float convert_gps_to_wgs84_longitude (char *gps_longitude_string) {
 
 	char degree[3] = {'0'};
 	char minutes[2] = {'0'};
@@ -468,16 +466,15 @@ char *convert_gps_to_wgs84_longitude (char *gps_longitude_string, char *wgs_long
 
 		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
 		// atoi neni zcela bezpecna fce, TODO
-		wgs_longitude_float = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
+		wgs_longitude_float = atoi(degree) + ((float)atoi(minutes) / 60) + ((float)atoi(seconds) / 3600);
 
-		// jestli je longitude W, obrat znamenko
+		// jestli je longitude W, obrat znamenko, TODO
 
-		// zkonvertuj na string
-		snprintf(wgs_longitude_string, 10, "%f", wgs_longitude_float);
-		return (wgs_longitude_string);
+		return (wgs_longitude_float);
 
 	} else {
-		return "undef";
+		// invalid hodnota - treba -500? TODO
+		return -500.0;
 	}
 }
 
