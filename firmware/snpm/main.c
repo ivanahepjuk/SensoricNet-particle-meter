@@ -51,6 +51,8 @@ char gps_longitude[9] = {0};
 char gps_longitude_ew[2] = {0};
 char gps_quality_indicator[2] = {0};
 char gps_altitude[8] = {0};
+char wgs_latitude[10] = {0};
+char wgs_longitude[10] = {0};
 
 
 //Global variables for compensation functions, bme280:

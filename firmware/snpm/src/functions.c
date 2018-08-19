@@ -408,35 +408,77 @@ char* concat(const char *s1, const char *s2)
 // 5133.82,N = 51.(33/60+82/3600) = 51.572777778N (N je +, S je -)
 // 00042.24,W = 0.(42/60+24/3600) = 0.706666667W (E je +, W je -???)
 
-void convert_gps_to_wgs84_latitude (*char gps_latitude) {
+char *convert_gps_to_wgs84_latitude (char *gps_latitude_string, char *wgs_latitude_string) {
 
 	char degree[2] = {'0'};
 	char minutes[2] = {'0'};
 	char seconds[2] = {'0'};
-	float wgs_latitude = 0;
+	float wgs_latitude_float = 0;
 
-	//odloz stupne
-	degree[0] = gps_latitude[0];
-	degree[1] = gps_latitude[1];
+	if (gps_latitude_string[0] != 0) {
 
-	//zjisti minuty
-	minutes[0] = gps_latitude[2];
-	minutes[1] = gps_latitude[3];
+		//odloz stupne
+		degree[0] = gps_latitude_string[0];
+		degree[1] = gps_latitude_string[1];
 
-	//zjisti vteriny
-	seconds[0] = gps_latitude[5];
-	seconds[1] = gps_latitude[6];
+		//zjisti minuty
+		minutes[0] = gps_latitude_string[2];
+		minutes[1] = gps_latitude_string[3];
 
-	// asi to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
+		//zjisti vteriny
+		seconds[0] = gps_latitude_string[5];
+		seconds[1] = gps_latitude_string[6];
 
-	wgs_latitude = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
+		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
+		// atoi neni zcela bezpecna fce, TODO
+		wgs_latitude_float = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
 
-	// jestli je latitude S, obrat znamenko
+		// jestli je latitude S, obrat znamenko
 
-	// zkonvertuj na string
-	char buf[13];
-	gcvt(wgs_latitude, 10, buf);
-	return (buf);
+		// zkonvertuj na string
+		snprintf(wgs_latitude_string, 10, "%f", wgs_latitude_float);
+		return (wgs_latitude_string);
+
+	} else {
+		return "undef";
+	}
+}
+
+char *convert_gps_to_wgs84_longitude (char *gps_longitude_string, char *wgs_longitude_string) {
+
+	char degree[3] = {'0'};
+	char minutes[2] = {'0'};
+	char seconds[2] = {'0'};
+	float wgs_longitude_float = 0;
+
+	if (gps_longitude_string[0] != 0) {
+
+		//odloz stupne
+		degree[0] = gps_longitude_string[0];
+		degree[1] = gps_longitude_string[1];
+		degree[2] = gps_longitude_string[2];
+
+		//zjisti minuty
+		minutes[0] = gps_longitude_string[3];
+		minutes[1] = gps_longitude_string[4];
+
+		//zjisti vteriny
+		seconds[0] = gps_longitude_string[6];
+		seconds[1] = gps_longitude_string[7];
+
+		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
+		// atoi neni zcela bezpecna fce, TODO
+		wgs_longitude_float = atoi(degree) + (atoi(minutes) / 60) + (atoi(seconds) / 3600);
+
+		// jestli je longitude W, obrat znamenko
+
+		// zkonvertuj na string
+		snprintf(wgs_longitude_string, 10, "%f", wgs_longitude_float);
+		return (wgs_longitude_string);
+
+	} else {
+		return "undef";
+	}
 }
 
 

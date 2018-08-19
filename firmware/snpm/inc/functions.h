@@ -39,6 +39,8 @@ extern char gps_longitude[9];
 extern char gps_longitude_ew[2];
 extern char gps_quality_indicator[2];
 extern char gps_altitude[8];
+extern char wgs_latitude[10];
+extern char wgs_longitude[10];
 
 
 //eeprom
@@ -67,6 +69,8 @@ void led_flash(uint8_t led, uint8_t loop, uint32_t delay);
 void led_on(uint8_t led);
 void led_off(uint8_t led);
 
+char *convert_gps_to_wgs84_latitude (char *gps_latitude_string, char *wgs_latitude);
+char *convert_gps_to_wgs84_longitude (char *gps_longitude_string, char *wgs_longitude);
 void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size);
 //void usart4_isr(void);
 
