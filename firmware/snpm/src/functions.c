@@ -72,7 +72,6 @@ void led_flash(uint8_t led, uint8_t loop, uint32_t delay)
 /**
  * zapne danou ledku
  */
-
 void led_on(uint8_t led)
 {
 	if (led==1) {
@@ -181,7 +180,8 @@ void wait(uint32_t usec)
 	}		
 }
 
-/* 		void usartSend(char *phrase, uint8_t usart)
+/**
+ * void usartSend(char *phrase, uint8_t usart)
  * 
  * This functions sends string to one of four usarts.
  * Note: chosen usart must be allready configured in usart_setup! 
@@ -353,13 +353,14 @@ void gpio_setup(void)
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO2);
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
 
+	// USART4 iot module
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
+
 	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO11);
 
-	//	// USART4 GPIO pins
-	//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
-	//	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
 
 }
 
@@ -602,6 +603,4 @@ void usart2_isr(void)
 	}
 	led_off(2);
 }
-
-
 

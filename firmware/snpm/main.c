@@ -19,13 +19,6 @@
 
 #include "main.h"
 
-// Sample pragmas to cope with warnings. Please note the related line at
-// the end of this function, used to pop the compiler diagnostics status.
-//#pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wunused-parameter"
-//#pragma GCC diagnostic ignored "-Wmissing-declarations"
-//#pragma GCC diagnostic ignored "-Wreturn-type"
-
 //debug
 int cykly = 0;
 char cykly_str[10];
@@ -35,13 +28,12 @@ int frame_counter = 0;
 /* For semihosting on newlib */
 //extern void initialise_monitor_handles(void);
 
-
 //Global variables for burst register reading, bme280
 int32_t t_fine;
 uint8_t comp_data[26];	//used for readings of compensation data
 uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 
-
+// gps global variables
 char gps_rx_buffer[255] = {0};
 uint8_t gps_rx_buffer_pointer = 0;
 char gps_utc_time[10] = {0};
@@ -55,37 +47,44 @@ float wgs_latitude = 0.0;
 float wgs_longitude = 0.0;
 float altitude = 0.0;
 
+// measured values
+float temp = 0;
+float press = 0;
+float hum = 0;
+float pm1 = 0;
+float pm2_5 = 0;
+float pm10 = 0;
 
-//Global variables for compensation functions, bme280:
-//temperature
+
+// Global variables for compensation functions, bme280:
+// temperature
 uint16_t dig_T1;
 int16_t dig_T2, dig_T3;
-//pressure
+// pressure
 uint16_t dig_P1;
 int16_t dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8, dig_P9;
-//humidity
+// humidity
 uint8_t dig_H1, dig_H3;
 int16_t dig_H2, dig_H4, dig_H5;
 int8_t dig_H6;
 
-
-
-/////////
-char ID[11];
+// dev_id
+char ID[11] = {DEV_ID};
 char id_decoded[23]={0};
 
-/////////////////////////////////////////////////////////////
-//Global variables for burst register reading, for OPC-N2: //
-/////////////////////////////////////////////////////////////
+// Global variables for burst register reading, for OPC-N2
+uint8_t histogram_buffer[62];	//whole dataset of opc readed into this
+uint8_t pm_values_buffer[12] = {0};	//only pm data
 
-uint8_t histogram_buffer[62];//whole dataset of opc readed into this
-uint8_t pm_values_buffer[12] = {0};//only pm data
+
+
 
 /********************************************************************************************
  *
  * MAIN
  *
  ********************************************************************************************/
+
 
 int main(void)
 {
@@ -139,10 +138,10 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-//		wait(SEC*15); //until quectel wakes up
+		wait(SEC*15); //until quectel wakes up
 		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
-//		nbiot_connect();
+		nbiot_connect();
 	#endif
 
 	//Connect to lora network
@@ -155,46 +154,11 @@ int main(void)
 	#endif
 
 
-		// test loop pro testovani parsovani gps
-		while (1) {
-			debug_usart_send("New loop");
-
-			char tmp_string[200] = {0};
-			int w;
-
-			for (w=0; w<100; w++) {
-				if (gps_rx_buffer[w] != '\n') {
-					tmp_string[w] = gps_rx_buffer[w];
-				}
-			}
-			debug_usart_send(tmp_string);
-
-			char pointer_debug_string[80] = {0};
-			sprintf(pointer_debug_string, "pointer %d", gps_rx_buffer_pointer);
-			debug_usart_send(pointer_debug_string);
-
-			sprintf(pointer_debug_string, "time: %s, latitude: %s, longitude: %s, altitude: %s", gps_utc_time, gps_latitude, gps_longitude, gps_altitude);
-			debug_usart_send(pointer_debug_string);
-
-			// testovaci hodnoty natvrdo, jinak gps_latitude, gps_longitude
-			wgs_latitude = convert_gps_to_wgs84_latitude("5133.82");
-			wgs_longitude = convert_gps_to_wgs84_longitude("00042.24");
-			// atof neni bezpecne, TODO
-			altitude = atof(gps_altitude);
-
-			sprintf(pointer_debug_string, "wgs latitude: %f, wgs longitude: %f, altitude: %f", wgs_latitude, wgs_longitude, altitude);
-			debug_usart_send(pointer_debug_string);
-
-			led_flash(1, 3, 100000);
-			wait(SEC *5);
-
-		}
-
-
-
+#if PARTICLEMETER == 1
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
+#endif
 
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
@@ -203,15 +167,54 @@ int main(void)
 
 	while (1) {
 		debug_usart_send("New loop");
+
+		// readout particlemeter data
+		#if PARTICLEMETER == 1
 		read_pm_values();
+		#endif
+
+		// readout BME data
 		BME280_data_readout(burst_read_data);
 
-		float temp = BME280_temp();
-		float press = BME280_press();
-		float hum = BME280_hum();
-		float pm1 = particlemeter_pm1();
-		float pm2_5 = particlemeter_pm2_5();
-		float pm10 = particlemeter_pm10();
+		// debug gps
+		char tmp_string[200] = {0};
+		int w;
+
+		for (w=0; w<100; w++) {
+			if (gps_rx_buffer[w] != '\n') {
+				tmp_string[w] = gps_rx_buffer[w];
+			}
+		}
+		debug_usart_send(tmp_string);
+
+		char pointer_debug_string[80] = {0};
+		sprintf(pointer_debug_string, "pointer %d", gps_rx_buffer_pointer);
+		debug_usart_send(pointer_debug_string);
+
+		sprintf(pointer_debug_string, "time: %s, latitude: %s, longitude: %s, altitude: %s, fix: %s", gps_utc_time, gps_latitude, gps_longitude, gps_altitude, gps_quality_indicator);
+		debug_usart_send(pointer_debug_string);
+
+		// testovaci hodnoty natvrdo, jinak gps_latitude, gps_longitude
+//			wgs_latitude = convert_gps_to_wgs84_latitude("5133.82");
+//			wgs_longitude = convert_gps_to_wgs84_longitude("00042.24");
+		wgs_latitude = convert_gps_to_wgs84_latitude(gps_latitude);
+		wgs_longitude = convert_gps_to_wgs84_longitude(gps_longitude);
+		// atof neni bezpecne, TODO
+		altitude = atof(gps_altitude);
+
+		if (gps_quality_indicator[0] != '0') {
+			sprintf(pointer_debug_string, "wgs latitude: %f, wgs longitude: %f, altitude: %f", wgs_latitude, wgs_longitude, altitude);
+			debug_usart_send(pointer_debug_string);
+		}
+
+		temp = BME280_temp();
+		press = BME280_press();
+		hum = BME280_hum();
+#if PARTICLEMETER == 1
+		pm1 = particlemeter_pm1();
+		pm2_5 = particlemeter_pm2_5();
+		pm10 = particlemeter_pm10();
+#endif
 
 		debug_usart_send("Encode values");
 		char debug_data_string[150] = {0};
@@ -221,18 +224,22 @@ int main(void)
 		CayenneLPP__addTemperature(lpp, 1, temp);
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
 		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
+#if PARTICLEMETER == 1
 		CayenneLPP__addAnalogInput(lpp, 4, pm1);
 		CayenneLPP__addAnalogInput(lpp, 5, pm2_5);
 		CayenneLPP__addAnalogInput(lpp, 6, pm10);
+#endif
+
 		// jsou udaje gps validni, pripadne zmenily se od minula? TODO
-		CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
+		if (gps_quality_indicator[0] != '0') {
+			CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
+		}
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
 
 		// Send it off
 		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
-
 		//printf("Encoded data size: %i\n", size);
 
 		char hex_string[200] = {0};		//encoded string here
@@ -250,7 +257,6 @@ int main(void)
 		
 
 		#if DEVICE_TYPE == LORAWAN
-
 		//sestaveni stringu pro LORAWAN
 		strcat(send_string, "mac tx uncnf 1 ");
 		strcat(send_string, hex_string);
@@ -268,6 +274,7 @@ int main(void)
 			lorawan_mac_save();
 		}
 		#endif
+
 		
 		#if DEVICE_TYPE == NBIOT
 		//tady se konvertuje na string a ulozi delka payloadu (int)
@@ -287,15 +294,15 @@ int main(void)
 		strcat(id_decoded, znak);
 		j++;
 		}
-		id_decoded[20] = 48;
-		id_decoded[21] = 48;
+		id_decoded[20] = '0';
+		id_decoded[21] = '0';
 		id_decoded[22] = NULL;
 
 
 		usartSend(id_decoded, 2);
 
-		strcat(send_string, id_decoded);  //nbiot-0001
-		//strcat(send_string, "00");  //nbiot-0001
+		strcat(send_string, id_decoded);	//nbiot-0001
+		//strcat(send_string, "00");	//nbiot-0001
 		strcat(send_string, hex_string);
 		strcat(send_string, "\r\n");
 
@@ -310,6 +317,7 @@ int main(void)
 		while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2))
 		wait(SEC*1);
 		#endif
+
 		
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
