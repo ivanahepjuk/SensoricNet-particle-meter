@@ -125,8 +125,8 @@ int lorawan_sendCommand(char *phrase, char *check, int pocetentru)
 		usart_send_blocking(USART4, phrase[i]);
 
 		#ifdef DEBUG
-		//sending stuff to usart2 debug port
-		usart_send_blocking(USART2, phrase[i]);
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, phrase[i]);
 		#endif
 		i++;
 	}
@@ -213,8 +213,8 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	while(phrase[i] != '\0'){	//posle string
 		usart_send_blocking(USART4, phrase[i]);
 	#ifdef DEBUG
-		//sending stuff to usart2 debug port
-		usart_send_blocking(USART2, phrase[i]);
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, phrase[i]);
 	#endif
 		i++;
 	}
@@ -226,8 +226,8 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 
 		incomming[i] = usart_recv_blocking(USART4);
 		#ifdef DEBUG 
-		//sending stuff to usart2 debug port
-		usart_send_blocking(USART2, incomming[i]);
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, incomming[i]);
 		#endif
 		if (incomming[i] == '\n')
 			enter++;
