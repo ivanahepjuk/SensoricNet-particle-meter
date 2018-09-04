@@ -138,13 +138,9 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-<<<<<<< HEAD
-		wait(SEC*0);//until quectel wakes up
-=======
 		wait(SEC*15); //until quectel wakes up
 		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
->>>>>>> 9169dc2180842e17db1c07443ca312183cb1add7
 		nbiot_connect();
 	#endif
 
