@@ -30,6 +30,16 @@
 
 #define SEC		(1000000)
 
+extern char gps_rx_buffer[255];
+extern uint8_t gps_rx_buffer_pointer;
+extern char gps_utc_time[10];
+extern char gps_latitude[8];
+extern char gps_latitude_ns[2];
+extern char gps_longitude[9];
+extern char gps_longitude_ew[2];
+extern char gps_quality_indicator[2];
+extern char gps_altitude[8];
+
 //eeprom
 int eeprom_write(char *dev_id);
 
@@ -39,6 +49,7 @@ char hexDigit(unsigned n);
 
 //posle string na usart c. 1,2,3,4
 void usartSend(char *phrase, uint8_t usart);
+void debug_usart_send(char *phrase);
 void clock_setup(void);
 void i2c_setup(void);
 void usart_setup(void);
@@ -51,12 +62,18 @@ uint8_t spi_reaad8(uint32_t spi);
 void wait(uint32_t usec);
 
 void flash(uint8_t loop, uint32_t delay);
+void led_flash(uint8_t led, uint8_t loop, uint32_t delay);
+void led_on(uint8_t led);
+void led_off(uint8_t led);
 
-void usart4_isr(void);
+float convert_gps_to_wgs84_latitude (char *gps_latitude_string);
+float convert_gps_to_wgs84_longitude (char *gps_longitude_string);
+void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size);
+//void usart4_isr(void);
 
 
 ////////////////dronovo
-char* concat(const char *s1, const char *s2);
-char* string_to_hex(unsigned char *string, int len);
+//char* concat(const char *s1, const char *s2);
+//char* string_to_hex(unsigned char *string, int len);
 
 #endif
