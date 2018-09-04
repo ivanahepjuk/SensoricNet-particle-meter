@@ -112,7 +112,7 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*15);//until quectel wakes up
+		wait(SEC*0);//until quectel wakes up
 		nbiot_connect();
 	#endif
 
