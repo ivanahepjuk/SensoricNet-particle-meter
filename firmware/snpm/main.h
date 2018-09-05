@@ -14,7 +14,7 @@
 #include "m24c04.h"
 
 //how long it waits at the end of each loop?
-#define WAIT 30
+#define WAIT 5
 
 //USART1 is used as debug output, if defined, debug output is send
 #define DEBUG
@@ -22,7 +22,7 @@
 #define DEBUG_BAUDRATE 57600
 
 //define which hw we have connected
-#define PARTICLEMETER 0
+#define PARTICLEMETER 1
 
 // define macro for device type description
 #define NBIOT 1

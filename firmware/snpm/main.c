@@ -138,7 +138,7 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*15); //until quectel wakes up
+		wait(SEC*1); //until quectel wakes up
 		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
 		nbiot_connect();
@@ -211,9 +211,11 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
+		nvic_disable_irq(NVIC_USART2_IRQ);
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
+		nvic_enable_irq(NVIC_USART2_IRQ);
 #endif
 
 		debug_usart_send("Encode values");
