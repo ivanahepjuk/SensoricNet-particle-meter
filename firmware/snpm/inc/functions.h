@@ -33,11 +33,11 @@
 extern char gps_rx_buffer[255];
 extern uint8_t gps_rx_buffer_pointer;
 extern char gps_utc_time[10];
-extern char gps_latitude[8];
-extern char gps_latitude_ns[2];
-extern char gps_longitude[9];
-extern char gps_longitude_ew[2];
-extern char gps_quality_indicator[2];
+extern char gps_latitude[9];
+extern char gps_latitude_ns[1];
+extern char gps_longitude[10];
+extern char gps_longitude_ew[1];
+extern char gps_quality_indicator[1];
 extern char gps_altitude[8];
 
 //eeprom
