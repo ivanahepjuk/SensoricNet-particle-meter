@@ -431,7 +431,10 @@ float convert_gps_to_wgs84_latitude (char *gps_latitude_string) {
 		// atoi neni zcela bezpecna fce, TODO
 		wgs_latitude_float = atoi(degree) + ((float)atof(minutes) / 60);
 
-		// jestli je latitude S, obrat znamenko, TODO
+		// jestli je latitude S, obrat znamenko
+		if (gps_latitude_ns[0] == 'S') {
+			wgs_latitude_float = -wgs_latitude_float;
+		}
 
 		return (wgs_latitude_float);
 
@@ -465,7 +468,10 @@ float convert_gps_to_wgs84_longitude (char *gps_longitude_string) {
 		// atoi neni zcela bezpecna fce, TODO
 		wgs_longitude_float = atoi(degree) + ((float)atof(minutes) / 60);
 
-		// jestli je longitude W, obrat znamenko, TODO
+		// jestli je longitude W, obrat znamenko
+		if (gps_longitude_ew[0] == 'W') {
+			wgs_longitude_float = -wgs_longitude_float;
+		}
 
 		return (wgs_longitude_float);
 
