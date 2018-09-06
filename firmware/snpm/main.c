@@ -212,11 +212,11 @@ int main(void)
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
 		usart_disable(USART2);
-		//nvic_disable_irq(NVIC_USART2_IRQ);
+		nvic_disable_irq(NVIC_USART2_IRQ);
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
-		//nvic_enable_irq(NVIC_USART2_IRQ);
+		nvic_enable_irq(NVIC_USART2_IRQ);
 		usart_enable(USART2);
 #endif
 

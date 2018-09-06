@@ -3246,4 +3246,6 @@ Wire Wire Line
 	17550 8400 17750 8400
 Wire Wire Line
 	17550 8550 17750 8550
+Text Notes 21450 7750 0    60   ~ 0
+zamek ke mne, drat doprava, jednicla dole.\n6 gnd\n5 SS\n4 SDI\n3 SDO\n2 SCK\n1 VCC\n
 $EndSCHEMATC
