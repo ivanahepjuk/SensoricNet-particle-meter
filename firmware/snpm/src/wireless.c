@@ -294,7 +294,7 @@ void nbiot_csq(void)
 
 void nbiot_nuestats(void)
 {
-	char incomming[300] = {0};	//readed string
+	char incomming[200] = {0};	//readed string
 	int i=0;	//iteracni promenna
 	int enter=0;	//detekce znaku CR
 	int pocetentru = 17;

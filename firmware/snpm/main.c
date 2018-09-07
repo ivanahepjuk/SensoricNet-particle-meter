@@ -99,6 +99,8 @@ int main(void)
 	i2c_setup();
 	spi_setup();
 
+	
+
 	flash(1, 200000);
 
 	//test
@@ -140,6 +142,9 @@ int main(void)
 
 	flash(1, 50000);
 
+	usart_disable_rx_interrupt(USART2);
+	usart_disable(USART2);
+
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
 		wait(SEC*1); //until quectel wakes up
@@ -159,15 +164,13 @@ int main(void)
 
 
 #if PARTICLEMETER == 1
-	usart_disable_rx_interrupt(USART2);
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
-	usart_enable_rx_interrupt(USART2);
 #endif
 
 	// init cayenne lpp
-	lpp = CayenneLPP__create(200);
+	lpp = CayenneLPP__create(500);
 
 	flash(3, 100000);
 
@@ -181,9 +184,7 @@ int main(void)
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
-		usart_disable_rx_interrupt(USART2);
 		read_pm_values();
-		usart_enable_rx_interrupt(USART2);
 		#endif
 
 		// readout BME data
@@ -224,11 +225,9 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
-		
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
-		
 #endif
 
 		debug_usart_send("Encode values");
@@ -356,6 +355,7 @@ int main(void)
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
 		
+
 		char loop_debug_string[20] = {0};
 		sprintf(loop_debug_string, "Loop %d done", cykly);
 		debug_usart_send(loop_debug_string);
@@ -363,8 +363,13 @@ int main(void)
 		cykly++;
 
 		flash(3, 100000);
-
+		
+		usart_enable_rx_interrupt(USART2);
+		usart_enable(USART2);
 		wait(SEC *WAIT);
+		usart_disable_rx_interrupt(USART2);
+		usart_disable(USART2);
+		
 	}
 	return 0;
 }
