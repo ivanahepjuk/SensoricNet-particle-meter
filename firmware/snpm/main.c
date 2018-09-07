@@ -159,15 +159,18 @@ int main(void)
 
 
 #if PARTICLEMETER == 1
+	usart_disable_rx_interrupt(USART2);
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
+	usart_enable_rx_interrupt(USART2);
 #endif
 
 	// init cayenne lpp
 	lpp = CayenneLPP__create(200);
 
 	flash(3, 100000);
+
 
 	while (1) {
 		debug_usart_send("New loop");
@@ -178,7 +181,9 @@ int main(void)
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
+		usart_disable_rx_interrupt(USART2);
 		read_pm_values();
+		usart_enable_rx_interrupt(USART2);
 		#endif
 
 		// readout BME data
@@ -219,15 +224,11 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
-		//usart_disable(USART2);
-		//nvic_disable_irq(NVIC_USART2_IRQ);
-		usart_disable_rx_interrupt(USART2);
+		
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
-		usart_enable_rx_interrupt(USART2);
-		//nvic_enable_irq(NVIC_USART2_IRQ);
-		//usart_enable(USART2);
+		
 #endif
 
 		debug_usart_send("Encode values");
