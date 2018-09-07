@@ -242,5 +242,101 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	}
 }
 
+void nbiot_csq(void)
+{
+	char incomming[50] = {0};	//readed string
+	int i=0;	//iteracni promenna
+	int enter=0;	//detekce znaku CR
+	int pocetentru = 2;
+
+	//posila na linku:
+	char phrase[] = "AT+CSQ\r\n";
+	
+	while(phrase[i] != '\0'){	//posle string
+		usart_send_blocking(USART4, phrase[i]);
+	#ifdef DEBUG
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, phrase[i]);
+	#endif
+		i++;
+	}
+	i=0;
+	//interrupt status register poreseny
+	USART_ICR(USART4) |= 0b00000000000010100011101110101111;
+	//cte z linky dokud neprijme tolik entru kolik ceka
+	while(enter < pocetentru){
+
+		incomming[i] = usart_recv_blocking(USART4);
+		#ifdef DEBUG 
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, incomming[i]);
+		#endif
+		if (incomming[i] == '\n')
+			enter++;
+		i++;
+	}
+	sscanf(incomming, "\r\n+CSQ:%d,%d", &csq[0], &csq[1]);
+	//rozebere precteny string a ulozi do global promenne:
+	//signal strength, bit error rate
+
+	//test jestli vratil spravne cisla nebo je mimo
+	if ((csq[0] < 0) || ((csq[0] > 51) && (csq[0] < 99)) || (csq[0] > 99))
+		csq[0] = 52; //52 znamena error
+	if ((csq[1] < 0) || ((csq[1] > 7 ) && (csq[0] < 99)) || (csq[1] > 99))
+		csq[1] = 52; //52 znamena error
+	#ifdef DEBUG
+	char pokus[30];
+	sprintf(pokus, "%d %d", csq[0], csq[1]);
+	debug_usart_send(pokus);
+	#endif
+}
+
+
+void nbiot_nuestats(void)
+{
+	char incomming[300] = {0};	//readed string
+	int i=0;	//iteracni promenna
+	int enter=0;	//detekce znaku CR
+	int pocetentru = 17;
+
+	//posila na linku:
+	char phrase[] = "AT+NUESTATS\r\n";
+	
+	while(phrase[i] != '\0'){	//posle string
+		usart_send_blocking(USART4, phrase[i]);
+	#ifdef DEBUG
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, phrase[i]);
+	#endif
+		i++;
+	}
+	i=0;
+	//interrupt status register poreseny
+	USART_ICR(USART4) |= 0b00000000000010100011101110101111;
+	//cte z linky dokud neprijme tolik entru kolik ceka
+	while(enter < pocetentru){
+
+		incomming[i] = usart_recv_blocking(USART4);
+		#ifdef DEBUG 
+		//sending stuff to debug port
+		usart_send_blocking(DEBUG_USART, incomming[i]);
+		#endif
+		if (incomming[i] == '\n')
+			enter++;
+		i++;
+	}
+
+	sscanf(incomming, "\r\nSignal power:%d\r\nTotal power:%d\r\nTX power:%d\r\nTX time:%d\r\nRX time:%d\r\nCell ID:%d\r\nDL MCS:%d\r\nUL MCS:%d\r\nDCI MCS:%d\r\nECL:%d\r\nSNR:%d\r\nEARFCN:%d\r\nPCI:%d\r\nRSRQ:%d\r\n", &nuestats[0], &nuestats[1], &nuestats[2], &nuestats[3], &nuestats[4], &nuestats[5], &nuestats[6], &nuestats[7], &nuestats[8], &nuestats[9], &nuestats[10], &nuestats[11], &nuestats[12], &nuestats[13]);
+	//TODO testovat nejak jestli jsou hodnoty v poradku
+	#ifdef DEBUG
+	//debugovaci vypis
+	char pokus[70];
+	sprintf(pokus, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d", nuestats[0], nuestats[1], nuestats[2], nuestats[3], nuestats[4], nuestats[5], nuestats[6], nuestats[7], nuestats[8], nuestats[9], nuestats[10], nuestats[11], nuestats[12], nuestats[13]);
+	debug_usart_send(pokus);	
+	#endif
+
+}
+
+
 
 

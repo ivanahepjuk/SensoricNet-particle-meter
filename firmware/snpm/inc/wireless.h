@@ -21,6 +21,9 @@
 #ifndef WIRELESS_H
 #define WIRELESS_H
 
+extern int csq[2];
+extern int nuestats[14];
+
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 			LORWAN WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
@@ -37,5 +40,6 @@ int  lorawan_sendCommand(char *phrase, char *check, int pocetentru);
 
 void nbiot_connect(void);
 int  nbiot_sendCommand(char *phrase, char *check, int pocetentru);
-
+void nbiot_csq(void);
+void nbiot_nuestats(void);
 #endif

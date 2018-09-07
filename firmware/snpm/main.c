@@ -55,6 +55,10 @@ float pm1 = 0;
 float pm2_5 = 0;
 float pm10 = 0;
 
+//nbiot BC-95 signal data //signal strength, bit error rate
+int csq[2] = {0}; //signal strength, bit error rate
+int nuestats[14] = {0}; //signal power, total power, tx power, tx time, rx time, cell ID, DL MCS, UL MCS, DCI MCS, ECL, SNR, EARFCN, PCI, RSRQ
+
 
 // Global variables for compensation functions, bme280:
 // temperature
@@ -240,6 +244,25 @@ int main(void)
 		if (gps_quality_indicator[0] != '0') {
 			CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
 		}
+		
+		//statistiky site
+		CayenneLPP__addDigitalInput(lpp, 8, csq[0]);//signal strength - jeste se da prepocitat podle datasheetu
+		CayenneLPP__addDigitalInput(lpp, 9, csq[1]);//channel bit error rate
+		CayenneLPP__addAnalogInput(lpp, 10, nuestats[0]);//signal power
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[1]);//total power
+		CayenneLPP__addAnalogInput(lpp, 12, nuestats[2]);//tx power
+		CayenneLPP__addAnalogInput(lpp, 13, nuestats[3]);//tx time
+		CayenneLPP__addAnalogInput(lpp, 14, nuestats[4]);//rx time
+								//cell id
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[6]);//DL MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[7]);//UL MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[8]);//DCI MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[9]);//ECL
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[10]);//SNR
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[11]);//EARFCN
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[12]);//PCI
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[13]);//RSRQ
+
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
@@ -312,6 +335,11 @@ int main(void)
 		strcat(send_string, hex_string);
 		strcat(send_string, "\r\n");
 
+		//vycitani statistik site a ukladani do poli csq a nuestats
+		nbiot_csq();
+		nbiot_nuestats();
+
+		
 		//socket opening
 		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
 		wait(SEC*1);

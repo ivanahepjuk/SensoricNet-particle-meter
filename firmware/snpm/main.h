@@ -22,7 +22,7 @@
 #define DEBUG_BAUDRATE 57600
 
 //define which hw we have connected
-#define PARTICLEMETER 1
+#define PARTICLEMETER 0
 
 // define macro for device type description
 #define NBIOT 1
