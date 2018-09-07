@@ -172,6 +172,10 @@ int main(void)
 	while (1) {
 		debug_usart_send("New loop");
 
+		//vycitani statistik site a ukladani do poli csq a nuestats
+		nbiot_csq();
+		nbiot_nuestats();
+
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
 		read_pm_values();
@@ -334,11 +338,6 @@ int main(void)
 		//strcat(send_string, "00");	//nbiot-0001
 		strcat(send_string, hex_string);
 		strcat(send_string, "\r\n");
-
-		//vycitani statistik site a ukladani do poli csq a nuestats
-		nbiot_csq();
-		nbiot_nuestats();
-
 		
 		//socket opening
 		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
