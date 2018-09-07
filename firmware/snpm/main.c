@@ -37,11 +37,11 @@ uint8_t burst_read_data[8] = {0};	//in loop measured data readed into this
 char gps_rx_buffer[255] = {0};
 uint8_t gps_rx_buffer_pointer = 0;
 char gps_utc_time[10] = {0};
-char gps_latitude[8] = {0};
-char gps_latitude_ns[2] = {0};
-char gps_longitude[9] = {0};
-char gps_longitude_ew[2] = {0};
-char gps_quality_indicator[2] = {0};
+char gps_latitude[9] = {0};
+char gps_latitude_ns[1] = {0};
+char gps_longitude[10] = {0};
+char gps_longitude_ew[1] = {0};
+char gps_quality_indicator[1] = {0};
 char gps_altitude[8] = {0};
 float wgs_latitude = 0.0;
 float wgs_longitude = 0.0;
@@ -138,7 +138,7 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*0);//until quectel wakes up
+
 		wait(SEC*15); //until quectel wakes up
 		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
@@ -212,9 +212,15 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
+		//usart_disable(USART2);
+		//nvic_disable_irq(NVIC_USART2_IRQ);
+		usart_disable_rx_interrupt(USART2);
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
+		usart_enable_rx_interrupt(USART2);
+		//nvic_enable_irq(NVIC_USART2_IRQ);
+		//usart_enable(USART2);
 #endif
 
 		debug_usart_send("Encode values");

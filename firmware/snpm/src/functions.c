@@ -401,18 +401,17 @@ char* concat(const char *s1, const char *s2)
 
 
 // gps dava souradnice 5133.82,N,00042.24,W
-//                     ssmm.vv   sssmm.vv
-// uhlova minuta je 1/60 stupne, jedna uhlova vterina je 1/3600 stupne
+//                     SSMM.mm   SSSMM.mm
+// uhlova minuta je 1/60 stupne
 // WGS84
 // 49.9346397,17.89627
-// 5133.82,N = 51.(33/60+82/3600) = 51.572777778N (N je +, S je -)
-// 00042.24,W = 0.(42/60+24/3600) = 0.706666667W (E je +, W je -???)
+// 5133.82,N = 51.(33.82/60) = 51.563666667N (N je +, S je -)
+// 00042.24,W = 0.(42.24/60) = 0.704W (E je +, W je -???)
 
 float convert_gps_to_wgs84_latitude (char *gps_latitude_string) {
 
 	char degree[2] = {'0'};
-	char minutes[2] = {'0'};
-	char seconds[2] = {'0'};
+	char minutes[5] = {'0'};
 	float wgs_latitude_float = 0;
 
 	if (gps_latitude_string[0] != 0) {
@@ -424,16 +423,18 @@ float convert_gps_to_wgs84_latitude (char *gps_latitude_string) {
 		//zjisti minuty
 		minutes[0] = gps_latitude_string[2];
 		minutes[1] = gps_latitude_string[3];
-
-		//zjisti vteriny
-		seconds[0] = gps_latitude_string[5];
-		seconds[1] = gps_latitude_string[6];
+		minutes[2] = gps_latitude_string[4];
+		minutes[3] = gps_latitude_string[5];
+		minutes[4] = gps_latitude_string[6];
 
 		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
 		// atoi neni zcela bezpecna fce, TODO
-		wgs_latitude_float = atoi(degree) + ((float)atoi(minutes) / 60) + ((float)atoi(seconds) / 3600);
+		wgs_latitude_float = atoi(degree) + ((float)atof(minutes) / 60);
 
-		// jestli je latitude S, obrat znamenko, TODO
+		// jestli je latitude S, obrat znamenko
+		if (gps_latitude_ns[0] == 'S') {
+			wgs_latitude_float = -wgs_latitude_float;
+		}
 
 		return (wgs_latitude_float);
 
@@ -446,8 +447,7 @@ float convert_gps_to_wgs84_latitude (char *gps_latitude_string) {
 float convert_gps_to_wgs84_longitude (char *gps_longitude_string) {
 
 	char degree[3] = {'0'};
-	char minutes[2] = {'0'};
-	char seconds[2] = {'0'};
+	char minutes[5] = {'0'};
 	float wgs_longitude_float = 0;
 
 	if (gps_longitude_string[0] != 0) {
@@ -460,16 +460,18 @@ float convert_gps_to_wgs84_longitude (char *gps_longitude_string) {
 		//zjisti minuty
 		minutes[0] = gps_longitude_string[3];
 		minutes[1] = gps_longitude_string[4];
-
-		//zjisti vteriny
-		seconds[0] = gps_longitude_string[6];
-		seconds[1] = gps_longitude_string[7];
+		minutes[2] = gps_longitude_string[5];
+		minutes[3] = gps_longitude_string[6];
+		minutes[4] = gps_longitude_string[7];
 
 		// mozna to pujde udelat chytreji - rovnou zkonvertovat string na float a prepocitat
 		// atoi neni zcela bezpecna fce, TODO
-		wgs_longitude_float = atoi(degree) + ((float)atoi(minutes) / 60) + ((float)atoi(seconds) / 3600);
+		wgs_longitude_float = atoi(degree) + ((float)atof(minutes) / 60);
 
-		// jestli je longitude W, obrat znamenko, TODO
+		// jestli je longitude W, obrat znamenko
+		if (gps_longitude_ew[0] == 'W') {
+			wgs_longitude_float = -wgs_longitude_float;
+		}
 
 		return (wgs_longitude_float);
 
