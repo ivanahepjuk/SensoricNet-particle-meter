@@ -52,6 +52,10 @@ mkdir ~/git
 cd ~/git
 git clone https://github.com/libopencm3/libopencm3.git
 ```
+checkout to used snapshot
+```
+git checkout f8aa36818ac57f92b68fbc7cd65767e782c5a3c8
+```
 
 and compile it
 
