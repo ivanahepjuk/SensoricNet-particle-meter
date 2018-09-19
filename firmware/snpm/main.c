@@ -167,6 +167,7 @@ int main(void)
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
+	wait(SEC * 1);
 #endif
 
 	// init cayenne lpp
