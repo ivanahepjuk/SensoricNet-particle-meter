@@ -1,4 +1,4 @@
-update=Tue 02 Jan 2018 02:51:18 PM CET
+update=Mon 24 Sep 2018 14:18:14 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,9 +25,19 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=Schematics/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
-LibDir=../SENSORIC_BOARD
+LibDir=../../../../sekura/hardware/monezor
 [eeschema/libraries]
 LibName1=sensenet_particlemeter
 LibName2=power
@@ -60,13 +70,4 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=switches
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=Schematics/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
+LibName32=/home/ia/work/sekura/hardware/monezor/monezor

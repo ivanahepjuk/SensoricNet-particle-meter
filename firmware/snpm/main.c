@@ -94,6 +94,7 @@ int main(void)
 {
 	
 	clock_setup();
+	systick_setup(30000);//125ms tick = 250ms period = 4Hz
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
