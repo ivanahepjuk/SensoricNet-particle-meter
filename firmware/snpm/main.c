@@ -102,7 +102,7 @@ int main(void)
 
 	
 
-	flash(1, 200000);
+	//flash(1, 200000);
 
 	//test
 	//   !!!   Uncomment this only if you know what you are doing,   
@@ -119,7 +119,7 @@ int main(void)
 	#endif
 	
 	BME280_init();
-
+flash(1, 200000);
 // semihosting - stdio po debug konzoli, inicializace
 /*
 #if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
