@@ -13,6 +13,10 @@
 #include "inc/cayenne_lpp.h"
 #include "m24c04.h"
 
+#include <libopencm3/stm32/rcc.h>
+#include <libopencm3/stm32/gpio.h>
+#include <libopencm3/cm3/systick.h>
+
 //how long it waits at the end of each loop?
 #define WAIT 5
 

@@ -71,6 +71,10 @@ float convert_gps_to_wgs84_longitude (char *gps_longitude_string);
 void get_nth_substring(unsigned int number, char separator, char* string, unsigned int string_size, char* buffer, unsigned int buffer_size);
 //void usart4_isr(void);
 
+void sys_tick_handler(void);
+void systick_setup(int xms);
+
+
 
 ////////////////dronovo
 //char* concat(const char *s1, const char *s2);

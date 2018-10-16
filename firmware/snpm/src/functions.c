@@ -606,3 +606,21 @@ void usart2_isr(void)
 	led_off(2);
 }
 
+void sys_tick_handler(void)
+{
+//	gpio_toggle(GPIOC, GPIO8);
+}
+//static 
+void systick_setup(int xms)
+{
+	/* div8 per ST, stays compatible with M3/M4 parts, well done ST */
+	systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
+	/* clear counter so it starts right away */
+	STK_CVR = 0;
+
+	systick_set_reload(rcc_ahb_frequency / 8 / 1000 * xms);
+	systick_counter_enable();
+	systick_interrupt_enable();
+}
+
+

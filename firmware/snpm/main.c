@@ -55,6 +55,10 @@ float pm1 = 0;
 float pm2_5 = 0;
 float pm10 = 0;
 
+//nbiot BC-95 signal data //signal strength, bit error rate
+int csq[2] = {0}; //signal strength, bit error rate
+int nuestats[14] = {0}; //signal power, total power, tx power, tx time, rx time, cell ID, DL MCS, UL MCS, DCI MCS, ECL, SNR, EARFCN, PCI, RSRQ
+
 
 // Global variables for compensation functions, bme280:
 // temperature
@@ -90,12 +94,15 @@ int main(void)
 {
 	
 	clock_setup();
+	systick_setup(30000);//125ms tick = 250ms period = 4Hz
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
 	spi_setup();
 
-	flash(1, 200000);
+	
+
+	//flash(1, 200000);
 
 	//test
 	//   !!!   Uncomment this only if you know what you are doing,   
@@ -112,7 +119,7 @@ int main(void)
 	#endif
 	
 	BME280_init();
-
+flash(1, 200000);
 // semihosting - stdio po debug konzoli, inicializace
 /*
 #if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
@@ -135,6 +142,9 @@ int main(void)
 	debug_usart_send("IoT module hw reset done");
 
 	flash(1, 50000);
+
+	usart_disable_rx_interrupt(USART2);
+	usart_disable(USART2);
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
@@ -159,15 +169,21 @@ int main(void)
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
+	wait(SEC * 1);
 #endif
 
 	// init cayenne lpp
-	lpp = CayenneLPP__create(200);
+	lpp = CayenneLPP__create(500);
 
 	flash(3, 100000);
 
+
 	while (1) {
 		debug_usart_send("New loop");
+
+		//vycitani statistik site a ukladani do poli csq a nuestats
+		nbiot_csq();
+		nbiot_nuestats();
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
@@ -212,15 +228,9 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
-		//usart_disable(USART2);
-		//nvic_disable_irq(NVIC_USART2_IRQ);
-		usart_disable_rx_interrupt(USART2);
 		pm1 = particlemeter_pm1();
 		pm2_5 = particlemeter_pm2_5();
 		pm10 = particlemeter_pm10();
-		usart_enable_rx_interrupt(USART2);
-		//nvic_enable_irq(NVIC_USART2_IRQ);
-		//usart_enable(USART2);
 #endif
 
 		debug_usart_send("Encode values");
@@ -241,6 +251,25 @@ int main(void)
 		if (gps_quality_indicator[0] != '0') {
 			CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
 		}
+		
+		//statistiky site
+		CayenneLPP__addDigitalInput(lpp, 8, csq[0]);//signal strength - jeste se da prepocitat podle datasheetu
+		CayenneLPP__addDigitalInput(lpp, 9, csq[1]);//channel bit error rate
+		CayenneLPP__addAnalogInput(lpp, 10, nuestats[0]);//signal power
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[1]);//total power
+		CayenneLPP__addAnalogInput(lpp, 12, nuestats[2]);//tx power
+		CayenneLPP__addAnalogInput(lpp, 13, nuestats[3]);//tx time
+		CayenneLPP__addAnalogInput(lpp, 14, nuestats[4]);//rx time
+								//cell id
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[6]);//DL MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[7]);//UL MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[8]);//DCI MCS
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[9]);//ECL
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[10]);//SNR
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[11]);//EARFCN
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[12]);//PCI
+		CayenneLPP__addAnalogInput(lpp, 11, nuestats[13]);//RSRQ
+
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
@@ -312,7 +341,7 @@ int main(void)
 		//strcat(send_string, "00");	//nbiot-0001
 		strcat(send_string, hex_string);
 		strcat(send_string, "\r\n");
-
+		
 		//socket opening
 		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
 		wait(SEC*1);
@@ -329,6 +358,7 @@ int main(void)
 		CayenneLPP__reset(lpp);
 		//lpp->cursor = NULL;
 		
+
 		char loop_debug_string[20] = {0};
 		sprintf(loop_debug_string, "Loop %d done", cykly);
 		debug_usart_send(loop_debug_string);
@@ -336,8 +366,13 @@ int main(void)
 		cykly++;
 
 		flash(3, 100000);
-
+		
+		usart_enable_rx_interrupt(USART2);
+		usart_enable(USART2);
 		wait(SEC *WAIT);
+		usart_disable_rx_interrupt(USART2);
+		usart_disable(USART2);
+		
 	}
 	return 0;
 }
