@@ -99,11 +99,11 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-for(;;){
-	oledInit();
+//for(;;){
+//	oledInit();
 flash(1, 200000);
 
-}
+//}
 	//flash(1, 200000);
 
 	//test
