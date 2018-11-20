@@ -99,11 +99,15 @@ int main(void)
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-//for(;;){
-//	oledInit();
-flash(1, 200000);
+/*
+	oledInit();
+while(1)
+{
+oledHLine(32);
+	oledRefresh();
+}
+*/
 
-//}
 	//flash(1, 200000);
 
 	//test
@@ -150,8 +154,7 @@ flash(1, 200000);
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-
-		wait(SEC*15); //until quectel wakes up
+		wait(SEC*10); //until quectel wakes up
 		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
 		nbiot_connect();

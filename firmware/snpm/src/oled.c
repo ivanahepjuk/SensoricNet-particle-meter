@@ -121,7 +121,7 @@ void SPISend(uint32_t base, uint8_t *data, int len)
 /*
  * Initialize the display.
  */
-void oledInit()
+void oledInit(void)
 {
 	static uint8_t s[25] = {
 		OLED_DISPLAYOFF,
@@ -156,11 +156,11 @@ void oledInit()
 
 	// Reset the LCD
 	gpio_set(OLED_RST_PORT, OLED_RST_PIN);
-	wait(400000);
+	wait(4000000);
 	gpio_clear(OLED_RST_PORT, OLED_RST_PIN);
-	wait(400000);
+	wait(4000000);
 	gpio_set(OLED_RST_PORT, OLED_RST_PIN);
-wait(400000);
+	wait(4000000);
 	// init
 	gpio_clear(OLED_CS_PORT, OLED_CS_PIN);		// SPI select
 	SPISend(SPI_BASE, s, 25);
@@ -170,8 +170,7 @@ wait(400000);
 //oledFrame(20, 20, 50, 50);
 
 
-oledHLine(32);
-	oledRefresh();
+
 }
 
 /*

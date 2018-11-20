@@ -43,8 +43,8 @@
 #define LED3_GPIO GPIO2
 
 // IoT module reset
-#define IOT_RESET_GPIO_GROUP GPIOA
-#define IOT_RESET_GPIO GPIO9
+#define IOT_RESET_GPIO_GROUP GPIOC
+#define IOT_RESET_GPIO GPIO12
 
 
 // u techto promennych se predpoklada jejich naplneni z cmdline

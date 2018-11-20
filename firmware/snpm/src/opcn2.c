@@ -34,22 +34,22 @@ uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 
 void pm_SS_on(void)
 {
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
+	gpio_clear(GPIOD, GPIO2); //SS Log 0
 	wait(100000); //1s
 }
 
 void pm_SS_off(void)
 {	wait(10000); //100ms
-	gpio_set(GPIOA, GPIO8); //SS Log 1
+	gpio_set(GPIOD, GPIO2); //SS Log 1
 	wait(50000); //100ms
 }
 
 void pm_SS_toggle(uint32_t delay)
 {
 	wait(delay); //0.1s
-	gpio_set(GPIOA, GPIO8); //SS Log 0
+	gpio_set(GPIOD, GPIO2); //SS Log 0
 	wait(delay); //0.1s
-	gpio_clear(GPIOA, GPIO8); //SS Log 1
+	gpio_clear(GPIOD, GPIO2); //SS Log 1
 	wait(10000); //1s
 }
 
@@ -158,7 +158,7 @@ float particlemeter_pm10(void)
 void particlemeter_set_laser(uint8_t laser)
 {
 	wait(DELAY);
-	gpio_clear(GPIOA, GPIO8); //SS Log 0
+	gpio_clear(GPIOD, GPIO2); //SS Log 0
 	
 	wait(DELAY_1);
 	  

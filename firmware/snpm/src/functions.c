@@ -104,7 +104,7 @@ void led_off(uint8_t led)
 void spi_setup(void)
 {
 	// gpio setting for SS
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO8);
+	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO2);
 	
 	// gpio setting for SDI SDO SCK
 	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3 | GPIO4 | GPIO5);
@@ -124,8 +124,8 @@ void spi_setup(void)
 	* Setting NSS high (Even though I am using gpio as SS)
 	*/
 	
-	//bitstream for register settinggs according to datasheetSPI_CR1(SPI1) |= 0b0000001100010101; //100101//4101 //7011  
-	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011
+	//bitstream for register settinggs according to datasheet
+	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011  
 	//bitstream for register settinggs according to datasheet
 	SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 
@@ -327,12 +327,6 @@ void usart_setup(void)
 
 void gpio_setup(void)
 {
-	//oled
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO6); //tx
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO7); //tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO4); //tx
-
-
 
 	//gpio LEDs setup
 	gpio_mode_setup(LED1_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED1_GPIO);
