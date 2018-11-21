@@ -37,7 +37,7 @@ int  lorawan_sendCommand(char *phrase, char *check, int pocetentru);
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 		NBIOT QUECTEL WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-
+void nbiot_reset(void);
 void nbiot_connect(void);
 int  nbiot_sendCommand(char *phrase, char *check, int pocetentru);
 void nbiot_csq(void);

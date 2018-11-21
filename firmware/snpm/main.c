@@ -92,72 +92,42 @@ uint8_t pm_values_buffer[12] = {0};	//only pm data
 
 int main(void)
 {
-	
 	clock_setup();
-	systick_setup(30000);//125ms tick = 250ms period = 4Hz
+	//systick_setup(1000);//125ms tick = 250ms period = 4Hz
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
 	spi_setup();
-/*
-	oledInit();
-while(1)
-{
-oledHLine(32);
-	oledRefresh();
-}
-*/
-
-	//flash(1, 200000);
-
-	//test
-	//   !!!   Uncomment this only if you know what you are doing,   
-	//   !!!!  This is used when deploying new devices   !!!!
-	//eeprom_write_id("nbiot-0005");
-	//reads ID from eeprom
+	iwdg_set_period_ms(32760);
 
 	debug_usart_send("Welcome to SensoricNet particlemeter");
-
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
-//		eeprom_read_id();
-//		usartSend(ID, 2);
 	#endif
 	
 	BME280_init();
-flash(1, 200000);
-// semihosting - stdio po debug konzoli, inicializace
-/*
-#if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
-	initialise_monitor_handles();
-	setbuf(stdout, NULL);
-#endif
-*/
-	
-
+	led_flash(1, 3, 20000);
+	nbiot_reset();
+	led_flash(1, 3, 20000);
+	// semihosting - stdio po debug konzoli, inicializace
+	/*
+	#if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
+		initialise_monitor_handles();
+		setbuf(stdout, NULL);
+	#endif
+	*/
 	struct CayenneLPP *lpp;
 	unsigned char *buf;
 	int size;
-
-	//IoT module HW reset
-	debug_usart_send("IoT module hw reset");
-	gpio_clear(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
-	wait(SEC*0.5);
-	gpio_set(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
-	wait(SEC*3);
-	debug_usart_send("IoT module hw reset done");
-
-	flash(1, 50000);
 
 	usart_disable_rx_interrupt(USART2);
 	usart_disable(USART2);
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
-		wait(SEC*10); //until quectel wakes up
-		flash(3, 50000);
 		debug_usart_send("NBIoT site connect");
 		nbiot_connect();
+		led_flash(1, 3, 20000);
 	#endif
 
 	//Connect to lora network
@@ -169,26 +139,29 @@ flash(1, 200000);
 		debug_usart_send("lora connected");
 	#endif
 
-
+	iwdg_reset();
+	iwdg_start();/*
 #if PARTICLEMETER == 1
+	debug_usart_send("PM switching on");
 	particlemeter_ON();
 	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
 	wait(SEC * 1);
+	debug_usart_send("PM switched on");
 #endif
-
+*/
 	// init cayenne lpp
 	lpp = CayenneLPP__create(500);
 
-	flash(3, 100000);
-
-
+	//flash(3, 100000);
 	while (1) {
 		debug_usart_send("New loop");
+		iwdg_reset();
+		iwdg_start();
 
 		//vycitani statistik site a ukladani do poli csq a nuestats
-		nbiot_csq();
-		nbiot_nuestats();
+		//nbiot_csq();
+		//nbiot_nuestats();
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
@@ -233,9 +206,9 @@ flash(1, 200000);
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
-		pm1 = particlemeter_pm1();
-		pm2_5 = particlemeter_pm2_5();
-		pm10 = particlemeter_pm10();
+		pm1 = 21.21;//particlemeter_pm1();
+		pm2_5 = 22.22;//particlemeter_pm2_5();
+		pm10 = 23.23;//particlemeter_pm10();
 #endif
 
 		debug_usart_send("Encode values");
@@ -243,7 +216,7 @@ flash(1, 200000);
 		sprintf(debug_data_string, "hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f", hum, temp, press, pm1, pm2_5, pm10);
 		debug_usart_send(debug_data_string);
 		
-		CayenneLPP__addTemperature(lpp, 1, temp);
+		CayenneLPP__addTemperature(lpp, 1, temp-3.5); //FIXME PRASARNA
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
 		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
 #if PARTICLEMETER == 1
@@ -256,7 +229,7 @@ flash(1, 200000);
 		if (gps_quality_indicator[0] != '0') {
 			CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
 		}
-		
+		/*
 		//statistiky site
 		CayenneLPP__addDigitalInput(lpp, 8, csq[0]);//signal strength - jeste se da prepocitat podle datasheetu
 		CayenneLPP__addDigitalInput(lpp, 9, csq[1]);//channel bit error rate
@@ -274,7 +247,7 @@ flash(1, 200000);
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[11]);//EARFCN
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[12]);//PCI
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[13]);//RSRQ
-
+*/
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
@@ -283,8 +256,8 @@ flash(1, 200000);
 		//sendData(CayenneLPP__getBuffer(lpp), CayenneLPP__getSize(lpp));
 		//printf("Encoded data size: %i\n", size);
 
-		char hex_string[200] = {0};		//encoded string here
-		char send_string[200] = {0};	//string to send here
+		char hex_string[400] = {0};		//encoded string here
+		char send_string[400] = {0};	//string to send here
 		
 		//ascii-hex encoding is happening here:
 		int j = 0;
@@ -370,7 +343,7 @@ flash(1, 200000);
 
 		cykly++;
 
-		flash(3, 100000);
+		flash(2, 100000);
 		
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);

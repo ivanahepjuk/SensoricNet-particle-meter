@@ -74,11 +74,15 @@ void led_flash(uint8_t led, uint8_t loop, uint32_t delay)
  */
 void led_on(uint8_t led)
 {
-	if (led==1) {
+	if (led==1) 
 		gpio_set(LED1_GPIO_GROUP, LED1_GPIO);
-	} else {
+
+	if (led==2) 
 		gpio_set(LED2_GPIO_GROUP, LED2_GPIO);
-	}
+
+	if (led==3) 
+		gpio_set(LED3_GPIO_GROUP, LED3_GPIO);
+	
 }
 
 /**
@@ -86,11 +90,12 @@ void led_on(uint8_t led)
  */
 void led_off(uint8_t led)
 {
-	if (led==1) {
+	if (led==1)
 		gpio_clear(LED1_GPIO_GROUP, LED1_GPIO);
-	} else {
+	if (led==2)
 		gpio_clear(LED2_GPIO_GROUP, LED2_GPIO);
-	}
+	if (led==3)
+		gpio_clear(LED3_GPIO_GROUP, LED3_GPIO);
 }
 
 /* 		void spi_setup(void)
@@ -107,11 +112,14 @@ void spi_setup(void)
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO2);
 	
 	// gpio setting for SDI SDO SCK
-	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3 | GPIO4 | GPIO5);
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3); //gpio3 sck 
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3); //gpio4 pm-sdo (MISO)
+	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT,  GPIO_PUPD_NONE,  GPIO5); //gpio5  pm-sdi (MOSI) 
+	//gpio_set_output_options(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, GPIO5);
 
 	// gpio alternative function SPI 1
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3  | GPIO4 | GPIO5);
-
+	gpio_set_af(GPIOB, GPIO_AF0, GPIO3  | GPIO4 | GPIO5);
 	//Reset SPI
 	spi_reset(SPI1);
 
@@ -125,7 +133,7 @@ void spi_setup(void)
 	*/
 	
 	//bitstream for register settinggs according to datasheet
-	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011  
+	SPI_CR1(SPI1) |= 0b0000001100100101; //100101//4101 //7011  
 	//bitstream for register settinggs according to datasheet
 	SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 
@@ -246,6 +254,9 @@ void clock_setup(void)
 	
 	// Enable GPIOC clock for LED
 	rcc_periph_clock_enable(RCC_GPIOC);
+
+	// Enable GPIOC clock for LED
+	rcc_periph_clock_enable(RCC_GPIOD);
 	
 	//clk for SPI1
 	rcc_periph_clock_enable(RCC_SPI1);
@@ -331,10 +342,14 @@ void gpio_setup(void)
 	//gpio LEDs setup
 	gpio_mode_setup(LED1_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED1_GPIO);
 	gpio_mode_setup(LED2_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED2_GPIO);
-	// gpio_mode_setup(LED3_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED3_GPIO);
+	gpio_mode_setup(LED3_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED3_GPIO);
 	
 	//iot module reset
 	gpio_mode_setup(IOT_RESET_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, IOT_RESET_GPIO);
+
+	//gps standby pin
+	//gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO0);
+	//gpio_set(GPIOA, GPIO0);
 
 
 	// USART1 DEBUG
@@ -519,7 +534,7 @@ void usart2_isr(void)
 {
 	static char data = 'A';
 
-	led_on(2);
+	led_on(3);
 
 	//Check if we were called because of RXNE.
 	// dron: jake jine preruseni by mohlo prijit? imho vzdy to bude od RXNE, ale ok, je to safe
@@ -603,11 +618,22 @@ void usart2_isr(void)
 		//USART_RQR(USART2) |= USART_RQR_RXFRQ;
 
 	}
-	led_off(2);
+	led_off(3);
 }
 
 void sys_tick_handler(void)
 {
+/**
+ * zablika danou led x-krat s danou periodou
+ */
+//led_flash(3, 2, 5000);
+
+//Application interrupt and reset control register (AIRCR):
+//mww 0xe000ed0c 0x05fa0004
+
+
+
+
 //	gpio_toggle(GPIOC, GPIO8);
 }
 //static 

@@ -176,10 +176,21 @@ int lorawan_sendCommand(char *phrase, char *check, int pocetentru)
   * Initial network connection
   * 
   * */
+
+void nbiot_reset(void)
+{
+	//IoT module HW reset
+	debug_usart_send("IoT module hw reset");
+	gpio_clear(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
+	wait(SEC*0.5);
+	gpio_set(IOT_RESET_GPIO_GROUP, IOT_RESET_GPIO);
+	wait(SEC*3);
+	debug_usart_send("IoT module hw reset done");
+}
   
 void nbiot_connect(void)
 {
-	flash(5, 50000);
+	wait(SEC*1); //until quectel wakes up
 	//usartSend("test uvnitr\r\n", 2);
 	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 2))
 	//usartSend("at+cfun\r\n", 2);
@@ -234,7 +245,8 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 		i++;
 	}
 
-	
+	//ohoho led_flash(1, 3, 200000);
+	led_flash(1, 2, 20000);
 	if ( (strstr(incomming, check)) == NULL) {
 		return 1;
 	} else {
