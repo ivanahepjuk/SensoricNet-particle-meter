@@ -245,8 +245,8 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 		i++;
 	}
 
-	//ohoho led_flash(1, 3, 200000);
-	led_flash(1, 2, 20000);
+	led_flash(1, 3, 200000);
+	//led_flash(1, 2, 20000);
 	if ( (strstr(incomming, check)) == NULL) {
 		return 1;
 	} else {
