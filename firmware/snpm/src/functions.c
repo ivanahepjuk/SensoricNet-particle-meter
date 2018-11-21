@@ -347,6 +347,9 @@ void gpio_setup(void)
 	//iot module reset
 	gpio_mode_setup(IOT_RESET_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, IOT_RESET_GPIO);
 
+	//MOSFET particlemeter
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
+
 	//gps standby pin
 	//gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO0);
 	//gpio_set(GPIOA, GPIO0);

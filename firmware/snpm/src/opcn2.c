@@ -56,6 +56,7 @@ void pm_SS_toggle(uint32_t delay)
 
 void particlemeter_ON(void)
 {
+	
 	pm_SS_on();
 	while(pm_set_command(0x03, 14000) != 0xF3){
 	//wait(14000);
@@ -64,7 +65,7 @@ void particlemeter_ON(void)
 	//wait(14000);
 	}
 	pm_SS_off();
-	
+	wait(SEC * 1);
 }
 
 

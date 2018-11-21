@@ -18,7 +18,7 @@
 #include <libopencm3/cm3/systick.h>
 
 //how long it waits at the end of each loop?
-#define WAIT 5
+#define WAIT 50
 
 //USART1 is used as debug output, if defined, debug output is send
 #define DEBUG

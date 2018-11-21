@@ -100,6 +100,9 @@ int main(void)
 	spi_setup();
 	iwdg_set_period_ms(32760);
 
+	gpio_set(GPIOA, GPIO10);
+	
+
 	debug_usart_send("Welcome to SensoricNet particlemeter");
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
@@ -108,7 +111,7 @@ int main(void)
 	BME280_init();
 	led_flash(1, 3, 20000);
 	nbiot_reset();
-	led_flash(1, 3, 20000);
+	led_flash(1, 3, 200000);
 	// semihosting - stdio po debug konzoli, inicializace
 	/*
 	#if defined(ENABLE_SEMIHOSTING) && (ENABLE_SEMIHOSTING)
@@ -140,16 +143,16 @@ int main(void)
 	#endif
 
 	iwdg_reset();
-	iwdg_start();/*
+	iwdg_start();
+
 #if PARTICLEMETER == 1
 	debug_usart_send("PM switching on");
 	particlemeter_ON();
-	wait(SEC * 1);
 	particlemeter_set_fan(FAN_SPEED);
 	wait(SEC * 1);
 	debug_usart_send("PM switched on");
 #endif
-*/
+
 	// init cayenne lpp
 	lpp = CayenneLPP__create(500);
 
@@ -206,9 +209,9 @@ int main(void)
 		press = BME280_press();
 		hum = BME280_hum();
 #if PARTICLEMETER == 1
-		pm1 = 21.21;//particlemeter_pm1();
-		pm2_5 = 22.22;//particlemeter_pm2_5();
-		pm10 = 23.23;//particlemeter_pm10();
+		pm1 = particlemeter_pm1();
+		pm2_5 = particlemeter_pm2_5();
+		pm10 = particlemeter_pm10();
 #endif
 
 		debug_usart_send("Encode values");
