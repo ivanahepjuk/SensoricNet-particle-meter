@@ -163,8 +163,8 @@ int main(void)
 		iwdg_start();
 
 		//vycitani statistik site a ukladani do poli csq a nuestats
-		//nbiot_csq();
-		//nbiot_nuestats();
+		nbiot_csq();
+		nbiot_nuestats();
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1
@@ -232,8 +232,9 @@ int main(void)
 		if (gps_quality_indicator[0] != '0') {
 			CayenneLPP__addGPS(lpp, 7, wgs_latitude, wgs_longitude, altitude);
 		}
-		/*
+		
 		//statistiky site
+
 		CayenneLPP__addDigitalInput(lpp, 8, csq[0]);//signal strength - jeste se da prepocitat podle datasheetu
 		CayenneLPP__addDigitalInput(lpp, 9, csq[1]);//channel bit error rate
 		CayenneLPP__addAnalogInput(lpp, 10, nuestats[0]);//signal power
@@ -250,7 +251,6 @@ int main(void)
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[11]);//EARFCN
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[12]);//PCI
 		CayenneLPP__addAnalogInput(lpp, 11, nuestats[13]);//RSRQ
-*/
 
 		buf=CayenneLPP__getBuffer(lpp);
 		size=CayenneLPP__getSize(lpp);
@@ -350,7 +350,8 @@ int main(void)
 		
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);
-		wait(SEC *WAIT);
+		wait(SEC *10);
+		iwdg_reset();
 		usart_disable_rx_interrupt(USART2);
 		usart_disable(USART2);
 		

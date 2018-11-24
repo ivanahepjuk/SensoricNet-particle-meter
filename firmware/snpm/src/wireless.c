@@ -197,7 +197,7 @@ void nbiot_connect(void)
 		wait(SEC*3);
 	while(nbiot_sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
 	//usartSend("at+cops\r\n", 2);
-		wait(SEC*3);
+		wait(SEC*5);
 	while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) //timeout = number of tries	
 	//usartSend("at+cgatt?\r\n", 2);
 		wait(SEC*3);

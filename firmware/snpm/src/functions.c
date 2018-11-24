@@ -372,8 +372,8 @@ void gpio_setup(void)
 	gpio_set_af(GPIOA, GPIO_AF1, GPIO3);
 
 	// USART4 iot module
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO10); //tx
-	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11); //rx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO10); //tx
+	gpio_mode_setup(GPIOC, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO11); //rx
 
 	// USART4 setup pins as alternate function AF0
 	gpio_set_af(GPIOC, GPIO_AF0, GPIO10);
