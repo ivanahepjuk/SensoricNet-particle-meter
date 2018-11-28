@@ -234,7 +234,7 @@ int main(void)
 		sprintf(debug_data_string, "hum: %.2f, temp: %.2f, press: %.2f, pm1: %.2f, pm2_5: %.2f, pm10: %.2f", hum, temp, press, pm1, pm2_5, pm10);
 		debug_usart_send(debug_data_string);
 		
-		CayenneLPP__addTemperature(lpp, 1, temp-3.5); //FIXME PRASARNA
+		CayenneLPP__addTemperature(lpp, 1, temp-2.1); //FIXME PRASARNA
 		CayenneLPP__addBarometricPressure(lpp, 2, press);
 		CayenneLPP__addRelativeHumidity(lpp, 3, hum);
 #if PARTICLEMETER == 1
