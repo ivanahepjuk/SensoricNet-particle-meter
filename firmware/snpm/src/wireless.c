@@ -190,6 +190,7 @@ void nbiot_reset(void)
   
 void nbiot_connect(void)
 {
+	uint8_t wdg_resets = 10;
 
 	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 2))
 	//usartSend("at+cfun\r\n", 2);
@@ -198,8 +199,14 @@ void nbiot_connect(void)
 	//usartSend("at+cops\r\n", 2);
 		wait(SEC*5);
 	while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) //timeout = number of tries	
-	//usartSend("at+cgatt?\r\n", 2);
+	{
+		if (wdg_resets > 0)
+		{
+			iwdg_reset();
+			wdg_resets--;
+		}
 		wait(SEC*3);
+	}
 }
 
  
