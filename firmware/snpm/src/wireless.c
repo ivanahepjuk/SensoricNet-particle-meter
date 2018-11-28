@@ -190,8 +190,7 @@ void nbiot_reset(void)
   
 void nbiot_connect(void)
 {
-	wait(SEC*1); //until quectel wakes up
-	//usartSend("test uvnitr\r\n", 2);
+
 	while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 2))
 	//usartSend("at+cfun\r\n", 2);
 		wait(SEC*3);
@@ -220,14 +219,26 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	int i=0;	//iteracni promenna
 	int enter=0;	//detekce znaku CR
 
+	uint32_t timestamp = ticker;
+
 	//posila na linku
-	while(phrase[i] != '\0'){	//posle string
+	while(phrase[i] != '\0')
+	{	//posle string
 		usart_send_blocking(USART4, phrase[i]);
 	#ifdef DEBUG
 		//sending stuff to debug port
 		usart_send_blocking(DEBUG_USART, phrase[i]);
 	#endif
+		wait(1000);
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 	i=0;
 	//interrupt status register poreseny
@@ -243,6 +254,14 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 		if (incomming[i] == '\n')
 			enter++;
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 
 	//led_flash(1, 3, 200000);
@@ -254,23 +273,35 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	}
 }
 
-void nbiot_csq(void)
+uint8_t nbiot_csq(void)
 {
 	char incomming[50] = {0};	//readed string
 	int i=0;	//iteracni promenna
 	int enter=0;	//detekce znaku CR
 	int pocetentru = 2;
 
+	uint32_t timestamp = ticker;
+
 	//posila na linku:
 	char phrase[] = "AT+CSQ\r\n";
-	
+
+
 	while(phrase[i] != '\0'){	//posle string
 		usart_send_blocking(USART4, phrase[i]);
 	#ifdef DEBUG
 		//sending stuff to debug port
 		usart_send_blocking(DEBUG_USART, phrase[i]);
 	#endif
+		wait(1000);
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 	i=0;
 	//interrupt status register poreseny
@@ -286,6 +317,14 @@ void nbiot_csq(void)
 		if (incomming[i] == '\n')
 			enter++;
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 	sscanf(incomming, "\r\n+CSQ:%d,%d", &csq[0], &csq[1]);
 	//rozebere precteny string a ulozi do global promenne:
@@ -301,15 +340,18 @@ void nbiot_csq(void)
 	sprintf(pokus, "%d %d", csq[0], csq[1]);
 	debug_usart_send(pokus);
 	#endif
+	return 0;
 }
 
 
-void nbiot_nuestats(void)
+uint8_t nbiot_nuestats(void)
 {
 	char incomming[200] = {0};	//readed string
 	int i=0;	//iteracni promenna
 	int enter=0;	//detekce znaku CR
 	int pocetentru = 17;
+
+	uint32_t timestamp = ticker;
 
 	//posila na linku:
 	char phrase[] = "AT+NUESTATS\r\n";
@@ -320,7 +362,16 @@ void nbiot_nuestats(void)
 		//sending stuff to debug port
 		usart_send_blocking(DEBUG_USART, phrase[i]);
 	#endif
+		wait(1000);
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 	i=0;
 	//interrupt status register poreseny
@@ -336,6 +387,14 @@ void nbiot_nuestats(void)
 		if (incomming[i] == '\n')
 			enter++;
 		i++;
+		//if anything goes wrong, escape function and do it again
+		if((ticker - timestamp)>8)
+		{
+			usart_send_blocking(USART4, '\r');
+			usart_send_blocking(USART4, '\n');
+			wait(1000);
+			return 1;	
+		}
 	}
 
 	sscanf(incomming, "\r\nSignal power:%d\r\nTotal power:%d\r\nTX power:%d\r\nTX time:%d\r\nRX time:%d\r\nCell ID:%d\r\nDL MCS:%d\r\nUL MCS:%d\r\nDCI MCS:%d\r\nECL:%d\r\nSNR:%d\r\nEARFCN:%d\r\nPCI:%d\r\nRSRQ:%d\r\n", &nuestats[0], &nuestats[1], &nuestats[2], &nuestats[3], &nuestats[4], &nuestats[5], &nuestats[6], &nuestats[7], &nuestats[8], &nuestats[9], &nuestats[10], &nuestats[11], &nuestats[12], &nuestats[13]);
@@ -346,7 +405,7 @@ void nbiot_nuestats(void)
 	sprintf(pokus, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d", nuestats[0], nuestats[1], nuestats[2], nuestats[3], nuestats[4], nuestats[5], nuestats[6], nuestats[7], nuestats[8], nuestats[9], nuestats[10], nuestats[11], nuestats[12], nuestats[13]);
 	debug_usart_send(pokus);	
 	#endif
-
+	return 0;
 }
 
 

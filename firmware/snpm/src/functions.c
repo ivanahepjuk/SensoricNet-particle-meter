@@ -626,19 +626,11 @@ void usart2_isr(void)
 
 void sys_tick_handler(void)
 {
-/**
- * zablika danou led x-krat s danou periodou
- */
-//led_flash(3, 2, 5000);
-
+ticker++;
 //Application interrupt and reset control register (AIRCR):
 //mww 0xe000ed0c 0x05fa0004
-
-
-
-
-//	gpio_toggle(GPIOC, GPIO8);
 }
+		
 //static 
 void systick_setup(int xms)
 {

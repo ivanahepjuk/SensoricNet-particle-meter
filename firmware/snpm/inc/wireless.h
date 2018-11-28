@@ -40,6 +40,6 @@ int  lorawan_sendCommand(char *phrase, char *check, int pocetentru);
 void nbiot_reset(void);
 void nbiot_connect(void);
 int  nbiot_sendCommand(char *phrase, char *check, int pocetentru);
-void nbiot_csq(void);
-void nbiot_nuestats(void);
+uint8_t nbiot_csq(void);
+uint8_t nbiot_nuestats(void);
 #endif

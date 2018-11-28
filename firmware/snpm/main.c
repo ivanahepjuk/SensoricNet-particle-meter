@@ -80,6 +80,8 @@ char id_decoded[23]={0};
 uint8_t histogram_buffer[62];	//whole dataset of opc readed into this
 uint8_t pm_values_buffer[12] = {0};	//only pm data
 
+//systick timer variable
+uint32_t ticker = 0;
 
 
 
@@ -93,13 +95,16 @@ uint8_t pm_values_buffer[12] = {0};	//only pm data
 int main(void)
 {
 	clock_setup();
-	//systick_setup(1000);//125ms tick = 250ms period = 4Hz
+	systick_setup(250);//250ms tick = 500ms period = 2Hz
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
 	spi_setup();
 	iwdg_set_period_ms(32760);
 
+	//PM reset
+	gpio_clear(GPIOA,GPIO10);
+	wait(SEC*3);
 	gpio_set(GPIOA, GPIO10);
 	
 
@@ -128,7 +133,11 @@ int main(void)
 
 	//Connect to nbiot network
 	#if DEVICE_TYPE == NBIOT
+		wait(SEC*1); //until quectel wakes up
+		//usartSend("test uvnitr\r\n", 2);
 		debug_usart_send("NBIoT site connect");
+		iwdg_reset();
+		iwdg_start();
 		nbiot_connect();
 		led_flash(1, 3, 20000);
 	#endif
@@ -145,14 +154,18 @@ int main(void)
 	iwdg_reset();
 	iwdg_start();
 
-#if PARTICLEMETER == 1
-	debug_usart_send("PM switching on");
-	particlemeter_ON();
-	particlemeter_set_fan(FAN_SPEED);
-	wait(SEC * 1);
-	debug_usart_send("PM switched on");
-#endif
-
+	#if PARTICLEMETER == 1
+		debug_usart_send("PM switching on");
+		particlemeter_ON();
+		particlemeter_set_fan(FAN_SPEED);
+		wait(SEC * 1);
+		debug_usart_send("PM switched on");
+		read_pm_values();
+		wait(SEC *10);
+		debug_usart_send("PM cleared");
+	#endif
+	iwdg_reset();
+	iwdg_start();
 	// init cayenne lpp
 	lpp = CayenneLPP__create(500);
 
@@ -163,8 +176,10 @@ int main(void)
 		iwdg_start();
 
 		//vycitani statistik site a ukladani do poli csq a nuestats
-		nbiot_csq();
-		nbiot_nuestats();
+		while(nbiot_csq())
+			wait(SEC*2);
+		while(nbiot_nuestats())
+			wait(SEC*2);
 
 		// readout particlemeter data
 		#if PARTICLEMETER == 1

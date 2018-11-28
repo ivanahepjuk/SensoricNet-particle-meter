@@ -40,6 +40,8 @@ extern char gps_longitude_ew[1];
 extern char gps_quality_indicator[1];
 extern char gps_altitude[8];
 
+extern uint32_t ticker;
+
 //eeprom
 int eeprom_write(char *dev_id);
 
