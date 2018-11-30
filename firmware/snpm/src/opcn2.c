@@ -179,3 +179,13 @@ void particlemeter_read(void)
 	//read registers
 ;	
 }
+
+
+void particlemeter_power_cycle(void)
+{
+
+	//PM reset
+	gpio_clear(GPIOA,GPIO10);
+	wait(SEC*5);
+	gpio_set(GPIOA, GPIO10);
+};

@@ -109,7 +109,7 @@ void led_off(uint8_t led)
 void spi_setup(void)
 {
 	// gpio setting for SS
-	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO2);
+	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, GPIO2);//byl NONE ale je tady pulldown abych omezil glitch na SS kdyz vysila modem
 	
 	// gpio setting for SDI SDO SCK
 	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3); //gpio3 sck 
@@ -133,7 +133,7 @@ void spi_setup(void)
 	*/
 	
 	//bitstream for register settinggs according to datasheet
-	SPI_CR1(SPI1) |= 0b0000001100100101; //100101//4101 //7011  
+	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011  
 	//bitstream for register settinggs according to datasheet
 	SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 
@@ -348,7 +348,7 @@ void gpio_setup(void)
 	gpio_mode_setup(IOT_RESET_GPIO_GROUP, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, IOT_RESET_GPIO);
 
 	//MOSFET particlemeter
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
+	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, GPIO10);//byl none
 
 	//gps standby pin
 	//gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO0);

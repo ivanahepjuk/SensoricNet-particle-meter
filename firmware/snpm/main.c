@@ -102,17 +102,12 @@ int main(void)
 	spi_setup();
 	iwdg_set_period_ms(32760);
 
-	//PM reset
-	gpio_clear(GPIOA,GPIO10);
-	wait(SEC*3);
-	gpio_set(GPIOA, GPIO10);
-	
-
 	debug_usart_send("Welcome to SensoricNet particlemeter");
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
 	#endif
-	
+	particlemeter_power_cycle();
+
 	BME280_init();
 	led_flash(1, 3, 20000);
 	nbiot_reset();
@@ -140,6 +135,9 @@ int main(void)
 		iwdg_start();
 		nbiot_connect();
 		led_flash(1, 3, 20000);
+		iwdg_reset();
+		iwdg_start();
+		send_reboot_variable();
 	#endif
 
 	//Connect to lora network
@@ -150,9 +148,6 @@ int main(void)
 		lorawan_connect();
 		debug_usart_send("lora connected");
 	#endif
-
-	iwdg_reset();
-	iwdg_start();
 
 	#if PARTICLEMETER == 1
 		debug_usart_send("PM switching on");
@@ -362,6 +357,10 @@ int main(void)
 		cykly++;
 
 		flash(2, 100000);
+
+		/*
+//pm zeros restart check here?
+		*/
 		
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);

@@ -205,7 +205,7 @@ void nbiot_connect(void)
 			iwdg_reset();
 			wdg_resets--;
 		}
-		wait(SEC*3);
+		wait(SEC*7);
 	}
 }
 
@@ -356,7 +356,7 @@ uint8_t nbiot_nuestats(void)
 	char incomming[200] = {0};	//readed string
 	int i=0;	//iteracni promenna
 	int enter=0;	//detekce znaku CR
-	int pocetentru = 17;
+	int pocetentru = 14;//17 u starsiho quectelu
 
 	uint32_t timestamp = ticker;
 
@@ -415,6 +415,64 @@ uint8_t nbiot_nuestats(void)
 	return 0;
 }
 
+void send_reboot_variable(void)
+{
+	
+		//create string
+		char send_string[200] = {0};
+		char hex_string[100] = {0};
+		
+		strcat(send_string, "AT+NSOST=0,193.84.207.60,9999,15,"); 
 
+		//prepare nbiot-000x ide:
+		uint8_t j=0;
+		char znak[3];
+
+		while(j<10){
+			charToHex(ID[j], znak);
+			strcat(send_string, znak);
+			j++;
+		}
+/*
+		id_decoded[20] = '0';
+		id_decoded[21] = '0';
+		id_decoded[22] = NULL;
+*/
+		strcat(send_string, "00\0");  //t treti nul je tam jako ukoncjici retezec
+
+		char lpp[10] = {0};
+
+		lpp[0] = 0x22;//data channel
+		lpp[1] = 0x01;//0x01 means "digital output" 
+		lpp[2] = 0x1;//posilam jednicku proste, sizeof 1B
+		lpp[3] = '\0';
+		
+		j=0;
+		
+		while(j<4){
+			charToHex(lpp[j], znak);
+			strcat(hex_string, znak);
+			j++;
+		}
+
+		strcat(send_string, hex_string);
+		strcat(send_string, "\r\n");
+		//pocet_pulsu = 0;
+		debug_usart_send(send_string);
+
+		//socket opening
+		while (nbiot_sendCommand("AT+NSOCR=DGRAM,17,9999,1\r\n", "OK\r\n", 4))
+			wait(1);
+		//Sending datagram
+		while (nbiot_sendCommand(send_string,"OK", 4))
+			wait(3);
+		//Closing socket
+		while (nbiot_sendCommand("AT+NSOCL=0\r\n", "OK", 2))
+			wait(1);
+
+		//send each 10s
+		//blnk();
+				
+}
 
 

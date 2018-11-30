@@ -24,6 +24,8 @@
 extern int csq[2];
 extern int nuestats[14];
 
+extern char ID[11];
+
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 			LORWAN WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
@@ -42,4 +44,5 @@ void nbiot_connect(void);
 int  nbiot_sendCommand(char *phrase, char *check, int pocetentru);
 uint8_t nbiot_csq(void);
 uint8_t nbiot_nuestats(void);
+void send_reboot_variable(void);
 #endif

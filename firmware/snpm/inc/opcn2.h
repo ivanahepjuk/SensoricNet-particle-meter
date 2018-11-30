@@ -58,4 +58,7 @@ void pm_SS_on(void);
 void pm_SS_off(void);
 void pm_SS_toggle(uint32_t delay);
 
+void particlemeter_power_cycle(void);
+
+
 #endif
