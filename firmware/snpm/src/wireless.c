@@ -274,8 +274,10 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 	//led_flash(1, 3, 200000);
 	//led_flash(1, 2, 20000);
 	if ( (strstr(incomming, check)) == NULL) {
+		led_flash(2,3, 10000);
 		return 1;
 	} else {
+		led_flash(2,1,10000);
 		return 0;
 	}
 }

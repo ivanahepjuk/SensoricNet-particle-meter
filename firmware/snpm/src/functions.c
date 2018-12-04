@@ -112,9 +112,9 @@ void spi_setup(void)
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, GPIO2);//byl NONE ale je tady pulldown abych omezil glitch na SS kdyz vysila modem
 	
 	// gpio setting for SDI SDO SCK
-	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3); //gpio3 sck 
-	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,  GPIO3); //gpio4 pm-sdo (MISO)
-	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT,  GPIO_PUPD_NONE,  GPIO5); //gpio5  pm-sdi (MOSI) 
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP,  GPIO3); //gpio3 sck 
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP,  GPIO3); //gpio4 pm-sdo (MISO)
+	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT,  GPIO_PUPD_PULLUP,  GPIO5); //gpio5  pm-sdi (MOSI) 
 	//gpio_set_output_options(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, GPIO5);
 
 	// gpio alternative function SPI 1
@@ -133,7 +133,7 @@ void spi_setup(void)
 	*/
 	
 	//bitstream for register settinggs according to datasheet
-	SPI_CR1(SPI1) |= 0b0000001100011101; //100101//4101 //7011  
+	SPI_CR1(SPI1) |= 0b0000001100100101; //v datasheet skutecnosti je to leading edge :O ale proste musi tam byt 0.bit =1
 	//bitstream for register settinggs according to datasheet
 	SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 

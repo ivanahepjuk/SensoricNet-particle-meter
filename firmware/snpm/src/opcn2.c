@@ -19,13 +19,14 @@
 
 #include "opcn2.h"
 #include "functions.h"
+#include <libopencm3/stm32/spi.h>
 
 uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 {
-	uint8_t incomming;
+	uint8_t incomming = 0;
 	
 	spi_send8(SPI1, command_byte);
-	//wait(50);
+	wait(50);
 	incomming = spi_read8(SPI1);//(uint8_t)
 	wait(delay);
 	
@@ -56,16 +57,21 @@ void pm_SS_toggle(uint32_t delay)
 
 void particlemeter_ON(void)
 {
+uint32_t dummy=0;
 	
 	pm_SS_on();
-	while(pm_set_command(0x03, 14000) != 0xF3){
-	//wait(14000);
+
+	while((pm_set_command(0x03, 20000)) != 0xF3)   //20000 je cca 35ms
+	{
+		dummy++;
 	}
-	while( pm_set_command(0x00, 14000) != 0x03){
-	//wait(14000);
+	iwdg_reset();
+	while((pm_set_command(0x00, 3500000)) != 0x03) //3500000 je cca 6s?
+	{
+		iwdg_reset();
 	}
+
 	pm_SS_off();
-	wait(SEC * 1);
 }
 
 
@@ -75,11 +81,11 @@ void particlemeter_set_fan(uint8_t speed)
 	
 	wait(70000);
 	
-	while( pm_set_command( 0x42, 14000) != 0xF3){;}
+	while( (pm_set_command( 0x42, 14000)) != 0xF3){;}
 	
-	while( pm_set_command( 0x00, 14000) != 0x42){;}
+	while( (pm_set_command( 0x00, 14000)) != 0x42){;}
 	
-	while( pm_set_command(speed, 14000) != 0x00){;}
+	while( (pm_set_command(speed, 14000)) != 0x00){;}
 	
 	wait(70000);
 	
