@@ -99,21 +99,23 @@ int main(void)
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
-	spi_setup();
+	
 	iwdg_set_period_ms(32760);
 
 	iwdg_reset();
 	iwdg_start();
 	wait(SEC*3);
 	gpio_set(GPIOD, GPIO2); //SS Log 1
-	gpio_clear(GPIOD, GPIO2); //SS Log 1
+	gpio_clear(GPIOD, GPIO2); //SS Log 0
 	gpio_set(GPIOD, GPIO2); //SS Log 1
 
 	debug_usart_send("Welcome to SensoricNet particlemeter");
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
 	#endif
+	iwdg_reset();
 	particlemeter_power_cycle();
+	spi_setup();
 
 	BME280_init();
 	led_flash(1, 3, 20000);

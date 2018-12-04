@@ -36,7 +36,7 @@ uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
 void pm_SS_on(void)
 {
 	gpio_clear(GPIOD, GPIO2); //SS Log 0
-	wait(100000); //1s
+	wait(30000); //1s
 }
 
 void pm_SS_off(void)
@@ -189,9 +189,27 @@ void particlemeter_read(void)
 
 void particlemeter_power_cycle(void)
 {
+	//zaparkoval sem je do log1 abych omezil glitche pri bootovani pm metru
+	gpio_set(GPIOB, GPIO3  | GPIO4 | GPIO5);
 
 	//PM reset
 	gpio_clear(GPIOA,GPIO10);
-	wait(SEC*5);
+	wait(SEC*10);
+	iwdg_reset();
+	
 	gpio_set(GPIOA, GPIO10);
+
+	//????????
+/*
+	gpio_set(GPIOD, GPIO2); //SS Log 1
+	wait(200000);
+	gpio_clear(GPIOD, GPIO2); //SS Log 0
+	wait(200000);
+	gpio_set(GPIOD, GPIO2); //SS Log 1
+	wait(200000);
+*/
+
+	gpio_clear(GPIOB, GPIO3  | GPIO4 | GPIO5);
+
+
 };

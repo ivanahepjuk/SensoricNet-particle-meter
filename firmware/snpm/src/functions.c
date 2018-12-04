@@ -113,12 +113,12 @@ void spi_setup(void)
 	
 	// gpio setting for SDI SDO SCK
 	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP,  GPIO3); //gpio3 sck 
-	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP,  GPIO3); //gpio4 pm-sdo (MISO)
+	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP,  GPIO4); //gpio4 pm-sdo (MISO)
 	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT,  GPIO_PUPD_PULLUP,  GPIO5); //gpio5  pm-sdi (MOSI) 
 	//gpio_set_output_options(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, GPIO5);
 
 	// gpio alternative function SPI 1
-	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3  | GPIO4 | GPIO5);
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO3  | GPIO4 | GPIO5);
 	gpio_set_af(GPIOB, GPIO_AF0, GPIO3  | GPIO4 | GPIO5);
 	//Reset SPI
 	spi_reset(SPI1);
@@ -133,15 +133,16 @@ void spi_setup(void)
 	*/
 	
 	//bitstream for register settinggs according to datasheet
-	SPI_CR1(SPI1) |= 0b0000001100100101; //v datasheet skutecnosti je to leading edge :O ale proste musi tam byt 0.bit =1
+	SPI_CR1(SPI1) |= 0b0000001100100101; //v datasheet skutecnosti je to leading edge :O ale proste musi tam byt 0.bit =1   //0b0000001100100101
 	//bitstream for register settinggs according to datasheet
-	SPI_CR2(SPI1) |= 0b0000011100000000; 
+	//SPI_CR2(SPI1) |= 0b0000011100000000; 
 	 
 	//this is super important for reliable reading 8-bit packets from bus   
 	spi_fifo_reception_threshold_8bit(SPI1);
 
 	//Enable SPI1 peripherals
 	spi_enable(SPI1);
+	//SPI_CR1(SPI1) |= 0b1000000;
 	
 }
   
