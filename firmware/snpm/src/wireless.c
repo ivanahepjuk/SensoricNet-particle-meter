@@ -21,6 +21,7 @@
 #include "functions.h"
 #include "wireless.h"
 #include <libopencm3/stm32/usart.h>
+ #include <libopencm3/stm32/iwdg.h>
 #include "../main.h"
 
 uint8_t usart_read(void);
@@ -273,6 +274,11 @@ int nbiot_sendCommand(char *phrase, char *check, int pocetentru)
 
 	//led_flash(1, 3, 200000);
 	//led_flash(1, 2, 20000);
+/*	if ( (strstr(incomming, "ERROR")) == NULL) {
+		led_flash(2,3, 10000);
+		return 1;
+	} */
+	
 	if ( (strstr(incomming, check)) == NULL) {
 		led_flash(2,3, 10000);
 		return 1;

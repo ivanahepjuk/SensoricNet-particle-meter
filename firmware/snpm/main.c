@@ -80,8 +80,7 @@ char id_decoded[23]={0};
 uint8_t histogram_buffer[62];	//whole dataset of opc readed into this
 uint8_t pm_values_buffer[12] = {0};	//only pm data
 
-//systick timer variable
-uint32_t ticker = 0;
+
 
 
 
@@ -368,10 +367,11 @@ int main(void)
 		/*
 //pm zeros restart check here?
 		*/
-		
+		iwdg_reset();
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);
-		wait(SEC *10);
+		
+		wait(SEC *5);
 		usart_disable_rx_interrupt(USART2);
 		usart_disable(USART2);
 		

@@ -24,7 +24,8 @@
 #include "../main.h"
 
 //#define SPI_CR1_DFF_8BIT  	(0 << 11)
-
+//systick timer variable
+uint32_t ticker = 0;
 // set some constants, fixme
 
 

@@ -26,6 +26,8 @@ extern int nuestats[14];
 
 extern char ID[11];
 
+extern uint32_t ticker;
+
  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * 			LORWAN WIRELESS MODULE FUNCTIONS			*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
