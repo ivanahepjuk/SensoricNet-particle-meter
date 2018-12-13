@@ -19,6 +19,7 @@
 
 #include "opcn2.h"
 #include "functions.h"
+#include "iwdg.h"
 #include <libopencm3/stm32/spi.h>
 
 uint8_t pm_set_command(uint8_t command_byte, uint32_t delay)
@@ -65,10 +66,10 @@ uint32_t dummy=0;
 	{
 		dummy++;
 	}
-	iwdg_reset();
+	//iwdg_reset();
 	while((pm_set_command(0x00, 3500000)) != 0x03) //3500000 je cca 6s?
 	{
-		iwdg_reset();
+	//	iwdg_reset();
 	}
 
 	pm_SS_off();
@@ -195,7 +196,7 @@ void particlemeter_power_cycle(void)
 	//PM reset
 	gpio_clear(GPIOA,GPIO10);
 	wait(SEC*10);
-	iwdg_reset();
+	moje_iwdg_reset();
 	
 	gpio_set(GPIOA, GPIO10);
 

@@ -50,7 +50,7 @@ void eeprom_read_id(void)
 	
 	for(int i=0; i<10; i++)
 		ID[i] = data[i];
-	ID[10] = NULL;
+	ID[10] = 0x00; //NULL;
 	
 }
 

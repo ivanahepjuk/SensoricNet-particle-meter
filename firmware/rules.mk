@@ -59,7 +59,7 @@ OBJS		+= src/wireless.o
 OBJS		+= src/cayenne_lpp.o
 OBJS		+= src/m24c04.o
 OBJS		+= src/gps.o
-OBJS		+= src/oled.o
+OBJS		+= src/iwdg.o
 
 
 ifeq ($(strip $(OPENCM3_DIR)),)

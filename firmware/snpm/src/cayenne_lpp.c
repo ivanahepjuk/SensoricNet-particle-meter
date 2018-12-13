@@ -147,7 +147,7 @@ unsigned char CayenneLPP__addTemperature(struct CayenneLPP* self, unsigned char 
 	{
 		return 0;
 	}
-	unsigned short int val = celsius * 10;
+	signed short int val = celsius * 10;
 	self->buffer[self->cursor++] = channel;
 	self->buffer[self->cursor++] = LPP_TEMPERATURE;
 	self->buffer[self->cursor++] = val >> 8;

@@ -11,7 +11,9 @@
 #include "inc/opcn2.h"
 #include "inc/wireless.h"
 #include "inc/cayenne_lpp.h"
+#include "inc/iwdg.h"
 #include "m24c04.h"
+
 
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>

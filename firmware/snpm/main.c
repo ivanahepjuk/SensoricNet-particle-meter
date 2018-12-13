@@ -94,15 +94,14 @@ uint8_t pm_values_buffer[12] = {0};	//only pm data
 int main(void)
 {
 	clock_setup();
-	systick_setup(250);//250ms tick = 500ms period = 2Hz
+	//systick_setup(250);//250ms tick = 500ms period = 2Hz
+	moje_iwdg_setup();
 	gpio_setup();
 	usart_setup();
 	i2c_setup();
-	
-	iwdg_set_period_ms(32760);
 
-	iwdg_reset();
-	iwdg_start();
+	moje_iwdg_reset();
+
 	wait(SEC*3);
 	gpio_set(GPIOD, GPIO2); //SS Log 1
 	gpio_clear(GPIOD, GPIO2); //SS Log 0
@@ -112,10 +111,10 @@ int main(void)
 	#if DEVICE_TYPE == NBIOT
 		debug_usart_send("device type is NBIoT");
 	#endif
-	iwdg_reset();
+	moje_iwdg_reset();
 	particlemeter_power_cycle();
 	spi_setup();
-
+debug_usart_send("tady");
 	BME280_init();
 	led_flash(1, 3, 20000);
 	nbiot_reset();
@@ -139,10 +138,10 @@ int main(void)
 		wait(SEC*1); //until quectel wakes up
 		//usartSend("test uvnitr\r\n", 2);
 		debug_usart_send("NBIoT site connect");
-		iwdg_reset();
+		moje_iwdg_reset();
 		nbiot_connect();
 		led_flash(1, 3, 20000);
-		iwdg_reset();
+		moje_iwdg_reset();
 		send_reboot_variable();
 	#endif
 
@@ -156,7 +155,7 @@ int main(void)
 	#endif
 
 	#if PARTICLEMETER == 1
-		iwdg_reset();
+		moje_iwdg_reset();
 		debug_usart_send("PM switching on");
 		particlemeter_ON();
 		particlemeter_set_fan(FAN_SPEED);
@@ -166,15 +165,15 @@ int main(void)
 		wait(SEC *5);
 		debug_usart_send("PM cleared");
 	#endif
-	iwdg_reset();
+	moje_iwdg_reset();
 
 	// init cayenne lpp
-	lpp = CayenneLPP__create(500);
+	lpp = CayenneLPP__create(255);
 
 	//flash(3, 100000);
 	while (1) {
 		debug_usart_send("New loop");
-		iwdg_reset();
+		moje_iwdg_reset();
 
 		//vycitani statistik site a ukladani do poli csq a nuestats
 		while(nbiot_csq())
@@ -329,7 +328,7 @@ int main(void)
 		}
 		id_decoded[20] = '0';
 		id_decoded[21] = '0';
-		id_decoded[22] = NULL;
+		id_decoded[22] = 0x00; //=NULL
 
 
 		usartSend(id_decoded, 2);
@@ -367,11 +366,11 @@ int main(void)
 		/*
 //pm zeros restart check here?
 		*/
-		iwdg_reset();
+		moje_iwdg_reset();
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);
 		
-		wait(SEC *5);
+		wait(SEC *7);
 		usart_disable_rx_interrupt(USART2);
 		usart_disable(USART2);
 		
