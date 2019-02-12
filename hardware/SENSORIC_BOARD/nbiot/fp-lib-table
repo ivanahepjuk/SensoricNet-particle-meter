@@ -1,8 +1,7 @@
 (fp_lib_table
-  (lib (name SNPM)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/SNPM.pretty)(options "")(descr ""))
   (lib (name Diodes_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Diodes_ThroughHole.pretty")(options "")(descr ""))
   (lib (name Capacitors_ThroughHole)(type KiCad)(uri "$(KISYSMOD)Capacitors_ThroughHole.pretty")(options "")(descr ""))
-  (lib (name koksovna)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/koksovna)(options "")(descr ""))
-  (lib (name monezor_footprints)(type KiCad)(uri /home/ia/work/sekura/hardware/monezor/monezor_footprints.pretty)(options "")(descr ""))
   (lib (name graphics)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/SENSORIC_BOARD/graphics)(options "")(descr ""))
+  (lib (name SNPM)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/SNPM.pretty)(options "")(descr ""))
+  (lib (name connector)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/connecting_power.pretty)(options "")(descr ""))
 )

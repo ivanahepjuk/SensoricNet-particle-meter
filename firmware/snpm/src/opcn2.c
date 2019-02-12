@@ -62,6 +62,10 @@ uint32_t dummy=0;
 	
 	pm_SS_on();
 
+	wait(SEC*10);
+	moje_iwdg_reset();
+	wait(SEC*10);
+	moje_iwdg_reset();
 	while((pm_set_command(0x03, 20000)) != 0xF3)   //20000 je cca 35ms
 	{
 		dummy++;
@@ -71,6 +75,7 @@ uint32_t dummy=0;
 	{
 	//	iwdg_reset();
 	}
+	
 
 	pm_SS_off();
 }

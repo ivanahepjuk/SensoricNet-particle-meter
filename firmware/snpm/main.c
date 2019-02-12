@@ -370,7 +370,7 @@ debug_usart_send("tady");
 		usart_enable_rx_interrupt(USART2);
 		usart_enable(USART2);
 		
-		wait(SEC *7);
+		wait(SEC *14);
 		usart_disable_rx_interrupt(USART2);
 		usart_disable(USART2);
 		

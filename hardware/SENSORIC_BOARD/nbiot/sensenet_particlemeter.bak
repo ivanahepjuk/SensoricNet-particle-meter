@@ -1,38 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:sensenet_particlemeter
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:switches
-LIBS:monezor
+EESchema Schematic File Version 4
 LIBS:sensenet_particlemeter-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
@@ -47,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L stm32f072 U2
+L sensenet_particlemeter-rescue:stm32f072 U2
 U 1 1 5995C231
 P 3950 3550
 F 0 "U2" H 5100 2600 60  0000 C CNN
@@ -58,7 +26,7 @@ F 3 "" H 3500 3350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR01
+L sensenet_particlemeter-rescue:+5V #PWR01
 U 1 1 5995C3C8
 P 22600 1500
 F 0 "#PWR01" H 22600 1350 50  0001 C CNN
@@ -69,36 +37,25 @@ F 3 "" H 22600 1500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP C19
+L sensenet_particlemeter-rescue:CP C19
 U 1 1 5995C4F5
-P 15700 1850
-F 0 "C19" H 15725 1950 50  0000 L CNN
-F 1 "1000u" H 15725 1750 50  0000 L CNN
-F 2 "SNPM:C_Radial_D10_L16_P5_bottom" H 15738 1700 50  0001 C CNN
-F 3 "" H 15700 1850 50  0001 C CNN
-	1    15700 1850
+P 15550 1850
+F 0 "C19" H 15575 1950 50  0000 L CNN
+F 1 "1000u" H 15575 1750 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 15588 1700 50  0001 C CNN
+F 3 "" H 15550 1850 50  0001 C CNN
+	1    15550 1850
 	1    0    0    -1  
 $EndComp
 $Comp
-L Barrel_Jack J13
-U 1 1 5995C7F2
-P 14700 1300
-F 0 "J13" H 14700 1495 50  0000 C CNN
-F 1 "BARREL_JACK" H 14700 1145 50  0000 C CNN
-F 2 "SNPM:BARREL_JACK" H 14700 1300 50  0001 C CNN
-F 3 "" H 14700 1300 50  0001 C CNN
-	1    14700 1300
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR02
+L sensenet_particlemeter-rescue:GND #PWR02
 U 1 1 5995CBFF
-P 21200 2600
-F 0 "#PWR02" H 21200 2350 50  0001 C CNN
-F 1 "GND" H 21200 2450 50  0000 C CNN
-F 2 "" H 21200 2600 50  0001 C CNN
-F 3 "" H 21200 2600 50  0001 C CNN
-	1    21200 2600
+P 20850 2550
+F 0 "#PWR02" H 20850 2300 50  0001 C CNN
+F 1 "GND" H 20850 2400 50  0000 C CNN
+F 2 "" H 20850 2550 50  0001 C CNN
+F 3 "" H 20850 2550 50  0001 C CNN
+	1    20850 2550
 	1    0    0    -1  
 $EndComp
 Text GLabel 4600 13800 2    39   Input ~ 0
@@ -106,7 +63,7 @@ Rx
 Text GLabel 4600 14000 2    39   Input ~ 0
 Tx
 $Comp
-L +3.3V #PWR03
+L sensenet_particlemeter-rescue:+3.3V #PWR03
 U 1 1 599AEC9A
 P 5250 5350
 F 0 "#PWR03" H 5250 5200 50  0001 C CNN
@@ -117,7 +74,7 @@ F 3 "" H 5250 5350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR04
+L sensenet_particlemeter-rescue:GND #PWR04
 U 1 1 599AEF9B
 P 5100 5800
 F 0 "#PWR04" H 5100 5550 50  0001 C CNN
@@ -128,7 +85,7 @@ F 3 "" H 5100 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR05
+L sensenet_particlemeter-rescue:+3.3V #PWR05
 U 1 1 599AF28A
 P 3300 5350
 F 0 "#PWR05" H 3300 5200 50  0001 C CNN
@@ -139,7 +96,7 @@ F 3 "" H 3300 5350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR06
+L sensenet_particlemeter-rescue:GND #PWR06
 U 1 1 599AF290
 P 3150 5800
 F 0 "#PWR06" H 3150 5550 50  0001 C CNN
@@ -150,7 +107,7 @@ F 3 "" H 3150 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR07
+L sensenet_particlemeter-rescue:GND #PWR07
 U 1 1 599AFECC
 P 3150 1700
 F 0 "#PWR07" H 3150 1450 50  0001 C CNN
@@ -161,7 +118,7 @@ F 3 "" H 3150 1700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L +3.3V #PWR08
+L sensenet_particlemeter-rescue:+3.3V #PWR08
 U 1 1 599AFF13
 P 3000 1700
 F 0 "#PWR08" H 3000 1550 50  0001 C CNN
@@ -178,7 +135,7 @@ SWD_DIO
 Text GLabel 1300 3250 0    39   Input ~ 0
 reset
 $Comp
-L GND #PWR09
+L sensenet_particlemeter-rescue:GND #PWR09
 U 1 1 599B11C0
 P 900 3800
 F 0 "#PWR09" H 900 3550 50  0001 C CNN
@@ -189,7 +146,7 @@ F 3 "" H 900 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR010
+L sensenet_particlemeter-rescue:+3.3V #PWR010
 U 1 1 599C72DB
 P 1300 4100
 F 0 "#PWR010" H 1300 3950 50  0001 C CNN
@@ -200,7 +157,7 @@ F 3 "" H 1300 4100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C6
+L sensenet_particlemeter-rescue:C C6
 U 1 1 599C78CF
 P 3450 5550
 F 0 "C6" H 3475 5650 50  0000 L CNN
@@ -211,7 +168,7 @@ F 3 "" H 3450 5550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR011
+L sensenet_particlemeter-rescue:GND #PWR011
 U 1 1 599C7B48
 P 3450 5800
 F 0 "#PWR011" H 3450 5550 50  0001 C CNN
@@ -222,7 +179,7 @@ F 3 "" H 3450 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C4
+L sensenet_particlemeter-rescue:C C4
 U 1 1 599C7DDB
 P 1300 4350
 F 0 "C4" H 1325 4450 50  0000 L CNN
@@ -233,7 +190,7 @@ F 3 "" H 1300 4350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR012
+L sensenet_particlemeter-rescue:GND #PWR012
 U 1 1 599C7F69
 P 1300 4550
 F 0 "#PWR012" H 1300 4300 50  0001 C CNN
@@ -244,7 +201,7 @@ F 3 "" H 1300 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C8
+L sensenet_particlemeter-rescue:C C8
 U 1 1 599C92C8
 P 5450 5550
 F 0 "C8" H 5475 5650 50  0000 L CNN
@@ -255,7 +212,7 @@ F 3 "" H 5450 5550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR013
+L sensenet_particlemeter-rescue:GND #PWR013
 U 1 1 599C9493
 P 5450 5800
 F 0 "#PWR013" H 5450 5550 50  0001 C CNN
@@ -266,7 +223,7 @@ F 3 "" H 5450 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C5
+L sensenet_particlemeter-rescue:C C5
 U 1 1 599C9CBD
 P 2800 1600
 F 0 "C5" H 2825 1700 50  0000 L CNN
@@ -277,7 +234,7 @@ F 3 "" H 2800 1600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR014
+L sensenet_particlemeter-rescue:GND #PWR014
 U 1 1 599CA459
 P 2800 1400
 F 0 "#PWR014" H 2800 1150 50  0001 C CNN
@@ -288,7 +245,7 @@ F 3 "" H 2800 1400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L +3.3V #PWR015
+L sensenet_particlemeter-rescue:+3.3V #PWR015
 U 1 1 599CABE6
 P 5850 2250
 F 0 "#PWR015" H 5850 2100 50  0001 C CNN
@@ -299,7 +256,7 @@ F 3 "" H 5850 2250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C9
+L sensenet_particlemeter-rescue:C C9
 U 1 1 599CAC69
 P 6100 2350
 F 0 "C9" H 6125 2450 50  0000 L CNN
@@ -310,7 +267,7 @@ F 3 "" H 6100 2350 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR016
+L sensenet_particlemeter-rescue:GND #PWR016
 U 1 1 599CAD78
 P 6450 2350
 F 0 "#PWR016" H 6450 2100 50  0001 C CNN
@@ -321,7 +278,7 @@ F 3 "" H 6450 2350 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR017
+L sensenet_particlemeter-rescue:GND #PWR017
 U 1 1 599CAE79
 P 6450 2500
 F 0 "#PWR017" H 6450 2250 50  0001 C CNN
@@ -332,7 +289,7 @@ F 3 "" H 6450 2500 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C23
+L sensenet_particlemeter-rescue:C C23
 U 1 1 599CFB46
 P 21450 4700
 F 0 "C23" H 21475 4800 50  0000 L CNN
@@ -343,18 +300,18 @@ F 3 "" H 21450 4700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C25
+L sensenet_particlemeter-rescue:C C25
 U 1 1 599CFEB7
-P 21500 1800
-F 0 "C25" H 21525 1900 50  0000 L CNN
-F 1 "100n" H 21525 1700 50  0000 L CNN
-F 2 "SNPM:SMD_0805" H 21538 1650 50  0001 C CNN
-F 3 "" H 21500 1800 50  0001 C CNN
-	1    21500 1800
+P 21300 1800
+F 0 "C25" H 21325 1900 50  0000 L CNN
+F 1 "100n" H 21325 1700 50  0000 L CNN
+F 2 "SNPM:SMD_0805" H 21338 1650 50  0001 C CNN
+F 3 "" H 21300 1800 50  0001 C CNN
+	1    21300 1800
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D4
+L sensenet_particlemeter-rescue:LED D4
 U 1 1 599D2370
 P 22400 2250
 F 0 "D4" H 22400 2350 50  0000 C CNN
@@ -365,7 +322,7 @@ F 3 "" H 22400 2250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R3
+L sensenet_particlemeter-rescue:R R3
 U 1 1 599D2485
 P 22400 1750
 F 0 "R3" V 22480 1750 50  0000 C CNN
@@ -376,18 +333,18 @@ F 3 "" H 22400 1750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR018
+L sensenet_particlemeter-rescue:GND #PWR018
 U 1 1 599D2A4C
-P 22400 2550
-F 0 "#PWR018" H 22400 2300 50  0001 C CNN
-F 1 "GND" H 22400 2400 50  0000 C CNN
-F 2 "" H 22400 2550 50  0001 C CNN
-F 3 "" H 22400 2550 50  0001 C CNN
-	1    22400 2550
+P 22400 2600
+F 0 "#PWR018" H 22400 2350 50  0001 C CNN
+F 1 "GND" H 22400 2450 50  0000 C CNN
+F 2 "" H 22400 2600 50  0001 C CNN
+F 3 "" H 22400 2600 50  0001 C CNN
+	1    22400 2600
 	1    0    0    -1  
 $EndComp
 $Comp
-L bme280_barebone U10
+L sensenet_particlemeter-rescue:bme280_barebone U10
 U 1 1 599DDC39
 P 20450 10500
 F 0 "U10" H 21000 10850 60  0000 C CNN
@@ -398,7 +355,7 @@ F 3 "" H 20400 10350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR019
+L sensenet_particlemeter-rescue:+3.3V #PWR019
 U 1 1 599DE262
 P 19650 10300
 F 0 "#PWR019" H 19650 10150 50  0001 C CNN
@@ -409,7 +366,7 @@ F 3 "" H 19650 10300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR020
+L sensenet_particlemeter-rescue:GND #PWR020
 U 1 1 599DEA6E
 P 20050 10450
 F 0 "#PWR020" H 20050 10200 50  0001 C CNN
@@ -420,7 +377,7 @@ F 3 "" H 20050 10450 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR021
+L sensenet_particlemeter-rescue:GND #PWR021
 U 1 1 599DEFD2
 P 21250 10300
 F 0 "#PWR021" H 21250 10050 50  0001 C CNN
@@ -431,7 +388,7 @@ F 3 "" H 21250 10300 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C21
+L sensenet_particlemeter-rescue:C C21
 U 1 1 599DF22D
 P 19650 10800
 F 0 "C21" H 19675 10900 50  0000 L CNN
@@ -442,7 +399,7 @@ F 3 "" H 19650 10800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR022
+L sensenet_particlemeter-rescue:GND #PWR022
 U 1 1 599DF585
 P 19650 11000
 F 0 "#PWR022" H 19650 10750 50  0001 C CNN
@@ -453,7 +410,7 @@ F 3 "" H 19650 11000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR023
+L sensenet_particlemeter-rescue:GND #PWR023
 U 1 1 599DFC31
 P 20050 10750
 F 0 "#PWR023" H 20050 10500 50  0001 C CNN
@@ -464,7 +421,7 @@ F 3 "" H 20050 10750 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L +3.3V #PWR024
+L sensenet_particlemeter-rescue:+3.3V #PWR024
 U 1 1 599DFFDC
 P 20600 10000
 F 0 "#PWR024" H 20600 9850 50  0001 C CNN
@@ -475,7 +432,7 @@ F 3 "" H 20600 10000 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R4
+L sensenet_particlemeter-rescue:R R4
 U 1 1 599E0145
 P 21800 10450
 F 0 "R4" V 21880 10450 50  0000 C CNN
@@ -486,7 +443,7 @@ F 3 "" H 21800 10450 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R R5
+L sensenet_particlemeter-rescue:R R5
 U 1 1 599E0431
 P 22000 10600
 F 0 "R5" V 22080 10600 50  0000 C CNN
@@ -497,7 +454,7 @@ F 3 "" H 22000 10600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L +3.3V #PWR025
+L sensenet_particlemeter-rescue:+3.3V #PWR025
 U 1 1 599E09EB
 P 21900 10200
 F 0 "#PWR025" H 21900 10050 50  0001 C CNN
@@ -516,7 +473,7 @@ i2c_sda
 Text GLabel 6050 4450 2    39   Input ~ 0
 i2c_scl
 $Comp
-L GND #PWR026
+L sensenet_particlemeter-rescue:GND #PWR026
 U 1 1 599E6CBC
 P 21050 8750
 F 0 "#PWR026" H 21050 8500 50  0001 C CNN
@@ -535,7 +492,7 @@ PM_SDI
 Text GLabel 4350 1650 1    39   Input ~ 0
 PM_SCK
 $Comp
-L GND #PWR027
+L sensenet_particlemeter-rescue:GND #PWR027
 U 1 1 599EBE7E
 P 15600 10500
 F 0 "#PWR027" H 15600 10250 50  0001 C CNN
@@ -546,7 +503,7 @@ F 3 "" H 15600 10500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L +3.3V #PWR028
+L sensenet_particlemeter-rescue:+3.3V #PWR028
 U 1 1 599EC08A
 P 16700 10650
 F 0 "#PWR028" H 16700 10500 50  0001 C CNN
@@ -557,7 +514,7 @@ F 3 "" H 16700 10650 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR029
+L sensenet_particlemeter-rescue:GND #PWR029
 U 1 1 599EC7BF
 P 17750 10600
 F 0 "#PWR029" H 17750 10350 50  0001 C CNN
@@ -568,7 +525,7 @@ F 3 "" H 17750 10600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR030
+L sensenet_particlemeter-rescue:+3.3V #PWR030
 U 1 1 599EC887
 P 17750 10300
 F 0 "#PWR030" H 17750 10150 50  0001 C CNN
@@ -579,7 +536,7 @@ F 3 "" H 17750 10300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L solder_jumper SJ16
+L sensenet_particlemeter-rescue:solder_jumper SJ16
 U 1 1 599EECC2
 P 17350 10350
 F 0 "SJ16" H 17450 10450 60  0000 C CNN
@@ -590,7 +547,7 @@ F 3 "" H 17350 10350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R2
+L sensenet_particlemeter-rescue:R R2
 U 1 1 599EF571
 P 17400 10550
 F 0 "R2" V 17480 10550 50  0000 C CNN
@@ -607,18 +564,17 @@ i2c_scl
 Text GLabel 4650 1650 1    39   Input ~ 0
 WIRELESS_reset
 $Comp
-L D_Schottky D3
+L sensenet_particlemeter-rescue:D_Schottky D3
 U 1 1 599FBD8A
-P 15350 1200
-F 0 "D3" H 15350 1300 50  0000 C CNN
-F 1 "D_Schottky_ss14" H 15350 1100 50  0000 C CNN
-F 2 "SNPM:D_SOD-123" H 15350 1200 50  0001 C CNN
-F 3 "" H 15350 1200 50  0001 C CNN
-	1    15350 1200
+P 15000 1200
+F 0 "D3" H 15000 1300 50  0000 C CNN
+F 1 "D_Schottky_ss14" H 15050 1050 50  0000 C CNN
+F 2 "SNPM:D_SOD-123" H 15000 1200 50  0001 C CNN
+F 3 "" H 15000 1200 50  0001 C CNN
+	1    15000 1200
 	-1   0    0    1   
 $EndComp
 NoConn ~ 3450 5100
-NoConn ~ 4350 5100
 NoConn ~ 4950 5100
 NoConn ~ 5750 3250
 NoConn ~ 5100 1850
@@ -633,7 +589,7 @@ Tx
 Text GLabel 4800 1650 1    39   Input ~ 0
 Rx
 $Comp
-L M10578-A2 U7
+L sensenet_particlemeter-rescue:M10578-A2 U7
 U 1 1 59A56606
 P 11250 3250
 F 0 "U7" H 11250 3600 60  0000 C CNN
@@ -644,7 +600,7 @@ F 3 "" H 11250 3250 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C14
+L sensenet_particlemeter-rescue:C C14
 U 1 1 59A56B77
 P 9500 3600
 F 0 "C14" H 9525 3700 50  0000 L CNN
@@ -655,7 +611,7 @@ F 3 "" H 9500 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D2
+L sensenet_particlemeter-rescue:LED D2
 U 1 1 59A590EB
 P 9900 4550
 F 0 "D2" H 9900 4650 50  0000 C CNN
@@ -666,7 +622,7 @@ F 3 "" H 9900 4550 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R1
+L sensenet_particlemeter-rescue:R R1
 U 1 1 59A599E5
 P 9900 4200
 F 0 "R1" V 9980 4200 50  0000 C CNN
@@ -679,7 +635,7 @@ $EndComp
 NoConn ~ 10600 4150
 NoConn ~ 10750 4150
 $Comp
-L GND #PWR031
+L sensenet_particlemeter-rescue:GND #PWR031
 U 1 1 59A5D33C
 P 11150 2650
 F 0 "#PWR031" H 11150 2400 50  0001 C CNN
@@ -690,7 +646,7 @@ F 3 "" H 11150 2650 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR032
+L sensenet_particlemeter-rescue:GND #PWR032
 U 1 1 59A5D7F7
 P 10500 2650
 F 0 "#PWR032" H 10500 2400 50  0001 C CNN
@@ -701,7 +657,7 @@ F 3 "" H 10500 2650 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR033
+L sensenet_particlemeter-rescue:GND #PWR033
 U 1 1 59A5DA82
 P 9850 3300
 F 0 "#PWR033" H 9850 3050 50  0001 C CNN
@@ -712,7 +668,7 @@ F 3 "" H 9850 3300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR034
+L sensenet_particlemeter-rescue:GND #PWR034
 U 1 1 59A5DDD4
 P 9500 3850
 F 0 "#PWR034" H 9500 3600 50  0001 C CNN
@@ -723,7 +679,7 @@ F 3 "" H 9500 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR035
+L sensenet_particlemeter-rescue:GND #PWR035
 U 1 1 59A5E256
 P 9900 4800
 F 0 "#PWR035" H 9900 4550 50  0001 C CNN
@@ -740,7 +696,7 @@ gps_standby
 Text GLabel 12650 3450 2    39   Input ~ 0
 gps_pulses
 $Comp
-L +3.3V #PWR036
+L sensenet_particlemeter-rescue:+3.3V #PWR036
 U 1 1 59A615F6
 P 8950 3450
 F 0 "#PWR036" H 8950 3300 50  0001 C CNN
@@ -751,7 +707,7 @@ F 3 "" H 8950 3450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR037
+L sensenet_particlemeter-rescue:GND #PWR037
 U 1 1 59A65589
 P 11700 3300
 F 0 "#PWR037" H 11700 3050 50  0001 C CNN
@@ -780,7 +736,7 @@ UART_GPS_TX
 Text GLabel 10900 4350 3    39   Input ~ 0
 UART_GPS_RX
 $Comp
-L R R6
+L sensenet_particlemeter-rescue:R R6
 U 1 1 59A7EA7B
 P 20850 10000
 F 0 "R6" V 20930 10000 50  0000 C CNN
@@ -791,7 +747,7 @@ F 3 "" H 20850 10000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L QUECTEL_BC95 U3
+L sensenet_particlemeter-rescue:QUECTEL_BC95 U3
 U 1 1 59B06CC9
 P 4400 10650
 F 0 "U3" H 5850 12150 60  0000 C CNN
@@ -851,7 +807,7 @@ NoConn ~ 2400 10000
 NoConn ~ 2400 10100
 NoConn ~ 2400 10200
 $Comp
-L GND #PWR038
+L sensenet_particlemeter-rescue:GND #PWR038
 U 1 1 59B0EB8E
 P 5450 8950
 F 0 "#PWR038" H 5450 8700 50  0001 C CNN
@@ -862,7 +818,7 @@ F 3 "" H 5450 8950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR039
+L sensenet_particlemeter-rescue:GND #PWR039
 U 1 1 59B0ECA8
 P 4600 8950
 F 0 "#PWR039" H 4600 8700 50  0001 C CNN
@@ -873,7 +829,7 @@ F 3 "" H 4600 8950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR040
+L sensenet_particlemeter-rescue:GND #PWR040
 U 1 1 59B0F233
 P 3500 8950
 F 0 "#PWR040" H 3500 8700 50  0001 C CNN
@@ -884,7 +840,7 @@ F 3 "" H 3500 8950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR041
+L sensenet_particlemeter-rescue:GND #PWR041
 U 1 1 59B0F346
 P 2250 9500
 F 0 "#PWR041" H 2250 9250 50  0001 C CNN
@@ -895,7 +851,7 @@ F 3 "" H 2250 9500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR042
+L sensenet_particlemeter-rescue:GND #PWR042
 U 1 1 59B0FD49
 P 5350 12350
 F 0 "#PWR042" H 5350 12100 50  0001 C CNN
@@ -906,7 +862,7 @@ F 3 "" H 5350 12350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR043
+L sensenet_particlemeter-rescue:GND #PWR043
 U 1 1 59B10BC4
 P 6250 11450
 F 0 "#PWR043" H 6250 11200 50  0001 C CNN
@@ -917,7 +873,7 @@ F 3 "" H 6250 11450 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR044
+L sensenet_particlemeter-rescue:GND #PWR044
 U 1 1 59B11419
 P 6250 10350
 F 0 "#PWR044" H 6250 10100 50  0001 C CNN
@@ -928,7 +884,7 @@ F 3 "" H 6250 10350 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR045
+L sensenet_particlemeter-rescue:GND #PWR045
 U 1 1 59B11CC6
 P 6250 9450
 F 0 "#PWR045" H 6250 9200 50  0001 C CNN
@@ -939,7 +895,7 @@ F 3 "" H 6250 9450 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C10
+L sensenet_particlemeter-rescue:C C10
 U 1 1 59B15D94
 P 6650 11450
 F 0 "C10" H 6675 11550 50  0000 L CNN
@@ -950,7 +906,7 @@ F 3 "" H 6650 11450 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L C C11
+L sensenet_particlemeter-rescue:C C11
 U 1 1 59B16270
 P 7100 11450
 F 0 "C11" H 7125 11550 50  0000 L CNN
@@ -961,7 +917,7 @@ F 3 "" H 7100 11450 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L R R11
+L sensenet_particlemeter-rescue:R R11
 U 1 1 59B16754
 P 6900 11300
 F 0 "R11" V 6980 11300 50  0000 C CNN
@@ -972,7 +928,7 @@ F 3 "" H 6900 11300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L SMA_mini P1
+L sensenet_particlemeter-rescue:SMA_mini P1
 U 1 1 59B17020
 P 7450 11300
 F 0 "P1" H 7460 11420 50  0000 C CNN
@@ -983,7 +939,7 @@ F 3 "" H 7450 11300 50  0000 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L GND #PWR046
+L sensenet_particlemeter-rescue:GND #PWR046
 U 1 1 59B17450
 P 6650 11650
 F 0 "#PWR046" H 6650 11400 50  0001 C CNN
@@ -994,7 +950,7 @@ F 3 "" H 6650 11650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR047
+L sensenet_particlemeter-rescue:GND #PWR047
 U 1 1 59B1757B
 P 7100 11650
 F 0 "#PWR047" H 7100 11400 50  0001 C CNN
@@ -1005,7 +961,7 @@ F 3 "" H 7100 11650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR048
+L sensenet_particlemeter-rescue:GND #PWR048
 U 1 1 59B176A6
 P 7700 11650
 F 0 "#PWR048" H 7700 11400 50  0001 C CNN
@@ -1015,10 +971,8 @@ F 3 "" H 7700 11650 50  0001 C CNN
 	1    7700 11650
 	1    0    0    -1  
 $EndComp
-Text GLabel 5150 12350 3    39   Input ~ 0
-batt
 $Comp
-L GND #PWR049
+L sensenet_particlemeter-rescue:GND #PWR049
 U 1 1 59B1F400
 P 4900 12350
 F 0 "#PWR049" H 4900 12100 50  0001 C CNN
@@ -1030,41 +984,41 @@ F 3 "" H 4900 12350 50  0001 C CNN
 $EndComp
 NoConn ~ 3300 12250
 $Comp
-L C C7
+L sensenet_particlemeter-rescue:C C7
 U 1 1 59B21822
-P 3050 12400
-F 0 "C7" H 3075 12500 50  0000 L CNN
-F 1 "100n" H 3075 12300 50  0000 L CNN
-F 2 "SNPM:SMD_0805" H 3088 12250 50  0001 C CNN
-F 3 "" H 3050 12400 50  0001 C CNN
-	1    3050 12400
-	0    1    1    0   
+P 6100 12750
+F 0 "C7" H 6125 12850 50  0000 L CNN
+F 1 "100n" H 6125 12650 50  0000 L CNN
+F 2 "SNPM:SMD_0805" H 6138 12600 50  0001 C CNN
+F 3 "" H 6100 12750 50  0001 C CNN
+	1    6100 12750
+	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR050
+L sensenet_particlemeter-rescue:GND #PWR050
 U 1 1 59B21966
-P 2800 12450
-F 0 "#PWR050" H 2800 12200 50  0001 C CNN
-F 1 "GND" H 2800 12300 50  0000 C CNN
-F 2 "" H 2800 12450 50  0001 C CNN
-F 3 "" H 2800 12450 50  0001 C CNN
-	1    2800 12450
+P 6100 12950
+F 0 "#PWR050" H 6100 12700 50  0001 C CNN
+F 1 "GND" H 6100 12800 50  0000 C CNN
+F 2 "" H 6100 12950 50  0001 C CNN
+F 3 "" H 6100 12950 50  0001 C CNN
+	1    6100 12950
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR051
+L sensenet_particlemeter-rescue:+3.3V #PWR051
 U 1 1 59B220EB
-P 3200 12650
-F 0 "#PWR051" H 3200 12500 50  0001 C CNN
-F 1 "+3.3V" H 3200 12790 50  0000 C CNN
-F 2 "" H 3200 12650 50  0001 C CNN
-F 3 "" H 3200 12650 50  0001 C CNN
-	1    3200 12650
-	-1   0    0    1   
+P 6100 12500
+F 0 "#PWR051" H 6100 12350 50  0001 C CNN
+F 1 "+3.3V" H 6100 12640 50  0000 C CNN
+F 2 "" H 6100 12500 50  0001 C CNN
+F 3 "" H 6100 12500 50  0001 C CNN
+	1    6100 12500
+	1    0    0    -1  
 $EndComp
 NoConn ~ 2400 11400
 $Comp
-L R R8
+L sensenet_particlemeter-rescue:R R8
 U 1 1 59B2F5FB
 P 4350 13800
 F 0 "R8" V 4430 13800 50  0000 C CNN
@@ -1075,7 +1029,7 @@ F 3 "" H 4350 13800 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R R9
+L sensenet_particlemeter-rescue:R R9
 U 1 1 59B2FAA5
 P 4350 14000
 F 0 "R9" V 4430 14000 50  0000 C CNN
@@ -1086,7 +1040,7 @@ F 3 "" H 4350 14000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R R10
+L sensenet_particlemeter-rescue:R R10
 U 1 1 59B319DD
 P 4350 14200
 F 0 "R10" V 4430 14200 50  0000 C CNN
@@ -1097,7 +1051,7 @@ F 3 "" H 4350 14200 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR052
+L sensenet_particlemeter-rescue:GND #PWR052
 U 1 1 59B3202B
 P 4600 14200
 F 0 "#PWR052" H 4600 13950 50  0001 C CNN
@@ -1110,7 +1064,7 @@ $EndComp
 Text GLabel 2050 10700 1    39   Input ~ 0
 WIRELESS_reset
 $Comp
-L Conn_01x01 J3
+L sensenet_particlemeter-rescue:Conn_01x01 J3
 U 1 1 59B45EAC
 P 2050 11500
 F 0 "J3" V 2050 11400 50  0000 C CNN
@@ -1121,7 +1075,7 @@ F 3 "" H 2050 11500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Conn_01x01 J4
+L sensenet_particlemeter-rescue:Conn_01x01 J4
 U 1 1 59B45FBA
 P 2150 11700
 F 0 "J4" V 2150 11600 50  0000 C CNN
@@ -1132,7 +1086,7 @@ F 3 "" H 2150 11700 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Conn_01x01 J1
+L sensenet_particlemeter-rescue:Conn_01x01 J1
 U 1 1 59B471C1
 P 1650 9600
 F 0 "J1" H 1650 9700 50  0000 C CNN
@@ -1143,7 +1097,7 @@ F 3 "" H 1650 9600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Conn_01x01 J2
+L sensenet_particlemeter-rescue:Conn_01x01 J2
 U 1 1 59B4784D
 P 1900 9700
 F 0 "J2" H 1900 9800 50  0000 C CNN
@@ -1154,7 +1108,7 @@ F 3 "" H 1900 9700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Conn_01x01 J6
+L sensenet_particlemeter-rescue:Conn_01x01 J6
 U 1 1 59BD7DC6
 P 2650 14850
 F 0 "J6" H 2650 14950 50  0000 C CNN
@@ -1165,7 +1119,7 @@ F 3 "" H 2650 14850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Conn_01x01 J5
+L sensenet_particlemeter-rescue:Conn_01x01 J5
 U 1 1 59BD7F12
 P 3450 14850
 F 0 "J5" H 3450 14950 50  0000 C CNN
@@ -1176,7 +1130,7 @@ F 3 "" H 3450 14850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SMA_mini P2
+L sensenet_particlemeter-rescue:SMA_mini P2
 U 1 1 59C00BD1
 P 13300 2150
 F 0 "P2" H 13310 2270 50  0000 C CNN
@@ -1187,7 +1141,7 @@ F 3 "" H 13300 2150 50  0000 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L GND #PWR053
+L sensenet_particlemeter-rescue:GND #PWR053
 U 1 1 59C00BD7
 P 13550 2600
 F 0 "#PWR053" H 13550 2350 50  0001 C CNN
@@ -1198,7 +1152,7 @@ F 3 "" H 13550 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R14
+L sensenet_particlemeter-rescue:R R14
 U 1 1 59C24CC5
 P 16300 8600
 F 0 "R14" V 16380 8600 50  0000 C CNN
@@ -1209,7 +1163,7 @@ F 3 "" H 16300 8600 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L GND #PWR054
+L sensenet_particlemeter-rescue:GND #PWR054
 U 1 1 59C24EE9
 P 16500 8600
 F 0 "#PWR054" H 16500 8350 50  0001 C CNN
@@ -1220,21 +1174,21 @@ F 3 "" H 16500 8600 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L SIM U4
+L sensenet_particlemeter-rescue:SIM U4
 U 1 1 5A144890
-P 5750 13200
-F 0 "U4" H 6050 13650 60  0000 C CNN
-F 1 "SIM" H 5850 13200 60  0000 C CNN
-F 2 "SNPM:nanosimmm" H 5750 13200 60  0001 C CNN
-F 3 "" H 5750 13200 60  0001 C CNN
-	1    5750 13200
+P 5400 13200
+F 0 "U4" H 5750 12750 60  0000 C CNN
+F 1 "SIM" H 5500 13200 60  0000 C CNN
+F 2 "SNPM:nanosimmm" H 5400 13200 60  0001 C CNN
+F 3 "" H 5400 13200 60  0001 C CNN
+	1    5400 13200
 	1    0    0    -1  
 $EndComp
-NoConn ~ 5250 13150
+NoConn ~ 4900 13150
 NoConn ~ 7650 11900
 NoConn ~ -2600 -350
 $Comp
-L Conn_01x01 J18
+L sensenet_particlemeter-rescue:Conn_01x01 J18
 U 1 1 5A147BAE
 P 2050 3400
 F 0 "J18" H 2050 3500 50  0000 C CNN
@@ -1245,7 +1199,7 @@ F 3 "" H 2050 3400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Conn_01x01 J11
+L sensenet_particlemeter-rescue:Conn_01x01 J11
 U 1 1 5A147D06
 P 1750 3550
 F 0 "J11" H 1750 3650 50  0000 C CNN
@@ -1259,7 +1213,7 @@ NoConn ~ 2500 2800
 NoConn ~ 2450 14850
 NoConn ~ 3250 14850
 $Comp
-L Conn_01x01 J21
+L sensenet_particlemeter-rescue:Conn_01x01 J21
 U 1 1 5A15C8F9
 P 4800 1050
 F 0 "J21" H 4800 1150 50  0000 C CNN
@@ -1270,40 +1224,29 @@ F 3 "" H 4800 1050 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C13
-U 1 1 5B353CD7
-P 12650 2150
-F 0 "C13" H 12675 2250 50  0000 L CNN
-F 1 "C" H 12675 2050 50  0000 L CNN
-F 2 "SNPM:SMD_0805" H 12688 2000 50  0001 C CNN
-F 3 "" H 12650 2150 50  0001 C CNN
-	1    12650 2150
-	0    1    1    0   
-$EndComp
-$Comp
-L L L1
+L sensenet_particlemeter-rescue:L L1
 U 1 1 5B353DB6
 P 12350 2350
 F 0 "L1" V 12300 2350 50  0000 C CNN
-F 1 "L" V 12425 2350 50  0000 C CNN
+F 1 "DNP" V 12425 2350 50  0000 C CNN
 F 2 "SNPM:SMD_0805" H 12350 2350 50  0001 C CNN
 F 3 "" H 12350 2350 50  0001 C CNN
 	1    12350 2350
 	1    0    0    -1  
 $EndComp
 $Comp
-L L L2
+L sensenet_particlemeter-rescue:L L2
 U 1 1 5B353EC8
 P 12950 2350
 F 0 "L2" V 12900 2350 50  0000 C CNN
-F 1 "L" V 13025 2350 50  0000 C CNN
+F 1 "DNP" V 13025 2350 50  0000 C CNN
 F 2 "SNPM:SMD_0805" H 12950 2350 50  0001 C CNN
 F 3 "" H 12950 2350 50  0001 C CNN
 	1    12950 2350
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR055
+L sensenet_particlemeter-rescue:GND #PWR055
 U 1 1 5B3544CD
 P 12350 2600
 F 0 "#PWR055" H 12350 2350 50  0001 C CNN
@@ -1314,7 +1257,7 @@ F 3 "" H 12350 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR056
+L sensenet_particlemeter-rescue:GND #PWR056
 U 1 1 5B3545B6
 P 12950 2600
 F 0 "#PWR056" H 12950 2350 50  0001 C CNN
@@ -1333,7 +1276,7 @@ PA12-USB-DP
 Text GLabel 17550 8400 0    39   Input ~ 0
 PA12-USB-DP
 $Comp
-L GND #PWR057
+L sensenet_particlemeter-rescue:GND #PWR057
 U 1 1 5B35767E
 P 17500 8100
 F 0 "#PWR057" H 17500 7850 50  0001 C CNN
@@ -1350,7 +1293,7 @@ BOOT_0
 Text GLabel 3450 1650 1    39   Input ~ 0
 BOOT_signal
 $Comp
-L +3.3V #PWR058
+L sensenet_particlemeter-rescue:+3.3V #PWR058
 U 1 1 5B35A775
 P 15100 7850
 F 0 "#PWR058" H 15100 7700 50  0001 C CNN
@@ -1363,7 +1306,7 @@ $EndComp
 Text GLabel 16050 8600 0    60   Input ~ 0
 BOOT_signal
 $Comp
-L R R7
+L sensenet_particlemeter-rescue:R R7
 U 1 1 5B35B6F3
 P 16200 7400
 F 0 "R7" V 16280 7400 50  0000 C CNN
@@ -1374,7 +1317,7 @@ F 3 "" H 16200 7400 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L GND #PWR059
+L sensenet_particlemeter-rescue:GND #PWR059
 U 1 1 5B35B9EC
 P 16400 7400
 F 0 "#PWR059" H 16400 7150 50  0001 C CNN
@@ -1385,7 +1328,7 @@ F 3 "" H 16400 7400 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L +3.3V #PWR060
+L sensenet_particlemeter-rescue:+3.3V #PWR060
 U 1 1 5B35BFD1
 P 15100 7750
 F 0 "#PWR060" H 15100 7600 50  0001 C CNN
@@ -1422,7 +1365,7 @@ SWD_DIO
 Text GLabel 20700 7600 2    39   Input ~ 0
 PM_SS
 $Comp
-L +3.3V #PWR061
+L sensenet_particlemeter-rescue:+3.3V #PWR061
 U 1 1 5B366D3B
 P 20700 6800
 F 0 "#PWR061" H 20700 6650 50  0001 C CNN
@@ -1433,7 +1376,7 @@ F 3 "" H 20700 6800 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR062
+L sensenet_particlemeter-rescue:GND #PWR062
 U 1 1 5B366E30
 P 21400 6900
 F 0 "#PWR062" H 21400 6650 50  0001 C CNN
@@ -1456,51 +1399,51 @@ gps_pulses
 Text GLabel 20050 7200 0    39   Input ~ 0
 gps_fix
 $Comp
-L C C15
+L sensenet_particlemeter-rescue:C C15
 U 1 1 5B46456A
-P 21200 1800
-F 0 "C15" H 21225 1900 50  0000 L CNN
-F 1 "1000u" H 21225 1700 50  0000 L CNN
-F 2 "SNPM:C_Radial_D10_L16_P5_bottom" H 21238 1650 50  0001 C CNN
-F 3 "" H 21200 1800 50  0001 C CNN
-	1    21200 1800
+P 21050 1800
+F 0 "C15" H 21075 1900 50  0000 L CNN
+F 1 "470u" H 21075 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21088 1650 50  0001 C CNN
+F 3 "" H 21050 1800 50  0001 C CNN
+	1    21050 1800
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R12
+L sensenet_particlemeter-rescue:R R12
 U 1 1 5B475BFB
-P 16300 1600
-F 0 "R12" V 16380 1600 50  0000 C CNN
-F 1 "0R33" V 16300 1600 50  0000 C CNN
-F 2 "SNPM:SMD_0805" V 16230 1600 50  0001 C CNN
-F 3 "" H 16300 1600 50  0001 C CNN
-	1    16300 1600
+P 16350 1600
+F 0 "R12" V 16430 1600 50  0000 C CNN
+F 1 "0R33" V 16350 1600 50  0000 C CNN
+F 2 "SNPM:SMD_0805" V 16280 1600 50  0001 C CNN
+F 3 "" H 16350 1600 50  0001 C CNN
+	1    16350 1600
 	0    1    1    0   
 $EndComp
 $Comp
-L R R16
+L sensenet_particlemeter-rescue:R R16
 U 1 1 5B478654
 P 19900 2150
 F 0 "R16" V 19980 2150 50  0000 C CNN
-F 1 "10k" V 19900 2150 50  0000 C CNN
+F 1 "820R" V 19900 2150 50  0000 C CNN
 F 2 "SNPM:SMD_0805" V 19830 2150 50  0001 C CNN
 F 3 "" H 19900 2150 50  0001 C CNN
 	1    19900 2150
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R15
+L sensenet_particlemeter-rescue:R R15
 U 1 1 5B47884E
 P 19900 1700
 F 0 "R15" V 19750 1700 50  0000 C CNN
-F 1 "27k" V 19900 1700 50  0000 C CNN
+F 1 "2k7" V 19900 1700 50  0000 C CNN
 F 2 "SNPM:SMD_0805" V 19830 1700 50  0001 C CNN
 F 3 "" H 19900 1700 50  0001 C CNN
 	1    19900 1700
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR063
+L sensenet_particlemeter-rescue:GND #PWR063
 U 1 1 5B478D23
 P 19900 2650
 F 0 "#PWR063" H 19900 2400 50  0001 C CNN
@@ -1511,7 +1454,7 @@ F 3 "" H 19900 2650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L L L3
+L sensenet_particlemeter-rescue:L L3
 U 1 1 5B47991F
 P 19500 1550
 F 0 "L3" V 19450 1550 50  0000 C CNN
@@ -1522,7 +1465,7 @@ F 3 "" H 19500 1550 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L D_Schottky D5
+L sensenet_particlemeter-rescue:D_Schottky D5
 U 1 1 5B479AF2
 P 19200 1700
 F 0 "D5" H 19200 1800 50  0000 C CNN
@@ -1533,7 +1476,7 @@ F 3 "" H 19200 1700 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR064
+L sensenet_particlemeter-rescue:GND #PWR064
 U 1 1 5B47A8EA
 P 18900 2600
 F 0 "#PWR064" H 18900 2350 50  0001 C CNN
@@ -1544,29 +1487,29 @@ F 3 "" H 18900 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C12
+L sensenet_particlemeter-rescue:C C12
 U 1 1 5B47AD3F
 P 18900 2400
 F 0 "C12" H 18925 2500 50  0000 L CNN
-F 1 "510pF" H 18925 2300 50  0000 L CNN
+F 1 "330pF" H 18925 2300 50  0000 L CNN
 F 2 "SNPM:SMD_0805" H 18938 2250 50  0001 C CNN
 F 3 "" H 18900 2400 50  0001 C CNN
 	1    18900 2400
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R13
+L sensenet_particlemeter-rescue:R R13
 U 1 1 5B47CB5D
-P 16300 1850
-F 0 "R13" V 16380 1850 50  0000 C CNN
-F 1 "tbd" V 16300 1850 50  0000 C CNN
-F 2 "SNPM:SMD_0805" V 16230 1850 50  0001 C CNN
-F 3 "" H 16300 1850 50  0001 C CNN
-	1    16300 1850
+P 16350 1850
+F 0 "R13" V 16430 1850 50  0000 C CNN
+F 1 "tbd" V 16350 1850 50  0000 C CNN
+F 2 "SNPM:SMD_0805" V 16280 1850 50  0001 C CNN
+F 3 "" H 16350 1850 50  0001 C CNN
+	1    16350 1850
 	0    1    1    0   
 $EndComp
 $Comp
-L MC33063 U1
+L sensenet_particlemeter-rescue:MC33063 U1
 U 1 1 5B47ECA6
 P 18850 1400
 F 0 "U1" H 17000 1800 60  0000 C CNN
@@ -1577,29 +1520,29 @@ F 3 "" H 20750 3000 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR065
+L sensenet_particlemeter-rescue:GND #PWR065
 U 1 1 5B481E0E
-P 15700 2600
-F 0 "#PWR065" H 15700 2350 50  0001 C CNN
-F 1 "GND" H 15700 2450 50  0000 C CNN
-F 2 "" H 15700 2600 50  0001 C CNN
-F 3 "" H 15700 2600 50  0001 C CNN
-	1    15700 2600
+P 15550 2600
+F 0 "#PWR065" H 15550 2350 50  0001 C CNN
+F 1 "GND" H 15550 2450 50  0000 C CNN
+F 2 "" H 15550 2600 50  0001 C CNN
+F 3 "" H 15550 2600 50  0001 C CNN
+	1    15550 2600
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR066
+L sensenet_particlemeter-rescue:GND #PWR066
 U 1 1 5B481FD6
-P 15000 2600
-F 0 "#PWR066" H 15000 2350 50  0001 C CNN
-F 1 "GND" H 15000 2450 50  0000 C CNN
-F 2 "" H 15000 2600 50  0001 C CNN
-F 3 "" H 15000 2600 50  0001 C CNN
-	1    15000 2600
+P 14800 2600
+F 0 "#PWR066" H 14800 2350 50  0001 C CNN
+F 1 "GND" H 14800 2450 50  0000 C CNN
+F 2 "" H 14800 2600 50  0001 C CNN
+F 3 "" H 14800 2600 50  0001 C CNN
+	1    14800 2600
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR067
+L sensenet_particlemeter-rescue:GND #PWR067
 U 1 1 5B484093
 P 18850 1250
 F 0 "#PWR067" H 18850 1000 50  0001 C CNN
@@ -1610,7 +1553,7 @@ F 3 "" H 18850 1250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR068
+L sensenet_particlemeter-rescue:GND #PWR068
 U 1 1 5B4862C1
 P 19200 2600
 F 0 "#PWR068" H 19200 2350 50  0001 C CNN
@@ -1621,7 +1564,7 @@ F 3 "" H 19200 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CAT24C02 U5
+L sensenet_particlemeter-rescue:CAT24C02 U5
 U 1 1 5B476E97
 P 16150 10500
 F 0 "U5" H 16350 10150 60  0000 C CNN
@@ -1632,7 +1575,7 @@ F 3 "" H 16600 10950 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Q_NMOS_GSD Q1
+L sensenet_particlemeter-rescue:Q_NMOS_GSD Q1
 U 1 1 5B479231
 P 21150 8200
 F 0 "Q1" H 21350 8250 50  0000 L CNN
@@ -1643,7 +1586,7 @@ F 3 "" H 21150 8200 50  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L R R17
+L sensenet_particlemeter-rescue:R R17
 U 1 1 5B479F83
 P 21700 8200
 F 0 "R17" V 21780 8200 50  0000 C CNN
@@ -1654,7 +1597,7 @@ F 3 "" H 21700 8200 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L R R18
+L sensenet_particlemeter-rescue:R R18
 U 1 1 5B47A254
 P 21450 8500
 F 0 "R18" V 21530 8500 50  0000 C CNN
@@ -1665,7 +1608,7 @@ F 3 "" H 21450 8500 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L GND #PWR069
+L sensenet_particlemeter-rescue:GND #PWR069
 U 1 1 5B47A472
 P 21450 8750
 F 0 "#PWR069" H 21450 8500 50  0001 C CNN
@@ -1680,7 +1623,7 @@ PM_meter_switch
 Text GLabel 6000 3100 2    39   Input ~ 0
 PM_meter_switch
 $Comp
-L +5V #PWR070
+L sensenet_particlemeter-rescue:+5V #PWR070
 U 1 1 5B478486
 P 20700 7300
 F 0 "#PWR070" H 20700 7150 50  0001 C CNN
@@ -1691,18 +1634,7 @@ F 3 "" H 20700 7300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L CP C17
-U 1 1 5B4AA870
-P 20500 1800
-F 0 "C17" H 20525 1900 50  0000 L CNN
-F 1 "1000u" H 20525 1700 50  0000 L CNN
-F 2 "SNPM:C_Radial_D10_L16_P5_bottom" H 20538 1650 50  0001 C CNN
-F 3 "" H 20500 1800 50  0001 C CNN
-	1    20500 1800
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR071
+L sensenet_particlemeter-rescue:GND #PWR071
 U 1 1 5B4AA87C
 P 21150 5850
 F 0 "#PWR071" H 21150 5600 50  0001 C CNN
@@ -1713,7 +1645,7 @@ F 3 "" H 21150 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D7
+L sensenet_particlemeter-rescue:LED D7
 U 1 1 5B4AA888
 P 22300 5150
 F 0 "D7" H 22300 5250 50  0000 C CNN
@@ -1724,7 +1656,7 @@ F 3 "" H 22300 5150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R26
+L sensenet_particlemeter-rescue:R R26
 U 1 1 5B4AA88E
 P 22300 4650
 F 0 "R26" V 22380 4650 50  0000 C CNN
@@ -1735,7 +1667,7 @@ F 3 "" H 22300 4650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR072
+L sensenet_particlemeter-rescue:GND #PWR072
 U 1 1 5B4AA894
 P 22300 5850
 F 0 "#PWR072" H 22300 5600 50  0001 C CNN
@@ -1746,7 +1678,7 @@ F 3 "" H 22300 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R19
+L sensenet_particlemeter-rescue:R R19
 U 1 1 5B4AA8B7
 P 16400 4500
 F 0 "R19" V 16480 4500 50  0000 C CNN
@@ -1757,7 +1689,7 @@ F 3 "" H 16400 4500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R R23
+L sensenet_particlemeter-rescue:R R23
 U 1 1 5B4AA8BD
 P 20150 5050
 F 0 "R23" V 20230 5050 50  0000 C CNN
@@ -1768,7 +1700,7 @@ F 3 "" H 20150 5050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R22
+L sensenet_particlemeter-rescue:R R22
 U 1 1 5B4AA8C3
 P 20150 4600
 F 0 "R22" V 20230 4600 50  0000 C CNN
@@ -1779,7 +1711,7 @@ F 3 "" H 20150 4600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR073
+L sensenet_particlemeter-rescue:GND #PWR073
 U 1 1 5B4AA8C9
 P 20150 5850
 F 0 "#PWR073" H 20150 5600 50  0001 C CNN
@@ -1790,7 +1722,7 @@ F 3 "" H 20150 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L L L5
+L sensenet_particlemeter-rescue:L L5
 U 1 1 5B4AA8D0
 P 19700 4450
 F 0 "L5" V 19650 4450 50  0000 C CNN
@@ -1801,7 +1733,7 @@ F 3 "" H 19700 4450 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L D_Schottky D6
+L sensenet_particlemeter-rescue:D_Schottky D6
 U 1 1 5B4AA8D6
 P 19300 4600
 F 0 "D6" H 19300 4700 50  0000 C CNN
@@ -1812,7 +1744,7 @@ F 3 "" H 19300 4600 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR074
+L sensenet_particlemeter-rescue:GND #PWR074
 U 1 1 5B4AA8DC
 P 19000 5500
 F 0 "#PWR074" H 19000 5250 50  0001 C CNN
@@ -1823,7 +1755,7 @@ F 3 "" H 19000 5500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C16
+L sensenet_particlemeter-rescue:C C16
 U 1 1 5B4AA8E2
 P 19000 5300
 F 0 "C16" H 19025 5400 50  0000 L CNN
@@ -1834,7 +1766,7 @@ F 3 "" H 19000 5300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R20
+L sensenet_particlemeter-rescue:R R20
 U 1 1 5B4AA8E8
 P 16400 4750
 F 0 "R20" V 16480 4750 50  0000 C CNN
@@ -1845,7 +1777,7 @@ F 3 "" H 16400 4750 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L MC33063 U6
+L sensenet_particlemeter-rescue:MC33063 U6
 U 1 1 5B4AA8EE
 P 18950 4300
 F 0 "U6" H 17100 4700 60  0000 C CNN
@@ -1856,7 +1788,7 @@ F 3 "" H 20850 5900 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR075
+L sensenet_particlemeter-rescue:GND #PWR075
 U 1 1 5B4AA917
 P 18950 4150
 F 0 "#PWR075" H 18950 3900 50  0001 C CNN
@@ -1867,7 +1799,7 @@ F 3 "" H 18950 4150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR076
+L sensenet_particlemeter-rescue:GND #PWR076
 U 1 1 5B4AA925
 P 19300 5500
 F 0 "#PWR076" H 19300 5250 50  0001 C CNN
@@ -1878,12 +1810,12 @@ F 3 "" H 19300 5500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CP C18
+L sensenet_particlemeter-rescue:CP C18
 U 1 1 5B4AA935
 P 20800 4700
 F 0 "C18" H 20825 4800 50  0000 L CNN
 F 1 "470uF" H 20825 4600 50  0000 L CNN
-F 2 "SNPM:C_Radial_D6.3_L11.2_P2.5_bottom" H 20838 4550 50  0001 C CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 20838 4550 50  0001 C CNN
 F 3 "" H 20800 4700 50  0001 C CNN
 	1    20800 4700
 	1    0    0    -1  
@@ -1891,18 +1823,18 @@ $EndComp
 Text Notes 16300 3200 0    60   ~ 0
 VIN 9V, VOUT 4,65V, Iout 500mA, Vripple 5mV, Fmin 50kHz
 $Comp
-L R R21
+L sensenet_particlemeter-rescue:R R21
 U 1 1 5B4AC7B4
 P 19900 2500
 F 0 "R21" V 19980 2500 50  0000 C CNN
-F 1 "tbd" V 19900 2500 50  0000 C CNN
+F 1 "100R" V 19900 2500 50  0000 C CNN
 F 2 "SNPM:SMD_0805" V 19830 2500 50  0001 C CNN
 F 3 "" H 19900 2500 50  0001 C CNN
 	1    19900 2500
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R24
+L sensenet_particlemeter-rescue:R R24
 U 1 1 5B4AE236
 P 20150 5400
 F 0 "R24" V 20230 5400 50  0000 C CNN
@@ -1915,7 +1847,7 @@ $EndComp
 Text Notes 16250 5950 0    60   ~ 0
 VIN 9V, VOUT 3.13V, Iout 500mA, Vripple 5mV, Fmin 50kHz
 $Comp
-L +3.3V #PWR077
+L sensenet_particlemeter-rescue:+3.3V #PWR077
 U 1 1 5B4B26B7
 P 22500 4400
 F 0 "#PWR077" H 22500 4250 50  0001 C CNN
@@ -1926,18 +1858,18 @@ F 3 "" H 22500 4400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +9V #PWR078
+L sensenet_particlemeter-rescue:+9V #PWR078
 U 1 1 5B4B3358
-P 15700 1150
-F 0 "#PWR078" H 15700 1000 50  0001 C CNN
-F 1 "+9V" H 15700 1290 50  0000 C CNN
-F 2 "" H 15700 1150 50  0000 C CNN
-F 3 "" H 15700 1150 50  0000 C CNN
-	1    15700 1150
+P 15550 1100
+F 0 "#PWR078" H 15550 950 50  0001 C CNN
+F 1 "+9V" H 15550 1240 50  0000 C CNN
+F 2 "" H 15550 1100 50  0000 C CNN
+F 3 "" H 15550 1100 50  0000 C CNN
+	1    15550 1100
 	1    0    0    -1  
 $EndComp
 $Comp
-L +9V #PWR079
+L sensenet_particlemeter-rescue:+9V #PWR079
 U 1 1 5B4B38DD
 P 15600 4100
 F 0 "#PWR079" H 15600 3950 50  0001 C CNN
@@ -1956,7 +1888,7 @@ USART_debug_rx
 Text GLabel 20700 7400 2    39   Input ~ 0
 USART_debug_tx
 $Comp
-L SW_DIP_x03 SW2
+L sensenet_particlemeter-rescue:SW_DIP_x03 SW2
 U 1 1 5B4F7D2E
 P 15600 7950
 F 0 "SW2" H 15600 8300 50  0000 C CNN
@@ -1967,7 +1899,7 @@ F 3 "" H 15600 7950 50  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L GND #PWR080
+L sensenet_particlemeter-rescue:GND #PWR080
 U 1 1 5B4F84A0
 P 15950 8150
 F 0 "#PWR080" H 15950 7900 50  0001 C CNN
@@ -1980,7 +1912,7 @@ $EndComp
 Text GLabel 3300 1650 1    39   Input ~ 0
 debug_on_off
 $Comp
-L LED D8
+L sensenet_particlemeter-rescue:LED D8
 U 1 1 5B4F48C0
 P 4200 6000
 F 0 "D8" H 4200 6100 50  0000 C CNN
@@ -1993,7 +1925,7 @@ $EndComp
 Text GLabel 15200 7950 0    39   Input ~ 0
 debug_on_off
 $Comp
-L GND #PWR081
+L sensenet_particlemeter-rescue:GND #PWR081
 U 1 1 5B4FBA55
 P 5500 7050
 F 0 "#PWR081" H 5500 6800 50  0001 C CNN
@@ -2004,7 +1936,7 @@ F 3 "" H 5500 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D9
+L sensenet_particlemeter-rescue:LED D9
 U 1 1 5B4FC722
 P 4500 6000
 F 0 "D9" H 4500 5900 50  0000 C CNN
@@ -2015,7 +1947,7 @@ F 3 "" H 4500 6000 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R27
+L sensenet_particlemeter-rescue:R R27
 U 1 1 5B4FCB98
 P 4200 5600
 F 0 "R27" V 4280 5600 50  0000 C CNN
@@ -2026,7 +1958,7 @@ F 3 "" H 4200 5600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R28
+L sensenet_particlemeter-rescue:R R28
 U 1 1 5B4FCD18
 P 4500 5600
 F 0 "R28" V 4580 5600 50  0000 C CNN
@@ -2037,7 +1969,7 @@ F 3 "" H 4500 5600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR082
+L sensenet_particlemeter-rescue:GND #PWR082
 U 1 1 5B4FCE50
 P 4200 6350
 F 0 "#PWR082" H 4200 6100 50  0001 C CNN
@@ -2048,7 +1980,7 @@ F 3 "" H 4200 6350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR083
+L sensenet_particlemeter-rescue:GND #PWR083
 U 1 1 5B4FD109
 P 4500 6350
 F 0 "#PWR083" H 4500 6100 50  0001 C CNN
@@ -2059,7 +1991,7 @@ F 3 "" H 4500 6350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D10
+L sensenet_particlemeter-rescue:LED D10
 U 1 1 5B4FEEFF
 P 4650 6000
 F 0 "D10" H 4650 5900 50  0000 C CNN
@@ -2070,7 +2002,7 @@ F 3 "" H 4650 6000 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R29
+L sensenet_particlemeter-rescue:R R29
 U 1 1 5B4FF03E
 P 4650 5600
 F 0 "R29" V 4730 5600 50  0000 C CNN
@@ -2081,7 +2013,7 @@ F 3 "" H 4650 5600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR084
+L sensenet_particlemeter-rescue:GND #PWR084
 U 1 1 5B4FF17C
 P 4650 6350
 F 0 "#PWR084" H 4650 6100 50  0001 C CNN
@@ -2092,7 +2024,7 @@ F 3 "" H 4650 6350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SW_DPST SW1
+L sensenet_particlemeter-rescue:SW_DPST SW1
 U 1 1 5B5008FC
 P 1250 3600
 F 0 "SW1" H 1250 3800 50  0000 C CNN
@@ -2103,7 +2035,7 @@ F 3 "" H 1250 3600 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SW_DPST SW3
+L sensenet_particlemeter-rescue:SW_DPST SW3
 U 1 1 5B501DB8
 P 5150 6800
 F 0 "SW3" H 5150 7000 50  0000 C CNN
@@ -2122,7 +2054,7 @@ RI
 Text GLabel 2100 2500 0    39   Input ~ 0
 RI
 $Comp
-L usb_femalee U8
+L sensenet_particlemeter-rescue:usb_femalee U8
 U 1 1 5B54F193
 P 17950 8350
 F 0 "U8" H 17600 8700 60  0000 C CNN
@@ -2137,7 +2069,7 @@ NoConn ~ 17750 8700
 Text Notes 21450 7750 0    60   ~ 0
 zamek ke mne, drat doprava, jednicla dole.\n6 gnd\n5 SS\n4 SDI\n3 SDO\n2 SCK\n1 VCC\n
 $Comp
-L Ferrite_Bead L6
+L sensenet_particlemeter-rescue:Ferrite_Bead L6
 U 1 1 5BA77339
 P 20500 4450
 F 0 "L6" V 20350 4475 50  0000 C CNN
@@ -2148,55 +2080,54 @@ F 3 "" H 20500 4450 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Ferrite_Bead L4
+L sensenet_particlemeter-rescue:Ferrite_Bead L4
 U 1 1 5BA77902
-P 20200 1550
-F 0 "L4" V 20050 1575 50  0000 C CNN
-F 1 "FBMH1608HL601-T" V 19950 1550 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 20130 1550 50  0001 C CNN
-F 3 "" H 20200 1550 50  0000 C CNN
-	1    20200 1550
+P 20100 1550
+F 0 "L4" V 19950 1575 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 19850 1550 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 20030 1550 50  0001 C CNN
+F 3 "" H 20100 1550 50  0000 C CNN
+	1    20100 1550
 	0    1    1    0   
 $EndComp
 $Comp
-L Ferrite_Bead L7
+L sensenet_particlemeter-rescue:Ferrite_Bead L7
 U 1 1 5BA78A59
-P 20850 1550
-F 0 "L7" V 20700 1575 50  0000 C CNN
-F 1 "FBMH1608HL601-T" V 20550 1700 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 20780 1550 50  0001 C CNN
-F 3 "" H 20850 1550 50  0000 C CNN
-	1    20850 1550
+P 20800 1550
+F 0 "L7" V 20650 1575 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 20500 1700 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 20730 1550 50  0001 C CNN
+F 3 "" H 20800 1550 50  0000 C CNN
+	1    20800 1550
 	0    1    1    0   
 $EndComp
 $Comp
-L D_Schottky D1
+L sensenet_particlemeter-rescue:D_Schottky D1
 U 1 1 5BA798AD
-P 21900 2050
-F 0 "D1" H 21900 2150 50  0000 C CNN
-F 1 "PTVS3V3S1UR,115" H 21900 1950 50  0000 C CNN
-F 2 "SNPM:SMD_0805" H 21900 2050 50  0001 C CNN
-F 3 "" H 21900 2050 50  0001 C CNN
-	1    21900 2050
+P 22150 2050
+F 0 "D1" H 22150 2150 50  0000 C CNN
+F 1 "PTVS3V3S1UR,115" H 22150 1950 50  0000 C CNN
+F 2 "SNPM:SMD_0805" H 22150 2050 50  0001 C CNN
+F 3 "" H 22150 2050 50  0001 C CNN
+	1    22150 2050
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR085
+L sensenet_particlemeter-rescue:GND #PWR085
 U 1 1 5BA79A27
-P 21900 2600
-F 0 "#PWR085" H 21900 2350 50  0001 C CNN
-F 1 "GND" H 21900 2450 50  0000 C CNN
-F 2 "" H 21900 2600 50  0001 C CNN
-F 3 "" H 21900 2600 50  0001 C CNN
-	1    21900 2600
+P 22150 2600
+F 0 "#PWR085" H 22150 2350 50  0001 C CNN
+F 1 "GND" H 22150 2450 50  0000 C CNN
+F 2 "" H 22150 2600 50  0001 C CNN
+F 3 "" H 22150 2600 50  0001 C CNN
+	1    22150 2600
 	1    0    0    -1  
 $EndComp
 NoConn ~ 2500 2950
 NoConn ~ 2500 3100
 NoConn ~ 2500 2350
-NoConn ~ 10100 3600
 $Comp
-L D_Schottky D11
+L sensenet_particlemeter-rescue:D_Schottky D11
 U 1 1 5BA8704D
 P 21950 5150
 F 0 "D11" H 21950 5250 50  0000 C CNN
@@ -2207,7 +2138,7 @@ F 3 "" H 21950 5150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR086
+L sensenet_particlemeter-rescue:GND #PWR086
 U 1 1 5BA871ED
 P 21950 5850
 F 0 "#PWR086" H 21950 5600 50  0001 C CNN
@@ -2224,7 +2155,7 @@ SM2T3V3A
 Text Notes 20200 4250 0    60   ~ 0
 FBMH1608HL601-T
 $Comp
-L Ferrite_Bead L8
+L sensenet_particlemeter-rescue:Ferrite_Bead L8
 U 1 1 5BA897A7
 P 21100 4450
 F 0 "L8" V 20950 4475 50  0000 C CNN
@@ -2235,7 +2166,7 @@ F 3 "" H 21100 4450 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Conn_01x01 J19
+L sensenet_particlemeter-rescue:Conn_01x01 J19
 U 1 1 5A148706
 P 2050 4000
 F 0 "J19" H 2050 4100 50  0000 C CNN
@@ -2247,7 +2178,7 @@ F 3 "" H 2050 4000 50  0001 C CNN
 $EndComp
 NoConn ~ 5750 3550
 $Comp
-L GND #PWR087
+L sensenet_particlemeter-rescue:GND #PWR087
 U 1 1 5BA7A8CA
 P 20700 7800
 F 0 "#PWR087" H 20700 7550 50  0001 C CNN
@@ -2258,7 +2189,7 @@ F 3 "" H 20700 7800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L CONN_02X12 P3
+L sensenet_particlemeter-rescue:CONN_02X12 P3
 U 1 1 5BA7CBB0
 P 20400 7350
 F 0 "P3" H 20400 8000 50  0000 C CNN
@@ -2273,7 +2204,7 @@ NMOS
 Text GLabel 20050 7300 0    39   Input ~ 0
 NMOS
 $Comp
-L OLED_128x64 U9
+L sensenet_particlemeter-rescue:OLED_128x64 U9
 U 1 1 5BA8DB2D
 P 10900 8100
 F 0 "U9" H 11350 6350 60  0000 C CNN
@@ -2284,7 +2215,7 @@ F 3 "" H 9600 7200 60  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C1
+L sensenet_particlemeter-rescue:C C1
 U 1 1 5BA8F232
 P 9850 9350
 F 0 "C1" H 9875 9450 50  0000 L CNN
@@ -2295,7 +2226,7 @@ F 3 "" H 9850 9350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R25
+L sensenet_particlemeter-rescue:R R25
 U 1 1 5BA8F321
 P 10100 9150
 F 0 "R25" V 10180 9150 50  0000 C CNN
@@ -2306,7 +2237,7 @@ F 3 "" H 10100 9150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C3
+L sensenet_particlemeter-rescue:C C3
 U 1 1 5BA8F481
 P 11950 9550
 F 0 "C3" H 11975 9650 50  0000 L CNN
@@ -2317,7 +2248,7 @@ F 3 "" H 11950 9550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C2
+L sensenet_particlemeter-rescue:C C2
 U 1 1 5BA8F5CD
 P 11650 9550
 F 0 "C2" H 11675 9650 50  0000 L CNN
@@ -2328,7 +2259,7 @@ F 3 "" H 11650 9550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C22
+L sensenet_particlemeter-rescue:C C22
 U 1 1 5BA8F70E
 P 12350 9050
 F 0 "C22" H 12375 9150 50  0000 L CNN
@@ -2339,7 +2270,7 @@ F 3 "" H 12350 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C20
+L sensenet_particlemeter-rescue:C C20
 U 1 1 5BA8F84E
 P 12150 9050
 F 0 "C20" H 12175 9150 50  0000 L CNN
@@ -2350,7 +2281,7 @@ F 3 "" H 12150 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR088
+L sensenet_particlemeter-rescue:GND #PWR088
 U 1 1 5BA8FA5B
 P 12450 10000
 F 0 "#PWR088" H 12450 9750 50  0001 C CNN
@@ -2361,7 +2292,7 @@ F 3 "" H 12450 10000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR089
+L sensenet_particlemeter-rescue:+3.3V #PWR089
 U 1 1 5BA8FB95
 P 11800 9250
 F 0 "#PWR089" H 11800 9100 50  0001 C CNN
@@ -2372,7 +2303,7 @@ F 3 "" H 11800 9250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR090
+L sensenet_particlemeter-rescue:GND #PWR090
 U 1 1 5BA90BC2
 P 11800 10000
 F 0 "#PWR090" H 11800 9750 50  0001 C CNN
@@ -2383,7 +2314,7 @@ F 3 "" H 11800 10000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR091
+L sensenet_particlemeter-rescue:GND #PWR091
 U 1 1 5BA90CFC
 P 9850 10000
 F 0 "#PWR091" H 9850 9750 50  0001 C CNN
@@ -2403,7 +2334,7 @@ NoConn ~ 10850 8800
 NoConn ~ 10950 8800
 NoConn ~ 11850 8800
 $Comp
-L GND #PWR092
+L sensenet_particlemeter-rescue:GND #PWR092
 U 1 1 5BA9403E
 P 11350 10000
 F 0 "#PWR092" H 11350 9750 50  0001 C CNN
@@ -2414,31 +2345,24 @@ F 3 "" H 11350 10000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	20350 1550 20700 1550
-Wire Wire Line
-	21000 1550 22600 1550
-Wire Wire Line
-	20500 2150 21500 2150
-Wire Wire Line
-	21200 1950 21200 2600
-Connection ~ 21200 2150
-Connection ~ 21200 1550
+	20950 1550 21050 1550
+Connection ~ 21050 1550
 Wire Wire Line
 	5100 5100 5100 5800
 Wire Wire Line
-	5250 5100 5250 5350
+	5250 5100 5250 5250
 Wire Wire Line
 	3150 5800 3150 5100
 Wire Wire Line
-	3300 5100 3300 5350
+	3300 5100 3300 5250
 Wire Wire Line
-	3000 1700 3000 1850
+	3000 1700 3000 1800
 Wire Wire Line
 	3150 1700 3150 1850
 Wire Wire Line
-	1300 3250 2500 3250
+	1300 3250 1600 3250
 Wire Wire Line
-	900  3350 900  3800
+	900  3350 900  3500
 Wire Wire Line
 	1600 3250 1600 3700
 Connection ~ 1600 3250
@@ -2447,7 +2371,7 @@ Wire Wire Line
 Wire Wire Line
 	5750 2650 6000 2650
 Wire Wire Line
-	1300 4100 1300 4200
+	1300 4100 1300 4150
 Wire Wire Line
 	1300 4150 2500 4150
 Wire Wire Line
@@ -2475,7 +2399,7 @@ Wire Wire Line
 	2800 1800 3000 1800
 Connection ~ 3000 1800
 Wire Wire Line
-	5750 2350 5950 2350
+	5750 2350 5850 2350
 Wire Wire Line
 	5850 2350 5850 2250
 Connection ~ 5850 2350
@@ -2484,7 +2408,7 @@ Wire Wire Line
 Wire Wire Line
 	5750 2500 6450 2500
 Wire Wire Line
-	22400 2550 22400 2400
+	22400 2600 22400 2400
 Wire Wire Line
 	22400 2100 22400 1900
 Wire Wire Line
@@ -2495,7 +2419,7 @@ Wire Wire Line
 Wire Wire Line
 	20100 10600 19650 10600
 Wire Wire Line
-	19650 10300 19650 10650
+	19650 10300 19650 10600
 Wire Wire Line
 	20050 10450 20100 10450
 Wire Wire Line
@@ -2506,18 +2430,18 @@ Wire Wire Line
 Wire Wire Line
 	20050 10750 20100 10750
 Wire Wire Line
-	21150 10600 21800 10600
+	21150 10600 21300 10600
 Wire Wire Line
 	21800 10300 21800 10250
 Wire Wire Line
-	21800 10250 22000 10250
+	21800 10250 21900 10250
 Wire Wire Line
 	22000 10250 22000 10450
 Wire Wire Line
 	21900 10200 21900 10250
 Connection ~ 21900 10250
 Wire Wire Line
-	21150 10750 22000 10750
+	21150 10750 21550 10750
 Wire Wire Line
 	21300 10600 21300 10950
 Connection ~ 21300 10600
@@ -2535,7 +2459,7 @@ Wire Wire Line
 Wire Wire Line
 	4350 1650 4350 1850
 Wire Wire Line
-	16600 10350 17150 10350
+	16600 10350 17100 10350
 Wire Wire Line
 	17100 10350 17100 10550
 Wire Wire Line
@@ -2554,7 +2478,7 @@ Wire Wire Line
 Wire Wire Line
 	4950 1650 4950 1850
 Wire Wire Line
-	10500 2650 10750 2650
+	10500 2650 10600 2650
 Wire Wire Line
 	10750 2650 10750 2800
 Wire Wire Line
@@ -2567,7 +2491,7 @@ Wire Wire Line
 Wire Wire Line
 	9850 3300 10100 3300
 Wire Wire Line
-	8950 3450 10100 3450
+	8950 3450 9500 3450
 Connection ~ 9500 3450
 Wire Wire Line
 	9500 3750 9500 3850
@@ -2603,7 +2527,6 @@ Wire Wire Line
 	2300 5150 3000 5150
 Wire Wire Line
 	3000 5150 3000 5100
-Connection ~ 20500 1550
 Wire Wire Line
 	20600 10000 20700 10000
 Wire Wire Line
@@ -2615,7 +2538,7 @@ Wire Wire Line
 Wire Wire Line
 	6150 9400 6200 9400
 Wire Wire Line
-	6200 9400 6200 9500
+	6200 9400 6200 9450
 Wire Wire Line
 	6200 9500 6150 9500
 Wire Wire Line
@@ -2624,7 +2547,7 @@ Connection ~ 6200 9450
 Wire Wire Line
 	6150 10000 6200 10000
 Wire Wire Line
-	6200 10000 6200 10700
+	6200 10000 6200 10100
 Wire Wire Line
 	6200 10350 6250 10350
 Wire Wire Line
@@ -2651,7 +2574,7 @@ Connection ~ 6200 10600
 Wire Wire Line
 	6150 11200 6200 11200
 Wire Wire Line
-	6200 11200 6200 11500
+	6200 11200 6200 11400
 Wire Wire Line
 	6200 11500 6150 11500
 Wire Wire Line
@@ -2661,49 +2584,42 @@ Wire Wire Line
 	6200 11450 6250 11450
 Connection ~ 6200 11450
 Wire Wire Line
-	6150 11300 6750 11300
+	6150 11300 6650 11300
 Connection ~ 6650 11300
 Wire Wire Line
 	6650 11600 6650 11650
 Wire Wire Line
 	7100 11650 7100 11600
 Wire Wire Line
-	7050 11300 7300 11300
+	7050 11300 7100 11300
 Connection ~ 7100 11300
 Wire Wire Line
 	7450 11100 7700 11100
 Wire Wire Line
-	7700 11100 7700 11650
+	7700 11100 7700 11350
 Connection ~ 7700 11350
-Wire Wire Line
-	2800 12450 2800 12400
-Wire Wire Line
-	2800 12400 2900 12400
-Wire Wire Line
-	3200 12250 3200 12650
-Connection ~ 3200 12400
 Wire Wire Line
 	3400 9050 3400 9000
 Wire Wire Line
-	3400 9000 3600 9000
+	3400 9000 3500 9000
 Wire Wire Line
-	3500 8950 3500 9050
+	3500 8950 3500 9000
 Connection ~ 3500 9000
 Wire Wire Line
 	3600 9000 3600 9050
 Wire Wire Line
 	4500 9050 4500 9000
 Wire Wire Line
-	4500 9000 4700 9000
+	4500 9000 4600 9000
 Wire Wire Line
 	4700 9000 4700 9050
 Wire Wire Line
-	4600 8950 4600 9050
+	4600 8950 4600 9000
 Connection ~ 4600 9000
 Wire Wire Line
 	5400 9050 5400 9000
 Wire Wire Line
-	5400 9000 5500 9000
+	5400 9000 5450 9000
 Wire Wire Line
 	5500 9000 5500 9050
 Wire Wire Line
@@ -2730,16 +2646,14 @@ Wire Wire Line
 Wire Wire Line
 	5100 12250 5100 12300
 Wire Wire Line
-	5100 12300 5200 12300
+	5100 12300 5150 12300
 Wire Wire Line
 	5200 12300 5200 12250
-Wire Wire Line
-	5150 12350 5150 12300
 Connection ~ 5150 12300
 Wire Wire Line
 	5300 12250 5300 12300
 Wire Wire Line
-	5300 12300 5400 12300
+	5300 12300 5350 12300
 Wire Wire Line
 	5400 12300 5400 12250
 Wire Wire Line
@@ -2779,30 +2693,30 @@ Wire Wire Line
 Wire Wire Line
 	13300 1950 13550 1950
 Wire Wire Line
-	13550 1950 13550 2600
+	13550 1950 13550 2200
 Connection ~ 13550 2200
 Wire Wire Line
 	16450 8600 16500 8600
 Wire Wire Line
 	3600 1650 3600 1850
 Wire Wire Line
-	4400 13450 5250 13450
+	4400 13450 4900 13450
 Wire Wire Line
-	4500 13250 5250 13250
+	4500 13250 4900 13250
 Wire Wire Line
-	4600 12950 5250 12950
+	4600 12950 4900 12950
 Wire Wire Line
-	4700 13050 5250 13050
+	4700 13050 4900 13050
 Wire Wire Line
-	4800 13350 5250 13350
+	4800 13350 4900 13350
 Wire Wire Line
 	2250 3400 2500 3400
 Wire Wire Line
 	1950 3550 2500 3550
 Wire Wire Line
-	3500 14000 4200 14000
+	3500 14000 3950 14000
 Wire Wire Line
-	10900 2150 12500 2150
+	10900 2150 12350 2150
 Wire Wire Line
 	10900 2800 10900 2150
 Wire Wire Line
@@ -2811,14 +2725,14 @@ Wire Wire Line
 	12350 2200 12350 2150
 Connection ~ 12350 2150
 Wire Wire Line
-	12800 2150 13150 2150
+	12800 2150 12950 2150
 Wire Wire Line
 	12950 2150 12950 2200
 Connection ~ 12950 2150
 Wire Wire Line
 	12950 2500 12950 2600
 Wire Wire Line
-	16050 8600 16150 8600
+	16050 8600 16100 8600
 Wire Wire Line
 	15100 7850 15300 7850
 Wire Wire Line
@@ -2833,7 +2747,7 @@ Wire Wire Line
 Wire Wire Line
 	16000 7750 16000 7400
 Wire Wire Line
-	15950 7400 16050 7400
+	15950 7400 16000 7400
 Connection ~ 16000 7400
 Wire Wire Line
 	16350 7400 16400 7400
@@ -2876,41 +2790,27 @@ Wire Wire Line
 Wire Wire Line
 	20650 7800 20700 7800
 Wire Wire Line
-	20500 1550 20500 1650
+	21300 2150 21300 1950
 Wire Wire Line
-	20500 1950 20500 2150
+	21300 1550 21300 1650
+Connection ~ 21300 1550
 Wire Wire Line
-	21500 2150 21500 1950
+	21050 1550 21050 1650
+Connection ~ 15550 1200
 Wire Wire Line
-	21500 1550 21500 1650
-Connection ~ 21500 1550
+	16200 1600 16200 1700
 Wire Wire Line
-	21200 1550 21200 1650
+	16500 1600 16500 1700
 Wire Wire Line
-	19900 2650 19900 2650
-Connection ~ 15700 1200
+	16200 1700 16100 1700
 Wire Wire Line
-	16150 1600 16100 1600
-Wire Wire Line
-	16100 1600 16100 1850
-Wire Wire Line
-	16100 1850 16150 1850
-Wire Wire Line
-	16450 1600 16500 1600
-Wire Wire Line
-	16500 1600 16500 1850
-Wire Wire Line
-	16500 1850 16450 1850
-Wire Wire Line
-	16100 1700 15950 1700
-Wire Wire Line
-	15950 1700 15950 1200
-Connection ~ 15950 1200
-Connection ~ 16100 1700
+	16100 1700 16100 1200
+Connection ~ 16100 1200
+Connection ~ 16200 1700
 Wire Wire Line
 	16500 1700 16650 1700
 Wire Wire Line
-	16650 1550 16650 2250
+	16650 1550 16650 1700
 Wire Wire Line
 	16650 1550 16700 1550
 Connection ~ 16500 1700
@@ -2921,25 +2821,20 @@ Wire Wire Line
 	16650 2250 16700 2250
 Connection ~ 16650 1900
 Wire Wire Line
-	15000 1300 15000 2600
-Connection ~ 15000 1400
+	15550 2600 15550 2000
 Wire Wire Line
-	15700 2600 15700 2000
-Wire Wire Line
-	15700 1150 15700 1700
+	15550 1100 15550 1200
 Wire Wire Line
 	18700 1200 18850 1200
 Wire Wire Line
 	18850 1200 18850 1250
 Wire Wire Line
-	18700 1550 19350 1550
+	18700 1550 19200 1550
 Connection ~ 19200 1550
 Wire Wire Line
-	19650 1550 20050 1550
+	19650 1550 19900 1550
 Wire Wire Line
-	19900 1850 19900 2000
-Wire Wire Line
-	18700 1900 19900 1900
+	19900 1850 19900 1900
 Connection ~ 19900 1900
 Wire Wire Line
 	19200 1850 19200 2600
@@ -2949,9 +2844,9 @@ Wire Wire Line
 	18900 2550 18900 2600
 Connection ~ 19900 1550
 Wire Wire Line
-	15000 1200 15200 1200
+	14800 1200 14850 1200
 Wire Wire Line
-	15500 1200 16700 1200
+	15500 1200 15550 1200
 Wire Wire Line
 	15650 10350 15750 10350
 Wire Wire Line
@@ -2963,7 +2858,7 @@ Wire Wire Line
 Wire Wire Line
 	21450 8750 21450 8650
 Wire Wire Line
-	21350 8200 21550 8200
+	21350 8200 21450 8200
 Wire Wire Line
 	21450 8200 21450 8350
 Connection ~ 21450 8200
@@ -2980,15 +2875,11 @@ Wire Wire Line
 Wire Wire Line
 	20150 7900 20050 7900
 Wire Notes Line
-	800  1100 800  7600
-Wire Notes Line
 	800  7600 8150 7600
 Wire Notes Line
 	8150 7600 8150 900 
 Wire Notes Line
 	8150 900  800  900 
-Wire Notes Line
-	800  900  800  1150
 Wire Notes Line
 	800  7800 8150 7800
 Wire Notes Line
@@ -3048,7 +2939,7 @@ Wire Notes Line
 Wire Notes Line
 	19000 11750 19000 9150
 Wire Wire Line
-	20800 5050 21450 5050
+	20800 5050 21150 5050
 Connection ~ 21150 5050
 Wire Wire Line
 	22300 5850 22300 5300
@@ -3068,13 +2959,13 @@ Wire Wire Line
 Wire Wire Line
 	16250 4500 16200 4500
 Wire Wire Line
-	16200 4500 16200 4750
+	16200 4500 16200 4600
 Wire Wire Line
 	16200 4750 16250 4750
 Wire Wire Line
 	16550 4500 16600 4500
 Wire Wire Line
-	16600 4500 16600 4750
+	16600 4500 16600 4600
 Wire Wire Line
 	16600 4750 16550 4750
 Wire Wire Line
@@ -3086,7 +2977,7 @@ Connection ~ 16200 4600
 Wire Wire Line
 	16600 4600 16750 4600
 Wire Wire Line
-	16750 4450 16750 5150
+	16750 4450 16750 4600
 Wire Wire Line
 	16750 4450 16800 4450
 Connection ~ 16600 4600
@@ -3101,12 +2992,12 @@ Wire Wire Line
 Wire Wire Line
 	18950 4100 18950 4150
 Wire Wire Line
-	18800 4450 19550 4450
+	18800 4450 19300 4450
 Connection ~ 19300 4450
 Wire Wire Line
-	19850 4450 20350 4450
+	19850 4450 20150 4450
 Wire Wire Line
-	20150 4750 20150 4900
+	20150 4750 20150 4800
 Wire Wire Line
 	18800 4800 20150 4800
 Connection ~ 20150 4800
@@ -3118,13 +3009,13 @@ Wire Wire Line
 	19000 5450 19000 5500
 Connection ~ 20150 4450
 Wire Wire Line
-	15600 4100 16800 4100
+	15600 4100 16050 4100
 Wire Wire Line
 	19900 2350 19900 2300
 Wire Wire Line
 	20150 5250 20150 5200
 Wire Wire Line
-	21250 4450 22500 4450
+	21250 4450 21450 4450
 Wire Notes Line
 	14200 3700 22700 3700
 Wire Notes Line
@@ -3156,7 +3047,7 @@ Wire Wire Line
 Wire Wire Line
 	4800 5100 4800 6900
 Wire Wire Line
-	5500 6550 5500 7050
+	5500 6550 5500 6700
 Wire Wire Line
 	4200 5750 4200 5850
 Wire Wire Line
@@ -3218,10 +3109,10 @@ Wire Wire Line
 Wire Wire Line
 	17550 8550 17750 8550
 Wire Wire Line
-	21900 1550 21900 1900
-Connection ~ 21900 1550
+	22150 1550 22150 1900
+Connection ~ 22150 1550
 Wire Wire Line
-	21900 2200 21900 2600
+	22150 2200 22150 2600
 Wire Wire Line
 	21450 5050 21450 4850
 Wire Wire Line
@@ -3232,7 +3123,7 @@ Connection ~ 21950 4450
 Wire Wire Line
 	21950 5850 21950 5300
 Wire Wire Line
-	20650 4450 20950 4450
+	20650 4450 20800 4450
 Wire Wire Line
 	21150 5050 21150 5850
 Wire Wire Line
@@ -3254,7 +3145,7 @@ Wire Wire Line
 Wire Wire Line
 	20650 6900 20750 6900
 Wire Wire Line
-	4650 1650 4650 1850
+	4650 1650 4650 1800
 Wire Wire Line
 	4800 1250 4800 1350
 Wire Wire Line
@@ -3271,7 +3162,7 @@ Wire Wire Line
 Wire Wire Line
 	9850 9200 9850 8800
 Wire Wire Line
-	9850 9500 9850 10000
+	9850 9500 9850 9800
 Wire Wire Line
 	9950 8800 9950 8950
 Wire Wire Line
@@ -3283,9 +3174,9 @@ Wire Wire Line
 Connection ~ 9850 9800
 Connection ~ 9650 9800
 Wire Wire Line
-	11350 8800 11350 10000
+	11350 8800 11350 8950
 Wire Wire Line
-	11350 8950 11750 8950
+	11350 8950 11450 8950
 Wire Wire Line
 	11450 8950 11450 8800
 Connection ~ 11350 8950
@@ -3296,19 +3187,19 @@ Wire Wire Line
 	11750 8950 11750 8800
 Connection ~ 11550 8950
 Wire Wire Line
-	11650 8800 11650 9400
+	11650 8800 11650 9300
 Wire Wire Line
-	11650 9300 11950 9300
+	11650 9300 11800 9300
 Wire Wire Line
 	11800 9300 11800 9250
 Wire Wire Line
-	11950 8800 11950 9400
+	11950 8800 11950 9300
 Connection ~ 11800 9300
 Connection ~ 11650 9300
 Wire Wire Line
 	11650 9700 11650 9800
 Wire Wire Line
-	11650 9800 11950 9800
+	11650 9800 11800 9800
 Wire Wire Line
 	11950 9800 11950 9700
 Wire Wire Line
@@ -3366,7 +3257,7 @@ Wire Wire Line
 Wire Wire Line
 	3750 5250 3750 5100
 $Comp
-L LOGO LOGO1
+L sensenet_particlemeter-rescue:LOGO LOGO1
 U 1 1 5BA9EC4C
 P 21850 14150
 F 0 "LOGO1" H 21850 14350 60  0000 C CNN
@@ -3391,11 +3282,11 @@ Wire Wire Line
 Wire Wire Line
 	9650 9700 9650 9800
 Wire Wire Line
-	9200 9800 10100 9800
+	9200 9800 9650 9800
 Wire Wire Line
 	9650 9050 9650 8800
 $Comp
-L C C24
+L sensenet_particlemeter-rescue:C C24
 U 1 1 5BD086E0
 P 9600 9350
 F 0 "C24" H 9625 9450 50  0000 L CNN
@@ -3419,7 +3310,7 @@ Wire Wire Line
 	9750 9600 9750 9800
 Connection ~ 9750 9800
 $Comp
-L Conn_01x01 J7
+L sensenet_particlemeter-rescue:Conn_01x01 J7
 U 1 1 5BD0A84C
 P 9700 10800
 F 0 "J7" V 9700 10700 50  0000 C CNN
@@ -3430,7 +3321,7 @@ F 3 "" H 9700 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J8
+L sensenet_particlemeter-rescue:Conn_01x01 J8
 U 1 1 5BD0BD5A
 P 9950 10800
 F 0 "J8" V 9950 10700 50  0000 C CNN
@@ -3441,7 +3332,7 @@ F 3 "" H 9950 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J9
+L sensenet_particlemeter-rescue:Conn_01x01 J9
 U 1 1 5BD0BEAB
 P 10200 10800
 F 0 "J9" V 10200 10700 50  0000 C CNN
@@ -3452,7 +3343,7 @@ F 3 "" H 10200 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J10
+L sensenet_particlemeter-rescue:Conn_01x01 J10
 U 1 1 5BD0BFFF
 P 10450 10800
 F 0 "J10" V 10450 10700 50  0000 C CNN
@@ -3463,7 +3354,7 @@ F 3 "" H 10450 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J12
+L sensenet_particlemeter-rescue:Conn_01x01 J12
 U 1 1 5BD0C156
 P 10700 10800
 F 0 "J12" V 10700 10700 50  0000 C CNN
@@ -3474,7 +3365,7 @@ F 3 "" H 10700 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J14
+L sensenet_particlemeter-rescue:Conn_01x01 J14
 U 1 1 5BD0C2BC
 P 10950 10800
 F 0 "J14" V 10950 10700 50  0000 C CNN
@@ -3485,7 +3376,7 @@ F 3 "" H 10950 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Conn_01x01 J15
+L sensenet_particlemeter-rescue:Conn_01x01 J15
 U 1 1 5BD0C419
 P 11200 10800
 F 0 "J15" V 11200 10700 50  0000 C CNN
@@ -3496,7 +3387,7 @@ F 3 "" H 11200 10800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR093
+L sensenet_particlemeter-rescue:GND #PWR093
 U 1 1 5BD0C6C7
 P 11200 11150
 F 0 "#PWR093" H 11200 10900 50  0001 C CNN
@@ -3507,7 +3398,7 @@ F 3 "" H 11200 11150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR094
+L sensenet_particlemeter-rescue:+5V #PWR094
 U 1 1 5BD0D1A9
 P 10950 11150
 F 0 "#PWR094" H 10950 11000 50  0001 C CNN
@@ -3541,6 +3432,358 @@ Wire Wire Line
 	10950 11000 10950 11150
 Wire Wire Line
 	11200 11000 11200 11150
-Text Notes 14800 1000 0    60   ~ 0
+Text Notes 14650 1000 0    60   ~ 0
 PMEG4010EH,115
+Wire Wire Line
+	21050 1550 21300 1550
+Wire Wire Line
+	1600 3250 2500 3250
+Wire Wire Line
+	3300 5250 3300 5350
+Wire Wire Line
+	1300 4150 1300 4200
+Wire Wire Line
+	5250 5250 5250 5350
+Wire Wire Line
+	3000 1800 3000 1850
+Wire Wire Line
+	5850 2350 5950 2350
+Wire Wire Line
+	22400 1550 22600 1550
+Wire Wire Line
+	19650 10600 19650 10650
+Wire Wire Line
+	21900 10250 22000 10250
+Wire Wire Line
+	21300 10600 21800 10600
+Wire Wire Line
+	21550 10750 22000 10750
+Wire Wire Line
+	17100 10350 17150 10350
+Wire Wire Line
+	10600 2650 10750 2650
+Wire Wire Line
+	9500 3450 9850 3450
+Wire Wire Line
+	6200 9450 6200 9500
+Wire Wire Line
+	6200 10100 6200 10200
+Wire Wire Line
+	6200 10200 6200 10300
+Wire Wire Line
+	6200 10300 6200 10350
+Wire Wire Line
+	6200 10350 6200 10400
+Wire Wire Line
+	6200 10400 6200 10500
+Wire Wire Line
+	6200 10500 6200 10600
+Wire Wire Line
+	6200 10600 6200 10700
+Wire Wire Line
+	6200 11400 6200 11450
+Wire Wire Line
+	6200 11450 6200 11500
+Wire Wire Line
+	6650 11300 6750 11300
+Wire Wire Line
+	7100 11300 7300 11300
+Wire Wire Line
+	7700 11350 7700 11650
+Wire Wire Line
+	3500 9000 3600 9000
+Wire Wire Line
+	3500 9000 3500 9050
+Wire Wire Line
+	4600 9000 4700 9000
+Wire Wire Line
+	4600 9000 4600 9050
+Wire Wire Line
+	5450 9000 5500 9000
+Wire Wire Line
+	5150 12300 5200 12300
+Wire Wire Line
+	5350 12300 5400 12300
+Wire Wire Line
+	3950 14000 4200 14000
+Wire Wire Line
+	13550 2200 13550 2600
+Wire Wire Line
+	12350 2150 12500 2150
+Wire Wire Line
+	12950 2150 13150 2150
+Wire Wire Line
+	16100 8600 16150 8600
+Wire Wire Line
+	16000 7400 16050 7400
+Wire Wire Line
+	21300 1550 21600 1550
+Wire Wire Line
+	15550 1200 15550 1700
+Wire Wire Line
+	15550 1200 15900 1200
+Wire Wire Line
+	16100 1200 16700 1200
+Wire Wire Line
+	16200 1700 16200 1850
+Wire Wire Line
+	16500 1700 16500 1850
+Wire Wire Line
+	16650 1700 16650 1900
+Wire Wire Line
+	16650 1900 16650 2250
+Wire Wire Line
+	19200 1550 19350 1550
+Wire Wire Line
+	19900 1900 19900 2000
+Wire Wire Line
+	19900 1550 19950 1550
+Wire Wire Line
+	21450 8200 21550 8200
+Wire Wire Line
+	21150 5050 21450 5050
+Wire Wire Line
+	22300 4450 22500 4450
+Wire Wire Line
+	20800 4450 20950 4450
+Wire Wire Line
+	21450 4450 21950 4450
+Wire Wire Line
+	16050 4100 16800 4100
+Wire Wire Line
+	16200 4600 16200 4750
+Wire Wire Line
+	16600 4600 16600 4750
+Wire Wire Line
+	16750 4600 16750 4800
+Wire Wire Line
+	16750 4800 16750 5150
+Wire Wire Line
+	19300 4450 19550 4450
+Wire Wire Line
+	20150 4800 20150 4900
+Wire Wire Line
+	20150 4450 20350 4450
+Wire Wire Line
+	900  3500 900  3700
+Wire Wire Line
+	900  3700 900  3800
+Wire Wire Line
+	5500 6900 5500 7050
+Wire Wire Line
+	5500 6700 5500 6900
+Wire Wire Line
+	22150 1550 22400 1550
+Wire Wire Line
+	21950 4450 22300 4450
+Wire Wire Line
+	4650 1800 4650 1850
+Wire Wire Line
+	9850 9800 9850 10000
+Wire Wire Line
+	9850 9800 10100 9800
+Wire Wire Line
+	9650 9800 9750 9800
+Wire Wire Line
+	11350 8950 11350 10000
+Wire Wire Line
+	11450 8950 11550 8950
+Wire Wire Line
+	11550 8950 11750 8950
+Wire Wire Line
+	11800 9300 11950 9300
+Wire Wire Line
+	11650 9300 11650 9400
+Wire Wire Line
+	11800 9800 11950 9800
+Wire Wire Line
+	11950 9300 11950 9400
+Wire Wire Line
+	9750 9800 9850 9800
+Wire Notes Line
+	800  900  800  7600
+$Comp
+L sensenet_particlemeter-rescue:L L9
+U 1 1 5C587828
+P 15350 1200
+F 0 "L9" V 15300 1200 50  0000 C CNN
+F 1 "39uH" V 15425 1200 50  0000 C CNN
+F 2 "Inductor_SMD:L_Taiyo-Yuden_NR-50xx" H 15350 1200 50  0001 C CNN
+F 3 "" H 15350 1200 50  0001 C CNN
+	1    15350 1200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	15150 1200 15200 1200
+$Comp
+L sensenet_particlemeter-rescue:C C17
+U 1 1 5C619B52
+P 20300 1800
+F 0 "C17" H 20325 1900 50  0000 L CNN
+F 1 "100n" H 20325 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20338 1650 50  0001 C CNN
+F 3 "" H 20300 1800 50  0001 C CNN
+	1    20300 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20250 1550 20300 1550
+$Comp
+L sensenet_particlemeter-rescue:C C26
+U 1 1 5C721A42
+P 20550 1800
+F 0 "C26" H 20575 1900 50  0000 L CNN
+F 1 "1n" H 20575 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20588 1650 50  0001 C CNN
+F 3 "" H 20550 1800 50  0001 C CNN
+	1    20550 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C28
+U 1 1 5C721D76
+P 21850 1800
+F 0 "C28" H 21875 1900 50  0000 L CNN
+F 1 "22p" H 21875 1700 50  0000 L CIN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21888 1650 50  0001 C CNN
+F 3 "" H 21850 1800 50  0001 C CNN
+	1    21850 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20300 1650 20300 1550
+Connection ~ 20300 1550
+Wire Wire Line
+	20300 1550 20550 1550
+Wire Wire Line
+	20550 1650 20550 1550
+Connection ~ 20550 1550
+Wire Wire Line
+	20300 1950 20300 2150
+Wire Wire Line
+	20300 2150 20550 2150
+Wire Wire Line
+	20550 1950 20550 2150
+Connection ~ 20550 2150
+$Comp
+L sensenet_particlemeter-rescue:C C27
+U 1 1 5C9FFFFF
+P 21600 1800
+F 0 "C27" H 21625 1900 50  0000 L CNN
+F 1 "1n" H 21625 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21638 1650 50  0001 C CNN
+F 3 "" H 21600 1800 50  0001 C CNN
+	1    21600 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20550 1550 20650 1550
+Wire Wire Line
+	20550 2150 20850 2150
+Wire Wire Line
+	21600 1950 21600 2150
+Wire Wire Line
+	21600 2150 21300 2150
+Connection ~ 21300 2150
+Wire Wire Line
+	21050 1950 21050 2150
+Connection ~ 21050 2150
+Wire Wire Line
+	21050 2150 21300 2150
+Wire Wire Line
+	21600 1650 21600 1550
+Connection ~ 21600 1550
+Wire Wire Line
+	21600 1550 21850 1550
+Wire Wire Line
+	21600 2150 21850 2150
+Wire Wire Line
+	21850 2150 21850 1950
+Connection ~ 21600 2150
+Wire Wire Line
+	21850 1650 21850 1550
+Connection ~ 21850 1550
+Wire Wire Line
+	21850 1550 22150 1550
+Wire Wire Line
+	20850 2550 20850 2150
+Connection ~ 20850 2150
+Wire Wire Line
+	20850 2150 21050 2150
+Text GLabel 4350 5200 3    39   Input ~ 0
+5V_enable
+Wire Wire Line
+	4350 5200 4350 5100
+Wire Wire Line
+	5150 12600 6100 12600
+Wire Wire Line
+	5150 12300 5150 12600
+Wire Wire Line
+	6100 12500 6100 12600
+Connection ~ 6100 12600
+Wire Wire Line
+	6100 12950 6100 12900
+NoConn ~ 3200 12250
+Wire Wire Line
+	9850 3450 9850 3600
+Wire Wire Line
+	9850 3600 10100 3600
+Connection ~ 9850 3450
+Wire Wire Line
+	9850 3450 10100 3450
+$Comp
+L Device:R R30
+U 1 1 5D1F8D28
+P 12650 2150
+F 0 "R30" V 12443 2150 50  0000 C CNN
+F 1 "0R" V 12534 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 12580 2150 50  0001 C CNN
+F 3 "~" H 12650 2150 50  0001 C CNN
+	1    12650 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C13
+U 1 1 5C91E67F
+P 15900 1850
+F 0 "C13" H 15925 1950 50  0000 L CNN
+F 1 "100n" H 15925 1750 50  0000 L CNN
+F 2 "SNPM:SMD_0805" H 15938 1700 50  0001 C CNN
+F 3 "" H 15900 1850 50  0001 C CNN
+	1    15900 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0102
+U 1 1 5C91EC08
+P 15900 2600
+F 0 "#PWR0102" H 15900 2350 50  0001 C CNN
+F 1 "GND" H 15900 2450 50  0000 C CNN
+F 2 "" H 15900 2600 50  0001 C CNN
+F 3 "" H 15900 2600 50  0001 C CNN
+	1    15900 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15900 1700 15900 1200
+Connection ~ 15900 1200
+Wire Wire Line
+	15900 1200 16100 1200
+Wire Wire Line
+	15900 2000 15900 2600
+Wire Wire Line
+	18700 1900 19900 1900
+$Comp
+L Connector:Conn_01x02_Female J?
+U 1 1 5C6AC441
+P 14600 1300
+F 0 "J?" H 14494 975 50  0000 C CNN
+F 1 "Conn_01x02_Female" V 14700 1400 50  0000 C CNN
+F 2 "" H 14600 1300 50  0001 C CNN
+F 3 "~" H 14600 1300 50  0001 C CNN
+	1    14600 1300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	14800 1300 14800 2600
 $EndSCHEMATC
