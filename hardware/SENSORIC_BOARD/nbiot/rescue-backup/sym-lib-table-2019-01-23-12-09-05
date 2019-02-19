@@ -1,4 +1,0 @@
-(sym_lib_table
-  (lib (name sensenet_particlemeter-rescue)(type Legacy)(uri ${KIPRJMOD}/sensenet_particlemeter-rescue.lib)(options "")(descr ""))
-  (lib (name sensenet_particlemeter)(type Legacy)(uri ${KIPRJMOD}/sensenet_particlemeter.lib)(options "")(descr ""))
-)

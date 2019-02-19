@@ -1,0 +1,3307 @@
+EESchema Schematic File Version 4
+LIBS:sensenet_particlemeter-cache
+EELAYER 26 0
+EELAYER END
+$Descr A2 23386 16535
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "2018-07-13"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L sensenet_particlemeter-rescue:stm32f072 U2
+U 1 1 5995C231
+P 3950 3550
+F 0 "U2" H 5100 2600 60  0000 C CNN
+F 1 "stm32f072" H 4800 4600 60  0000 C CNN
+F 2 "SNPM:TQFP-64_10x10mm_Pitch0.5mm" H 3500 3350 60  0001 C CNN
+F 3 "" H 3500 3350 60  0001 C CNN
+	1    3950 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+5V #PWR01
+U 1 1 5995C3C8
+P 22600 1500
+F 0 "#PWR01" H 22600 1350 50  0001 C CNN
+F 1 "+5V" H 22600 1640 50  0000 C CNN
+F 2 "" H 22600 1500 50  0001 C CNN
+F 3 "" H 22600 1500 50  0001 C CNN
+	1    22600 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:CP C19
+U 1 1 5995C4F5
+P 15850 2200
+F 0 "C19" H 15875 2300 50  0000 L CNN
+F 1 "470u" H 15875 2100 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 15888 2050 50  0001 C CNN
+F 3 "" H 15850 2200 50  0001 C CNN
+	1    15850 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR02
+U 1 1 5995CBFF
+P 20850 2950
+F 0 "#PWR02" H 20850 2700 50  0001 C CNN
+F 1 "GND" H 20850 2800 50  0000 C CNN
+F 2 "" H 20850 2950 50  0001 C CNN
+F 3 "" H 20850 2950 50  0001 C CNN
+	1    20850 2950
+	1    0    0    -1  
+$EndComp
+Text GLabel 2900 13800 0    39   Input ~ 0
+Rx
+Text GLabel 2850 13050 0    39   Input ~ 0
+Tx
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR03
+U 1 1 599AEC9A
+P 5250 5350
+F 0 "#PWR03" H 5250 5200 50  0001 C CNN
+F 1 "+3.3V" V 5250 5600 50  0000 C CNN
+F 2 "" H 5250 5350 50  0001 C CNN
+F 3 "" H 5250 5350 50  0001 C CNN
+	1    5250 5350
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR04
+U 1 1 599AEF9B
+P 5100 5800
+F 0 "#PWR04" H 5100 5550 50  0001 C CNN
+F 1 "GND" V 5000 5750 50  0000 C CNN
+F 2 "" H 5100 5800 50  0001 C CNN
+F 3 "" H 5100 5800 50  0001 C CNN
+	1    5100 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR05
+U 1 1 599AF28A
+P 3300 5350
+F 0 "#PWR05" H 3300 5200 50  0001 C CNN
+F 1 "+3.3V" V 3300 5600 50  0000 C CNN
+F 2 "" H 3300 5350 50  0001 C CNN
+F 3 "" H 3300 5350 50  0001 C CNN
+	1    3300 5350
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR06
+U 1 1 599AF290
+P 3150 5800
+F 0 "#PWR06" H 3150 5550 50  0001 C CNN
+F 1 "GND" V 3050 5750 50  0000 C CNN
+F 2 "" H 3150 5800 50  0001 C CNN
+F 3 "" H 3150 5800 50  0001 C CNN
+	1    3150 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR07
+U 1 1 599AFECC
+P 3150 1700
+F 0 "#PWR07" H 3150 1450 50  0001 C CNN
+F 1 "GND" V 3150 1500 50  0000 C CNN
+F 2 "" H 3150 1700 50  0001 C CNN
+F 3 "" H 3150 1700 50  0001 C CNN
+	1    3150 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR08
+U 1 1 599AFF13
+P 3000 1700
+F 0 "#PWR08" H 3000 1550 50  0001 C CNN
+F 1 "+3.3V" V 3000 1950 50  0000 C CNN
+F 2 "" H 3000 1700 50  0001 C CNN
+F 3 "" H 3000 1700 50  0001 C CNN
+	1    3000 1700
+	1    0    0    -1  
+$EndComp
+Text GLabel 5250 1650 1    39   Input ~ 0
+SWD_CLK
+Text GLabel 6000 2650 2    39   Input ~ 0
+SWD_DIO
+Text GLabel 1300 3250 0    39   Input ~ 0
+reset
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR09
+U 1 1 599B11C0
+P 900 3800
+F 0 "#PWR09" H 900 3550 50  0001 C CNN
+F 1 "GND" H 900 3650 50  0000 C CNN
+F 2 "" H 900 3800 50  0001 C CNN
+F 3 "" H 900 3800 50  0001 C CNN
+	1    900  3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR010
+U 1 1 599C72DB
+P 1300 4100
+F 0 "#PWR010" H 1300 3950 50  0001 C CNN
+F 1 "+3.3V" H 1150 4250 50  0000 C CNN
+F 2 "" H 1300 4100 50  0001 C CNN
+F 3 "" H 1300 4100 50  0001 C CNN
+	1    1300 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C6
+U 1 1 599C78CF
+P 3450 5550
+F 0 "C6" H 3475 5650 50  0000 L CNN
+F 1 "C" H 3475 5450 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3488 5400 50  0001 C CNN
+F 3 "" H 3450 5550 50  0001 C CNN
+	1    3450 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR011
+U 1 1 599C7B48
+P 3450 5800
+F 0 "#PWR011" H 3450 5550 50  0001 C CNN
+F 1 "GND" V 3350 5750 50  0000 C CNN
+F 2 "" H 3450 5800 50  0001 C CNN
+F 3 "" H 3450 5800 50  0001 C CNN
+	1    3450 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C4
+U 1 1 599C7DDB
+P 1300 4350
+F 0 "C4" H 1325 4450 50  0000 L CNN
+F 1 "C" H 1325 4250 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 1338 4200 50  0001 C CNN
+F 3 "" H 1300 4350 50  0001 C CNN
+	1    1300 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR012
+U 1 1 599C7F69
+P 1300 4550
+F 0 "#PWR012" H 1300 4300 50  0001 C CNN
+F 1 "GND" V 1200 4500 50  0000 C CNN
+F 2 "" H 1300 4550 50  0001 C CNN
+F 3 "" H 1300 4550 50  0001 C CNN
+	1    1300 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C8
+U 1 1 599C92C8
+P 5450 5550
+F 0 "C8" H 5475 5650 50  0000 L CNN
+F 1 "C" H 5475 5450 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5488 5400 50  0001 C CNN
+F 3 "" H 5450 5550 50  0001 C CNN
+	1    5450 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR013
+U 1 1 599C9493
+P 5450 5800
+F 0 "#PWR013" H 5450 5550 50  0001 C CNN
+F 1 "GND" V 5350 5750 50  0000 C CNN
+F 2 "" H 5450 5800 50  0001 C CNN
+F 3 "" H 5450 5800 50  0001 C CNN
+	1    5450 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C5
+U 1 1 599C9CBD
+P 2800 1600
+F 0 "C5" H 2825 1700 50  0000 L CNN
+F 1 "100n" H 2825 1500 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2838 1450 50  0001 C CNN
+F 3 "" H 2800 1600 50  0001 C CNN
+	1    2800 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR014
+U 1 1 599CA459
+P 2800 1400
+F 0 "#PWR014" H 2800 1150 50  0001 C CNN
+F 1 "GND" V 2800 1200 50  0000 C CNN
+F 2 "" H 2800 1400 50  0001 C CNN
+F 3 "" H 2800 1400 50  0001 C CNN
+	1    2800 1400
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR015
+U 1 1 599CABE6
+P 5850 2250
+F 0 "#PWR015" H 5850 2100 50  0001 C CNN
+F 1 "+3.3V" V 5850 2500 50  0000 C CNN
+F 2 "" H 5850 2250 50  0001 C CNN
+F 3 "" H 5850 2250 50  0001 C CNN
+	1    5850 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C9
+U 1 1 599CAC69
+P 6100 2350
+F 0 "C9" H 6125 2450 50  0000 L CNN
+F 1 "C" H 6125 2250 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6138 2200 50  0001 C CNN
+F 3 "" H 6100 2350 50  0001 C CNN
+	1    6100 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR016
+U 1 1 599CAD78
+P 6450 2350
+F 0 "#PWR016" H 6450 2100 50  0001 C CNN
+F 1 "GND" V 6450 2150 50  0000 C CNN
+F 2 "" H 6450 2350 50  0001 C CNN
+F 3 "" H 6450 2350 50  0001 C CNN
+	1    6450 2350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR017
+U 1 1 599CAE79
+P 6450 2500
+F 0 "#PWR017" H 6450 2250 50  0001 C CNN
+F 1 "GND" V 6450 2300 50  0000 C CNN
+F 2 "" H 6450 2500 50  0001 C CNN
+F 3 "" H 6450 2500 50  0001 C CNN
+	1    6450 2500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C23
+U 1 1 599CFB46
+P 20250 4750
+F 0 "C23" H 20275 4850 50  0000 L CNN
+F 1 "100n" H 20275 4650 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20288 4600 50  0001 C CNN
+F 3 "" H 20250 4750 50  0001 C CNN
+	1    20250 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C25
+U 1 1 599CFEB7
+P 21300 1800
+F 0 "C25" H 21325 1900 50  0000 L CNN
+F 1 "100n" H 21325 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21338 1650 50  0001 C CNN
+F 3 "" H 21300 1800 50  0001 C CNN
+	1    21300 1800
+	1    0    0    -1  
+$EndComp
+Text GLabel 6050 4300 2    39   Input ~ 0
+i2c_sda
+Text GLabel 6050 4450 2    39   Input ~ 0
+i2c_scl
+Text GLabel 4500 1650 1    39   Input ~ 0
+PM_SS
+Text GLabel 4200 1650 1    39   Input ~ 0
+PM_SDO
+Text GLabel 4050 1650 1    39   Input ~ 0
+PM_SDI
+Text GLabel 4350 1650 1    39   Input ~ 0
+PM_SCK
+Text GLabel 4650 1650 1    39   Input ~ 0
+WIRELESS_reset
+$Comp
+L sensenet_particlemeter-rescue:D_Schottky D3
+U 1 1 599FBD8A
+P 15300 1550
+F 0 "D3" H 15300 1650 50  0000 C CNN
+F 1 "D_Schottky_ss14" H 15350 1400 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 15300 1550 50  0001 C CNN
+F 3 "" H 15300 1550 50  0001 C CNN
+	1    15300 1550
+	-1   0    0    1   
+$EndComp
+NoConn ~ 3450 5100
+NoConn ~ 4950 5100
+NoConn ~ 5750 3250
+NoConn ~ 5100 1850
+NoConn ~ 5750 3400
+NoConn ~ 5750 3700
+NoConn ~ 5750 3850
+NoConn ~ 5750 4000
+NoConn ~ 5750 4150
+NoConn ~ 5750 4600
+Text GLabel 4950 1650 1    39   Input ~ 0
+Tx
+Text GLabel 4800 1650 1    39   Input ~ 0
+Rx
+$Comp
+L sensenet_particlemeter-rescue:M10578-A2 U7
+U 1 1 59A56606
+P 11250 3250
+F 0 "U7" H 11250 3600 60  0000 C CNN
+F 1 "M10578-A2" H 11400 2450 60  0000 C CNN
+F 2 "SNPM:M10578" H 11250 3250 60  0001 C CNN
+F 3 "" H 11250 3250 60  0001 C CNN
+	1    11250 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C14
+U 1 1 59A56B77
+P 9500 3600
+F 0 "C14" H 9525 3700 50  0000 L CNN
+F 1 "2,2u" H 9525 3500 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 9538 3450 50  0001 C CNN
+F 3 "" H 9500 3600 50  0001 C CNN
+	1    9500 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:LED D2
+U 1 1 59A590EB
+P 9900 4550
+F 0 "D2" H 9900 4650 50  0000 C CNN
+F 1 "LED" H 9900 4450 50  0000 C CNN
+F 2 "SNPM:SMD_0805_bottom" H 9900 4550 50  0001 C CNN
+F 3 "" H 9900 4550 50  0001 C CNN
+	1    9900 4550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R1
+U 1 1 59A599E5
+P 9900 4200
+F 0 "R1" V 9980 4200 50  0000 C CNN
+F 1 "R" V 9900 4200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 9830 4200 50  0001 C CNN
+F 3 "" H 9900 4200 50  0001 C CNN
+	1    9900 4200
+	1    0    0    -1  
+$EndComp
+NoConn ~ 10600 4150
+NoConn ~ 10750 4150
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR031
+U 1 1 59A5D33C
+P 11150 2650
+F 0 "#PWR031" H 11150 2400 50  0001 C CNN
+F 1 "GND" H 11150 2500 50  0000 C CNN
+F 2 "" H 11150 2650 50  0001 C CNN
+F 3 "" H 11150 2650 50  0001 C CNN
+	1    11150 2650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR032
+U 1 1 59A5D7F7
+P 10500 2650
+F 0 "#PWR032" H 10500 2400 50  0001 C CNN
+F 1 "GND" H 10500 2500 50  0000 C CNN
+F 2 "" H 10500 2650 50  0001 C CNN
+F 3 "" H 10500 2650 50  0001 C CNN
+	1    10500 2650
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR033
+U 1 1 59A5DA82
+P 9850 3300
+F 0 "#PWR033" H 9850 3050 50  0001 C CNN
+F 1 "GND" H 9850 3150 50  0000 C CNN
+F 2 "" H 9850 3300 50  0001 C CNN
+F 3 "" H 9850 3300 50  0001 C CNN
+	1    9850 3300
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR034
+U 1 1 59A5DDD4
+P 9500 3850
+F 0 "#PWR034" H 9500 3600 50  0001 C CNN
+F 1 "GND" H 9500 3700 50  0000 C CNN
+F 2 "" H 9500 3850 50  0001 C CNN
+F 3 "" H 9500 3850 50  0001 C CNN
+	1    9500 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR035
+U 1 1 59A5E256
+P 9900 4800
+F 0 "#PWR035" H 9900 4550 50  0001 C CNN
+F 1 "GND" H 9900 4650 50  0000 C CNN
+F 2 "" H 9900 4800 50  0001 C CNN
+F 3 "" H 9900 4800 50  0001 C CNN
+	1    9900 4800
+	1    0    0    -1  
+$EndComp
+Text GLabel 12650 3600 2    39   Input ~ 0
+gps_reset
+Text GLabel 12650 3750 2    39   Input ~ 0
+gps_standby
+Text GLabel 12650 3450 2    39   Input ~ 0
+gps_pulses
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR036
+U 1 1 59A615F6
+P 8950 3450
+F 0 "#PWR036" H 8950 3300 50  0001 C CNN
+F 1 "+3.3V" H 8950 3590 50  0000 C CNN
+F 2 "" H 8950 3450 50  0001 C CNN
+F 3 "" H 8950 3450 50  0001 C CNN
+	1    8950 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR037
+U 1 1 59A65589
+P 11700 3300
+F 0 "#PWR037" H 11700 3050 50  0001 C CNN
+F 1 "GND" H 11700 3150 50  0000 C CNN
+F 2 "" H 11700 3300 50  0001 C CNN
+F 3 "" H 11700 3300 50  0001 C CNN
+	1    11700 3300
+	0    -1   -1   0   
+$EndComp
+Text GLabel 10100 4050 3    39   Input ~ 0
+gps_fix
+Text GLabel 2350 3850 0    39   Input ~ 0
+gps_reset
+Text GLabel 2350 4300 0    39   Input ~ 0
+gps_standby
+Text GLabel 2350 3700 0    39   Input ~ 0
+gps_pulses
+Text GLabel 2350 4450 0    39   Input ~ 0
+gps_fix
+Text GLabel 2300 5000 0    39   Input ~ 0
+UART_GPS_TX
+Text GLabel 2300 5150 0    39   Input ~ 0
+UART_GPS_RX
+Text GLabel 11050 4350 3    39   Input ~ 0
+UART_GPS_TX
+Text GLabel 10900 4350 3    39   Input ~ 0
+UART_GPS_RX
+$Comp
+L sensenet_particlemeter-rescue:QUECTEL_BC95 U3
+U 1 1 59B06CC9
+P 4400 10650
+F 0 "U3" H 5850 12150 60  0000 C CNN
+F 1 "QUECTEL_BC95" H 4300 10650 60  0000 C CNN
+F 2 "SNPM:quectel_BC95" H 7950 12950 60  0001 C CNN
+F 3 "" H 7950 12950 60  0001 C CNN
+	1    4400 10650
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2400 11700
+NoConn ~ 2400 11600
+NoConn ~ 2400 11500
+NoConn ~ 2400 11000
+NoConn ~ 2400 10900
+NoConn ~ 2400 10700
+NoConn ~ 2400 10600
+NoConn ~ 2400 10500
+NoConn ~ 2400 10400
+NoConn ~ 2400 10300
+NoConn ~ 3100 12250
+NoConn ~ 3400 12250
+NoConn ~ 3700 12250
+NoConn ~ 3800 12250
+NoConn ~ 3900 12250
+NoConn ~ 4100 12250
+NoConn ~ 4200 12250
+NoConn ~ 4300 12250
+NoConn ~ 5000 12250
+NoConn ~ 6150 11700
+NoConn ~ 6150 11600
+NoConn ~ 6150 9600
+NoConn ~ 6150 9700
+NoConn ~ 6150 9800
+NoConn ~ 6150 9900
+NoConn ~ 6150 10800
+NoConn ~ 6150 10900
+NoConn ~ 6150 11000
+NoConn ~ 6150 11100
+NoConn ~ 5300 9050
+NoConn ~ 5200 9050
+NoConn ~ 5100 9050
+NoConn ~ 5000 9050
+NoConn ~ 4900 9050
+NoConn ~ 4800 9050
+NoConn ~ 4400 9050
+NoConn ~ 4300 9050
+NoConn ~ 4200 9050
+NoConn ~ 4100 9050
+NoConn ~ 4000 9050
+NoConn ~ 3900 9050
+NoConn ~ 3800 9050
+NoConn ~ 3700 9050
+NoConn ~ 2400 9400
+NoConn ~ 2400 9800
+NoConn ~ 2400 9900
+NoConn ~ 2400 10000
+NoConn ~ 2400 10100
+NoConn ~ 2400 10200
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR038
+U 1 1 59B0EB8E
+P 5450 8950
+F 0 "#PWR038" H 5450 8700 50  0001 C CNN
+F 1 "GND" H 5450 8800 50  0000 C CNN
+F 2 "" H 5450 8950 50  0001 C CNN
+F 3 "" H 5450 8950 50  0001 C CNN
+	1    5450 8950
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR039
+U 1 1 59B0ECA8
+P 4600 8950
+F 0 "#PWR039" H 4600 8700 50  0001 C CNN
+F 1 "GND" H 4600 8800 50  0000 C CNN
+F 2 "" H 4600 8950 50  0001 C CNN
+F 3 "" H 4600 8950 50  0001 C CNN
+	1    4600 8950
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR040
+U 1 1 59B0F233
+P 3500 8950
+F 0 "#PWR040" H 3500 8700 50  0001 C CNN
+F 1 "GND" H 3500 8800 50  0000 C CNN
+F 2 "" H 3500 8950 50  0001 C CNN
+F 3 "" H 3500 8950 50  0001 C CNN
+	1    3500 8950
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR041
+U 1 1 59B0F346
+P 2250 9500
+F 0 "#PWR041" H 2250 9250 50  0001 C CNN
+F 1 "GND" H 2250 9350 50  0000 C CNN
+F 2 "" H 2250 9500 50  0001 C CNN
+F 3 "" H 2250 9500 50  0001 C CNN
+	1    2250 9500
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR042
+U 1 1 59B0FD49
+P 5350 12350
+F 0 "#PWR042" H 5350 12100 50  0001 C CNN
+F 1 "GND" H 5350 12200 50  0000 C CNN
+F 2 "" H 5350 12350 50  0001 C CNN
+F 3 "" H 5350 12350 50  0001 C CNN
+	1    5350 12350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR043
+U 1 1 59B10BC4
+P 6250 11450
+F 0 "#PWR043" H 6250 11200 50  0001 C CNN
+F 1 "GND" H 6250 11300 50  0000 C CNN
+F 2 "" H 6250 11450 50  0001 C CNN
+F 3 "" H 6250 11450 50  0001 C CNN
+	1    6250 11450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR044
+U 1 1 59B11419
+P 6250 10350
+F 0 "#PWR044" H 6250 10100 50  0001 C CNN
+F 1 "GND" H 6250 10200 50  0000 C CNN
+F 2 "" H 6250 10350 50  0001 C CNN
+F 3 "" H 6250 10350 50  0001 C CNN
+	1    6250 10350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR045
+U 1 1 59B11CC6
+P 6250 9450
+F 0 "#PWR045" H 6250 9200 50  0001 C CNN
+F 1 "GND" H 6250 9300 50  0000 C CNN
+F 2 "" H 6250 9450 50  0001 C CNN
+F 3 "" H 6250 9450 50  0001 C CNN
+	1    6250 9450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C10
+U 1 1 59B15D94
+P 6650 11450
+F 0 "C10" H 6675 11550 50  0000 L CNN
+F 1 "NC" H 6675 11350 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6688 11300 50  0001 C CNN
+F 3 "" H 6650 11450 50  0001 C CNN
+	1    6650 11450
+	1    0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C11
+U 1 1 59B16270
+P 7100 11450
+F 0 "C11" H 7125 11550 50  0000 L CNN
+F 1 "NC" H 7125 11350 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7138 11300 50  0001 C CNN
+F 3 "" H 7100 11450 50  0001 C CNN
+	1    7100 11450
+	1    0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R11
+U 1 1 59B16754
+P 6900 11300
+F 0 "R11" V 6980 11300 50  0000 C CNN
+F 1 "0R" V 6900 11300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 6830 11300 50  0001 C CNN
+F 3 "" H 6900 11300 50  0001 C CNN
+	1    6900 11300
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:SMA_mini P1
+U 1 1 59B17020
+P 7450 11300
+F 0 "P1" H 7460 11420 50  0000 C CNN
+F 1 "SMA_mini" V 7350 11200 50  0001 C CNN
+F 2 "SNPM:Antenna_conn" H 7450 11300 50  0001 C CNN
+F 3 "" H 7450 11300 50  0000 C CNN
+	1    7450 11300
+	1    0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR046
+U 1 1 59B17450
+P 6650 11650
+F 0 "#PWR046" H 6650 11400 50  0001 C CNN
+F 1 "GND" H 6650 11500 50  0000 C CNN
+F 2 "" H 6650 11650 50  0001 C CNN
+F 3 "" H 6650 11650 50  0001 C CNN
+	1    6650 11650
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR047
+U 1 1 59B1757B
+P 7100 11650
+F 0 "#PWR047" H 7100 11400 50  0001 C CNN
+F 1 "GND" H 7100 11500 50  0000 C CNN
+F 2 "" H 7100 11650 50  0001 C CNN
+F 3 "" H 7100 11650 50  0001 C CNN
+	1    7100 11650
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR048
+U 1 1 59B176A6
+P 7700 11650
+F 0 "#PWR048" H 7700 11400 50  0001 C CNN
+F 1 "GND" H 7700 11500 50  0000 C CNN
+F 2 "" H 7700 11650 50  0001 C CNN
+F 3 "" H 7700 11650 50  0001 C CNN
+	1    7700 11650
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR049
+U 1 1 59B1F400
+P 4900 12350
+F 0 "#PWR049" H 4900 12100 50  0001 C CNN
+F 1 "GND" H 4900 12200 50  0000 C CNN
+F 2 "" H 4900 12350 50  0001 C CNN
+F 3 "" H 4900 12350 50  0001 C CNN
+	1    4900 12350
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3300 12250
+$Comp
+L sensenet_particlemeter-rescue:C C7
+U 1 1 59B21822
+P 7100 12750
+F 0 "C7" H 7125 12850 50  0000 L CNN
+F 1 "100n" H 7125 12650 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7138 12600 50  0001 C CNN
+F 3 "" H 7100 12750 50  0001 C CNN
+	1    7100 12750
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR050
+U 1 1 59B21966
+P 7100 12950
+F 0 "#PWR050" H 7100 12700 50  0001 C CNN
+F 1 "GND" H 7100 12800 50  0000 C CNN
+F 2 "" H 7100 12950 50  0001 C CNN
+F 3 "" H 7100 12950 50  0001 C CNN
+	1    7100 12950
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR051
+U 1 1 59B220EB
+P 7100 12500
+F 0 "#PWR051" H 7100 12350 50  0001 C CNN
+F 1 "+3.3V" H 7100 12640 50  0000 C CNN
+F 2 "" H 7100 12500 50  0001 C CNN
+F 3 "" H 7100 12500 50  0001 C CNN
+	1    7100 12500
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2400 11400
+$Comp
+L sensenet_particlemeter-rescue:R R8
+U 1 1 59B2F5FB
+P 3200 13800
+F 0 "R8" V 3280 13800 50  0000 C CNN
+F 1 "1k" V 3200 13800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 3130 13800 50  0001 C CNN
+F 3 "" H 3200 13800 50  0001 C CNN
+	1    3200 13800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R9
+U 1 1 59B2FAA5
+P 3150 13050
+F 0 "R9" V 3230 13050 50  0000 C CNN
+F 1 "1k" V 3150 13050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 3080 13050 50  0001 C CNN
+F 3 "" H 3150 13050 50  0001 C CNN
+	1    3150 13050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R10
+U 1 1 59B319DD
+P 3150 13300
+F 0 "R10" V 3230 13300 50  0000 C CNN
+F 1 "10k" V 3150 13300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 3080 13300 50  0001 C CNN
+F 3 "" H 3150 13300 50  0001 C CNN
+	1    3150 13300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR052
+U 1 1 59B3202B
+P 2850 13300
+F 0 "#PWR052" H 2850 13050 50  0001 C CNN
+F 1 "GND" H 2850 13150 50  0000 C CNN
+F 2 "" H 2850 13300 50  0001 C CNN
+F 3 "" H 2850 13300 50  0001 C CNN
+	1    2850 13300
+	0    1    1    0   
+$EndComp
+Text GLabel 2050 10700 1    39   Input ~ 0
+WIRELESS_reset
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J3
+U 1 1 59B45EAC
+P 2050 11500
+F 0 "J3" V 2050 11400 50  0000 C CNN
+F 1 "CONN_01X01" V 2150 11500 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch1.00mm" H 2050 11500 50  0001 C CNN
+F 3 "" H 2050 11500 50  0001 C CNN
+	1    2050 11500
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J4
+U 1 1 59B45FBA
+P 2150 11700
+F 0 "J4" V 2150 11600 50  0000 C CNN
+F 1 "CONN_01X01" V 2250 11700 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch1.00mm" H 2150 11700 50  0001 C CNN
+F 3 "" H 2150 11700 50  0001 C CNN
+	1    2150 11700
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J1
+U 1 1 59B471C1
+P 1650 9600
+F 0 "J1" H 1650 9700 50  0000 C CNN
+F 1 "CONN_01X01" V 1750 9600 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch1.00mm" H 1650 9600 50  0001 C CNN
+F 3 "" H 1650 9600 50  0001 C CNN
+	1    1650 9600
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J2
+U 1 1 59B4784D
+P 1900 9700
+F 0 "J2" H 1900 9800 50  0000 C CNN
+F 1 "CONN_01X01" V 2000 9700 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch1.00mm" H 1900 9700 50  0001 C CNN
+F 3 "" H 1900 9700 50  0001 C CNN
+	1    1900 9700
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J6
+U 1 1 59BD7DC6
+P 2650 14850
+F 0 "J6" H 2650 14950 50  0000 C CNN
+F 1 "CONN_01X01" V 2750 14850 50  0000 C CNN
+F 2 "SNPM:MountingHole_3.2mm_M3_DIN965" H 2650 14850 50  0001 C CNN
+F 3 "" H 2650 14850 50  0001 C CNN
+	1    2650 14850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J5
+U 1 1 59BD7F12
+P 3750 14900
+F 0 "J5" H 3750 15000 50  0000 C CNN
+F 1 "CONN_01X01" V 3850 14900 50  0000 C CNN
+F 2 "SNPM:MountingHole_3.2mm_M3_DIN965" H 3750 14900 50  0001 C CNN
+F 3 "" H 3750 14900 50  0001 C CNN
+	1    3750 14900
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:SMA_mini P2
+U 1 1 59C00BD1
+P 13300 2150
+F 0 "P2" H 13310 2270 50  0000 C CNN
+F 1 "SMA_mini" V 13200 2050 50  0001 C CNN
+F 2 "SNPM:Antenna_conn" H 13300 2150 50  0001 C CNN
+F 3 "" H 13300 2150 50  0000 C CNN
+	1    13300 2150
+	1    0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR053
+U 1 1 59C00BD7
+P 13550 2600
+F 0 "#PWR053" H 13550 2350 50  0001 C CNN
+F 1 "GND" H 13550 2450 50  0000 C CNN
+F 2 "" H 13550 2600 50  0001 C CNN
+F 3 "" H 13550 2600 50  0001 C CNN
+	1    13550 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:SIM U4
+U 1 1 5A144890
+P 6450 13200
+F 0 "U4" H 6800 12750 60  0000 C CNN
+F 1 "SIM" H 6550 13200 60  0000 C CNN
+F 2 "SNPM:nanosimmm" H 6450 13200 60  0001 C CNN
+F 3 "" H 6450 13200 60  0001 C CNN
+	1    6450 13200
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5950 13150
+NoConn ~ -2600 -350
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J18
+U 1 1 5A147BAE
+P 2050 3400
+F 0 "J18" H 2050 3500 50  0000 C CNN
+F 1 "CONN_01X01" V 2150 3400 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch2.54mm" H 2050 3400 50  0001 C CNN
+F 3 "" H 2050 3400 50  0001 C CNN
+	1    2050 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J11
+U 1 1 5A147D06
+P 1750 3550
+F 0 "J11" H 1750 3650 50  0000 C CNN
+F 1 "CONN_01X01" V 1850 3550 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch2.54mm" H 1750 3550 50  0001 C CNN
+F 3 "" H 1750 3550 50  0001 C CNN
+	1    1750 3550
+	-1   0    0    1   
+$EndComp
+NoConn ~ 2500 2800
+NoConn ~ 2450 14850
+NoConn ~ 3550 14900
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J21
+U 1 1 5A15C8F9
+P 4800 1050
+F 0 "J21" H 4800 1150 50  0000 C CNN
+F 1 "CONN_01X01" V 4900 1050 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch1.00mm" H 4800 1050 50  0001 C CNN
+F 3 "" H 4800 1050 50  0001 C CNN
+	1    4800 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:L L1
+U 1 1 5B353DB6
+P 12350 2350
+F 0 "L1" V 12300 2350 50  0000 C CNN
+F 1 "DNP" V 12425 2350 50  0000 C CNN
+F 2 "SNPM:SMD_0805" H 12350 2350 50  0001 C CNN
+F 3 "" H 12350 2350 50  0001 C CNN
+	1    12350 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:L L2
+U 1 1 5B353EC8
+P 12950 2350
+F 0 "L2" V 12900 2350 50  0000 C CNN
+F 1 "DNP" V 13025 2350 50  0000 C CNN
+F 2 "SNPM:SMD_0805" H 12950 2350 50  0001 C CNN
+F 3 "" H 12950 2350 50  0001 C CNN
+	1    12950 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR055
+U 1 1 5B3544CD
+P 12350 2600
+F 0 "#PWR055" H 12350 2350 50  0001 C CNN
+F 1 "GND" H 12350 2450 50  0000 C CNN
+F 2 "" H 12350 2600 50  0001 C CNN
+F 3 "" H 12350 2600 50  0001 C CNN
+	1    12350 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR056
+U 1 1 5B3545B6
+P 12950 2600
+F 0 "#PWR056" H 12950 2350 50  0001 C CNN
+F 1 "GND" H 12950 2450 50  0000 C CNN
+F 2 "" H 12950 2600 50  0001 C CNN
+F 3 "" H 12950 2600 50  0001 C CNN
+	1    12950 2600
+	1    0    0    -1  
+$EndComp
+Text GLabel 3600 1650 1    39   Input ~ 0
+BOOT_0
+Text GLabel 3450 1650 1    39   Input ~ 0
+BOOT_signal
+Text GLabel 11300 8050 2    39   Input ~ 0
+Rx
+Text GLabel 11300 8150 2    39   Input ~ 0
+Tx
+Text GLabel 10300 7100 0    39   Input ~ 0
+UART_GPS_TX
+Text GLabel 11000 7100 2    39   Input ~ 0
+UART_GPS_RX
+Text GLabel 9700 8800 3    39   Input ~ 0
+i2c_sda
+Text GLabel 9800 8800 3    39   Input ~ 0
+i2c_scl
+Text GLabel 9200 10350 0    39   Input ~ 0
+PM_SDI
+Text GLabel 9200 10450 0    39   Input ~ 0
+PM_SDO
+Text GLabel 9200 10550 0    39   Input ~ 0
+PM_SCK
+Text GLabel 10600 8250 0    39   Input ~ 0
+SWD_CLK
+Text GLabel 10600 8050 0    39   Input ~ 0
+SWD_DIO
+Text GLabel 9200 10250 0    39   Input ~ 0
+PM_SS
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR062
+U 1 1 5B366E30
+P 9150 10100
+F 0 "#PWR062" H 9150 9850 50  0001 C CNN
+F 1 "GND" H 9150 9950 50  0000 C CNN
+F 2 "" H 9150 10100 50  0001 C CNN
+F 3 "" H 9150 10100 50  0001 C CNN
+	1    9150 10100
+	1    0    0    1   
+$EndComp
+Text GLabel 11000 7200 2    39   Input ~ 0
+WIRELESS_reset
+Text GLabel 10300 7000 0    39   Input ~ 0
+gps_reset
+Text GLabel 11000 7000 2    39   Input ~ 0
+gps_standby
+Text GLabel 11000 6900 2    39   Input ~ 0
+gps_pulses
+Text GLabel 10300 7200 0    39   Input ~ 0
+gps_fix
+$Comp
+L sensenet_particlemeter-rescue:C C15
+U 1 1 5B46456A
+P 21050 1800
+F 0 "C15" H 21075 1900 50  0000 L CNN
+F 1 "470u" H 21075 1700 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 21088 1650 50  0001 C CNN
+F 3 "" H 21050 1800 50  0001 C CNN
+	1    21050 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R16
+U 1 1 5B478654
+P 19450 1850
+F 0 "R16" V 19530 1850 50  0000 C CNN
+F 1 "3k3" V 19450 1850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 19380 1850 50  0001 C CNN
+F 3 "" H 19450 1850 50  0001 C CNN
+	1    19450 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR063
+U 1 1 5B478D23
+P 19450 2950
+F 0 "#PWR063" H 19450 2700 50  0001 C CNN
+F 1 "GND" H 19450 2800 50  0000 C CNN
+F 2 "" H 19450 2950 50  0001 C CNN
+F 3 "" H 19450 2950 50  0001 C CNN
+	1    19450 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:L L3
+U 1 1 5B47991F
+P 15650 1550
+F 0 "L3" V 15600 1550 50  0000 C CNN
+F 1 "39uH" V 15725 1550 50  0000 C CNN
+F 2 "Inductor_SMD:L_Taiyo-Yuden_NR-50xx" H 15650 1550 50  0001 C CNN
+F 3 "" H 15650 1550 50  0001 C CNN
+	1    15650 1550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR065
+U 1 1 5B481E0E
+P 15850 2950
+F 0 "#PWR065" H 15850 2700 50  0001 C CNN
+F 1 "GND" H 15850 2800 50  0000 C CNN
+F 2 "" H 15850 2950 50  0001 C CNN
+F 3 "" H 15850 2950 50  0001 C CNN
+	1    15850 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR066
+U 1 1 5B481FD6
+P 15100 2950
+F 0 "#PWR066" H 15100 2700 50  0001 C CNN
+F 1 "GND" H 15100 2800 50  0000 C CNN
+F 2 "" H 15100 2950 50  0001 C CNN
+F 3 "" H 15100 2950 50  0001 C CNN
+	1    15100 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR067
+U 1 1 5B484093
+P 17650 2950
+F 0 "#PWR067" H 17650 2700 50  0001 C CNN
+F 1 "GND" H 17650 2800 50  0000 C CNN
+F 2 "" H 17650 2950 50  0001 C CNN
+F 3 "" H 17650 2950 50  0001 C CNN
+	1    17650 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+5V #PWR070
+U 1 1 5B478486
+P 9150 10700
+F 0 "#PWR070" H 9150 10550 50  0001 C CNN
+F 1 "+5V" H 9150 10840 50  0000 C CNN
+F 2 "" H 9150 10700 50  0001 C CNN
+F 3 "" H 9150 10700 50  0001 C CNN
+	1    9150 10700
+	1    0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR071
+U 1 1 5B4AA87C
+P 21150 5850
+F 0 "#PWR071" H 21150 5600 50  0001 C CNN
+F 1 "GND" H 21150 5700 50  0000 C CNN
+F 2 "" H 21150 5850 50  0001 C CNN
+F 3 "" H 21150 5850 50  0001 C CNN
+	1    21150 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R23
+U 1 1 5B4AA8BD
+P 19050 5250
+F 0 "R23" V 19130 5250 50  0000 C CNN
+F 1 "5k6" V 19050 5250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 18980 5250 50  0001 C CNN
+F 3 "" H 19050 5250 50  0001 C CNN
+	1    19050 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R22
+U 1 1 5B4AA8C3
+P 19050 4700
+F 0 "R22" V 19130 4700 50  0000 C CNN
+F 1 "8k2" V 19050 4700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 18980 4700 50  0001 C CNN
+F 3 "" H 19050 4700 50  0001 C CNN
+	1    19050 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:L L5
+U 1 1 5B4AA8D0
+P 15550 4450
+F 0 "L5" V 15500 4450 50  0000 C CNN
+F 1 "41uH" V 15625 4450 50  0000 C CNN
+F 2 "Inductor_SMD:L_Taiyo-Yuden_NR-50xx" H 15550 4450 50  0001 C CNN
+F 3 "" H 15550 4450 50  0001 C CNN
+	1    15550 4450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR074
+U 1 1 5B4AA8DC
+P 19050 5850
+F 0 "#PWR074" H 19050 5600 50  0001 C CNN
+F 1 "GND" H 19050 5700 50  0000 C CNN
+F 2 "" H 19050 5850 50  0001 C CNN
+F 3 "" H 19050 5850 50  0001 C CNN
+	1    19050 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C16
+U 1 1 5B4AA8E2
+P 19600 4750
+F 0 "C16" H 19625 4850 50  0000 L CNN
+F 1 "47u" H 19625 4650 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 19638 4600 50  0001 C CNN
+F 3 "" H 19600 4750 50  0001 C CNN
+	1    19600 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R20
+U 1 1 5B4AA8E8
+P 18650 4650
+F 0 "R20" V 18730 4650 50  0000 C CNN
+F 1 "100k" V 18650 4650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 18580 4650 50  0001 C CNN
+F 3 "" H 18650 4650 50  0001 C CNN
+	1    18650 4650
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR075
+U 1 1 5B4AA917
+P 17750 5850
+F 0 "#PWR075" H 17750 5600 50  0001 C CNN
+F 1 "GND" H 17750 5700 50  0000 C CNN
+F 2 "" H 17750 5850 50  0001 C CNN
+F 3 "" H 17750 5850 50  0001 C CNN
+	1    17750 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR076
+U 1 1 5B4AA925
+P 19600 5850
+F 0 "#PWR076" H 19600 5600 50  0001 C CNN
+F 1 "GND" H 19600 5700 50  0000 C CNN
+F 2 "" H 19600 5850 50  0001 C CNN
+F 3 "" H 19600 5850 50  0001 C CNN
+	1    19600 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:CP C18
+U 1 1 5B4AA935
+P 21400 4700
+F 0 "C18" H 21425 4800 50  0000 L CNN
+F 1 "470uF" H 21425 4600 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 21438 4550 50  0001 C CNN
+F 3 "" H 21400 4700 50  0001 C CNN
+	1    21400 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R21
+U 1 1 5B4AC7B4
+P 19450 2550
+F 0 "R21" V 19530 2550 50  0000 C CNN
+F 1 "1k1" V 19450 2550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 19380 2550 50  0001 C CNN
+F 3 "" H 19450 2550 50  0001 C CNN
+	1    19450 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR077
+U 1 1 5B4B26B7
+P 22500 4400
+F 0 "#PWR077" H 22500 4250 50  0001 C CNN
+F 1 "+3.3V" H 22500 4540 50  0000 C CNN
+F 2 "" H 22500 4400 50  0001 C CNN
+F 3 "" H 22500 4400 50  0001 C CNN
+	1    22500 4400
+	1    0    0    -1  
+$EndComp
+Text GLabel 3750 1650 1    39   Input ~ 0
+USART_debug_rx
+Text GLabel 3900 1650 1    39   Input ~ 0
+USART_debug_tx
+Text GLabel 10950 7400 2    39   Input ~ 0
+USART_debug_rx
+Text GLabel 10300 7400 0    39   Input ~ 0
+USART_debug_tx
+Text GLabel 3300 1650 1    39   Input ~ 0
+debug_on_off
+$Comp
+L sensenet_particlemeter-rescue:LED D8
+U 1 1 5B4F48C0
+P 4350 6000
+F 0 "D8" H 4350 6100 50  0000 C CNN
+F 1 "LED" H 4550 6100 50  0000 C CNN
+F 2 "SNPM:SMD_0805_bottom" H 4350 6000 50  0001 C CNN
+F 3 "" H 4350 6000 50  0001 C CNN
+	1    4350 6000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR081
+U 1 1 5B4FBA55
+P 5500 7050
+F 0 "#PWR081" H 5500 6800 50  0001 C CNN
+F 1 "GND" H 5500 6900 50  0000 C CNN
+F 2 "" H 5500 7050 50  0001 C CNN
+F 3 "" H 5500 7050 50  0001 C CNN
+	1    5500 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:LED D9
+U 1 1 5B4FC722
+P 4500 6000
+F 0 "D9" H 4500 5900 50  0000 C CNN
+F 1 "LED" H 4700 5900 50  0000 C CNN
+F 2 "SNPM:SMD_0805_bottom" H 4500 6000 50  0001 C CNN
+F 3 "" H 4500 6000 50  0001 C CNN
+	1    4500 6000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R27
+U 1 1 5B4FCB98
+P 4350 5600
+F 0 "R27" V 4430 5600 50  0000 C CNN
+F 1 "R" V 4350 5600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4280 5600 50  0001 C CNN
+F 3 "" H 4350 5600 50  0001 C CNN
+	1    4350 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R28
+U 1 1 5B4FCD18
+P 4500 5600
+F 0 "R28" V 4580 5600 50  0000 C CNN
+F 1 "R" V 4500 5600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4430 5600 50  0001 C CNN
+F 3 "" H 4500 5600 50  0001 C CNN
+	1    4500 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR082
+U 1 1 5B4FCE50
+P 4350 6350
+F 0 "#PWR082" H 4350 6100 50  0001 C CNN
+F 1 "GND" V 4450 6300 50  0000 C CNN
+F 2 "" H 4350 6350 50  0001 C CNN
+F 3 "" H 4350 6350 50  0001 C CNN
+	1    4350 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR083
+U 1 1 5B4FD109
+P 4500 6350
+F 0 "#PWR083" H 4500 6100 50  0001 C CNN
+F 1 "GND" V 4600 6300 50  0000 C CNN
+F 2 "" H 4500 6350 50  0001 C CNN
+F 3 "" H 4500 6350 50  0001 C CNN
+	1    4500 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:LED D10
+U 1 1 5B4FEEFF
+P 4650 6000
+F 0 "D10" H 4650 5900 50  0000 C CNN
+F 1 "LED" H 4850 5900 50  0000 C CNN
+F 2 "SNPM:SMD_0805_bottom" H 4650 6000 50  0001 C CNN
+F 3 "" H 4650 6000 50  0001 C CNN
+	1    4650 6000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R29
+U 1 1 5B4FF03E
+P 4650 5600
+F 0 "R29" V 4730 5600 50  0000 C CNN
+F 1 "R" V 4650 5600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4580 5600 50  0001 C CNN
+F 3 "" H 4650 5600 50  0001 C CNN
+	1    4650 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR084
+U 1 1 5B4FF17C
+P 4650 6350
+F 0 "#PWR084" H 4650 6100 50  0001 C CNN
+F 1 "GND" V 4750 6300 50  0000 C CNN
+F 2 "" H 4650 6350 50  0001 C CNN
+F 3 "" H 4650 6350 50  0001 C CNN
+	1    4650 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:SW_DPST SW1
+U 1 1 5B5008FC
+P 1250 3600
+F 0 "SW1" H 1250 3800 50  0000 C CNN
+F 1 "SW_DPST" H 1250 3400 50  0000 C CNN
+F 2 "SNPM:edge_switch" H 1250 3600 50  0001 C CNN
+F 3 "" H 1250 3600 50  0000 C CNN
+	1    1250 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:SW_DPST SW3
+U 1 1 5B501DB8
+P 5150 6800
+F 0 "SW3" H 5150 7000 50  0000 C CNN
+F 1 "SW_DPST" H 5150 6600 50  0000 C CNN
+F 2 "SNPM:edge_switch" H 5150 6800 50  0001 C CNN
+F 3 "" H 5150 6800 50  0000 C CNN
+	1    5150 6800
+	1    0    0    -1  
+$EndComp
+Text GLabel 2250 11100 0    39   Input ~ 0
+NETLIGHT
+Text GLabel 2100 2650 0    39   Input ~ 0
+NETLIGHT
+Text GLabel 4000 12500 3    39   Input ~ 0
+RI
+Text GLabel 2100 2500 0    39   Input ~ 0
+RI
+Text Notes 11700 7750 0    60   ~ 0
+zamek ke mne, drat doprava, jednicla dole.\n6 gnd\n5 SS\n4 SDI\n3 SDO\n2 SCK\n1 VCC\n
+$Comp
+L sensenet_particlemeter-rescue:Ferrite_Bead L6
+U 1 1 5BA77339
+P 19950 4450
+F 0 "L6" V 19800 4475 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 19600 4500 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 19880 4450 50  0001 C CNN
+F 3 "" H 19950 4450 50  0000 C CNN
+	1    19950 4450
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Ferrite_Bead L4
+U 1 1 5BA77902
+P 20100 1550
+F 0 "L4" V 19950 1575 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 19850 1550 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 20030 1550 50  0001 C CNN
+F 3 "" H 20100 1550 50  0000 C CNN
+	1    20100 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Ferrite_Bead L7
+U 1 1 5BA78A59
+P 20800 1550
+F 0 "L7" V 20650 1575 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 20500 1700 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 20730 1550 50  0001 C CNN
+F 3 "" H 20800 1550 50  0000 C CNN
+	1    20800 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:D_Schottky D1
+U 1 1 5BA798AD
+P 22150 2050
+F 0 "D1" H 22150 2150 50  0000 C CNN
+F 1 "PTVS3V3S1UR,115" H 22150 1950 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 22150 2050 50  0001 C CNN
+F 3 "" H 22150 2050 50  0001 C CNN
+	1    22150 2050
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR085
+U 1 1 5BA79A27
+P 22150 2950
+F 0 "#PWR085" H 22150 2700 50  0001 C CNN
+F 1 "GND" H 22150 2800 50  0000 C CNN
+F 2 "" H 22150 2950 50  0001 C CNN
+F 3 "" H 22150 2950 50  0001 C CNN
+	1    22150 2950
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2500 2950
+NoConn ~ 2500 3100
+NoConn ~ 2500 2350
+$Comp
+L sensenet_particlemeter-rescue:D_Schottky D11
+U 1 1 5BA8704D
+P 22400 5150
+F 0 "D11" H 22400 5250 50  0000 C CNN
+F 1 "SM2T3V3A" H 22400 5050 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 22400 5150 50  0001 C CNN
+F 3 "" H 22400 5150 50  0001 C CNN
+	1    22400 5150
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR086
+U 1 1 5BA871ED
+P 22400 5850
+F 0 "#PWR086" H 22400 5600 50  0001 C CNN
+F 1 "GND" H 22400 5700 50  0000 C CNN
+F 2 "" H 22400 5850 50  0001 C CNN
+F 3 "" H 22400 5850 50  0001 C CNN
+	1    22400 5850
+	1    0    0    -1  
+$EndComp
+Text Notes 22400 2500 1    60   ~ 0
+PTVS3V3S1UR,115
+Text Notes 22600 5050 1    60   ~ 0
+SM2T3V3A
+Text Notes 20200 4250 0    60   ~ 0
+FBMH1608HL601-T
+$Comp
+L sensenet_particlemeter-rescue:Ferrite_Bead L8
+U 1 1 5BA897A7
+P 21100 4450
+F 0 "L8" V 20950 4475 50  0000 C CNN
+F 1 "FBMH1608HL601-T" V 20750 4650 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 21030 4450 50  0001 C CNN
+F 3 "" H 21100 4450 50  0000 C CNN
+	1    21100 4450
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:Conn_01x01 J19
+U 1 1 5A148706
+P 2050 4000
+F 0 "J19" H 2050 4100 50  0000 C CNN
+F 1 "CONN_01X01" V 2150 4000 50  0000 C CNN
+F 2 "SNPM:Pin_Header_Straight_1x01_Pitch2.54mm" H 2050 4000 50  0001 C CNN
+F 3 "" H 2050 4000 50  0001 C CNN
+	1    2050 4000
+	-1   0    0    1   
+$EndComp
+NoConn ~ 5750 3550
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR087
+U 1 1 5BA7A8CA
+P 11300 8350
+F 0 "#PWR087" H 11300 8100 50  0001 C CNN
+F 1 "GND" H 11300 8200 50  0000 C CNN
+F 2 "" H 11300 8350 50  0001 C CNN
+F 3 "" H 11300 8350 50  0001 C CNN
+	1    11300 8350
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	20950 1550 21050 1550
+Connection ~ 21050 1550
+Wire Wire Line
+	5100 5100 5100 5800
+Wire Wire Line
+	5250 5100 5250 5250
+Wire Wire Line
+	3150 5800 3150 5100
+Wire Wire Line
+	3300 5100 3300 5250
+Wire Wire Line
+	3000 1700 3000 1800
+Wire Wire Line
+	3150 1700 3150 1850
+Wire Wire Line
+	1300 3250 1600 3250
+Wire Wire Line
+	900  3350 900  3500
+Wire Wire Line
+	1600 3250 1600 3700
+Connection ~ 1600 3250
+Wire Wire Line
+	5250 1650 5250 1850
+Wire Wire Line
+	5750 2650 6000 2650
+Wire Wire Line
+	1300 4100 1300 4150
+Wire Wire Line
+	1300 4150 2500 4150
+Wire Wire Line
+	3300 5250 3450 5250
+Wire Wire Line
+	3450 5250 3450 5400
+Connection ~ 3300 5250
+Wire Wire Line
+	3450 5800 3450 5700
+Wire Wire Line
+	1300 4550 1300 4500
+Connection ~ 1300 4150
+Wire Wire Line
+	5450 5400 5450 5250
+Wire Wire Line
+	5450 5250 5250 5250
+Connection ~ 5250 5250
+Wire Wire Line
+	5450 5700 5450 5800
+Wire Wire Line
+	2800 1450 2800 1400
+Wire Wire Line
+	2800 1750 2800 1800
+Wire Wire Line
+	2800 1800 3000 1800
+Connection ~ 3000 1800
+Wire Wire Line
+	5750 2350 5850 2350
+Wire Wire Line
+	5850 2350 5850 2250
+Connection ~ 5850 2350
+Wire Wire Line
+	6250 2350 6450 2350
+Wire Wire Line
+	5750 2500 6450 2500
+Wire Wire Line
+	22600 1550 22600 1500
+Wire Wire Line
+	5750 4300 6050 4300
+Wire Wire Line
+	5750 4450 6050 4450
+Wire Wire Line
+	4050 1650 4050 1850
+Wire Wire Line
+	4200 1650 4200 1850
+Wire Wire Line
+	4350 1650 4350 1850
+Wire Wire Line
+	4800 1650 4800 1850
+Wire Wire Line
+	4950 1650 4950 1850
+Wire Wire Line
+	10500 2650 10600 2650
+Wire Wire Line
+	10750 2650 10750 2800
+Wire Wire Line
+	10600 2800 10600 2650
+Connection ~ 10600 2650
+Wire Wire Line
+	11050 2800 11050 2650
+Wire Wire Line
+	11050 2650 11150 2650
+Wire Wire Line
+	9850 3300 10100 3300
+Wire Wire Line
+	8950 3450 9500 3450
+Connection ~ 9500 3450
+Wire Wire Line
+	9500 3750 9500 3850
+Wire Wire Line
+	11500 3600 12650 3600
+Wire Wire Line
+	11500 3450 12650 3450
+Wire Wire Line
+	11500 3750 12650 3750
+Wire Wire Line
+	10900 4350 10900 4150
+Wire Wire Line
+	11050 4150 11050 4350
+Wire Wire Line
+	9900 4800 9900 4700
+Wire Wire Line
+	9900 4400 9900 4350
+Wire Wire Line
+	9900 4050 9900 3750
+Wire Wire Line
+	9900 3750 10100 3750
+Wire Wire Line
+	11500 3300 11700 3300
+Wire Wire Line
+	10100 3750 10100 4050
+Wire Wire Line
+	2500 4600 2450 4600
+Wire Wire Line
+	2450 4600 2450 5000
+Wire Wire Line
+	2450 5000 2300 5000
+Wire Wire Line
+	2300 5150 3000 5150
+Wire Wire Line
+	3000 5150 3000 5100
+Wire Wire Line
+	6150 9400 6200 9400
+Wire Wire Line
+	6200 9400 6200 9450
+Wire Wire Line
+	6200 9500 6150 9500
+Wire Wire Line
+	6200 9450 6250 9450
+Connection ~ 6200 9450
+Wire Wire Line
+	6150 10000 6200 10000
+Wire Wire Line
+	6200 10000 6200 10100
+Wire Wire Line
+	6200 10350 6250 10350
+Wire Wire Line
+	6150 10100 6200 10100
+Connection ~ 6200 10100
+Wire Wire Line
+	6150 10200 6200 10200
+Connection ~ 6200 10200
+Wire Wire Line
+	6150 10300 6200 10300
+Connection ~ 6200 10300
+Wire Wire Line
+	6200 10400 6150 10400
+Connection ~ 6200 10350
+Wire Wire Line
+	6200 10700 6150 10700
+Connection ~ 6200 10400
+Wire Wire Line
+	6150 10500 6200 10500
+Connection ~ 6200 10500
+Wire Wire Line
+	6150 10600 6200 10600
+Connection ~ 6200 10600
+Wire Wire Line
+	6150 11200 6200 11200
+Wire Wire Line
+	6200 11200 6200 11400
+Wire Wire Line
+	6200 11500 6150 11500
+Wire Wire Line
+	6150 11400 6200 11400
+Connection ~ 6200 11400
+Wire Wire Line
+	6200 11450 6250 11450
+Connection ~ 6200 11450
+Wire Wire Line
+	6150 11300 6650 11300
+Connection ~ 6650 11300
+Wire Wire Line
+	6650 11600 6650 11650
+Wire Wire Line
+	7100 11650 7100 11600
+Wire Wire Line
+	7050 11300 7100 11300
+Connection ~ 7100 11300
+Wire Wire Line
+	7450 11100 7700 11100
+Wire Wire Line
+	7700 11100 7700 11350
+Connection ~ 7700 11350
+Wire Wire Line
+	3400 9050 3400 9000
+Wire Wire Line
+	3400 9000 3500 9000
+Wire Wire Line
+	3500 8950 3500 9000
+Connection ~ 3500 9000
+Wire Wire Line
+	3600 9000 3600 9050
+Wire Wire Line
+	4500 9050 4500 9000
+Wire Wire Line
+	4500 9000 4600 9000
+Wire Wire Line
+	4700 9000 4700 9050
+Wire Wire Line
+	4600 8950 4600 9000
+Connection ~ 4600 9000
+Wire Wire Line
+	5400 9050 5400 9000
+Wire Wire Line
+	5400 9000 5450 9000
+Wire Wire Line
+	5500 9000 5500 9050
+Wire Wire Line
+	5450 8950 5450 9000
+Connection ~ 5450 9000
+Wire Wire Line
+	2250 9500 2400 9500
+Wire Wire Line
+	3500 12250 3500 13050
+Wire Wire Line
+	2050 10700 2050 10800
+Wire Wire Line
+	2050 10800 2400 10800
+Wire Wire Line
+	4900 12250 4900 12350
+Wire Wire Line
+	5100 12250 5100 12300
+Wire Wire Line
+	5100 12300 5150 12300
+Wire Wire Line
+	5200 12300 5200 12250
+Connection ~ 5150 12300
+Wire Wire Line
+	5300 12250 5300 12300
+Wire Wire Line
+	5300 12300 5350 12300
+Wire Wire Line
+	5400 12300 5400 12250
+Wire Wire Line
+	5350 12300 5350 12350
+Connection ~ 5350 12300
+Wire Wire Line
+	2050 11300 2050 11200
+Wire Wire Line
+	2050 11200 2400 11200
+Wire Wire Line
+	2400 11300 2150 11300
+Wire Wire Line
+	2150 11300 2150 11500
+Wire Wire Line
+	1850 9600 2400 9600
+Wire Wire Line
+	2100 9700 2400 9700
+Wire Wire Line
+	4000 12250 4000 12500
+Wire Wire Line
+	4400 12250 4400 12750
+Wire Wire Line
+	4500 12250 4500 13250
+Wire Wire Line
+	4600 12250 4600 12950
+Wire Wire Line
+	4700 12250 4700 13050
+Wire Wire Line
+	4800 12250 4800 13350
+Wire Wire Line
+	13300 1950 13550 1950
+Wire Wire Line
+	13550 1950 13550 2200
+Connection ~ 13550 2200
+Wire Wire Line
+	3600 1650 3600 1850
+Wire Wire Line
+	2250 3400 2500 3400
+Wire Wire Line
+	1950 3550 2500 3550
+Wire Wire Line
+	10900 2150 12350 2150
+Wire Wire Line
+	10900 2800 10900 2150
+Wire Wire Line
+	12350 2600 12350 2500
+Wire Wire Line
+	12350 2200 12350 2150
+Connection ~ 12350 2150
+Wire Wire Line
+	12800 2150 12950 2150
+Wire Wire Line
+	12950 2150 12950 2200
+Connection ~ 12950 2150
+Wire Wire Line
+	12950 2500 12950 2600
+Wire Wire Line
+	3450 1650 3450 1850
+Wire Wire Line
+	10300 7000 10400 7000
+Wire Wire Line
+	10300 7100 10400 7100
+Wire Wire Line
+	10300 7200 10400 7200
+Wire Wire Line
+	10300 7400 10400 7400
+Wire Wire Line
+	10900 7000 11000 7000
+Wire Wire Line
+	10900 7100 11000 7100
+Wire Wire Line
+	10900 7200 11000 7200
+Wire Wire Line
+	10900 7400 10950 7400
+Wire Wire Line
+	11300 8150 11200 8150
+Wire Wire Line
+	11300 8250 11200 8250
+Wire Wire Line
+	21300 2450 21300 1950
+Wire Wire Line
+	21300 1550 21300 1650
+Connection ~ 21300 1550
+Wire Wire Line
+	21050 1550 21050 1650
+Connection ~ 15850 1550
+Wire Wire Line
+	15850 2950 15850 2350
+Wire Wire Line
+	15850 1450 15850 1550
+Wire Wire Line
+	15100 1550 15150 1550
+Wire Wire Line
+	15800 1550 15850 1550
+Wire Wire Line
+	11200 8350 11300 8350
+Wire Notes Line
+	800  7600 8150 7600
+Wire Notes Line
+	8150 7600 8150 900 
+Wire Notes Line
+	8150 900  800  900 
+Wire Notes Line
+	800  7800 8150 7800
+Wire Notes Line
+	8150 7800 8150 14450
+Wire Notes Line
+	8150 14450 800  14450
+Wire Notes Line
+	800  14450 800  7800
+Wire Notes Line
+	14200 900  22700 900 
+Wire Notes Line
+	22700 900  22700 3500
+Wire Notes Line
+	22700 3500 14200 3500
+Wire Notes Line
+	14200 3500 14200 900 
+Wire Notes Line
+	14200 6600 18800 6600
+Wire Notes Line
+	18800 6600 18800 8950
+Wire Notes Line
+	18800 8950 14200 8950
+Wire Notes Line
+	14200 8950 14200 6600
+Wire Notes Line
+	23100 3700 23100 6400
+Wire Notes Line
+	22700 6600 22700 8950
+Wire Notes Line
+	22700 8950 19000 8950
+Wire Notes Line
+	19000 8950 19000 6600
+Wire Notes Line
+	9250 6600 12950 6600
+Wire Notes Line
+	8350 900  14000 900 
+Wire Notes Line
+	14000 900  14000 6400
+Wire Notes Line
+	14000 6400 8350 6400
+Wire Notes Line
+	8350 6400 8350 900 
+Wire Notes Line
+	14200 9150 18800 9150
+Wire Notes Line
+	18800 9150 18800 11750
+Wire Notes Line
+	18800 11750 14200 11750
+Wire Notes Line
+	14200 11750 14200 9150
+Wire Notes Line
+	19000 9150 22700 9150
+Wire Notes Line
+	22700 9150 22700 11750
+Wire Notes Line
+	22700 11750 19000 11750
+Wire Notes Line
+	19000 11750 19000 9150
+Connection ~ 21150 5050
+Wire Wire Line
+	22500 4450 22500 4400
+Connection ~ 21400 4450
+Wire Wire Line
+	19450 2400 19450 2100
+Wire Wire Line
+	21250 4450 21400 4450
+Wire Notes Line
+	14200 3700 22700 3700
+Wire Notes Line
+	22700 3700 22700 6400
+Wire Notes Line
+	22700 6400 14200 6400
+Wire Notes Line
+	14200 6400 14200 3700
+Wire Wire Line
+	3900 1850 3900 1650
+Wire Wire Line
+	3750 1850 3750 1650
+Wire Wire Line
+	10300 6800 10400 6800
+Wire Wire Line
+	10900 6800 10950 6800
+Wire Wire Line
+	3300 1650 3300 1850
+Wire Wire Line
+	4800 5100 4800 6900
+Wire Wire Line
+	5500 6550 5500 6700
+Wire Wire Line
+	4350 5750 4350 5850
+Wire Wire Line
+	4500 5750 4500 5850
+Wire Wire Line
+	4350 6150 4350 6350
+Wire Wire Line
+	4500 6150 4500 6350
+Wire Wire Line
+	4200 5100 4200 5450
+Wire Wire Line
+	4500 5100 4500 5450
+Wire Wire Line
+	4650 5100 4650 5450
+Wire Wire Line
+	4650 5750 4650 5850
+Wire Wire Line
+	4650 6150 4650 6350
+Wire Wire Line
+	1050 3500 900  3500
+Wire Wire Line
+	1450 3500 1450 3350
+Wire Wire Line
+	1450 3350 900  3350
+Connection ~ 900  3500
+Wire Wire Line
+	1050 3700 900  3700
+Connection ~ 900  3700
+Wire Wire Line
+	1600 3700 1450 3700
+Wire Wire Line
+	5500 6700 5350 6700
+Wire Wire Line
+	5350 6900 5500 6900
+Connection ~ 5500 6900
+Wire Wire Line
+	4800 6900 4950 6900
+Wire Wire Line
+	4950 6700 4900 6700
+Wire Wire Line
+	4900 6700 4900 6550
+Wire Wire Line
+	4900 6550 5500 6550
+Connection ~ 5500 6700
+Wire Wire Line
+	2250 11100 2400 11100
+Wire Wire Line
+	2100 2650 2500 2650
+Wire Wire Line
+	2100 2500 2500 2500
+Wire Wire Line
+	22150 1550 22150 1900
+Connection ~ 22150 1550
+Wire Wire Line
+	22150 2200 22150 2950
+Wire Wire Line
+	21400 5050 21400 4850
+Wire Wire Line
+	21400 4450 21400 4550
+Wire Wire Line
+	22400 5000 22400 4450
+Connection ~ 22400 4450
+Wire Wire Line
+	22400 5850 22400 5300
+Wire Wire Line
+	21150 5050 21150 5850
+Wire Wire Line
+	2250 4000 2500 4000
+Wire Wire Line
+	2350 3700 2500 3700
+Wire Wire Line
+	2350 3850 2500 3850
+Wire Wire Line
+	2350 4300 2500 4300
+Wire Wire Line
+	2350 4450 2500 4450
+Wire Wire Line
+	4500 1650 4500 1850
+Wire Wire Line
+	10300 6900 10400 6900
+Wire Wire Line
+	10900 6900 11000 6900
+Wire Wire Line
+	4650 1650 4650 1800
+Wire Wire Line
+	4800 1250 4800 1350
+Wire Wire Line
+	4800 1350 4700 1350
+Wire Wire Line
+	4700 1350 4700 1800
+Wire Wire Line
+	4700 1800 4650 1800
+Connection ~ 4650 1800
+Text GLabel 3750 5250 3    39   Input ~ 0
+OLED_D/C
+Text GLabel 3900 5250 3    39   Input ~ 0
+OLED_RESET
+Text GLabel 4050 5250 3    39   Input ~ 0
+OLED_CS
+Wire Wire Line
+	4050 5250 4050 5100
+Wire Wire Line
+	3900 5250 3900 5100
+Wire Wire Line
+	3750 5250 3750 5100
+$Comp
+L sensenet_particlemeter-rescue:LOGO LOGO1
+U 1 1 5BA9EC4C
+P 21850 14150
+F 0 "LOGO1" H 21850 14350 60  0000 C CNN
+F 1 "LOGO" H 21850 13950 60  0000 C CNN
+F 2 "graphics:drawing" H 21850 14150 60  0001 C CNN
+F 3 "" H 21850 14150 60  0001 C CNN
+	1    21850 14150
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR093
+U 1 1 5BD0C6C7
+P 11700 11100
+F 0 "#PWR093" H 11700 10850 50  0001 C CNN
+F 1 "GND" H 11700 10950 50  0000 C CNN
+F 2 "" H 11700 11100 50  0001 C CNN
+F 3 "" H 11700 11100 50  0001 C CNN
+	1    11700 11100
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+5V #PWR094
+U 1 1 5BD0D1A9
+P 11600 10950
+F 0 "#PWR094" H 11600 10800 50  0001 C CNN
+F 1 "+5V" H 11600 11090 50  0000 C CNN
+F 2 "" H 11600 10950 50  0001 C CNN
+F 3 "" H 11600 10950 50  0001 C CNN
+	1    11600 10950
+	0    -1   -1   0   
+$EndComp
+Text GLabel 11600 10850 0    39   Input ~ 0
+PM_SCK
+Text GLabel 11600 10750 0    39   Input ~ 0
+PM_SDO
+Text GLabel 11600 10650 0    39   Input ~ 0
+OLED_RESET
+Text GLabel 11600 10550 0    39   Input ~ 0
+OLED_D/C
+Text GLabel 11600 10450 0    39   Input ~ 0
+OLED_CS
+Text Notes 14950 1350 0    60   ~ 0
+PMEG4010EH,115
+Wire Wire Line
+	21050 1550 21300 1550
+Wire Wire Line
+	1600 3250 2500 3250
+Wire Wire Line
+	3300 5250 3300 5350
+Wire Wire Line
+	1300 4150 1300 4200
+Wire Wire Line
+	5250 5250 5250 5350
+Wire Wire Line
+	3000 1800 3000 1850
+Wire Wire Line
+	5850 2350 5950 2350
+Wire Wire Line
+	10600 2650 10750 2650
+Wire Wire Line
+	9500 3450 9850 3450
+Wire Wire Line
+	6200 9450 6200 9500
+Wire Wire Line
+	6200 10100 6200 10200
+Wire Wire Line
+	6200 10200 6200 10300
+Wire Wire Line
+	6200 10300 6200 10350
+Wire Wire Line
+	6200 10350 6200 10400
+Wire Wire Line
+	6200 10400 6200 10500
+Wire Wire Line
+	6200 10500 6200 10600
+Wire Wire Line
+	6200 10600 6200 10700
+Wire Wire Line
+	6200 11400 6200 11450
+Wire Wire Line
+	6200 11450 6200 11500
+Wire Wire Line
+	6650 11300 6750 11300
+Wire Wire Line
+	7100 11300 7300 11300
+Wire Wire Line
+	7700 11350 7700 11650
+Wire Wire Line
+	3500 9000 3600 9000
+Wire Wire Line
+	3500 9000 3500 9050
+Wire Wire Line
+	4600 9000 4700 9000
+Wire Wire Line
+	4600 9000 4600 9050
+Wire Wire Line
+	5450 9000 5500 9000
+Wire Wire Line
+	5150 12300 5200 12300
+Wire Wire Line
+	5350 12300 5400 12300
+Wire Wire Line
+	13550 2200 13550 2600
+Wire Wire Line
+	12350 2150 12500 2150
+Wire Wire Line
+	12950 2150 13150 2150
+Wire Wire Line
+	21300 1550 21600 1550
+Wire Wire Line
+	15850 1550 15850 2050
+Wire Wire Line
+	15850 1550 16350 1550
+Wire Wire Line
+	21150 5050 21400 5050
+Wire Wire Line
+	21400 4450 21700 4450
+Wire Wire Line
+	900  3500 900  3700
+Wire Wire Line
+	900  3700 900  3800
+Wire Wire Line
+	5500 6900 5500 7050
+Wire Wire Line
+	5500 6700 5500 6900
+Wire Wire Line
+	4650 1800 4650 1850
+Wire Notes Line
+	800  900  800  7600
+Wire Wire Line
+	15450 1550 15500 1550
+$Comp
+L sensenet_particlemeter-rescue:C C17
+U 1 1 5C619B52
+P 20300 1800
+F 0 "C17" H 20325 1900 50  0000 L CNN
+F 1 "100n" H 20325 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20338 1650 50  0001 C CNN
+F 3 "" H 20300 1800 50  0001 C CNN
+	1    20300 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20250 1550 20300 1550
+$Comp
+L sensenet_particlemeter-rescue:C C26
+U 1 1 5C721A42
+P 20550 1800
+F 0 "C26" H 20575 1900 50  0000 L CNN
+F 1 "1n" H 20575 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20588 1650 50  0001 C CNN
+F 3 "" H 20550 1800 50  0001 C CNN
+	1    20550 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C28
+U 1 1 5C721D76
+P 21850 1800
+F 0 "C28" H 21875 1900 50  0000 L CNN
+F 1 "22p" H 21875 1700 50  0000 L CIN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21888 1650 50  0001 C CNN
+F 3 "" H 21850 1800 50  0001 C CNN
+	1    21850 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20300 1650 20300 1550
+Connection ~ 20300 1550
+Wire Wire Line
+	20300 1550 20550 1550
+Wire Wire Line
+	20550 1650 20550 1550
+Connection ~ 20550 1550
+Wire Wire Line
+	20300 1950 20300 2450
+Wire Wire Line
+	20300 2450 20550 2450
+Wire Wire Line
+	20550 1950 20550 2450
+Connection ~ 20550 2450
+$Comp
+L sensenet_particlemeter-rescue:C C27
+U 1 1 5C9FFFFF
+P 21600 1800
+F 0 "C27" H 21625 1900 50  0000 L CNN
+F 1 "1n" H 21625 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21638 1650 50  0001 C CNN
+F 3 "" H 21600 1800 50  0001 C CNN
+	1    21600 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20550 1550 20650 1550
+Wire Wire Line
+	20550 2450 20850 2450
+Wire Wire Line
+	21600 1950 21600 2450
+Wire Wire Line
+	21600 2450 21300 2450
+Connection ~ 21300 2450
+Wire Wire Line
+	21050 1950 21050 2450
+Connection ~ 21050 2450
+Wire Wire Line
+	21050 2450 21300 2450
+Wire Wire Line
+	21600 1650 21600 1550
+Connection ~ 21600 1550
+Wire Wire Line
+	21600 1550 21850 1550
+Wire Wire Line
+	21600 2450 21850 2450
+Wire Wire Line
+	21850 2450 21850 1950
+Connection ~ 21600 2450
+Wire Wire Line
+	21850 1650 21850 1550
+Connection ~ 21850 1550
+Wire Wire Line
+	21850 1550 22150 1550
+Wire Wire Line
+	20850 2950 20850 2450
+Connection ~ 20850 2450
+Wire Wire Line
+	20850 2450 21050 2450
+Text GLabel 4200 5450 3    39   Input ~ 0
+5V_enable
+Wire Wire Line
+	5150 12300 5150 12600
+Wire Wire Line
+	7100 12500 7100 12600
+Connection ~ 7100 12600
+Wire Wire Line
+	7100 12950 7100 12900
+NoConn ~ 3200 12250
+Wire Wire Line
+	9850 3450 9850 3600
+Wire Wire Line
+	9850 3600 10100 3600
+Connection ~ 9850 3450
+Wire Wire Line
+	9850 3450 10100 3450
+$Comp
+L Device:R R30
+U 1 1 5D1F8D28
+P 12650 2150
+F 0 "R30" V 12443 2150 50  0000 C CNN
+F 1 "0R" V 12534 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 12580 2150 50  0001 C CNN
+F 3 "~" H 12650 2150 50  0001 C CNN
+	1    12650 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C13
+U 1 1 5C91E67F
+P 16350 2200
+F 0 "C13" H 16375 2300 50  0000 L CNN
+F 1 "22u" H 16375 2100 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 16388 2050 50  0001 C CNN
+F 3 "" H 16350 2200 50  0001 C CNN
+	1    16350 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0102
+U 1 1 5C91EC08
+P 16350 2950
+F 0 "#PWR0102" H 16350 2700 50  0001 C CNN
+F 1 "GND" H 16350 2800 50  0000 C CNN
+F 2 "" H 16350 2950 50  0001 C CNN
+F 3 "" H 16350 2950 50  0001 C CNN
+	1    16350 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16350 2050 16350 1550
+Connection ~ 16350 1550
+Wire Wire Line
+	16350 2350 16350 2950
+$Comp
+L Connector:Conn_01x02_Female J13
+U 1 1 5C6AC441
+P 14900 1650
+F 0 "J13" H 14794 1325 50  0000 C CNN
+F 1 "Conn_01x02_Female" V 15000 1750 50  0000 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P3.81mm_Drill1.2mm" H 14900 1650 50  0001 C CNN
+F 3 "~" H 14900 1650 50  0001 C CNN
+	1    14900 1650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	15100 1650 15100 2950
+$Comp
+L NCP59152:NCP59152 U1
+U 1 1 5C6B2134
+P 18650 1800
+F 0 "U1" H 18200 2347 60  0000 C CNN
+F 1 "NCP59152" H 18200 2241 60  0000 C CNN
+F 2 "Package_DFN_QFN:DFN-8-1EP_4x4mm_P0.8mm_EP2.39x2.21mm" H 18200 2300 60  0001 C CNN
+F 3 "" H 18200 2300 60  0001 C CNN
+	1    18650 1800
+	1    0    0    -1  
+$EndComp
+Text Notes 16600 800  0    60   ~ 0
+ESE477M025AH1EA
+Text GLabel 17450 1800 0    39   Input ~ 0
+5V_enable
+Wire Wire Line
+	16350 1550 16700 1550
+Wire Wire Line
+	17450 1800 17650 1800
+Wire Wire Line
+	17650 2400 17850 2400
+Wire Wire Line
+	17650 2400 17650 2950
+Wire Wire Line
+	19450 2950 19450 2700
+Wire Wire Line
+	18900 1550 19150 1550
+Wire Wire Line
+	19450 1550 19450 1700
+Connection ~ 19450 1550
+Wire Wire Line
+	19450 1550 19850 1550
+Wire Wire Line
+	18900 2100 19450 2100
+Connection ~ 19450 2100
+Wire Wire Line
+	19450 2100 19450 2000
+$Comp
+L sensenet_particlemeter-rescue:R R12
+U 1 1 5CE1EB23
+P 19150 1750
+F 0 "R12" V 19230 1750 50  0000 C CNN
+F 1 "100k" V 19150 1750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 19080 1750 50  0001 C CNN
+F 3 "" H 19150 1750 50  0001 C CNN
+	1    19150 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18900 1800 18900 1900
+Wire Wire Line
+	18900 1900 19150 1900
+Wire Wire Line
+	19150 1600 19150 1550
+Connection ~ 19150 1550
+Wire Wire Line
+	19150 1550 19450 1550
+$Comp
+L sensenet_particlemeter-rescue:C C30
+U 1 1 5CEA0C82
+P 19850 1800
+F 0 "C30" H 19875 1900 50  0000 L CNN
+F 1 "47u" H 19875 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 19888 1650 50  0001 C CNN
+F 3 "" H 19850 1800 50  0001 C CNN
+	1    19850 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0101
+U 1 1 5CEA1175
+P 19850 2950
+F 0 "#PWR0101" H 19850 2700 50  0001 C CNN
+F 1 "GND" H 19850 2800 50  0000 C CNN
+F 2 "" H 19850 2950 50  0001 C CNN
+F 3 "" H 19850 2950 50  0001 C CNN
+	1    19850 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	19850 1950 19850 2950
+Wire Wire Line
+	19850 1650 19850 1550
+Connection ~ 19850 1550
+Wire Wire Line
+	19850 1550 19950 1550
+$Comp
+L sensenet_particlemeter-rescue:C C12
+U 1 1 5D0AD2AF
+P 16700 2200
+F 0 "C12" H 16725 2300 50  0000 L CNN
+F 1 "100n" H 16725 2100 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 16738 2050 50  0001 C CNN
+F 3 "" H 16700 2200 50  0001 C CNN
+	1    16700 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0103
+U 1 1 5D0AD3AD
+P 16700 2950
+F 0 "#PWR0103" H 16700 2700 50  0001 C CNN
+F 1 "GND" H 16700 2800 50  0000 C CNN
+F 2 "" H 16700 2950 50  0001 C CNN
+F 3 "" H 16700 2950 50  0001 C CNN
+	1    16700 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16700 2050 16700 1550
+Connection ~ 16700 1550
+Wire Wire Line
+	16700 1550 17050 1550
+Wire Wire Line
+	16700 2950 16700 2350
+$Comp
+L sensenet_particlemeter-rescue:C C29
+U 1 1 5D1323CE
+P 17050 2200
+F 0 "C29" H 17075 2300 50  0000 L CNN
+F 1 "1n" H 17075 2100 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 17088 2050 50  0001 C CNN
+F 3 "" H 17050 2200 50  0001 C CNN
+	1    17050 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0104
+U 1 1 5D1B743C
+P 17050 2950
+F 0 "#PWR0104" H 17050 2700 50  0001 C CNN
+F 1 "GND" H 17050 2800 50  0000 C CNN
+F 2 "" H 17050 2950 50  0001 C CNN
+F 3 "" H 17050 2950 50  0001 C CNN
+	1    17050 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17050 2950 17050 2350
+Wire Wire Line
+	17050 2050 17050 1550
+Connection ~ 17050 1550
+Wire Wire Line
+	17050 1550 17850 1550
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0105
+U 1 1 5D51F1C0
+P 18350 2950
+F 0 "#PWR0105" H 18350 2700 50  0001 C CNN
+F 1 "GND" H 18350 2800 50  0000 C CNN
+F 2 "" H 18350 2950 50  0001 C CNN
+F 3 "" H 18350 2950 50  0001 C CNN
+	1    18350 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18350 2550 18350 2950
+$Comp
+L sensenet_particlemeter-rescue:R R13
+U 1 1 5D563306
+P 17650 2200
+F 0 "R13" V 17730 2200 50  0000 C CNN
+F 1 "100k" V 17650 2200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 17580 2200 50  0001 C CNN
+F 3 "" H 17650 2200 50  0001 C CNN
+	1    17650 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17650 2050 17650 1800
+Connection ~ 17650 1800
+Wire Wire Line
+	17650 1800 17850 1800
+Wire Wire Line
+	17650 2350 17650 2400
+Connection ~ 17650 2400
+Wire Wire Line
+	22150 1550 22600 1550
+Wire Wire Line
+	22400 4450 22500 4450
+Text Notes 2250 -1100 0    60   ~ 0
+pico clasp konektor,\n
+$Comp
+L sensenet_particlemeter-rescue:C C1
+U 1 1 5C674C34
+P 21700 4700
+F 0 "C1" H 21725 4800 50  0000 L CNN
+F 1 "100n" H 21725 4600 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 21738 4550 50  0001 C CNN
+F 3 "" H 21700 4700 50  0001 C CNN
+	1    21700 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C2
+U 1 1 5C7A50CF
+P 22000 4700
+F 0 "C2" H 22025 4800 50  0000 L CNN
+F 1 "22p" H 22025 4600 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 22038 4550 50  0001 C CNN
+F 3 "" H 22000 4700 50  0001 C CNN
+	1    22000 4700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	21700 4550 21700 4450
+Connection ~ 21700 4450
+Wire Wire Line
+	21700 4450 22000 4450
+Wire Wire Line
+	22000 4550 22000 4450
+Connection ~ 22000 4450
+Wire Wire Line
+	22000 4450 22400 4450
+Wire Wire Line
+	21700 4850 21700 5050
+Wire Wire Line
+	21700 5050 21400 5050
+Connection ~ 21400 5050
+Wire Wire Line
+	22000 4850 22000 5050
+Wire Wire Line
+	22000 5050 21700 5050
+Connection ~ 21700 5050
+$Comp
+L NCP59152:NCP59152 U6
+U 1 1 5C876E63
+P 18050 4700
+F 0 "U6" H 17600 5247 60  0000 C CNN
+F 1 "NCP59152" H 17600 5141 60  0000 C CNN
+F 2 "Package_DFN_QFN:DFN-8-1EP_4x4mm_P0.8mm_EP2.39x2.21mm" H 17600 5200 60  0001 C CNN
+F 3 "" H 17600 5200 60  0001 C CNN
+	1    18050 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+6V #PWR0106
+U 1 1 5C8A9243
+P 15850 1450
+F 0 "#PWR0106" H 15850 1300 50  0001 C CNN
+F 1 "+6V" H 15865 1623 50  0000 C CNN
+F 2 "" H 15850 1450 50  0001 C CNN
+F 3 "" H 15850 1450 50  0001 C CNN
+	1    15850 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+6V #PWR0107
+U 1 1 5C8A931F
+P 15000 4350
+F 0 "#PWR0107" H 15000 4200 50  0001 C CNN
+F 1 "+6V" H 15015 4523 50  0000 C CNN
+F 2 "" H 15000 4350 50  0001 C CNN
+F 3 "" H 15000 4350 50  0001 C CNN
+	1    15000 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C24
+U 1 1 5C8D9169
+P 20600 4750
+F 0 "C24" H 20625 4850 50  0000 L CNN
+F 1 "1n" H 20625 4650 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 20638 4600 50  0001 C CNN
+F 3 "" H 20600 4750 50  0001 C CNN
+	1    20600 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20100 4450 20250 4450
+Wire Wire Line
+	20250 4600 20250 4450
+Connection ~ 20250 4450
+Wire Wire Line
+	20250 4450 20600 4450
+Wire Wire Line
+	20600 4600 20600 4450
+Connection ~ 20600 4450
+Wire Wire Line
+	20600 4450 20950 4450
+Wire Wire Line
+	20250 4900 20250 5050
+Wire Wire Line
+	20250 5050 20600 5050
+Wire Wire Line
+	20600 4900 20600 5050
+Connection ~ 20600 5050
+Wire Wire Line
+	20600 5050 21150 5050
+Wire Wire Line
+	19600 4600 19600 4450
+Wire Wire Line
+	19600 4450 19800 4450
+Wire Wire Line
+	18300 4450 18650 4450
+Connection ~ 19600 4450
+Wire Wire Line
+	19050 4550 19050 4450
+Connection ~ 19050 4450
+Wire Wire Line
+	19050 4450 19600 4450
+Wire Wire Line
+	18650 4500 18650 4450
+Connection ~ 18650 4450
+Wire Wire Line
+	18650 4450 19050 4450
+Wire Wire Line
+	18300 4700 18400 4700
+Wire Wire Line
+	18400 4700 18400 4900
+Wire Wire Line
+	18400 4900 18650 4900
+Wire Wire Line
+	18650 4900 18650 4800
+Wire Wire Line
+	19050 4850 19050 5100
+Wire Wire Line
+	19050 5400 19050 5850
+Wire Wire Line
+	19600 4900 19600 5850
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0108
+U 1 1 5CB67D2B
+P 17100 5850
+F 0 "#PWR0108" H 17100 5600 50  0001 C CNN
+F 1 "GND" H 17100 5700 50  0000 C CNN
+F 2 "" H 17100 5850 50  0001 C CNN
+F 3 "" H 17100 5850 50  0001 C CNN
+	1    17100 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17750 5450 17750 5850
+Wire Wire Line
+	17100 5850 17100 5300
+Wire Wire Line
+	17100 5300 17250 5300
+$Comp
+L sensenet_particlemeter-rescue:C C20
+U 1 1 5CBCA469
+P 16350 4650
+F 0 "C20" H 16375 4750 50  0000 L CNN
+F 1 "100n" H 16375 4550 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 16388 4500 50  0001 C CNN
+F 3 "" H 16350 4650 50  0001 C CNN
+	1    16350 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C3
+U 1 1 5CBCAAFF
+P 16000 4650
+F 0 "C3" H 16025 4750 50  0000 L CNN
+F 1 "22u" H 16025 4550 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 16038 4500 50  0001 C CNN
+F 3 "" H 16000 4650 50  0001 C CNN
+	1    16000 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C22
+U 1 1 5CBFC7D6
+P 16700 4650
+F 0 "C22" H 16725 4750 50  0000 L CNN
+F 1 "1n" H 16725 4550 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 16738 4500 50  0001 C CNN
+F 3 "" H 16700 4650 50  0001 C CNN
+	1    16700 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16000 4500 16000 4450
+Wire Wire Line
+	16000 4450 16350 4450
+Wire Wire Line
+	16350 4500 16350 4450
+Connection ~ 16350 4450
+Wire Wire Line
+	16350 4450 16700 4450
+Wire Wire Line
+	16700 4500 16700 4450
+Connection ~ 16700 4450
+Wire Wire Line
+	16700 4450 17250 4450
+Wire Wire Line
+	16000 4800 16000 5300
+Wire Wire Line
+	16000 5300 16350 5300
+Wire Wire Line
+	16700 5300 16700 4800
+Wire Wire Line
+	16350 4800 16350 5300
+Connection ~ 16350 5300
+Wire Wire Line
+	16350 5300 16700 5300
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0109
+U 1 1 5CD2BB0E
+P 16350 5850
+F 0 "#PWR0109" H 16350 5600 50  0001 C CNN
+F 1 "GND" H 16350 5700 50  0000 C CNN
+F 2 "" H 16350 5850 50  0001 C CNN
+F 3 "" H 16350 5850 50  0001 C CNN
+	1    16350 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16350 5850 16350 5300
+Wire Wire Line
+	15700 4450 16000 4450
+Connection ~ 16000 4450
+Wire Wire Line
+	15400 4450 15000 4450
+Wire Wire Line
+	15000 4450 15000 4350
+Text Notes 12800 8400 0    60   ~ 0
+501568-0607
+Text Notes 12950 8700 0    60   ~ 0
+ 15133-0601 
+Wire Wire Line
+	9150 10700 9150 10650
+Wire Wire Line
+	9150 10650 9300 10650
+Wire Wire Line
+	9200 10550 9300 10550
+Wire Wire Line
+	9200 10450 9300 10450
+Wire Wire Line
+	9200 10350 9300 10350
+Wire Wire Line
+	9200 10250 9300 10250
+Wire Wire Line
+	9150 10100 9150 10150
+Wire Wire Line
+	9150 10150 9300 10150
+$Comp
+L Connector:Conn_01x06_Female J16
+U 1 1 5D09F261
+P 9500 10350
+F 0 "J16" H 9550 10350 50  0000 L CNN
+F 1 "Conn_01x06_Female" H 9527 10235 50  0000 L CNN
+F 2 "SNPM:pico_clasp_6_horizontal" H 9500 10350 50  0001 C CNN
+F 3 "~" H 9500 10350 50  0001 C CNN
+	1    9500 10350
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5750 2800
+NoConn ~ 5750 2950
+NoConn ~ 5750 3100
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0110
+U 1 1 5C86D82F
+P 10300 6800
+F 0 "#PWR0110" H 10300 6550 50  0001 C CNN
+F 1 "GND" H 10300 6650 50  0000 C CNN
+F 2 "" H 10300 6800 50  0001 C CNN
+F 3 "" H 10300 6800 50  0001 C CNN
+	1    10300 6800
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even J17
+U 1 1 5C86E7D2
+P 10600 7100
+F 0 "J17" H 10650 7617 50  0000 C CNN
+F 1 "Conn_02x08_Odd_Even" H 10650 7526 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical" H 10600 7100 50  0001 C CNN
+F 3 "~" H 10600 7100 50  0001 C CNN
+	1    10600 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0113
+U 1 1 5C86EDFF
+P 11000 7300
+F 0 "#PWR0113" H 11000 7050 50  0001 C CNN
+F 1 "GND" H 11000 7150 50  0000 C CNN
+F 2 "" H 11000 7300 50  0001 C CNN
+F 3 "" H 11000 7300 50  0001 C CNN
+	1    11000 7300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0114
+U 1 1 5C86EED2
+P 10300 7300
+F 0 "#PWR0114" H 10300 7050 50  0001 C CNN
+F 1 "GND" H 10300 7150 50  0000 C CNN
+F 2 "" H 10300 7300 50  0001 C CNN
+F 3 "" H 10300 7300 50  0001 C CNN
+	1    10300 7300
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+5V #PWR0115
+U 1 1 5C86F456
+P 11000 7500
+F 0 "#PWR0115" H 11000 7350 50  0001 C CNN
+F 1 "+5V" H 11000 7640 50  0000 C CNN
+F 2 "" H 11000 7500 50  0001 C CNN
+F 3 "" H 11000 7500 50  0001 C CNN
+	1    11000 7500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10300 7300 10400 7300
+Wire Wire Line
+	10300 7500 10400 7500
+Wire Wire Line
+	10900 7300 11000 7300
+Wire Wire Line
+	10900 7500 11000 7500
+$Comp
+L Connector:Conn_01x07_Female J7
+U 1 1 5C97EAF5
+P 12050 10750
+F 0 "J7" H 12077 10776 50  0000 L CNN
+F 1 "Conn_01x07_Female" H 12077 10685 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 12050 10750 50  0001 C CNN
+F 3 "~" H 12050 10750 50  0001 C CNN
+	1    12050 10750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11600 10450 11850 10450
+Wire Wire Line
+	11600 10550 11850 10550
+Wire Wire Line
+	11600 10650 11850 10650
+Wire Wire Line
+	11600 10750 11850 10750
+Wire Wire Line
+	11600 10850 11850 10850
+Wire Wire Line
+	11600 10950 11850 10950
+Wire Wire Line
+	11700 11100 11700 11050
+Wire Wire Line
+	11700 11050 11850 11050
+$Comp
+L sensenet_particlemeter-rescue:+5V #PWR0112
+U 1 1 5CAE8A00
+P 10300 7500
+F 0 "#PWR0112" H 10300 7350 50  0001 C CNN
+F 1 "+5V" H 10300 7640 50  0000 C CNN
+F 2 "" H 10300 7500 50  0001 C CNN
+F 3 "" H 10300 7500 50  0001 C CNN
+	1    10300 7500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L atec508A:ATECC508A U8
+U 1 1 5C6D3214
+P 16400 7500
+F 0 "U8" H 16375 7647 60  0000 C CNN
+F 1 "ATECC508A" H 16375 7541 60  0000 C CNN
+F 2 "Package_DFN_QFN:DFN-8-1EP_3x2mm_P0.5mm_EP1.75x1.45mm" H 16400 7500 60  0001 C CNN
+F 3 "" H 16400 7500 60  0001 C CNN
+	1    16400 7500
+	1    0    0    -1  
+$EndComp
+Text GLabel 18100 8050 2    39   Input ~ 0
+i2c_sda
+Text GLabel 18100 7900 2    39   Input ~ 0
+i2c_scl
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0116
+U 1 1 5C726832
+P 15800 8150
+F 0 "#PWR0116" H 15800 7900 50  0001 C CNN
+F 1 "GND" H 15800 8000 50  0000 C CNN
+F 2 "" H 15800 8150 50  0001 C CNN
+F 3 "" H 15800 8150 50  0001 C CNN
+	1    15800 8150
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR0117
+U 1 1 5C726BC1
+P 17000 7400
+F 0 "#PWR0117" H 17000 7250 50  0001 C CNN
+F 1 "+3.3V" H 17000 7540 50  0000 C CNN
+F 2 "" H 17000 7400 50  0001 C CNN
+F 3 "" H 17000 7400 50  0001 C CNN
+	1    17000 7400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	15800 8150 15800 8050
+Wire Wire Line
+	15800 8050 15950 8050
+Wire Wire Line
+	16800 7600 17000 7600
+Wire Wire Line
+	17000 7600 17000 7400
+Wire Wire Line
+	16800 7900 17500 7900
+Wire Wire Line
+	16800 8050 17850 8050
+NoConn ~ 15950 7600
+NoConn ~ 15950 7750
+NoConn ~ 15950 7900
+NoConn ~ 16800 7750
+$Comp
+L sensenet_particlemeter-rescue:R R3
+U 1 1 5C8F41C6
+P 17500 7700
+F 0 "R3" V 17580 7700 50  0000 C CNN
+F 1 "4k7" V 17500 7700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 17430 7700 50  0001 C CNN
+F 3 "" H 17500 7700 50  0001 C CNN
+	1    17500 7700
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R4
+U 1 1 5C8F44CD
+P 17850 7700
+F 0 "R4" V 17930 7700 50  0000 C CNN
+F 1 "4k7" V 17850 7700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 17780 7700 50  0001 C CNN
+F 3 "" H 17850 7700 50  0001 C CNN
+	1    17850 7700
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR0118
+U 1 1 5C948855
+P 17700 7400
+F 0 "#PWR0118" H 17700 7250 50  0001 C CNN
+F 1 "+3.3V" H 17700 7540 50  0000 C CNN
+F 2 "" H 17700 7400 50  0001 C CNN
+F 3 "" H 17700 7400 50  0001 C CNN
+	1    17700 7400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17500 7550 17500 7500
+Wire Wire Line
+	17500 7500 17700 7500
+Wire Wire Line
+	17700 7500 17700 7400
+Wire Wire Line
+	17700 7500 17850 7500
+Wire Wire Line
+	17850 7500 17850 7550
+Connection ~ 17700 7500
+Wire Wire Line
+	17500 7850 17500 7900
+Connection ~ 17500 7900
+Wire Wire Line
+	17500 7900 18100 7900
+Wire Wire Line
+	17850 7850 17850 8050
+Connection ~ 17850 8050
+Wire Wire Line
+	17850 8050 18100 8050
+$Comp
+L sensenet_particlemeter-rescue:+3.3V #PWR0111
+U 1 1 5CA73288
+P 10650 8350
+F 0 "#PWR0111" H 10650 8200 50  0001 C CNN
+F 1 "+3.3V" H 10650 8490 50  0000 C CNN
+F 2 "" H 10650 8350 50  0001 C CNN
+F 3 "" H 10650 8350 50  0001 C CNN
+	1    10650 8350
+	0    -1   1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0119
+U 1 1 5CA73793
+P 10650 8150
+F 0 "#PWR0119" H 10650 7900 50  0001 C CNN
+F 1 "GND" H 10650 8000 50  0000 C CNN
+F 2 "" H 10650 8150 50  0001 C CNN
+F 3 "" H 10650 8150 50  0001 C CNN
+	1    10650 8150
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Female J8
+U 1 1 5CA73852
+P 9700 8500
+F 0 "J8" V 9640 8312 50  0000 R CNN
+F 1 "Conn_01x02_Female" V 9549 8312 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 9700 8500 50  0001 C CNN
+F 3 "~" H 9700 8500 50  0001 C CNN
+	1    9700 8500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J20
+U 1 1 5C86D4BC
+P 10900 8150
+F 0 "J20" H 10950 8467 50  0000 C CNN
+F 1 "Conn_02x04_Odd_Even" H 10950 8376 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x04_P2.54mm_Vertical" H 10900 8150 50  0001 C CNN
+F 3 "~" H 10900 8150 50  0001 C CNN
+	1    10900 8150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9700 8800 9700 8700
+Wire Wire Line
+	9800 8700 9800 8800
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0120
+U 1 1 5CB43952
+P 11300 8250
+F 0 "#PWR0120" H 11300 8000 50  0001 C CNN
+F 1 "GND" H 11300 8100 50  0000 C CNN
+F 2 "" H 11300 8250 50  0001 C CNN
+F 3 "" H 11300 8250 50  0001 C CNN
+	1    11300 8250
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	11300 8050 11200 8050
+Wire Wire Line
+	10700 8050 10600 8050
+Wire Wire Line
+	10700 8150 10650 8150
+Wire Wire Line
+	10700 8250 10600 8250
+Wire Wire Line
+	10700 8350 10650 8350
+Wire Wire Line
+	4350 5100 4350 5450
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0121
+U 1 1 5CD6AF96
+P 10300 6900
+F 0 "#PWR0121" H 10300 6650 50  0001 C CNN
+F 1 "GND" H 10300 6750 50  0000 C CNN
+F 2 "" H 10300 6900 50  0001 C CNN
+F 3 "" H 10300 6900 50  0001 C CNN
+	1    10300 6900
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0122
+U 1 1 5CD6B055
+P 10950 6800
+F 0 "#PWR0122" H 10950 6550 50  0001 C CNN
+F 1 "GND" H 10950 6650 50  0000 C CNN
+F 2 "" H 10950 6800 50  0001 C CNN
+F 3 "" H 10950 6800 50  0001 C CNN
+	1    10950 6800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5150 12600 7100 12600
+$Comp
+L sensenet_particlemeter-rescue:R R6
+U 1 1 5C788F49
+P 5150 12950
+F 0 "R6" V 5230 12950 50  0000 C CNN
+F 1 "22R" V 5150 12950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 5080 12950 50  0001 C CNN
+F 3 "" H 5150 12950 50  0001 C CNN
+	1    5150 12950
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R2
+U 1 1 5C789360
+P 5000 13050
+F 0 "R2" V 5080 13050 50  0000 C CNN
+F 1 "22R" V 5000 13050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4930 13050 50  0001 C CNN
+F 3 "" H 5000 13050 50  0001 C CNN
+	1    5000 13050
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:R R5
+U 1 1 5C789550
+P 5050 13250
+F 0 "R5" V 5130 13250 50  0000 C CNN
+F 1 "22R" V 5050 13250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4980 13250 50  0001 C CNN
+F 3 "" H 5050 13250 50  0001 C CNN
+	1    5050 13250
+	0    1    1    0   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C33
+U 1 1 5C789636
+P 5850 13700
+F 0 "C33" H 5875 13800 50  0000 L CNN
+F 1 "33p" H 5875 13600 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5888 13550 50  0001 C CNN
+F 3 "" H 5850 13700 50  0001 C CNN
+	1    5850 13700
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:C C21
+U 1 1 5C789803
+P 4250 13000
+F 0 "C21" H 4275 13100 50  0000 L CNN
+F 1 "100n" H 4275 12900 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 4288 12850 50  0001 C CNN
+F 3 "" H 4250 13000 50  0001 C CNN
+	1    4250 13000
+	-1   0    0    1   
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0123
+U 1 1 5C789B2D
+P 4250 13200
+F 0 "#PWR0123" H 4250 12950 50  0001 C CNN
+F 1 "GND" H 4250 13050 50  0000 C CNN
+F 2 "" H 4250 13200 50  0001 C CNN
+F 3 "" H 4250 13200 50  0001 C CNN
+	1    4250 13200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4250 12850 4250 12750
+Wire Wire Line
+	4250 12750 4400 12750
+Connection ~ 4400 12750
+Wire Wire Line
+	4400 12750 4400 13450
+Wire Wire Line
+	4250 13200 4250 13150
+Wire Wire Line
+	4600 12950 5000 12950
+Wire Wire Line
+	4700 13050 4850 13050
+Wire Wire Line
+	4800 13350 5950 13350
+Wire Wire Line
+	5300 12950 5350 12950
+Wire Wire Line
+	5150 13050 5600 13050
+Wire Wire Line
+	5200 13250 5850 13250
+Wire Wire Line
+	4500 13250 4900 13250
+Wire Wire Line
+	4400 13450 5950 13450
+$Comp
+L sensenet_particlemeter-rescue:C C31
+U 1 1 5C96E349
+P 5350 13700
+F 0 "C31" H 5375 13800 50  0000 L CNN
+F 1 "33p" H 5375 13600 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5388 13550 50  0001 C CNN
+F 3 "" H 5350 13700 50  0001 C CNN
+	1    5350 13700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3600 13800 3350 13800
+Wire Wire Line
+	3050 13800 2900 13800
+Wire Wire Line
+	2850 13050 3000 13050
+Wire Wire Line
+	2850 13300 3000 13300
+Wire Wire Line
+	3300 13050 3400 13050
+Wire Wire Line
+	3300 13300 3400 13300
+Wire Wire Line
+	3400 13300 3400 13050
+Wire Wire Line
+	3600 12250 3600 13800
+Wire Wire Line
+	3400 13050 3500 13050
+Connection ~ 3400 13050
+$Comp
+L sensenet_particlemeter-rescue:C C32
+U 1 1 5CB37D25
+P 5600 13700
+F 0 "C32" H 5625 13800 50  0000 L CNN
+F 1 "33p" H 5625 13600 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5638 13550 50  0001 C CNN
+F 3 "" H 5600 13700 50  0001 C CNN
+	1    5600 13700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5350 13550 5350 12950
+Connection ~ 5350 12950
+Wire Wire Line
+	5350 12950 5950 12950
+Wire Wire Line
+	5600 13550 5600 13050
+Connection ~ 5600 13050
+Wire Wire Line
+	5600 13050 5950 13050
+Wire Wire Line
+	5850 13550 5850 13250
+Connection ~ 5850 13250
+Wire Wire Line
+	5850 13250 5950 13250
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0124
+U 1 1 5CC4AB7C
+P 5350 13900
+F 0 "#PWR0124" H 5350 13650 50  0001 C CNN
+F 1 "GND" H 5350 13750 50  0000 C CNN
+F 2 "" H 5350 13900 50  0001 C CNN
+F 3 "" H 5350 13900 50  0001 C CNN
+	1    5350 13900
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0125
+U 1 1 5CC4AC49
+P 5600 13900
+F 0 "#PWR0125" H 5600 13650 50  0001 C CNN
+F 1 "GND" H 5600 13750 50  0000 C CNN
+F 2 "" H 5600 13900 50  0001 C CNN
+F 3 "" H 5600 13900 50  0001 C CNN
+	1    5600 13900
+	1    0    0    -1  
+$EndComp
+$Comp
+L sensenet_particlemeter-rescue:GND #PWR0126
+U 1 1 5CC4AD16
+P 5850 13900
+F 0 "#PWR0126" H 5850 13650 50  0001 C CNN
+F 1 "GND" H 5850 13750 50  0000 C CNN
+F 2 "" H 5850 13900 50  0001 C CNN
+F 3 "" H 5850 13900 50  0001 C CNN
+	1    5850 13900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 13900 5350 13850
+Wire Wire Line
+	5600 13900 5600 13850
+Wire Wire Line
+	5850 13900 5850 13850
+$EndSCHEMATC

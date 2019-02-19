@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name SNPM)(type KiCad)(uri /home/ia/work/SensoricNet-particle-meter/hardware/footprints/SNPM.pretty)(options "")(descr ""))
-)

@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name sensenet_particlemeter-rescue)(type Legacy)(uri ${KIPRJMOD}/sensenet_particlemeter-rescue.lib)(options "")(descr ""))
+  (lib (name atec508A)(type Legacy)(uri ${FOOTPRINTS_AND_MODULES}/atec508A.lib)(options "")(descr ""))
+  (lib (name NCP59152)(type Legacy)(uri ${FOOTPRINTS_AND_MODULES}/NCP59152.lib)(options "")(descr ""))
+)
