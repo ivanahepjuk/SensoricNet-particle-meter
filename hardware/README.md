@@ -1,5 +1,7 @@
 ## Hardware plans
 
+Created in KiCAD 5.0.2
+
 ##### SENSORICNET mother board version 1.0
 
 * Core MCU STM32F072RBT6 (128kB memory)
