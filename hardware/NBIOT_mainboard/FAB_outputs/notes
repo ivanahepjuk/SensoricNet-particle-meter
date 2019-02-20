@@ -1,0 +1,4 @@
+machine:
+
+Pcbnew->fabriocation outputs->generate footprint position file
+

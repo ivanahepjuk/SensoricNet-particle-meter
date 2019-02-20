@@ -5,11 +5,11 @@ EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
 Sheet 1 1
-Title ""
-Date "2018-07-13"
-Rev ""
-Comp ""
-Comment1 ""
+Title "SENSORICNET mother board"
+Date "2019-02-20"
+Rev "1.0"
+Comp "Labka z.s."
+Comment1 "created by i_a"
 Comment2 ""
 Comment3 ""
 Comment4 ""

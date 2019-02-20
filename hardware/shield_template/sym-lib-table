@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name atec508A)(type Legacy)(uri ${FOOTPRINTS_AND_MODULES}/atec508A.lib)(options "")(descr ""))
+  (lib (name NCP59152)(type Legacy)(uri ${FOOTPRINTS_AND_MODULES}/NCP59152.lib)(options "")(descr ""))
+)
