@@ -1,5 +1,7 @@
 ## Hardware plans
 
+Created in KiCAD 5.0.2
+
 ##### SENSORICNET mother board version 1.0
 
 * Core MCU STM32F072RBT6 (128kB memory)
@@ -12,6 +14,7 @@
 * Prepared for 6V/500mA power source, variable connector (based on boxing)
 * OLED 128x64 SSD1306 BW display
 * Pin description added
+* Added socket for BME280, it can be placed externally - improved accuracy 
 
 TOP SIDE:
 
@@ -25,7 +28,7 @@ BOTTOM SIDE:
 
 * Enhancement for SENSORICNET Motherboard
 * Lorawan modem Microchip RN2483
-*all pins form motherboard fitsh thorugh tis shield, possibility for adding another one
+* all pins form motherboard fit through this shield, possibility for adding another one
 
 ##### SENSORICNET shield template
-* Allows anybody to quickly develop another sensing shield for SENSORICNET
+* Allows anybody to quickly develop own sensing shield for SENSORICNET
