@@ -1,5 +1,8 @@
 # SensoricNet-particle-meter
-This is repo for sensoric net, project backed by Vodafone. Nb-Iot stuff.
+
+*ALL FILES IN THIS SensoricNet-Particle-Meter REPOSITORY ARE PUBLISHED UNDER GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007*
+
+This is repo for sensoricnet, project backed by Vodafone. Nb-Iot stuff.
 
 
 # Firmware
