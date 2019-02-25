@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name SNPM)(type KiCad)(uri ${FOOTPRINTS_AND_MODULES}/SNPM.pretty)(options "")(descr ""))
+)

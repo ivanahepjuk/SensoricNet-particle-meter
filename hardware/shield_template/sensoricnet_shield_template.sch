@@ -1,0 +1,470 @@
+EESchema Schematic File Version 4
+LIBS:sensoricnet_shield_template-cache
+EELAYER 26 0
+EELAYER END
+$Descr A2 23386 16535
+encoding utf-8
+Sheet 1 1
+Title "SENSORICNET mother board"
+Date "2019-02-20"
+Rev "1.0"
+Comp "Labka z.s."
+Comment1 "created by i_a"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+NoConn ~ 2100 5400
+NoConn ~ 4900 5400
+Text GLabel 14050 2500 2    39   Input ~ 0
+Rx
+Text GLabel 14050 2600 2    39   Input ~ 0
+Tx
+Text GLabel 8700 2900 0    39   Input ~ 0
+UART_GPS_TX
+Text GLabel 9400 2900 2    39   Input ~ 0
+UART_GPS_RX
+Text GLabel 12450 2900 3    39   Input ~ 0
+i2c_sda
+Text GLabel 12950 2900 3    39   Input ~ 0
+i2c_scl
+Text GLabel 9000 5900 0    39   Input ~ 0
+PM_SDI
+Text GLabel 9000 6000 0    39   Input ~ 0
+PM_SDO
+Text GLabel 9000 6100 0    39   Input ~ 0
+PM_SCK
+Text GLabel 13350 2700 0    39   Input ~ 0
+SWD_CLK
+Text GLabel 13350 2500 0    39   Input ~ 0
+SWD_DIO
+Text GLabel 9000 5800 0    39   Input ~ 0
+PM_SS
+Text GLabel 9400 3000 2    39   Input ~ 0
+WIRELESS_reset
+Text GLabel 8700 2800 0    39   Input ~ 0
+gps_reset
+Text GLabel 9400 2800 2    39   Input ~ 0
+gps_standby
+Text GLabel 9400 2700 2    39   Input ~ 0
+gps_pulses
+Text GLabel 8700 3000 0    39   Input ~ 0
+gps_fix
+Text GLabel 9350 3200 2    39   Input ~ 0
+USART_debug_rx
+Text GLabel 8700 3200 0    39   Input ~ 0
+USART_debug_tx
+Wire Wire Line
+	8700 2800 8800 2800
+Wire Wire Line
+	8700 2900 8800 2900
+Wire Wire Line
+	8700 3000 8800 3000
+Wire Wire Line
+	8700 3200 8800 3200
+Wire Wire Line
+	9300 2800 9400 2800
+Wire Wire Line
+	9300 2900 9400 2900
+Wire Wire Line
+	9300 3000 9400 3000
+Wire Wire Line
+	9300 3200 9350 3200
+Wire Wire Line
+	14050 2600 13950 2600
+Wire Wire Line
+	14050 2700 13950 2700
+Wire Wire Line
+	13950 2800 14050 2800
+Wire Notes Line
+	6800 1550 11400 1550
+Wire Notes Line
+	11400 1550 11400 3900
+Wire Notes Line
+	11400 3900 6800 3900
+Wire Notes Line
+	6800 3900 6800 1550
+Wire Notes Line
+	15300 1550 15300 3900
+Wire Notes Line
+	15300 3900 11600 3900
+Wire Notes Line
+	11600 3900 11600 1550
+Wire Notes Line
+	6800 4100 11400 4100
+Wire Notes Line
+	11400 4100 11400 6700
+Wire Notes Line
+	11400 6700 6800 6700
+Wire Notes Line
+	6800 6700 6800 4100
+Wire Notes Line
+	11600 4100 15300 4100
+Wire Notes Line
+	15300 4100 15300 6700
+Wire Notes Line
+	15300 6700 11600 6700
+Wire Notes Line
+	11600 6700 11600 4100
+Wire Wire Line
+	8700 2600 8800 2600
+Wire Wire Line
+	9300 2600 9350 2600
+Wire Wire Line
+	8700 2700 8800 2700
+Wire Wire Line
+	9300 2700 9400 2700
+$Comp
+L sensenet_particlemeter-rescue:LOGO LOGO1
+U 1 1 5BA9EC4C
+P 3650 8050
+F 0 "LOGO1" H 3650 8250 60  0000 C CNN
+F 1 "LOGO" H 3650 7850 60  0000 C CNN
+F 2 "graphics:PCB_artwork" H 3650 8050 60  0001 C CNN
+F 3 "" H 3650 8050 60  0001 C CNN
+	1    3650 8050
+	1    0    0    -1  
+$EndComp
+Text GLabel 13100 5450 0    39   Input ~ 0
+PM_SCK
+Text GLabel 13100 5350 0    39   Input ~ 0
+PM_SDO
+Text GLabel 13100 5250 0    39   Input ~ 0
+OLED_RESET
+Text GLabel 13100 5150 0    39   Input ~ 0
+OLED_D/C
+Text GLabel 13100 5050 0    39   Input ~ 0
+OLED_CS
+Text Notes 7800 4800 0    60   ~ 0
+Connector MOLEX s.n. 501568-0607 [pico-clasp 6pos]
+Text Notes 7800 4900 0    60   ~ 0
+Connecting wire  MOLEX s.n. 15133-0600 [50mm]
+Wire Wire Line
+	8950 6250 8950 6200
+Wire Wire Line
+	8950 6200 9100 6200
+Wire Wire Line
+	9000 6100 9100 6100
+Wire Wire Line
+	9000 6000 9100 6000
+Wire Wire Line
+	9000 5900 9100 5900
+Wire Wire Line
+	9000 5800 9100 5800
+Wire Wire Line
+	8950 5650 8950 5700
+Wire Wire Line
+	8950 5700 9100 5700
+$Comp
+L Connector:Conn_01x06_Female J16
+U 1 1 5D09F261
+P 9300 5900
+F 0 "J16" H 9350 5900 50  0000 L CNN
+F 1 "Conn_01x06_Female" H 9327 5785 50  0000 L CNN
+F 2 "SNPM:pico_clasp_6_horizontal" H 9300 5900 50  0001 C CNN
+F 3 "~" H 9300 5900 50  0001 C CNN
+	1    9300 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even J17
+U 1 1 5C86E7D2
+P 9000 2900
+F 0 "J17" H 9050 3417 50  0000 C CNN
+F 1 "Conn_02x08_Odd_Even" H 9050 3326 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical" H 9000 2900 50  0001 C CNN
+F 3 "~" H 9000 2900 50  0001 C CNN
+	1    9000 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 3100 8800 3100
+Wire Wire Line
+	8700 3300 8800 3300
+Wire Wire Line
+	9300 3100 9400 3100
+Wire Wire Line
+	9300 3300 9400 3300
+$Comp
+L Connector:Conn_01x07_Female J7
+U 1 1 5C97EAF5
+P 13550 5350
+F 0 "J7" H 13577 5376 50  0000 L CNN
+F 1 "Conn_01x07_Female" H 13577 5285 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 13550 5350 50  0001 C CNN
+F 3 "~" H 13550 5350 50  0001 C CNN
+	1    13550 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13100 5050 13350 5050
+Wire Wire Line
+	13100 5150 13350 5150
+Wire Wire Line
+	13100 5250 13350 5250
+Wire Wire Line
+	13100 5350 13350 5350
+Wire Wire Line
+	13100 5450 13350 5450
+Wire Wire Line
+	13100 5550 13350 5550
+Wire Wire Line
+	13200 5700 13200 5650
+Wire Wire Line
+	13200 5650 13350 5650
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J20
+U 1 1 5C86D4BC
+P 13650 2600
+F 0 "J20" H 13700 2917 50  0000 C CNN
+F 1 "Conn_02x04_Odd_Even" H 13700 2826 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x04_P2.54mm_Vertical" H 13650 2600 50  0001 C CNN
+F 3 "~" H 13650 2600 50  0001 C CNN
+	1    13650 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	12450 2900 12450 2800
+Wire Wire Line
+	12950 2800 12950 2900
+Wire Wire Line
+	14050 2500 13950 2500
+Wire Wire Line
+	13450 2500 13350 2500
+Wire Wire Line
+	13450 2600 13400 2600
+Wire Wire Line
+	13450 2700 13350 2700
+Wire Wire Line
+	13450 2800 13400 2800
+$Comp
+L Connector_Generic:Conn_02x01 J8
+U 1 1 5CB2E8FD
+P 12650 2800
+F 0 "J8" H 12700 3017 50  0000 C CNN
+F 1 "Conn_02x01" H 12700 2926 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 12650 2800 50  0001 C CNN
+F 3 "~" H 12650 2800 50  0001 C CNN
+	1    12650 2800
+	1    0    0    -1  
+$EndComp
+Text Notes 11850 4350 0    60   ~ 0
+OLED connector for 128x64, driver ssd1306, 7pin
+Text Notes 7350 4350 0    60   ~ 0
+Molex pico clasp connector:
+Text Notes 7150 1850 0    60   ~ 0
+Shield connector, debug signals
+Text Notes 12000 1850 0    60   ~ 0
+JTAG, I2C for external bme280
+Wire Notes Line
+	11600 1550 15300 1550
+Wire Notes Line
+	6600 6700 950  6700
+Text Notes 1200 4300 0    60   ~ 0
+Mounting holes
+Wire Notes Line
+	950  6900 6600 6900
+Wire Notes Line
+	6600 6900 6600 9400
+Wire Notes Line
+	6600 9400 950  9400
+Wire Notes Line
+	950  9400 950  6900
+Text Notes 1150 7100 0    60   ~ 0
+ARTWORK
+Text Notes 7800 5000 0    60   ~ 0
+Connecting wire  MOLEX s.n. 15133-0601 [100mm]
+Wire Notes Line
+	950  4100 6600 4100
+Wire Notes Line
+	6600 4100 6600 6700
+Wire Notes Line
+	950  4100 950  6700
+$Comp
+L Connector:Conn_01x01_Female J6
+U 1 1 5C72EC4F
+P 2300 5400
+F 0 "J6" H 2327 5426 50  0000 L CNN
+F 1 "Conn_01x01_Female" H 2327 5335 50  0000 L CNN
+F 2 "SNPM:MountingHole_3.2mm_M3_DIN965" H 2300 5400 50  0001 C CNN
+F 3 "~" H 2300 5400 50  0001 C CNN
+	1    2300 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Female J5
+U 1 1 5C72F143
+P 5100 5400
+F 0 "J5" H 5127 5426 50  0000 L CNN
+F 1 "Conn_01x01_Female" H 5127 5335 50  0000 L CNN
+F 2 "SNPM:MountingHole_3.2mm_M3_DIN965" H 5100 5400 50  0001 C CNN
+F 3 "~" H 5100 5400 50  0001 C CNN
+	1    5100 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5C737989
+P 8700 2600
+F 0 "#PWR0101" H 8700 2350 50  0001 C CNN
+F 1 "GND" V 8705 2472 50  0000 R CNN
+F 2 "" H 8700 2600 50  0001 C CNN
+F 3 "" H 8700 2600 50  0001 C CNN
+	1    8700 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5C7379B3
+P 8700 2700
+F 0 "#PWR0102" H 8700 2450 50  0001 C CNN
+F 1 "GND" V 8705 2572 50  0000 R CNN
+F 2 "" H 8700 2700 50  0001 C CNN
+F 3 "" H 8700 2700 50  0001 C CNN
+	1    8700 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5C7379CE
+P 8700 3100
+F 0 "#PWR0103" H 8700 2850 50  0001 C CNN
+F 1 "GND" V 8705 2972 50  0000 R CNN
+F 2 "" H 8700 3100 50  0001 C CNN
+F 3 "" H 8700 3100 50  0001 C CNN
+	1    8700 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5C7379E9
+P 9350 2600
+F 0 "#PWR0104" H 9350 2350 50  0001 C CNN
+F 1 "GND" V 9355 2472 50  0000 R CNN
+F 2 "" H 9350 2600 50  0001 C CNN
+F 3 "" H 9350 2600 50  0001 C CNN
+	1    9350 2600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 5C737A14
+P 9400 3100
+F 0 "#PWR0105" H 9400 2850 50  0001 C CNN
+F 1 "GND" V 9405 2972 50  0000 R CNN
+F 2 "" H 9400 3100 50  0001 C CNN
+F 3 "" H 9400 3100 50  0001 C CNN
+	1    9400 3100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR0106
+U 1 1 5C737A86
+P 9400 3300
+F 0 "#PWR0106" H 9400 3150 50  0001 C CNN
+F 1 "+5V" V 9415 3428 50  0000 L CNN
+F 2 "" H 9400 3300 50  0001 C CNN
+F 3 "" H 9400 3300 50  0001 C CNN
+	1    9400 3300
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR0107
+U 1 1 5C737AB0
+P 8700 3300
+F 0 "#PWR0107" H 8700 3150 50  0001 C CNN
+F 1 "+5V" V 8715 3428 50  0000 L CNN
+F 2 "" H 8700 3300 50  0001 C CNN
+F 3 "" H 8700 3300 50  0001 C CNN
+	1    8700 3300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+3V3 #PWR0108
+U 1 1 5C737CB1
+P 13400 2800
+F 0 "#PWR0108" H 13400 2650 50  0001 C CNN
+F 1 "+3V3" V 13415 2928 50  0000 L CNN
+F 2 "" H 13400 2800 50  0001 C CNN
+F 3 "" H 13400 2800 50  0001 C CNN
+	1    13400 2800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0109
+U 1 1 5C737D1B
+P 14050 2700
+F 0 "#PWR0109" H 14050 2450 50  0001 C CNN
+F 1 "GND" V 14055 2572 50  0000 R CNN
+F 2 "" H 14050 2700 50  0001 C CNN
+F 3 "" H 14050 2700 50  0001 C CNN
+	1    14050 2700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0110
+U 1 1 5C737D76
+P 14050 2800
+F 0 "#PWR0110" H 14050 2550 50  0001 C CNN
+F 1 "GND" V 14055 2672 50  0000 R CNN
+F 2 "" H 14050 2800 50  0001 C CNN
+F 3 "" H 14050 2800 50  0001 C CNN
+	1    14050 2800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0111
+U 1 1 5C737D91
+P 13400 2600
+F 0 "#PWR0111" H 13400 2350 50  0001 C CNN
+F 1 "GND" V 13405 2472 50  0000 R CNN
+F 2 "" H 13400 2600 50  0001 C CNN
+F 3 "" H 13400 2600 50  0001 C CNN
+	1    13400 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0112
+U 1 1 5C737F67
+P 13200 5700
+F 0 "#PWR0112" H 13200 5450 50  0001 C CNN
+F 1 "GND" H 13205 5527 50  0000 C CNN
+F 2 "" H 13200 5700 50  0001 C CNN
+F 3 "" H 13200 5700 50  0001 C CNN
+	1    13200 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0113
+U 1 1 5C737FF2
+P 13100 5550
+F 0 "#PWR0113" H 13100 5400 50  0001 C CNN
+F 1 "+5V" V 13115 5678 50  0000 L CNN
+F 2 "" H 13100 5550 50  0001 C CNN
+F 3 "" H 13100 5550 50  0001 C CNN
+	1    13100 5550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR0114
+U 1 1 5C7381AD
+P 8950 6250
+F 0 "#PWR0114" H 8950 6100 50  0001 C CNN
+F 1 "+5V" H 8965 6423 50  0000 C CNN
+F 2 "" H 8950 6250 50  0001 C CNN
+F 3 "" H 8950 6250 50  0001 C CNN
+	1    8950 6250
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0115
+U 1 1 5C738228
+P 8950 5650
+F 0 "#PWR0115" H 8950 5400 50  0001 C CNN
+F 1 "GND" H 8955 5477 50  0000 C CNN
+F 2 "" H 8950 5650 50  0001 C CNN
+F 3 "" H 8950 5650 50  0001 C CNN
+	1    8950 5650
+	-1   0    0    1   
+$EndComp
+$EndSCHEMATC
