@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name sensenet_particlemeter-rescue)(type Legacy)(uri ${PROJEKT}/sensenet_particlemeter-rescue.lib)(options "")(descr ""))
+)
