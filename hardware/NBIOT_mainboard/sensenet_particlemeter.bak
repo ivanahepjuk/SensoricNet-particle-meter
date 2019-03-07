@@ -3525,10 +3525,10 @@ Connection ~ 15400 13400
 Wire Wire Line
 	15400 13400 15400 13700
 $Comp
-L Connector:Conn_01x02_Female J?
+L Connector:Conn_01x02_Female J14
 U 1 1 5C84CC5B
 P 14550 2550
-F 0 "J?" H 14500 2650 50  0000 C CNN
+F 0 "J14" H 14500 2650 50  0000 C CNN
 F 1 "Conn_01x02_Female" V 14600 2850 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 14550 2550 50  0001 C CNN
 F 3 "~" H 14550 2550 50  0001 C CNN

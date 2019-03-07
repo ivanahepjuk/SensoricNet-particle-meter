@@ -16,19 +16,28 @@ Created in KiCAD 5.0.2
 * Pin description added
 * Added socket for BME280, it can be placed externally - improved accuracy 
 
-TOP SIDE:
+OUTER SIDE:
 
-![TOP SIDE](pictures/TOP.png)
+![OUTER SIDE](pictures/mainboard_bottom(top).png)
 
-BOTTOM SIDE:
+INNER SIDE:
 
-![BOTTOM SIDE](pictures/BOTTOM.png)
+![INNER SIDE](pictures/mainboard_top(bottom).png)
 
 ##### SENSORICNET LORAWAN shield
 
 * Enhancement for SENSORICNET Motherboard
 * Lorawan modem Microchip RN2483
 * all pins form motherboard fit through this shield, possibility for adding another one
+
+OUTER SIDE:
+
+![OUTER SIDE](pictures/lorawan_shield_bottom(top).png)
+
+INNER SIDE:
+
+![INNER SIDE](pictures/lorawan_shield_top(bottom).png)
+
 
 ##### SENSORICNET shield template
 * Allows anybody to quickly develop own sensing shield for SENSORICNET
