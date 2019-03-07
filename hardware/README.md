@@ -41,3 +41,5 @@ INNER SIDE:
 
 ##### SENSORICNET shield template
 * Allows anybody to quickly develop own sensing shield for SENSORICNET
+* Do you have an idea how to upgrade our sensor? Creating a shield sounds like a good way!
+
