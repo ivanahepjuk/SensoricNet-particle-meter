@@ -16,9 +16,7 @@ Please go to HW folder
 # Backend
 Plese go to TBD
 
-MAINBOARD 1.0 OUTER SIDE:
 
-![OUTER SIDE](hardware/pictures/mainboard_bottom(top).png)
 
 
 
