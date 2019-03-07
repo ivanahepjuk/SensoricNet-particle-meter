@@ -1,59 +1,50 @@
-Id,Designator,Package,Quantity,Designation,POPULATE,"ordered, unpopulated",,notes,links
-1,C15,CP_Radial_D10.0mm_P5.00mm_bottom,1,470u,no,x,,,https://www.arrow.com/en/products/ece-a0jn471x/panasonic
-2,LOGO1,PCB_artwork,1,LOGO,no,,,,
-3,U4,nanosimmm,1,SIM,no,x,,,https://www.tme.eu/cz/details/mx-504520-0691_c/konektory-ke-kartam/molex/504520-0691/
-4,U2,TQFP-64_10x10mm_Pitch0.5mm,1,stm32f072,yes,,,STM32F072RBT6,https://www.arrow.com/en/products/stm32f072rbt6/stmicroelectronics
-5,"J1,J2,J3,J4,J21",Pin_Header_Straight_1x01_Pitch1.00mm,5,CONN_01X01,no,,,,
-6,"J5,J6",MountingHole_3.2mm_M3_DIN965,2,CONN_01X01,no,,,,
-7,"L2,L1",SMD_0805,2,DNP,no,,,,
-8,U3,quectel_BC95,1,QUECTEL_BC95,yes,,,CHECK,https://www.soselectronic.cz/products/quectel/bc95-b20-bc95-b20hb-02-std-234632
-9,U7,M10578,1,M10578-A2,yes,,,check orientation,https://www.arrow.com/en/products/m10578-a2/antenova
-10,"J11,J18,J19",Pin_Header_Straight_1x01_Pitch2.54mm,3,CONN_01X01,no,,,,
-11,"L4,L6,L7,L8",R_0603,4,FBMH1608HL601-T,yes,,,,https://www.arrow.com/en/products/fbmh1608hl601-t/taiyo-yuden
-12,D2,SMD_0805_bottom,1,LED GREEN,no,,,,
-13,D8,SMD_0805_bottom,1,LED RED,no,,,,
-14,D9,SMD_0805_bottom,1,LED YELLOW,no,,,,
-15,D10,SMD_0805_bottom,1,LED GREEN,no,,,,
-16,"P1,P2",Antenna_conn,2,SMA_mini,yes,,,check,
-17,"SW1,SW3",edge_switch,2,SW_DPST,no,,,,
-18,"C17,C25,C1,C4,C5,C6,C7,C8,C9,C12,C20,C21,C23",C_0805_2012Metric,13,100n,yes,,,6.3V,
-19,"R30,R11",R_0805_2012Metric,2,0R,yes,,,,
-20,"C28,C2",C_0805_2012Metric,2,22p,yes,,,6.3V,
-21,"C26,C27,C29,C22,C24",C_0805_2012Metric,5,1n,yes,,,6.3V,
-22,J13,SolderWirePad_1x02_P3.81mm_Drill1.2mm,1,Conn_01x02_Female,no,,,,
-23,"C30,C16,C34",C_0805_2012Metric,3,47u,yes,,,6.3V,
-24,"U1,U6",DFN-8-1EP_4x4mm_P0.8mm_EP2.39x2.21mm,2,NCP59152,yes,,,NCP59152MNADJTYG,
-25,D1,D_SOD-123,1,"PTVS3V3S1UR,115",yes,,,,https://www.arrow.com/en/products/ptvs3v3s1ur115/nexperia
-26,"C10,C11",C_0805_2012Metric,2,DNP,no,,,,
-27,"C13,C3",C_0805_2012Metric,2,22u,yes,,,6.3V,
-28,C14,C_0805_2012Metric,1,"2,2u",yes,,,6.3V,
-29,J17,PinSocket_2x08_P2.54mm_Vertical,1,Conn_02x08_Odd_Even,no,x,,,
-30,J20,PinSocket_2x04_P2.54mm_Vertical,1,Conn_02x04_Odd_Even,no,x,,,
-31,J7,PinHeader_1x07_P2.54mm_Vertical,1,Conn_01x07_Female,no,x,,,
-32,"R3,R4",R_0805_2012Metric,2,4k7,yes,,,,
-33,U8,DFN-8-1EP_3x2mm_P0.5mm_EP1.75x1.45mm,1,ATECC508A,yes,,,https://www.arrow.com/en/products/atecc608a-mahda-s/microchip-technology,
-34,"R1,R8,R9,R23,R27,R28,R29",R_0805_2012Metric,7,1k,yes,,,,
-35,R10,R_0805_2012Metric,1,10k,yes,,,,
-36,"R12,R13,R20",R_0805_2012Metric,3,100k,yes,,,,
-37,R16,R_0805_2012Metric,1,3k3,yes,,,,
-38,R21,R_0805_2012Metric,1,1k1,yes,,,,
-39,R22,R_0805_2012Metric,1,1k6,yes,,,,
-40,"C31,C32,C33",C_0805_2012Metric,3,33p,yes,,,,
-41,"R2,R5,R6",R_0805_2012Metric,3,22R,yes,,,,
-42,D3,D_SOD-123,1,D_Schottky_ss14,yes,,,https://www.arrow.com/en/products/pmeg4010eh115/nexperia,
-43,D11,D_SOD-123,1,SM2T3V3A,yes,,,https://www.arrow.com/en/products/sm2t3v3a/stmicroelectronics,
-44,J16,pico_clasp_6_horizontal,1,Conn_01x06_Female,yes,,,https://www.arrow.com/en/products/5015680607/molex,
-45,L3,L_Taiyo-Yuden_NR-50xx,1,39uH,yes,,check,,
-46,L5,L_Taiyo-Yuden_NR-50xx,1,41uH,yes,,check,,
-47,J8,PinHeader_1x02_P2.54mm_Vertical,1,Conn_02x01,no,,,,
-48,C18,CP_Radial_D10.0mm_P5.00mm,1,470uF,no,x,,https://www.arrow.com/en/products/ece-a0jn471x/panasonic,
-49,C19,CP_Radial_D10.0mm_P5.00mm,1,470u,no,x,,https://www.arrow.com/en/products/ece-a0jn471x/panasonic,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,Another orders:,,,,,,,
-,,,,,,,,,
-,,Link,amount per one board:,,,,,,
-,lte antenna check,,,,,,,,
-,GPS antenna,,,,,,,,
-,wire molex,,,,,,,,
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+1;"R9,R1,R8,R23,R27,R28,R29";"R_0805_2012Metric";7;"1k";;;
+2;"LOGO1";"PCB_artwork";1;"LOGO";;;
+3;"U4";"nanosimmm";1;"SIM";;;
+4;"U2";"TQFP-64_10x10mm_Pitch0.5mm";1;"stm32f072";;;
+5;"J1,J2,J3,J4,J21";"Pin_Header_Straight_1x01_Pitch1.00mm";5;"CONN_01X01";;;
+6;"J5,J6";"MountingHole_3.2mm_M3_DIN965";2;"CONN_01X01";;;
+7;"L2,L1";"SMD_0805";2;"DNP";;;
+8;"U3";"quectel_BC95";1;"QUECTEL_BC95";;;
+9;"U7";"M10578";1;"M10578-A2";;;
+10;"J11,J18,J19";"Pin_Header_Straight_1x01_Pitch2.54mm";3;"CONN_01X01";;;
+11;"L4,L6,L7,L8";"R_0603";4;"FBMH1608HL601-T";;;
+12;"D2,D10";"SMD_0805_bottom";2;"LED GREEN";;;
+13;"D8";"SMD_0805_bottom";1;"LED RED";;;
+14;"D9";"SMD_0805_bottom";1;"LED YELLOW";;;
+15;"P1,P2";"Antenna_conn";2;"SMA_mini";;;
+16;"SW1,SW2";"edge_switch";2;"SW_DPST";;;
+17;"C17,C25,C1,C4,C5,C6,C7,C8,C9,C12,C20,C21,C23,C36";"C_0805_2012Metric";14;"100n";;;
+18;"R30,R11";"R_0805_2012Metric";2;"0R";;;
+19;"C28,C2";"C_0805_2012Metric";2;"22p";;;
+20;"C26,C27,C29,C22,C24,C35";"C_0805_2012Metric";6;"1n";;;
+21;"C30,C16,C34";"C_0805_2012Metric";3;"47u";;;
+22;"U1,U6";"DFN-8-1EP_4x4mm_P0.8mm_EP2.39x2.21mm";2;"NCP59152";;;
+23;"D1,D4";"D_SOD-123";2;"PTVS3V3S1UR,115";;;
+24;"C10,C11";"C_0805_2012Metric";2;"DNP";;;
+25;"C13,C3";"C_0805_2012Metric";2;"22u";;;
+26;"C14";"C_0805_2012Metric";1;"2,2u";;;
+27;"J17";"PinSocket_2x08_P2.54mm_Vertical";1;"Conn_02x08_Odd_Even";;;
+28;"J20";"PinSocket_2x04_P2.54mm_Vertical";1;"Conn_02x04_Odd_Even";;;
+29;"R3,R4";"R_0805_2012Metric";2;"4k7";;;
+30;"U8";"DFN-8-1EP_3x2mm_P0.5mm_EP1.75x1.45mm";1;"ATECC508A";;;
+31;"R10";"R_0805_2012Metric";1;"10k";;;
+32;"R12,R13,R20";"R_0805_2012Metric";3;"100k";;;
+33;"R16";"R_0805_2012Metric";1;"3k3";;;
+34;"R21";"R_0805_2012Metric";1;"1k1";;;
+35;"R22";"R_0805_2012Metric";1;"1k6";;;
+36;"C31,C32,C33";"C_0805_2012Metric";3;"33p";;;
+37;"R2,R5,R6";"R_0805_2012Metric";3;"22R";;;
+38;"D3";"D_SOD-123";1;"D_Schottky_ss14";;;
+39;"D11";"D_SOD-123";1;"SM2T3V3A";;;
+40;"J16";"pico_clasp_6_horizontal";1;"Conn_01x06_Female";;;
+41;"L3";"L_Taiyo-Yuden_NR-50xx";1;"39uH";;;
+42;"L5";"L_Taiyo-Yuden_NR-50xx";1;"41uH";;;
+43;"J8,J9,J10";"PinHeader_1x02_P2.54mm_Vertical";3;"Conn_02x01";;;
+44;"C18";"CP_Radial_D10.0mm_P5.00mm";1;"470uF";;;
+45;"C19,C15";"CP_Radial_D10.0mm_P5.00mm";2;"470u";;;
+46;"J7";"OLED";1;"Conn_01x07_Female";;;
+47;"LOGO2";"OSHW-Logo2_9.8x8mm_BackSilkScreen";1;"LOGO";;;
+48;"J12";"BarrelJack_Horizontal";1;"Barrel_Jack_Switch";;;
+49;"J13,J14";"PinHeader_1x02_P2.54mm_Vertical";2;"Conn_01x02_Female";;;
