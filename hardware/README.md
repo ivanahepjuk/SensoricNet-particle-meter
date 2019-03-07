@@ -32,11 +32,11 @@ INNER SIDE:
 
 OUTER SIDE:
 
-![OUTER SIDE](pictures/lorawan_shield_bottom(top).png)
+![INNER SIDE](pictures/lorawan_shield_top(bottom).png)
 
 INNER SIDE:
 
-![INNER SIDE](pictures/lorawan_shield_top(bottom).png)
+![OUTER SIDE](pictures/lorawan_shield_bottom(top).png)
 
 
 ##### SENSORICNET shield template
