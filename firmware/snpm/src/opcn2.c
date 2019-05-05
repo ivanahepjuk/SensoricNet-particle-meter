@@ -199,11 +199,11 @@ void particlemeter_power_cycle(void)
 	gpio_set(GPIOB, GPIO3  | GPIO4 | GPIO5);
 
 	//PM reset
-	gpio_clear(GPIOA,GPIO10);
+	gpio_clear(GPIOC,GPIO5);
 	wait(SEC*1);  //fixme was 10
 	moje_iwdg_reset();
 	
-	gpio_set(GPIOA, GPIO10);
+	gpio_set(GPIOC, GPIO5);
 
 	//????????
 /*

@@ -38,8 +38,8 @@
 // define pins for peripherals
 
 // leds
-#define LED1_GPIO_GROUP GPIOC
-#define LED1_GPIO GPIO5
+#define LED1_GPIO_GROUP GPIOB
+#define LED1_GPIO GPIO0
 #define LED2_GPIO_GROUP GPIOB
 #define LED2_GPIO GPIO1
 #define LED3_GPIO_GROUP GPIOB

@@ -27,7 +27,6 @@
 #include <stdio.h>
 //#include <stdint.h>
 	
-
 #define SEC		(1000000)
 
 extern char gps_rx_buffer[255];
@@ -73,11 +72,5 @@ void get_nth_substring(unsigned int number, char separator, char* string, unsign
 
 //void sys_tick_handler(void);
 void systick_setup(int xms);
-
-
-
-////////////////dronovo
-//char* concat(const char *s1, const char *s2);
-//char* string_to_hex(unsigned char *string, int len);
 
 #endif
