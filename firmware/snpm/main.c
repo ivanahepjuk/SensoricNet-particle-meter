@@ -115,7 +115,9 @@ int main(void)
   particlemeter_power_cycle();
   spi_setup();
   debug_usart_send("tady");
-  BME280_init();
+  #if BME280 == 1
+    BME280_init();
+  #endif
   led_flash(1, 3, 20000);
   nbiot_reset();
   led_flash(1, 3, 200000);
@@ -186,9 +188,10 @@ int main(void)
       read_pm_values();
     #endif
 
-    // readout BME data
-    BME280_data_readout(burst_read_data);
-
+    #if BME280 == 1
+      // readout BME data
+      BME280_data_readout(burst_read_data);
+    #endif
     // debug gps
     char tmp_string[200] = {0};
     int w;
