@@ -160,11 +160,11 @@ void nbiot_connect(void) {
   while(nbiot_sendCommand("AT+CFUN=1\r\n", "OK", 2))
     //usartSend("at+cfun\r\n", 2);
     wait(SEC*3);
-    while(nbiot_sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
+  while(nbiot_sendCommand("AT+COPS=1,2,\"23003\"\r\n", "OK", 2))
       //usartSend("at+cops\r\n", 2);
-      wait(SEC*5);
-    while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) {//timeout = number of tries	
-      if (wdg_resets > 0){
+    wait(SEC*5);
+  while(nbiot_sendCommand("AT+CGATT?\r\n", "CGATT:1", 4)) {//timeout = number of tries	
+    if (wdg_resets > 0){
         iwdg_reset();
         wdg_resets--;
     }
@@ -298,7 +298,7 @@ uint8_t nbiot_csq(void)
   #ifdef DEBUG
   char helper[30];
   sprintf(helper, "%d %d", csq[0], csq[1]);
-  debug_usart_send(pokus);
+  debug_usart_send(helper);
   #endif
   return 0;
 }
