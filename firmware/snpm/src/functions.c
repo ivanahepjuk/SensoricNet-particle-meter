@@ -241,7 +241,7 @@ void i2c_setup(void) {
   //digital filter
   //i2c_set_digital_filter(I2C1, I2C_CR1_DNF_DISABLED);
   //speed
-  i2c_set_speed(I2C2, i2c_speed_sm_100k, 8);
+  i2c_set_speed(I2C2, i2c_speed_fm_400k, 8);
   //configure No-Stretch CR1 (only relevant in slave mode)
   i2c_enable_stretching(I2C2);
   //addressing mode

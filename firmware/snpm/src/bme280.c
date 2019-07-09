@@ -21,6 +21,44 @@
 #include "bme280.h"
 #include "functions.h"		//smazat
 
+
+
+void atecWake(void) {
+
+  //rcc_periph_clock_enable(RCC_GPIOB);
+  gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, GPIO14);
+  gpio_clear(GPIOB, GPIO14); //SS Log 0
+  wait(50);//60us
+  gpio_set(GPIOB, GPIO14); //SS Log 1
+  wait(1000);//1500 us
+  gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO14);
+  
+  //i2c_setup();
+
+}
+
+
+void atec(void) {
+  //register ctrl_hum, set oversampling x16
+  uint8_t packet[] = {0xc0, 0x77, 0x30, 0xff, 0xbb};
+	
+  //zapis cmd na i2c adresu BME cmd je v cmd_w
+  //i2c_transfer7(I2C2, 0x00, packet, 4, data, 4);
+
+//i2c_write7_v1 (I2C2, 0xc0, packet, 4); 
+  i2c_send_start(I2C2);	
+  wait(5);
+  for (uint8_t i = 0; i< 5; i++) {
+    i2c_send_data(I2C2, packet[i]);
+    while(i2c_busy(I2C2))
+      ;
+
+  }
+}
+
+
+
+
 void BME280_init(void)
 {
 	//register ctrl_hum, set oversampling x16

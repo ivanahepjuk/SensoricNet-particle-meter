@@ -23,6 +23,11 @@
 #include <stdint.h>
 
 #define BME 0x76
+#define ATEC 0xC0
+
+void atecWake(void);
+void atec(void);
+
 
 extern int32_t t_fine;
 extern uint8_t comp_data[26]; //compensation data readed into this

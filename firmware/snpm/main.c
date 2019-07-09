@@ -95,11 +95,18 @@ int main(void)
 {
   clock_setup();
   //systick_setup(250);//250ms tick = 500ms period = 2Hz
-  moje_iwdg_setup();
+//  moje_iwdg_setup();
   gpio_setup();
-  usart_setup();
+//  usart_setup();
   i2c_setup();
 
+while(1) {
+led_flash(3, 3, 20000);
+  //BME280_init();
+  atecWake();
+  atec();
+  wait(2000000);
+}
   moje_iwdg_reset();
 
   wait(SEC*3);
